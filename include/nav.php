@@ -2,6 +2,7 @@
 <?php 
     include('css.php'); 
     @include('sql/connection.php');
+    include('helper/config_functions.php');
 ?>
 
 <ul class="nav nav-tabs">
