@@ -26,6 +26,12 @@
     <a class="nav-link" href="test_noor.php">Nour</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="open_file.php">Sara</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="">Raghad</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link disabled" href="#">Disabled</a>
   </li>
 </ul>

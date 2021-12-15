@@ -10,7 +10,6 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/open_file.css">
-    <script src = "1.js"></script>
 </head>
 <body>
 <form action="" method="post">
@@ -31,20 +30,21 @@ include('include/nav.php');
                 <hr>
             </div>
             <button type="submit" name="open" >فتح</button>
-            <button type="button" name="new">جديد</button>
+            <button type="button" name="new" id="new" onclick="test1()">جديد</button>
             <button type="button" name="close">إغلاق</button>
             <div id="new_text" hidden>
-                <label for="" >اسم الملف</label>
-                <input type="text"  name="file_name" required>
+                <label for="">اسم الملف</label>
+                <input type="text" required>
                 <button type="button" name="add" id="add" onclick="test2()">إضافة</button>
                 <div id = "initial_balance" hidden>
                      <label>الرصيد الافتتاحي</label>
-                    <input type="text" name="initial_value">
-                    <button type="submit" id="save" name="save">حفظ</button>
+                    <input type="text">
+                    <button type="submit" id="save">حفظ</button>
                 </div>
             </div>
         </div>
     </form>
+<script src = "js/scripts/open_file.js"></script>
 </body>
 </html>
 
