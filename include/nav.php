@@ -23,6 +23,9 @@
     <a class="nav-link" href="test_index.php">Test</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="test_noor.php">Nour</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link disabled" href="#">Disabled</a>
   </li>
 </ul>
