@@ -6,7 +6,12 @@ include('include/nav.php');
 
 include("sql/sql_queries.php");
 
-echo delete("users");
+$users = [
+    "name" => "noor",
+    "email" => "noor@gmail"
+] ;
+
+    echo selectWithTable("users","items");
 
 ?>
 
