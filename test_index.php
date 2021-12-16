@@ -6,6 +6,10 @@ include('include/nav.php');
 
 </style>
 
+
+<a href="backup_db.php">Backup</a>
+
+
 <script>
 
 </script>
