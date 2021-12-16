@@ -9,7 +9,7 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/open_file.css">
+    <!-- <link rel="stylesheet" href="css/styles/open_file.css"> -->
 </head>
 <body>
 <form action="" method="post">
@@ -35,7 +35,7 @@ include('include/nav.php');
             <div id="new_text" hidden>
                 <label for="">اسم الملف</label>
                 <input type="text" required>
-                <button type="button" name="add" id="add" onclick="test2()">إضافة</button>
+                <button type="submit" name="add" id="add" onclick="test2()">إضافة</button>
                 <div id = "initial_balance" hidden>
                      <label>الرصيد الافتتاحي</label>
                     <input type="text">
@@ -44,9 +44,14 @@ include('include/nav.php');
             </div>
         </div>
     </form>
+    
 <script src = "js/scripts/open_file.js"></script>
 </body>
 </html>
+
+
+
+
 
 <?php
 include('include/footer.php');

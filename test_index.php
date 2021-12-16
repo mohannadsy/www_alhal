@@ -8,6 +8,7 @@ include('include/nav.php');
 
 
 <a href="backup_db.php">Backup</a>
+<a href="open_file.php">Open File</a>
 
 
 <script>
