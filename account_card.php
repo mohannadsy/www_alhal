@@ -21,7 +21,8 @@ include('include/nav.php');
                     <fieldset class="border p-2">
                         <legend class="w-auto">معلومات الحساب</legend>
                         <label for="account code">رمز الحساب</label>
-                        <input name="account code" type="text" readonly value="<?php echo get_auto_code($con , "accounts" , "code" , "acc_")  ?>">
+                        <input name="account code" type="text" readonly 
+                                value="<?php echo get_auto_code($con , "accounts" , "code" , get_value_from_config("prefix_code" , "account"))  ?>">
                         <br><br>
                         <label for="account name">الحساب</label>
                         <input type="text" name="account name">
