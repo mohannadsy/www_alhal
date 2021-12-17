@@ -3,6 +3,9 @@
     include('css.php'); 
     @include('sql/connection.php');
     include('helper/config_functions.php');
+    include('helper/operation_functions.php');
+    include('helper/database_functions.php');
+    include('helper/javascript_functions.php');
 ?>
 
 <ul class="nav nav-tabs">

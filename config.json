@@ -1,1 +1,7 @@
-{"database":"souq","sql_path":"C:\\Users\\ASUS\\Desktop\\souq.sql"}
+{
+    "database": "souq1",
+    "host": "localhost",
+    "user": "root",
+    "pass": "",
+    "sql_path": "C:\\Users\\ASUS\\Desktop\\souq.sql"
+}
