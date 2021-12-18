@@ -50,10 +50,10 @@ function select($table , $columns =' * ')
         $col = getStrFromList($columns);
     }
     $sql="select $col  from ";
-    if(is_array($table))
+    if(!is_array($table))
           return $sql . $table;
      else
-         $sql = $sql + getStrFromList($table);
+         $sql = $sql . getStrFromList($table);
      return $sql;
 }
 
@@ -64,6 +64,13 @@ function selectWithTable($table1,$table2)
 }
 
 // insert into users ( name, phone) values ( 'ahmad', '123')
+?>
+<style>
+  body{
+    direction : ltr
+  }
+</style>
+<?php
 function insert($table , $array)
 {
     $sql = "insert into  $table  (" ;
@@ -74,7 +81,7 @@ function insert($table , $array)
     $sql =rtrim($sql,",") . ") values (";
     foreach ($array as $key => $value)
     {
-        $sql = $sql . " ' $value ' , ";
+        $sql = $sql . " ' $value ' ,";
     }
     $sql =rtrim( $sql ,",") . ")";
     return $sql;
@@ -103,7 +110,7 @@ function delete($table)
 
 function where($column,$value,$op="=")
 {
-  return "where $column " . " " .$op . " ' $value '";
+  return " where $column " . " " .$op . " '$value'";
 } 
 function whereLarger($column,$value)
 {
@@ -150,31 +157,31 @@ function whereBetween( $column , $first_value , $second_value)
 
 function whereLike( $column , $value)
 {
-  return   " where  $column   like'%  $value  %' ";
+  return   " where  $column   like'%$value%' ";
 }
 function whereRlike( $column , $value)
 {
-  return " where $column  like'%  $value ' ";
+  return " where $column  like'%$value' ";
 }
 function whereLlike( $column , $value)
 {
-  return " where  $column like ' $value  %' ";
+  return " where  $column like '$value%' ";
 }
 
 ##############################
 # other Ready CRUD functions
 function selectWhereId( $table , $id)
 {
-    return select( $table)+where("id", $id);
+    return select( $table) . where("id", $id);
 
 }
 function updateWhereId( $table, $id, $array)
 {
-    return update( $table , $array).where("id", $id);
+    return update( $table , $array) .where("id", $id);
 }
 function deleteWhereId( $table , $id)
 {
-    return delete( $table)+where("id", $id);
+    return delete( $table) . where("id", $id);
 }
 function selectDistinct( $table, $column)
 {

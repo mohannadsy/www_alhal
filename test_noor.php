@@ -15,15 +15,16 @@ $tables = ['users' , 'phones' , 'roles'];
 $columns = ['id' , 'name' , 'phone'];
 
 ##############################Nour#
-////echo select('users');
+//echo select('users' , $columns);
 //echo selectWithTable('items','categories');
-////echo insert('users',$users);
-////echo update('users',$users);
-//echo delete('users');
-////echo delete('users') . where ('id'= '2');
-////echo selectWhereId('users','1');
-//echo(addColumn('users','n','int'));
+// echo  insert('users',$users);
+// echo update('users',$users);
+// echo delete('users');
+// echo delete('users') . where ('id', '2');
+// echo selectWhereId('users','1');
+// echo(addColumn('users','n','int'));
 //echo(search('users','id','1'));
+echo updateWhereId('users','1',$users);
 
 ?>
 
