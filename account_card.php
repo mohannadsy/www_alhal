@@ -71,9 +71,15 @@ include('include/nav.php');
 </html>
 
 <?php
-echo insert('clients' , get_array_from_array($_POST , ['name','account_id'])) . '<br>';
-echo insert('addresses' , get_array_from_array($_POST , ['state','city' , 'location'])) . '<br>';
-echo insert('accounts' , get_array_from_array($_POST , ['code','dept'])) . '<br>';
+if(isset($_POST['add'])){
+    echo $clients =  insert('clients' , get_array_from_array($_POST , ['name','account_id','phone']));
+    echo $addresses = insert('addresses' , get_array_from_array($_POST , ['state','city' , 'location']));
+    echo $acounts = insert('accounts' , get_array_from_array($_POST , ['code','dept']));
+
+    mysqli_query($con , $clients);
+    mysqli_query($con , $addresses);
+    mysqli_query($con , $acounts);
+}
 ?>
 
 

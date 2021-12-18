@@ -81,7 +81,7 @@ function insert($table , $array)
     $sql =rtrim($sql,",") . ") values (";
     foreach ($array as $key => $value)
     {
-        $sql = $sql . " ' $value ' ,";
+        $sql = $sql . " '$value' ,";
     }
     $sql =rtrim( $sql ,",") . ")";
     return $sql;
