@@ -4,6 +4,7 @@ include('include/nav.php');
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,34 +16,89 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container">
+
+            <!-- Messages Section -->
+            <?php
+            if (isset($_GET['message_success'])) {
+                if ($_GET['message_success'] == 'success')
+                    echo "<div class='text-center alert-success'>تم انشاء الحساب بنجاح</div>";
+                if ($_GET['message_success'] != 'success')
+                    echo "<div class='text-center alert-danger'>عئرا لم يتم انشاء الحساب بنجاح</div>";
+            }
+            if (isset($_GET['message_update'])) {
+                if ($_GET['message_update'] == 'success')
+                    echo "<div class='text-center alert-info'>تم تعديل الحساب بنجاح</div>";
+                if ($_GET['message_update'] != 'success')
+                    echo "<div class='text-center alert-danger'>عئرا لم يتم تعديل الحساب بنجاح</div>";
+            }
+
+            $account = [];
+            if (isset($_GET['id'])) {
+                $select_where_id = selectWhereId('accounts', $_GET['id']);
+                $select_where_exec = mysqli_query($con, $select_where_id);
+                $account = mysqli_fetch_array($select_where_exec);
+            }
+            ?>
+
+
             <div class="row">
                 <div class="md-4">
+
                     <br>
                     <fieldset class="border p-2">
                         <legend class="w-auto">معلومات الحساب</legend>
+
                         <label for="code">رمز الحساب</label>
-                        <input name="code" type="text" readonly 
-                                value="<?php echo get_auto_code($con , "accounts" , "code" , get_value_from_config("prefix_code" , "account"))  ?>">
+                        <input name="code" type="text" readonly value="<?php
+                                                                        if (isset($account['code'])) echo $account['code'];
+                                                                        else
+                                                                            echo get_auto_code($con, "accounts", "code", get_value_from_config("prefix_code", "account"))  ?>">
+
                         <br><br>
+
                         <label for="name">الحساب</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name" value="<?php if (isset($account['name'])) echo $account['name'] ?>">
+
                         <br><br>
+
                         <label for="main account">الحساب الرئيسي</label>
-                        <input type="text" name="account_id">
+                        <!-- <input type="text" name="account_id"> -->
+
+                        <select name="account_id" id="">
+                            <option value="0">حساب رئيسي جديد</option>
+                            <?php
+                            foreach (get_main_accounts($con) as $key => $value) {
+                                echo "<option value='$key'>$value</option>";
+                            }
+                            ?>
+                        </select>
+
                         <br><br>
+
                     </fieldset>
+
+
                     <fieldset class="border p-2">
                         <legend class="w-auto">الرصيد الافتتاحي</legend>
+
                         <label name="credit">له</label>
                         <input type="number" name="credit">
+
                         <br><br>
+
                         <label name="debit">علينا</label>
                         <input type="number" name="debit">
+
                     </fieldset>
+
                     <button type="submit" name="add">إضافة</button>
-                    <button type="submit" hidden name="update">تعديل</button>
+
+                    <button type="submit" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+
                     <button type="submit" hidden name="delete">حذف</button>
+
                     <button type="button" name="close">إغلاق</button>
+
                 </div>
                 <div class="md-8">
                     <br>
@@ -50,14 +106,26 @@ include('include/nav.php');
                         <legend class="w-auto">معلومات التواصل </legend>
                         <label name="">المحافظة</label>
                         <input type="text" name="state">
-                        <br><br> <label name="">المدينة</label>
-                        <input type="text" name="city">
-                        <br><br> <label name="">مكان السكن</label>
-                        <input type="text" name="location">
-                        <br><br> <label name="">الهاتف</label>
-                        <input type="text" name="phone">
+
                         <br><br>
+
+                        <label name="">المدينة</label>
+                        <input type="text" name="city">
+
+                        <br><br>
+
+                        <label name="">مكان السكن</label>
+                        <input type="text" name="location">
+
+                        <br><br>
+
+                        <label name="">الهاتف</label>
+                        <input type="text" name="phone">
+
+                        <br><br>
+
                     </fieldset>
+
                     <label name="">ملاحظات</label>
                     <textarea rows="3" type="text" name="note"></textarea>
                     <hr>
@@ -71,15 +139,43 @@ include('include/nav.php');
 </html>
 
 <?php
-if(isset($_POST['add'])){
-    echo $clients =  insert('clients' , get_array_from_array($_POST , ['name','account_id','phone']));
-    echo $addresses = insert('addresses' , get_array_from_array($_POST , ['state','city' , 'location']));
-    echo $acounts = insert('accounts' , get_array_from_array($_POST , ['code','dept']));
 
-    mysqli_query($con , $clients);
-    mysqli_query($con , $addresses);
-    mysqli_query($con , $acounts);
+
+
+if (isset($_POST['add'])) {
+    $_POST['fund'] = 0;
+    if ($_POST['credit'] == '')
+        $_POST['fund'] = '-' . $_POST['debit'];
+    else
+        $_POST['fund'] = $_POST['credit'];
+    $accounts =  insert('accounts', get_array_from_array($_POST, [
+        'name', 'account_id', 'phone', 'state',
+        'city', 'location', 'note', 'code', 'fund'
+    ]));
+
+    $accounts_exec = mysqli_query($con, $accounts);
+    if ($accounts_exec)
+        open_window_self('account_card.php?message_success=success');
 }
+
+if (isset($_POST['update'])) {
+    $_POST['fund'] = 0;
+    if ($_POST['credit'] == '')
+        $_POST['fund'] = '-' . $_POST['debit'];
+    else
+        $_POST['fund'] = $_POST['credit'];
+    $accounts =  updateWhereId('accounts', $_GET['id'], get_array_from_array($_POST, [
+        'name', 'account_id', 'phone', 'state',
+        'city', 'location', 'note', 'code', 'fund'
+    ]));
+
+    $accounts_exec = mysqli_query($con, $accounts);
+    if ($accounts_exec)
+        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+}
+
+
+
 ?>
 
 

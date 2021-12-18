@@ -95,7 +95,7 @@ function update($table ,$array)
     {
         $sql = $sql . " " . $key . " ='" . $value . "' ,";
     }
-    $sql = rtrim( $sql , ','). " ";
+    $sql = $sql . ' updated_at = CURRENT_TIMESTAMP';
     return $sql;
 }
 
@@ -203,7 +203,7 @@ function orderBy( $column = "id")
 
 function resetAutoIncrement( $table)
 {
-    return "ALTER TABLE". $table." AUTO_INCREMENT = 1 ";
+    return "ALTER TABLE ". $table." AUTO_INCREMENT = 1 ";
 }
 
 # Columns ###

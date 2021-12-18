@@ -193,3 +193,13 @@ function drop_database($con, $db_name)
         show_message_drop($db_execute);
     }
 }
+
+
+function reset_auto_increment_all_tables($con){
+    $select_tables_query = "show tables";
+    $select_tables_exec = mysqli_query($con , $select_tables_query);
+    while($table = mysqli_fetch_row($select_tables_exec)){
+        $query = resetAutoIncrement($table[0]);
+        $query_exec = mysqli_query($con , $query);
+    }
+}
