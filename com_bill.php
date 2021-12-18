@@ -52,24 +52,24 @@ include('include/nav.php');
             </div>
         </div>
         <div class="row justify-content-center">
-            <table class="col-10 table table-bordered table-hover"  name="table" id="tbl">
+            <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
                 <thead class="text-center">
                 <tr>
-                    <th>الرقم</th>
-                    <th>المادة</th>
-                    <th>الوحدة</th>
-                    <th>عدد العبوات</th>
-                    <th>وزن قائم</th>
-                    <th>وزن الصافي</th>
-                    <th> الإفرادي </th>
-                    <th>الإجمالي </th>
-                    <th>ملاحظات</th>
+                    <th contenteditable='false'>الرقم</th>
+                    <th contenteditable='false'>المادة</th>
+                    <th contenteditable='false'>الوحدة</th>
+                    <th contenteditable='false'>عدد العبوات</th>
+                    <th contenteditable='false'>وزن قائم</th>
+                    <th contenteditable='false'>وزن الصافي</th>
+                    <th contenteditable='false'> الإفرادي </th>
+                    <th contenteditable='false'>الإجمالي </th>
+                    <th contenteditable='false'>ملاحظات</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td name='bill_code_1'></td>
+                    <td name='item_name_1' ></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -80,7 +80,8 @@ include('include/nav.php');
                 </tr>
                 </tbody>
             </table>
-            <button type="button" >adding column</button>
+            <button type="button" id="add_col">adding column</button>
+            <button type="button" id="add_row">adding Row</button>
         </div>
         <div class="row justify-content-end">
             <label>الإجمالي</label>

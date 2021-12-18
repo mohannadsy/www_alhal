@@ -1,7 +1,5 @@
 <?php
 include('include/nav.php');
-include('helper/javascript_functions.php');
-include('helper/database_functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +25,7 @@ include('helper/database_functions.php');
                 $select_db_query = "show databases like 'souq%';";
                 $select_db_execute = mysqli_query($con, $select_db_query);
                 while ($row = mysqli_fetch_row($select_db_execute)) {
-                    echo "<tr><td>" . $row[0] . "</td></tr>";
+                    echo "<tr><td id = '".$row[0]."' onclick='get_selected_database(".$row[0].")'>" . $row[0] . "</td></tr>";
                 }
                 ?>
                 <!-- End Code Section -->
