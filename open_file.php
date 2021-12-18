@@ -16,7 +16,7 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="center">
-            <table name="table" class="table border">
+            <table name="table" class="table border table-hover" id="table">
                 <tr>
                     <th>اسم قاعدة البيانات</th>
                 </tr>
@@ -25,13 +25,18 @@ include('include/nav.php');
                 $select_db_query = "show databases like 'souq%';";
                 $select_db_execute = mysqli_query($con, $select_db_query);
                 while ($row = mysqli_fetch_row($select_db_execute)) {
-                    echo "<tr><td id = '".$row[0]."' onclick='get_selected_database(".$row[0].")'>" . $row[0] . "</td></tr>";
+                    echo "<tr>
+                            <td 
+                                id = '".$row[0]."' 
+                                onclick='get_selected_database(\"".$row[0]."\")'>" . $row[0] . "  
+                            </td>
+                        </tr>";
                 }
                 ?>
                 <!-- End Code Section -->
 
             </table>
-            <input type="hidden" name="selected_database" value="souq">
+            <input type="text" name="selected_database" value="souq" id="selected_database"> 
             <div>
                 <h3>معلومات الملف</h3>
                 <label name="file">الملف</label>
@@ -54,7 +59,6 @@ include('include/nav.php');
 
     <script src="js/scripts/open_file.js"></script>
 </body>
-
 </html>
 
 

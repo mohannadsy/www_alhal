@@ -1,14 +1,1 @@
-{
-    "database": "souq",
-    "host": "localhost",
-    "user": "root",
-    "pass": "",
-    "sql_path": "C:\\Users\\ASUS\\Desktop\\souq.sql",
-    "number_of_zeros_code" : "5",
-    
-    "prefix_code" : {
-        "account":"acc_",
-        "category":"cat_",
-        "item":"it_"
-    }
-}
+{"database":"souq","host":"localhost","user":"root","pass":"","sql_path":"C:\\Users\\ASUS\\Desktop\\souq.sql","number_of_zeros_code":"5","prefix_code":{"account":"acc_","category":"cat_","item":"it_"}}
