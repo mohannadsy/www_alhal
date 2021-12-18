@@ -76,7 +76,7 @@ function insert($table , $array)
     $sql = "insert into  $table  (" ;
     foreach ($array as $key => $value)
     {
-        $sql = $sql . $key  . " , ";
+        $sql = $sql . $key  . " ,";
     }
     $sql =rtrim($sql,",") . ") values (";
     foreach ($array as $key => $value)

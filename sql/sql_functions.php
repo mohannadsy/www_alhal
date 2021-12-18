@@ -22,7 +22,7 @@ function getStrFromList($lst)
 function getKeysFromDictionary($dictionary)
 {
     $keys='';
-    foreach($arr as $key => $value)
+    foreach($dictionary as $key => $value)
        $keys = $keys .' ' .$key;
 
     return $keys;
@@ -31,7 +31,7 @@ function getKeysFromDictionary($dictionary)
 function getValuesFromDictionary($dictionary)
 {
     $values ='';
-    foreach($arr as $key => $value)
+    foreach($dictionary as $key => $value)
        $values = $values .' ' .$value;
 
     return $values;

@@ -20,15 +20,15 @@ include('include/nav.php');
                     <br>
                     <fieldset class="border p-2">
                         <legend class="w-auto">معلومات الحساب</legend>
-                        <label for="account code">رمز الحساب</label>
-                        <input name="account code" type="text" readonly 
+                        <label for="code">رمز الحساب</label>
+                        <input name="code" type="text" readonly 
                                 value="<?php echo get_auto_code($con , "accounts" , "code" , get_value_from_config("prefix_code" , "account"))  ?>">
                         <br><br>
-                        <label for="account name">الحساب</label>
-                        <input type="text" name="account name">
+                        <label for="name">الحساب</label>
+                        <input type="text" name="name">
                         <br><br>
                         <label for="main account">الحساب الرئيسي</label>
-                        <input type="text" name="main account">
+                        <input type="text" name="account_id">
                         <br><br>
                     </fieldset>
                     <fieldset class="border p-2">
@@ -40,8 +40,8 @@ include('include/nav.php');
                         <input type="number" name="debit">
                     </fieldset>
                     <button type="submit" name="add">إضافة</button>
-                    <button type="submit" name="update">تعديل</button>
-                    <button type="submit" name="delete">حذف</button>
+                    <button type="submit" hidden name="update">تعديل</button>
+                    <button type="submit" hidden name="delete">حذف</button>
                     <button type="button" name="close">إغلاق</button>
                 </div>
                 <div class="md-8">
@@ -49,7 +49,7 @@ include('include/nav.php');
                     <fieldset class="border p-2">
                         <legend class="w-auto">معلومات التواصل </legend>
                         <label name="">المحافظة</label>
-                        <input type="text" name="">
+                        <input type="text" name="state">
                         <br><br> <label name="">المدينة</label>
                         <input type="text" name="city">
                         <br><br> <label name="">مكان السكن</label>
@@ -59,7 +59,7 @@ include('include/nav.php');
                         <br><br>
                     </fieldset>
                     <label name="">ملاحظات</label>
-                    <textarea rows="3" type="text" name="notes"></textarea>
+                    <textarea rows="3" type="text" name="note"></textarea>
                     <hr>
                 </div>
 
@@ -69,6 +69,13 @@ include('include/nav.php');
 </body>
 
 </html>
+
+<?php
+echo insert('clients' , get_array_from_array($_POST , ['name','account_id'])) . '<br>';
+echo insert('addresses' , get_array_from_array($_POST , ['state','city' , 'location'])) . '<br>';
+echo insert('accounts' , get_array_from_array($_POST , ['code','dept'])) . '<br>';
+?>
+
 
 <?php
 include('include/footer.php');

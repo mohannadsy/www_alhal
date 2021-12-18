@@ -22,10 +22,16 @@ function get_auto_code($con , $table , $column , $prefix){
     return generate_code($prefix , $code);
 }
 ################################################################################################
-
-
-
-
-
-
-?>
+/**
+ * Dictionary
+ */
+function get_array_from_array($dictionary,$array){
+    $result_array=[];
+    foreach ($array as $key){
+        foreach ($dictionary as $_key=>$value){
+            if($key==$_key)
+                $result_array[$_key] = $value;
+        }
+    }
+return $result_array;
+}
