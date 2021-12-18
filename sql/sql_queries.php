@@ -51,16 +51,16 @@ function select($table , $columns =' * ')
     }
     $sql="select $col  from ";
     if(is_array($table))
-            return $sql . $table;
+          return $sql . $table;
      else
-            $sql = $sql + getStrFromList($table);
+         $sql = $sql + getStrFromList($table);
      return $sql;
 }
 
 
 function selectWithTable($table1,$table2)
 {
- return "select * from  $table1  ,  $table2  where  $table2 .id = $table1 " . "." . getSingleName($table2) ."_id ";
+  return "select * from  $table1  ,  $table2  where  $table2 .id = $table1 " . "." . getSingleName($table2) ."_id ";
 }
 
 // insert into users ( name, phone) values ( 'ahmad', '123')
@@ -71,24 +71,24 @@ function insert($table , $array)
     {
         $sql = $sql . $key  . " , ";
     }
-    $sql =substr($sql,0,-1) . ") values (";
+    $sql =rtrim($sql,",") . ") values (";
     foreach ($array as $key => $value)
     {
-        $sql = $sql . " '$value' , ";
+        $sql = $sql . " ' $value ' , ";
     }
-    $sql =substr($sql,0,-1) . ")";
+    $sql =rtrim( $sql ,",") . ")";
     return $sql;
 }
 
 //update users set  name = 'ahmad' , phone = '123'
-function _update($table ,$array)
+function update($table ,$array)
 {
     $sql="update $table set ";
     foreach($array as $key => $value)
     {
         $sql = $sql . " " . $key . " ='" . $value . "' ,";
     }
-    $sql = sql.rtrim(','). " ";
+    $sql = rtrim( $sql , ','). " ";
     return $sql;
 }
 
@@ -113,114 +113,114 @@ function whereSmaller($column,$value)
 {
   return where($column,$value,"<");
 } 
-function whereNotEqual($column, $value)
+function whereNotEqual( $column , $value)
 {
-  return where($column ,$value , "<>");
+  return where( $column , $value , "<>");
 }
 
-function andWhere($column,$value,$op="=")
+function andWhere( $column, $value, $op = "=")
 {
-  return " and ".where($column , $value , $op);
+  return " and ". where( $column , $value , $op);
 }
-function andWhereLarger($column,$value)
+function andWhereLarger( $column , $value)
 {
-  return " and ".where($column , $value , ">");
+  return " and ". where($column , $value , ">");
 }
-function andWhereSmaller($column,$value)
+function andWhereSmaller( $column, $value)
 {
-  return " and ".where($column , $value , "<");
+  return " and ". where( $column , $value , "<");
 }
 
-function orWhere($column,$value,$op="=")
+function orWhere( $column , $value,$op="=")
 {
-  return " or" . where($column , $value , $op);
+  return " or" . where( $column , $value , $op);
 }
-function orWhereLarger($column,$value)
+function orWhereLarger( $column , $value)
 {
-  return "or ".where($column,$value,">");
+  return "or ". where( $column , $value ,">");
 }
-function orWhereSmaller($column,$value)
+function orWhereSmaller( $column , $value)
 {
-  return "or ".where($column,$value,"<");
+  return "or ". where( $column , $value,"<");
 }
-function whereBetween($column , $first_value , $second_value)
+function whereBetween( $column , $first_value , $second_value)
 {
   return " where  $column  between '" . $first_value . "' and '$second_value' " ;
 }
 
-function whereLike($column,$value)
+function whereLike( $column , $value)
 {
   return   " where  $column   like'%  $value  %' ";
 }
-function whereRlike($column,$value)
+function whereRlike( $column , $value)
 {
   return " where $column  like'%  $value ' ";
 }
-function whereLlike($column,$value)
+function whereLlike( $column , $value)
 {
   return " where  $column like ' $value  %' ";
 }
 
 ##############################
 # other Ready CRUD functions
-function selectWhereId($table,$id)
+function selectWhereId( $table , $id)
 {
-    return select($table)+where("id",$id);
+    return select( $table)+where("id", $id);
 
 }
-function updateWhereId($table,$id,$array)
+function updateWhereId( $table, $id, $array)
 {
-    return update($table,$array).where("id",$id);
+    return update( $table , $array).where("id", $id);
 }
-function deleteWhereId($table,$id)
+function deleteWhereId( $table , $id)
 {
-    return delete($table)+where("id",$id);
+    return delete( $table)+where("id", $id);
 }
-function selectDistinct($table,$column)
+function selectDistinct( $table, $column)
 {
     return "select DISTINCT  $column  from  $table";
 }
 ##############################
 
-function orderBy($column = "id")
+function orderBy( $column = "id")
 {
     $sql = " order by ";
-    if(is_array($column ))
+    if(is_array( $column ))
     {
-        $sql = $sql + getStrFromList($column);
+        $sql = $sql . getStrFromList( $column);
     }
     else
-        $sql = $sql + $column;
+        $sql = $sql . $column;
     return $sql;
 }
 
-function resetAutoIncrement($table)
+function resetAutoIncrement( $table)
 {
     return "ALTER TABLE". $table." AUTO_INCREMENT = 1 ";
 }
 
 # Columns ###
-function addColumn($table ,$column, $type)
+function addColumn( $table , $column, $type)
 {
     return "alter table  $table  add $column  $type ";
 }
-function addColumnTimestamp($table ,$column)
+function addColumnTimestamp( $table , $column)
 {
-    return addColumn($table , $column , "timestamp");
+    return addColumn( $table , $column , "timestamp");
 }
-function addColumnVarchar($table ,$column)
+function addColumnVarchar( $table , $column)
 {
-    return addColumn($table , $column , "varchar(250)");
+    return addColumn( $table , $column , "varchar(250)");
 }
-function addColumnInt($table ,$column)
+function addColumnInt( $table , $column)
 {
-    return addColumn($table , $column , "int(10)");
+    return addColumn( $table , $column , "int(10)");
 }
-function dropColumn($table ,$column)
+function dropColumn( $table , $column)
 {
     return "alter table $table  drop  $column ";
 }
-function updateColum($table , $column , $new_type)
+function updateColum( $table , $column , $new_type)
 {
     return "Alter Table $table  Modify column $column  $new_type " ;
 }
@@ -229,9 +229,9 @@ function updateColum($table , $column , $new_type)
 ########################## Helper CODE SECTION ###################################
 ################################################################################
 
-function search($table, $columns , $search_word)
+function search( $table, $columns , $search_word)
 {
-    return "select * from  " + whereLike($columns , $search_word)  ;
+    return "select * from $table " . whereLike( $columns , $search_word)  ;
 }
 
 

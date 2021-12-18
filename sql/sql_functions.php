@@ -2,30 +2,40 @@
 
 function getSingleName($table)
 {
-    if($table.endswith('ies'))
-    {
-        return $table[0:(len($table)-3)] + "y";
-    }
-    return $table[0:(len($table)-1)];
+    if(strpos($table,"ies" , strlen($table)-4)== strlen($table)-3)
+        return substr_replace($table,'y' , strlen($table)-3);
+    else
+    return rtrim($table,'s');
+
+   
 }
     
 function getStrFromList($lst)
 {
     $result = '';
-    for $l in $lst
-        $result = $result + " " + $l + " ," ;
-    $result = $result.rtrim(',');
+    foreach( $lst as $l )   
+       $result = $result . " " . $l . " ," ;
+    $result = rtrim($result,',');
     return $result;
 }
     
 function getKeysFromDictionary($dictionary)
 {
-    return ' ';
+    $keys='';
+    foreach($arr as $key => $value)
+       $keys = $keys .' ' .$key;
+
+    return $keys;
 }
 
 function getValuesFromDictionary($dictionary)
 {
-    return '';
+    $values ='';
+    foreach($arr as $key => $value)
+       $values = $values .' ' .$value;
+
+    return $values;
+    
 }
 
 
