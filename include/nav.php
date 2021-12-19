@@ -8,6 +8,7 @@
     include('helper/database_functions.php');
     include('helper/javascript_functions.php');
     include('helper/ready_queries_functions.php');
+    include('helper/notification_functions.php');
 ?>
 
 <ul class="nav nav-tabs">

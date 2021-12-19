@@ -19,18 +19,8 @@ include('include/nav.php');
 
             <!-- Messages Section -->
             <?php
-            if (isset($_GET['message_success'])) {
-                if ($_GET['message_success'] == 'success')
-                    echo "<div class='text-center alert-success'>تم انشاء الحساب بنجاح</div>";
-                if ($_GET['message_success'] != 'success')
-                    echo "<div class='text-center alert-danger'>عئرا لم يتم انشاء الحساب بنجاح</div>";
-            }
-            if (isset($_GET['message_update'])) {
-                if ($_GET['message_update'] == 'success')
-                    echo "<div class='text-center alert-info'>تم تعديل الحساب بنجاح</div>";
-                if ($_GET['message_update'] != 'success')
-                    echo "<div class='text-center alert-danger'>عئرا لم يتم تعديل الحساب بنجاح</div>";
-            }
+            success_error_create_message('تم انشاء الحساب بنجاح' , 'عئرا لم يتم انشاء الحساب بنجاح');
+            success_error_update_message('تم تعديل الحساب بنجاح' , 'عئرا لم يتم تعديل الحساب بنجاح');
 
             $account = [];
             if (isset($_GET['id'])) {
@@ -155,7 +145,7 @@ if (isset($_POST['add'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?message_success=success');
+        open_window_self('account_card.php?message_create=success');
 }
 
 if (isset($_POST['update'])) {
