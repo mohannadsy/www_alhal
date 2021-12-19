@@ -36,7 +36,7 @@ include('include/nav.php');
                 <!-- End Code Section -->
 
             </table>
-            <input type="text" name="selected_database" value="souq" id="selected_database"> 
+            <input type="hidden" name="selected_database" value="" id="selected_database"> 
             <div>
                 <h3>معلومات الملف</h3>
                 <label name="file">الملف</label>
@@ -47,6 +47,7 @@ include('include/nav.php');
                 <hr>
             </div>
             <button type="submit" name="open_db">فتح</button>
+            <button type="submit" name="delete_db">حذف</button>
             <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
             <button type="button" name="close">إغلاق</button>
             <div id="new_text" hidden>
@@ -64,19 +65,41 @@ include('include/nav.php');
 
 
 <?php
-echo print_r($_POST);
+
 if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
-    $selected_database = $_POST['selected_database'];
-    if ($selected_database == 'souq')
+    $selected_database = trim($_POST['selected_database']);
+    if(is_empty($selected_database))
+        message_box('رجاءا حدد قاعدة بيانات');
+    
+    elseif ($selected_database == get_value_from_config('deafult_database')){
         message_box("لقد دخلت على قاعدة البيانات الافتراضية");
-    update_value_in_config('database', $selected_database);
+        update_value_in_config('database', $selected_database);
+    }
 }
 
 if (isset($_POST['create_db'])) {
     $database_name = $_POST['database_name'];
-    if (trim($database_name != '')) {
+    if (is_not_empty($database_name)) {
         create_database($con , $database_name);
+        open_window_self('open_file.php');
     }
+}
+
+if(isset($_POST['delete_db'])){
+    $selected_database = trim($_POST['selected_database']);
+    if(is_empty($selected_database))
+        message_box('رجاءا حدد قاعدة بيانات');
+    elseif ($selected_database == get_value_from_config('deafult_database'))
+        message_box("لا يمكنك حذف قاعدة البيانات الرئيسية");
+    else{
+        open_window_self_after_confirm('هل انت متأكد انك تريد حذف قاعدة البانات! لايمكنك التراجع عن هذه الخطوة!' , "open_file.php?delete_database=$selected_database");
+    }
+}
+if(isset($_GET['delete_database'])){
+    $selected_database = $_GET['delete_database'];
+    drop_database($con , $selected_database);
+    update_value_in_config('database', get_value_from_config('deafult_database'));
+    open_window_self("open_file.php");
 }
 
 ?>

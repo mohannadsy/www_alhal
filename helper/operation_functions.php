@@ -35,3 +35,13 @@ function get_array_from_array($dictionary,$array){
     }
 return $result_array;
 }
+
+
+
+###############################################################################################
+function is_empty($text){
+    return strlen(trim($text)) == 0 ? true : false;
+}
+function is_not_empty($text){
+    return !is_empty($text);
+}
