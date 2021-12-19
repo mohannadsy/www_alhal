@@ -9,14 +9,12 @@ function test2() {
 }
 
 function get_selected_database(id) {
-    b = false;
-    if (b) {
-        var table = document.getElementById(id).innerHTML;
-        document.getElementById("selected_database").value = table;
-        document.getElementById(id).style.backgroundColor = 'blue';
-        b = true;
-    }
-    document.getElementById(id).style.backgroundColor = 'none';
-
-
+    var table = document.getElementById(id).innerHTML;
+    document.getElementById("selected_database").value = table;
+    $('table tr').each(function(a, b) {
+        $(b).click(function() {
+            $('table tr').css('background', '#ffffff');
+            $(this).css('background', 'blue');
+        });
+    });
 }
