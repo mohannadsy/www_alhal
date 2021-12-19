@@ -19,8 +19,8 @@ include('include/nav.php');
 
             <!-- Messages Section -->
             <?php
-            success_error_create_message('تم انشاء الحساب بنجاح' , 'عئرا لم يتم انشاء الحساب بنجاح');
-            success_error_update_message('تم تعديل الحساب بنجاح' , 'عئرا لم يتم تعديل الحساب بنجاح');
+            success_error_create_message('تم انشاء الحساب بنجاح', 'عئرا لم يتم انشاء الحساب بنجاح');
+            success_error_update_message('تم تعديل الحساب بنجاح', 'عئرا لم يتم تعديل الحساب بنجاح');
 
             $account = [];
             if (isset($_GET['id'])) {
@@ -55,10 +55,12 @@ include('include/nav.php');
                         <!-- <input type="text" name="account_id"> -->
 
                         <select name="account_id" id="">
-                            <option value="0">حساب رئيسي جديد</option>
+                            <option value="0">حساب رئيسي</option>
                             <?php
-                            foreach (get_main_accounts($con) as $key => $value) {
-                                echo "<option value='$key'>$value</option>";
+                            foreach (get_main_accounts($con) as $id => $value) {
+                                echo "<option value='$id'";
+                                if (isset($account['account_id']) && $id == $account['account_id']) echo ' selected ';
+                                echo ">$value</option>";
                             }
                             ?>
                         </select>
@@ -71,13 +73,15 @@ include('include/nav.php');
                     <fieldset class="border p-2">
                         <legend class="w-auto">الرصيد الافتتاحي</legend>
 
-                        <label name="credit">له</label>
-                        <input type="number" name="credit">
+                        <label name="credit">لنا</label>
+                        <input type="number" name="credit"
+                        value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
 
                         <br><br>
 
                         <label name="debit">علينا</label>
-                        <input type="number" name="debit">
+                        <input type="number" name="debit"
+                        value="<?php if(isset($account['fund']) && $account['fund'] < 0) echo  trim($account['fund'] , '-') ?>">
 
                     </fieldset>
 
@@ -95,29 +99,33 @@ include('include/nav.php');
                     <fieldset class="border p-2">
                         <legend class="w-auto">معلومات التواصل </legend>
                         <label name="">المحافظة</label>
-                        <input type="text" name="state">
+                        <input type="text" name="state" 
+                        value="<?php if(isset($account['state'])) echo $account['state'] ?>">
 
                         <br><br>
 
                         <label name="">المدينة</label>
-                        <input type="text" name="city">
+                        <input type="text" name="city"
+                        value="<?php if(isset($account['city'])) echo $account['city'] ?>">
 
                         <br><br>
 
                         <label name="">مكان السكن</label>
-                        <input type="text" name="location">
+                        <input type="text" name="location"
+                        value="<?php if(isset($account['location'])) echo $account['location'] ?>">
 
                         <br><br>
 
                         <label name="">الهاتف</label>
-                        <input type="text" name="phone">
+                        <input type="text" name="phone"
+                        value="<?php if(isset($account['phone'])) echo $account['phone'] ?>">
 
                         <br><br>
 
                     </fieldset>
 
                     <label name="">ملاحظات</label>
-                    <textarea rows="3" type="text" name="note"></textarea>
+                    <textarea rows="3" type="text" name="note"><?php if(isset($account['note'])) echo $account['note'] ?></textarea>
                     <hr>
                 </div>
 
@@ -133,11 +141,13 @@ include('include/nav.php');
 
 
 if (isset($_POST['add'])) {
-    $_POST['fund'] = 0;
-    if ($_POST['credit'] == '')
-        $_POST['fund'] = '-' . $_POST['debit'];
-    else
-        $_POST['fund'] = $_POST['credit'];
+    $credit = 0;
+    $debit = 0;
+    if ($_POST['credit'] != '')
+        $credit = $_POST['credit'];
+    if($_POST['debit'] != '')
+        $debit = $_POST['debit'];
+    $_POST['fund'] = $credit-$debit;
     $accounts =  insert('accounts', get_array_from_array($_POST, [
         'name', 'account_id', 'phone', 'state',
         'city', 'location', 'note', 'code', 'fund'
@@ -149,11 +159,13 @@ if (isset($_POST['add'])) {
 }
 
 if (isset($_POST['update'])) {
-    $_POST['fund'] = 0;
-    if ($_POST['credit'] == '')
-        $_POST['fund'] = '-' . $_POST['debit'];
-    else
-        $_POST['fund'] = $_POST['credit'];
+    $credit = 0;
+    $debit = 0;
+    if ($_POST['credit'] != '')
+        $credit = $_POST['credit'];
+    if($_POST['debit'] != '')
+        $debit = $_POST['debit'];
+    $_POST['fund'] = $credit-$debit;
     $accounts =  updateWhereId('accounts', $_GET['id'], get_array_from_array($_POST, [
         'name', 'account_id', 'phone', 'state',
         'city', 'location', 'note', 'code', 'fund'

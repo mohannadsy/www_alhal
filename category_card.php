@@ -64,7 +64,7 @@ include('include/nav.php');
                     <button <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
                         تعديل
                     </button>
-                    <button <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
+                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
                         حذف
                     </button>
                     <button type="button" class="btn btn-primary" name="close">
@@ -99,10 +99,7 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    if(open_window_self_after_confirm('هل تريد بالتأكيد حذف هذا الصنف !', "category_card.php?delete_id=".$_GET['id']));
-}
-if(isset($_GET['delete_id'])){
-    $delete_category_query = deleteWhereId('categories',$_GET['delete_id']);
+    $delete_category_query = delete('categories').where('code' , $_POST['code']);
     $delete_category_exec = mysqli_query($con, $delete_category_query);
     if ($delete_category_exec) {
         open_window_self("category_card.php?message_delete=success");
@@ -114,5 +111,6 @@ if(isset($_GET['delete_id'])){
 
 
 <?php
+// mysqli_query($con , resetAutoIncrement('categories'));
 include('include/footer.php');
 ?>
