@@ -34,7 +34,7 @@
     <a class="nav-link" href="test_sara.php">Sara</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="">Raghad</a>
+    <a class="nav-link" href="test_rgd.php">Raghad</a>
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" href="#">Disabled</a>

@@ -13,14 +13,14 @@ include('include/nav.php');
 
         <form action="" method="post"> 
             
-            <label for="">اسم الصنف</label>
-            <input type="text" name="category_name" id="">
+            <label for="name">اسم الصنف</label>
+            <input type="text" name="name" id="">
             <br><br>
-            <label for="">رمز الصنف</label>
-            <input type="text" name="category_code" id="">
+            <label for="code">رمز الصنف</label>
+            <input type="text" name="code" id="">
             <br><br>
-            <label for=""> ملاحظات</label>
-            <input type="text" name="notes" id="">
+            <label for="note"> ملاحظات</label>
+            <input type="text" name="note" id="">
             <br><br>
             <div>
                 <button type="submit" name="add">إضافة</button>
