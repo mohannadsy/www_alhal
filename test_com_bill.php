@@ -37,71 +37,38 @@ include('include/nav.php');
                 <textarea name="buyer_notes"></textarea>
             </div>
         </div>
-            <!-- <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>البائع</label>
-                    <input type="text" name="seller">
-                </div>
-                <div class="col-6">
-                    <label>المشتري</label>
-                    <input type="text" name="buyer">
-                </div>
+        <div class="row justify-content-center" >
+            <div style="height:200px;">
+                <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
+                    <thead class="text-center">
+                    <tr>
+                        <th contenteditable='false'>الرقم</th>
+                        <th contenteditable='false'>المادة</th>
+                        <th contenteditable='false'>الوحدة</th>
+                        <th contenteditable='false'>عدد العبوات</th>
+                        <th contenteditable='false'>وزن قائم</th>
+                        <th contenteditable='false'>وزن الصافي</th>
+                        <th contenteditable='false'> الإفرادي </th>
+                        <th contenteditable='false'>الإجمالي </th>
+                        <th contenteditable='false'>ملاحظات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td name='bill_code_1'></td>
+                        <td name='item_name_1' ></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>طريقة الدفع </label>
-                    <input type="radio" name="rad_seller" checked>
-                    <label>نقدي</label>
-                    <input type="radio" name="rad_seller" disabled>
-                    <label>آجل</label>
-                </div>
-                <div class="col-6">
-                    <label>طريقة الدفع </label>
-                    <input type="radio" name="rad_buyer">
-                    <label>نقدي</label>
-                    <input type="radio" name="rad_buyer">
-                    آجل
-                </div>
-            </div>
-            <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>ملاحظات</label>
-                    <textarea name="seller_notes"></textarea>
-                </div>
-                <div class="col-6">
-                    <label>ملاحظات</label>
-                    <textarea name="buyer_notes"></textarea>
-                </div> 
-            </div> -->
-        <div class="row justify-content-center">
-            <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
-                <thead class="text-center">
-                <tr>
-                    <th contenteditable='false'>الرقم</th>
-                    <th contenteditable='false'>المادة</th>
-                    <th contenteditable='false'>الوحدة</th>
-                    <th contenteditable='false'>عدد العبوات</th>
-                    <th contenteditable='false'>وزن قائم</th>
-                    <th contenteditable='false'>وزن الصافي</th>
-                    <th contenteditable='false'> الإفرادي </th>
-                    <th contenteditable='false'>الإجمالي </th>
-                    <th contenteditable='false'>ملاحظات</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td name='bill_code_1'></td>
-                    <td name='item_name_1' ></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
+            
             <button type="button" id="add_col">adding column</button>
             <button type="button" id="add_row">adding Row</button>
         </div>
