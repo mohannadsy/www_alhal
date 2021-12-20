@@ -15,37 +15,65 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container">
-            <div class="row">
-            <div class="col-md-6" >
-            <div class="row">
-                <div class="col-md-6" >
-                 <label for="code">رمز المادة<label>
-                 <input type="number" name="code"></div>
-                 <div class="col-md-6" >
-                 <label for="name">المادة</label>
-                 <input type="text" name="name"></div>
-                 <label for="unit">وحدة القياس</label>
-                 <input type="text" name="unit"></div>
+
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-group row">
+                    <label for="code" class="col-md-4 col-form-label text-md-right">رمز المادة</label>
+                    <div class="col-md-6">
+                        <input type="text" id="" class="form-control" name="code" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="name" class="col-md-4 col-form-label text-md-right">المادة </label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="name" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="unit" class="col-md-4 col-form-label text-md-right">وحدة القياس </label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="unit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-md-4 col-form-label text-md-right">الصنف </label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="category">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
+                    <div class="col-md-6">
+                        <textarea type="text" id="" class="form-control" name="note"></textarea>
+                    </div>
+                </div>  
+                <div class="col-10 py-3">
+                            <button type="button" class="btn btn-primary" name="view items">استعراض المواد</button>
+
+                            <button type="submit" class=" btn btn-primary" name="add">
+                                إضافة
+                            </button>
+                            <button  type="submit" class="btn btn-primary" name="update">
+                                تعديل
+                            </button>
+                            <button type="submit" class="btn btn-primary" name="delete">
+                                حذف
+                            </button>
+                            <button type="button" class="btn btn-primary" name="close">
+                                إغلاق
+                            </button>
+                </div>
+                <div class="col-6">
+
+                </div>
             </div>
-            <div class="row">
-            <div class="col-md-6" >
-                   <label for="category">الصنف</label>
-                   <input type="text" name="category"></div>
-                   <div class="col-md-6" >
-                   <label for="note">ملاحظات</label>
-                    <textarea type="text" name="note"></textarea></div>
-            </div>
-            <div class="row py-5">            
-                    <button type="submit" name="view items">استعراض المواد</button>
-                    <button type="submit" name="add">إضافة</button>
-                    <button type="submit" name="update">تعديل</button>
-                    <button type="submit" name="delete">حذف</button>
-                    <button type="button" name="close">إغلاق</button>
-            </div>
-</div>
-<div class="col-md-6" ></div>
-       </div>
-        </div>
+
+
+
     </form>
 
 </body>
