@@ -39,7 +39,7 @@ include('include/nav.php');
 <thead>
   <tr>
     <th> الحساب</th>
-    <th> مدين</th>
+    <th> دائن</th>
     <th> البيان</th>
 
   </tr>
