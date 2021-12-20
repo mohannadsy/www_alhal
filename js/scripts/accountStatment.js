@@ -8,17 +8,6 @@ function createCell(cell, text, style) {
 
 }
 
-function appendColumn() {
-    var tbl = document.getElementById("tbl"), // table reference
-        i;
-    // open loop for each row and append cell
-    if (tbl.rows[0].cells.length < 12)
-        for (i = 0; i < tbl.rows.length; i++) {
-            createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col');
-            // tbl.rows.text.style.
-        }
-}
-
 function appendRow() {
     var tbl = document.getElementById('tbl'), // table reference
         row = tbl.insertRow(tbl.rows.length), // append table row
@@ -30,15 +19,9 @@ function appendRow() {
         }
 }
 
-document.querySelector('#add_col').onclick = appendColumn
-document.querySelector('#add_row').onclick = appendRow
-
-
-
-
 function deafultRows() {
     var i = 0;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 5; i++) {
         appendRow();
     }
 }

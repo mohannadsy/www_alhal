@@ -32,7 +32,7 @@ include('include/nav.php');
                 <input type="radio" name="rad_buyer">
                 <label>نقدي</label>
                 <input type="radio" name="rad_buyer">
-                آجل
+                <label>آجل</label>
                 <label>ملاحظات</label>
                 <textarea name="buyer_notes"></textarea>
             </div>
@@ -73,6 +73,8 @@ include('include/nav.php');
                     <textarea name="buyer_notes"></textarea>
                 </div> 
             </div> -->
+        <button type="button" id="add_col">adding column</button>
+        <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
             <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
                 <thead class="text-center">
@@ -102,8 +104,6 @@ include('include/nav.php');
                 </tr>
                 </tbody>
             </table>
-            <button type="button" id="add_col">adding column</button>
-            <button type="button" id="add_row">adding Row</button>
         </div>
         <div class="row justify-content-end">
             <label>الإجمالي</label>
