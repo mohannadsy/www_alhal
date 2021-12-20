@@ -121,7 +121,7 @@ function show_message_create($test)
 }
 
 
-function importDatabaseTables($con, $filePath)
+function import_database_tables($con, $filePath)
 {
     // Connect & select the database
 
@@ -169,7 +169,7 @@ function create_database($con, $db_name)
     show_message_create($db_execute);
     update_value_in_config('database', $db_name);
     $con = mysqli_connect($host, $user, $pass, $db_name) or die('Connection Failed');
-    importDatabaseTables($con, $sql_path);
+    import_database_tables($con, $sql_path);
 }
 
 function show_message_drop($test)
@@ -203,3 +203,14 @@ function reset_auto_increment_all_tables($con){
         $query_exec = mysqli_query($con , $query);
     }
 }
+
+function drop_all_tables($con){
+    $select_tables_query = "show tables";
+    $select_tables_exec = mysqli_query($con , $select_tables_query);
+    while($table = mysqli_fetch_row($select_tables_exec)){
+        $query = "drop table $table[0]";
+        $query_exec = mysqli_query($con , $query);
+    }
+}
+
+
