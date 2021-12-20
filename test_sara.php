@@ -9,6 +9,8 @@ include('include/nav.php');
 <a href="test_com_bill.php">Test print</a>
 <br>
 <a href="paymentBonds.php">Payment Bonds</a>
+<br>
+<a href="accountStatment.php">account statment</a>
 <?php
 include('include/footer.php');
 ?>
