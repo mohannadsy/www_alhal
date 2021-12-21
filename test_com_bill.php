@@ -14,7 +14,7 @@ include('include/nav.php');
 <form action="" method="post">
     <div class="container">
         <div class="row" style="height:200px;">
-            <div class="col-6">
+            <div class="col-6" id="printableArea">
                 <label>البائع</label>
                 <input type="text" name="seller">
                 <label>طريقة الدفع </label>
@@ -38,7 +38,7 @@ include('include/nav.php');
             </div>
         </div>
         <div class="row justify-content-center" >
-            <div style="height:200px;">
+            
                 <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
                     <thead class="text-center">
                     <tr>
@@ -67,8 +67,6 @@ include('include/nav.php');
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            
             <button type="button" id="add_col">adding column</button>
             <button type="button" id="add_row">adding Row</button>
         </div>
@@ -97,7 +95,7 @@ include('include/nav.php');
                     <option value="">مشتري</option>
                     </optgroup>
                 </select>
-                <button type="button" name="print" onclick="window.print();" >الطباعة</button>
+                <button type="button" name="print" onclick="printSection('printableArea')">الطباعة</button>
             </div>
         </div>
     </div>
