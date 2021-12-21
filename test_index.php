@@ -17,6 +17,10 @@ include('include/nav.php');
 </form>
 <?php
 if (isset($_POST['reset_souq'])) {
+    // reset_auto_increment_all_tables($con);
+
+    // backup($con , get_value_from_config('database'));
+
     drop_all_tables($con);
     import_database_tables($con, get_value_from_config('sql_path'));
 }
