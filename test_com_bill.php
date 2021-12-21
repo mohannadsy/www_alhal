@@ -95,7 +95,7 @@ include('include/nav.php');
                     <option value="">مشتري</option>
                     </optgroup>
                 </select>
-                <button type="button" name="print" onclick="printSection('printableArea')">الطباعة</button>
+                <button type="button" name="print" onclick="window.print();">الطباعة</button>
             </div>
         </div>
     </div>
