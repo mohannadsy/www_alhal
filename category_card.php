@@ -1,7 +1,7 @@
 <?php
 include('include/nav.php');
 ?>
-<html dir="rtl">
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">

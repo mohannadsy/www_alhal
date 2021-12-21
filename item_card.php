@@ -3,7 +3,7 @@ include('include/nav.php');
 ?>
 
 <!DOCTYPE html>
-<html dir="rtl">
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
