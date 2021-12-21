@@ -26,5 +26,4 @@ function deafultRows() {
     }
 }
 
-
 deafultRows();
