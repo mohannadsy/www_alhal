@@ -64,13 +64,7 @@ function selectWithTable($table1,$table2)
 }
 
 // insert into users ( name, phone) values ( 'ahmad', '123')
-?>
-<style>
-  body{
-    direction : ltr
-  }
-</style>
-<?php
+
 function insert($table , $array)
 {
     $sql = "insert into  $table  (" ;
@@ -159,6 +153,10 @@ function whereLike( $column , $value)
 {
   return   " where  $column   like'%$value%' ";
 }
+function andLike($column , $value){
+  return " and $column   like'%$value%' ";
+}
+
 function whereRlike( $column , $value)
 {
   return " where $column  like'%$value' ";

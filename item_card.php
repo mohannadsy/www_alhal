@@ -79,13 +79,11 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
-                            <textarea type="text" id="" class="form-control" name="note">
-                                <?php if (isset($_GET['id'])) echo $item['note']; ?>
-                            </textarea>
+                            <textarea type="text" id="" class="form-control" name="note"><?php if (isset($_GET['id'])) echo $item['note']; ?></textarea>
                         </div>
                     </div>
                     <div class="col-10 py-3">
-                        <button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button>
+                        <a href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
 
                         <button <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
                             إضافة

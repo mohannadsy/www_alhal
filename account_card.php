@@ -73,7 +73,7 @@ include('include/nav.php');
                     <fieldset class="border p-2">
                         <legend class="w-auto">الرصيد الافتتاحي</legend>
 
-                        <label name="credit">لنا</label>
+                        <label name="credit">له</label>
                         <input type="number" name="credit"
                         value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
 

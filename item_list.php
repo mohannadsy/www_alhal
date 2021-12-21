@@ -17,19 +17,19 @@ include('include/nav.php');
             <div class="row py-4">
 
                 <div class="col-4">
-                        <input type="search" class=""  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                        <button type="button" class="btn btn-primary">بحث</button>
+                        <input id="search_text" type="search" class=""  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                        <button id="search" type="button" class="btn btn-primary">بحث</button>
 
                 </div>
                 <div class="col-5">
-                    <button type="submit" class=" btn btn-primary" name="new_category">
+                    <a href="category_card.php"><button type="button" class=" btn btn-primary" name="new_category">
                         صنف جديد
-                    </button>
+                    </button></a>
                 </div>
                 <div class="col-1">
-                    <button type="submit" class=" btn btn-primary" name="item_card">
+                    <a href="item_card.php"><button type="button" class=" btn btn-primary" name="item_card">
                          بطاقة مادة
-                    </button>
+                    </button></a>
                 </div>
             </div>
             <div class="row justify-content-center" >
@@ -43,19 +43,7 @@ include('include/nav.php');
                                 <th scope="col">الصنف</th>
                                 </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
+                        <tbody id="show">
                         </tbody>
                     </table>
 
@@ -76,6 +64,42 @@ include('include/nav.php');
     
 </body>
 </html>
+
 <?php
 include('include/footer.php');
 ?>
+
+
+<script>
+    $(function(){
+        $('#search_text').keyup(function(){
+            var item_search = $(this).val();
+            if(item_search != ''){
+                $.ajax({
+                    url:"search.php",
+                    method:"POST",
+                    data:{item_search : item_search},
+                    success:function(data){
+                        $('#show').fadeIn();
+                        $('#show').html(data);
+                    }
+                });
+            }
+        });
+
+        $('#search').click(function(){
+            var item_search = $('#search_text').val();
+            if(item_search != ''){
+                $.ajax({
+                    url:"search.php",
+                    method:"POST",
+                    data:{item_search : item_search},
+                    success:function(data){
+                        $('#show').fadeIn();
+                        $('#show').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
