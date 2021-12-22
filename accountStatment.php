@@ -27,12 +27,12 @@ include('include/nav.php');
                 <input type="date" name="" id="" min="" max="" value="2022-01-22">
                 <label for="">نوع التقرير</label>
                 <label for="">تفصيلي</label>
-                <input type="radio" name="rad_pay" id="delailes" >
+                <input type="radio" name="rad_pay" id="delailes" onclick='clickradio()'>
                 <label for="">مختصر</label>
-                <input type="radio" name="rad_pay" id="less" >
+                <input type="radio" name="rad_pay" id="less" onclick='clickradio()' checked>
             </div>
             <div class="row justify-content-center ">
-                    <table contenteditable='true' class="col-10 table table-bordered table-hover "  name="table" id="tbl1" >
+                    <table contenteditable='true' class="col-10 table table-bordered table-hover "  name="table" id="tbl1">
                         <thead class="text-center">
                         <tr>
                             <th contenteditable='false'>التاريخ</th>
@@ -49,7 +49,7 @@ include('include/nav.php');
                     </table>
                 </div>
                 <div class="row justify-content-center ">
-                    <table contenteditable='true' class="col-10 table table-bordered table-hover "  name="table" id="tbl2" hidden>
+                    <table hidden contenteditable='true' class="col-10 table table-bordered table-hover "  name="table" id="tbl2">
                         <thead class="text-center">
                         <tr>
                             <th contenteditable='false'>التاريخ</th>

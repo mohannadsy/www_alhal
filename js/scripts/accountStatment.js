@@ -27,20 +27,17 @@ function deafultRows() {
 }
 
 function clickradio() {
-    if (document.querySelector('#delailes').checked == true) {
+    if (document.getElementById('delailes').checked == true) {
         document.getElementById("tbl2").hidden = false;
         document.getElementById("tbl1").hidden = true;
-    } else if (document.querySelector('#less').checked == true) {
-        document.getElementById("tbl1").hidden = true;
-        document.getElementById("tbl2").hidden = false;
     }
-
+    if (document.getElementById('less').checked == true) {
+        document.getElementById("tbl2").hidden = true;
+        document.getElementById("tbl1").hidden = false;
+    }
+    return;
 }
-//if (document.querySelector('#delailes').onclick == true) {
-//  document.getElementById("tbl1").hidden = true;
-//  document.getElementById("tbl2").hidden = false;
-// }
 
-//document.querySelector('#delailes').onclick = clickradio
-clickradio();
+
+//clickradio();
 deafultRows();
