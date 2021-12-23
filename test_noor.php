@@ -4,7 +4,6 @@ include('include/nav.php');
 
 <?php
 
-include("sql/sql_queries.php");
 
 $users = [
     "name" => "noor",
@@ -50,9 +49,20 @@ $columns = ['id' , 'name' , 'phone'];
 // echo(addColumn('users','n','int'));
 //echo(search('users','id','1'));
 //echo updateWhereId('users','1',$users);
-print_r(test($users,$user));
+//print_r(test($users,$user));
 
 ?>
+
+<br>
+<a href="item_movment.php"> item_movment </a>
+<br>
+<a href="comission_movment.php"> comission_movment </a>
+<br>
+<a href="report_item.php"> report_item </a>
+<br>
+<a href="report_comission.php"> report_comission </a>
+
+
 
 <?php
 include('include/footer.php');

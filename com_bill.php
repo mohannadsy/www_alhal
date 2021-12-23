@@ -105,7 +105,7 @@ include('include/nav.php');
                 </tbody>
             </table>
         </div>
-        <div class="row justify-content-end">
+        <div class=">
             <label>الإجمالي</label>
             <input type="text" name="total">
         </div>
