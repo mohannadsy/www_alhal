@@ -19,22 +19,6 @@ include('include/nav.php');
 </div>
 <div>hello</div>
 
-<table class="table table-bordered" contenteditable='true' style="width:500px">
-    <thead>
-        <tr>
-            <th contenteditable='false'>المادة</th>
-            <th contenteditable='false'>الوحدة</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="ui-widget">5
-                
-            </td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
 <?php
 include('include/footer.php');
 ?>
