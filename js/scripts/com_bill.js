@@ -47,6 +47,7 @@ function deafultRows() {
 deafultRows();
 
 
+
 function printSection(el) {
     var getFullContent = document.body.innerHTML;
     var printsection = document.getElementById(el).innerHTML;

@@ -12,7 +12,10 @@ include('include/nav.php');
 <br>
 <a href="accountStatment.php">account statment</a>
 <br>
-<a href="catchBonds.php">Catch Bomds</a>
+<a href="catchBonds.php">Catch Bonds</a>
+<br>
+<a href="test_search.php">Test Search</a>
+
 
 <?php
 include('include/footer.php');

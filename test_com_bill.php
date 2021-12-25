@@ -8,7 +8,16 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles/com_bill.css">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        .ui-autocomplete { 
+            cursor:pointer; 
+            height:120px; 
+            overflow-y:scroll;
+        }  
+    </style>
 </head>
 <body>
 <form action="" method="post">
@@ -70,6 +79,12 @@ include('include/nav.php');
             <button type="button" id="add_col">adding column</button>
             <button type="button" id="add_row">adding Row</button>
         </div>
+        
+        <div class="ui-widget">
+            <input type="text" id="txtBirds" placeholder="bold-text" />
+        </div>
+
+        <br/>
         <div class="row justify-content-end">
             <label>الإجمالي</label>
             <input type="text" name="total">
@@ -102,6 +117,39 @@ include('include/nav.php');
 </form>
 <script src = "js/scripts/com_bill.js"></script>
 </body>
+<script>
+    $(document).ready(function() {
+        BindControls();
+    });
+
+    function BindControls() {
+        const arrBirds = [
+            "Bald Eagle",
+            "Cooper's Hawk",
+            "Mourning Dove",
+            "Abert's Towhee",
+            "Brewer's Sparrow",
+            "Black Vulture",
+            "Gila Woodpecker",
+            "Gilded Flicker",
+            "Cassin's Sparrow",
+            "Bell's Sparrow",
+            "American Kestrel"
+        ];
+
+        $("#txtBirds").autocomplete({
+            source: arrBirds,
+            minLength: 0,
+            scroll: true
+        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+            let txt = String(item.value).replace(new RegExp(this.term, "gi"), "<b>$&</b>");
+            return $("<li></li>")
+                .data("ui-autocomplete-item", item)
+                .append("<a>" + txt + "</a>")
+                .appendTo(ul);
+        };
+    }
+</script>
 </html>
 
 

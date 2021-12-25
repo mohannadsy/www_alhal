@@ -54,7 +54,7 @@ include('include/nav.php');
                         <tr>
                             <th contenteditable='false'>التاريخ</th>
                             <th contenteditable='false'>له</th>
-                            <th contenteditable='false'>علينا</th>
+                            <th contenteditable='false'>عليه</th>
                             <th contenteditable='false'>رقم الحركة</th>
                             <th contenteditable='false'>اسم الحركة</th>
                             <th contenteditable='false'>القيمة</th>
