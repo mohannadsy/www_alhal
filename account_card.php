@@ -3,7 +3,7 @@ include('include/nav.php');
 ?>
 
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -31,8 +31,8 @@ include('include/nav.php');
             ?>
 
 
-            <div class="row">
-                <div class="md-4">
+            <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
 
                     <br>
                     <fieldset class="border p-2">
@@ -85,13 +85,13 @@ include('include/nav.php');
 
                     </fieldset>
 
-                    <button type="submit" name="add">إضافة</button>
+                    <button type="submit" class="btn btn-primary" name="add">إضافة</button>
 
-                    <button type="submit" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+                    <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
-                    <button type="submit" hidden name="delete">حذف</button>
+                    <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
 
-                    <button type="button" name="close">إغلاق</button>
+                    <button type="button" class="btn btn-primary" name="close">إغلاق</button>
 
                 </div>
                 <div class="md-8">

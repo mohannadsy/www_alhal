@@ -7,6 +7,7 @@ include('include/nav.php');
 <a href="account_list.php">قائمة الحساب</a>
 <a href="account_card.php">بطاقة حساب</a>
 <a href="item_list.php">قائمة المواد</a>
+<a href="test_account_card.php"> test</a>
 
 
 <?php
