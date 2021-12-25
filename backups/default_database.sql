@@ -16,20 +16,12 @@ CREATE TABLE `accounts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-
-
-
-CREATE TABLE `barcodes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_id` int(11) unsigned NOT NULL,
-  `unit_type` varchar(250) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+INSERT INTO accounts VALUES("1","acc_00000","jablah","","","0","","","","","0","","2021-12-22 09:32:36","2021-12-22 09:32:36");
+INSERT INTO accounts VALUES("2","acc_00001","ahmad","","","1","","","","","-20000","","2021-12-22 09:32:54","2021-12-22 11:43:37");
+INSERT INTO accounts VALUES("3","acc_00002","ali","","","1","","","","","0","","2021-12-22 09:33:03","2021-12-22 09:33:03");
+INSERT INTO accounts VALUES("4","acc_00003","New","","","1","","","","","-70000","","2021-12-22 11:44:19","2021-12-22 11:48:57");
 
 
 
@@ -37,6 +29,10 @@ CREATE TABLE `bill_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `total_weight` varchar(250) DEFAULT NULL,
+  `real_weight` varchar(250) DEFAULT NULL,
+  `price` varchar(250) DEFAULT NULL,
+  `total_item_price` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -47,14 +43,15 @@ CREATE TABLE `bills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `buyer_id` int(10) unsigned NOT NULL,
   `seller_id` int(10) unsigned NOT NULL,
-  `store_id` int(11) unsigned DEFAULT NULL,
-  `unit_price` varchar(255) DEFAULT NULL,
-  `number_of_units` varchar(255) DEFAULT NULL,
+  `buyer_type_pay` varchar(250) DEFAULT NULL,
+  `seller_type_pay` varchar(250) DEFAULT NULL,
+  `buyer_note` varchar(250) DEFAULT NULL,
+  `seller_note` varchar(250) DEFAULT NULL,
   `total_price` varchar(255) DEFAULT NULL,
-  `payment_type` varchar(250) DEFAULT NULL,
-  `discount_amount` varchar(250) DEFAULT NULL,
-  `descount_type` varchar(250) DEFAULT NULL,
   `currency` varchar(250) DEFAULT NULL,
+  `com_ratio` varchar(250) DEFAULT NULL,
+  `com_value` varchar(250) DEFAULT NULL,
+  `real_price` varchar(250) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -65,17 +62,21 @@ CREATE TABLE `bills` (
 
 
 
-CREATE TABLE `bonds` (
+CREATE TABLE `catch_bonds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `client_id` int(11) NOT NULL,
-  `partial_payment` varchar(250) NOT NULL,
-  `type` varchar(250) NOT NULL,
+  `code` varchar(250) DEFAULT NULL,
+  `main_account_id` int(11) NOT NULL,
+  `other_account_id` int(11) NOT NULL,
+  `maden` varchar(250) NOT NULL,
+  `date` date DEFAULT NULL,
+  `currency` varchar(250) DEFAULT NULL,
   `note` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO catch_bonds VALUES("2","00001","1","5","50000","2022-01-26","ليرة سورية"," قبضنا 50000","2021-12-25 18:50:27","2021-12-25 18:50:27");
 
 
 
@@ -139,6 +140,23 @@ CREATE TABLE `items` (
   `price_distribution` varchar(250) NOT NULL,
   `cost` varchar(250) NOT NULL,
   `price_policy` varchar(250) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `payment_bonds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(250) DEFAULT NULL,
+  `main_account_id` int(11) NOT NULL,
+  `other_account_id` int(11) NOT NULL,
+  `daen` varchar(250) NOT NULL,
+  `date` date DEFAULT NULL,
+  `currency` varchar(250) DEFAULT NULL,
+  `note` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)

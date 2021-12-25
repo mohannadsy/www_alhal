@@ -17,24 +17,26 @@ include('include/nav.php');
             <div class="col-6">
                 <label>البائع</label>
                 <input type="text" name="seller">
+                <input type="hidden" name="seller_id" value="6">
                 <label>طريقة الدفع </label>
-                <input type="radio" name="rad_seller" checked>
+                <input type="radio" name="seller_type_pay" checked value="cash">
                 <label>نقدي</label>
-                <input type="radio" name="rad_seller" >
+                <input type="radio" name="seller_type_pay" value="agel">
                 <label>آجل</label>
                 <label>ملاحظات</label>
-                <textarea name="seller_notes"></textarea>
+                <textarea name="seller_note"></textarea>
             </div>
             <div class="col-6">
                 <label>المشتري</label>
                 <input type="text" name="buyer">
+                <input type="hidden" name="buyer_id" value="7">
                 <label>طريقة الدفع </label>
-                <input type="radio" name="rad_buyer">
+                <input type="radio" name="buyer_type_pay" checked value="cash">
                 <label>نقدي</label>
-                <input type="radio" name="rad_buyer">
+                <input type="radio" name="buyer_type_pay" value="agel">
                 <label>آجل</label>
                 <label>ملاحظات</label>
-                <textarea name="buyer_notes"></textarea>
+                <textarea name="buyer_note"></textarea>
             </div>
         </div>
             <!-- <div class="row align-items-center" >
@@ -76,13 +78,13 @@ include('include/nav.php');
         <button type="button" id="add_col">adding column</button>
         <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
-            <table contenteditable='true' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
+            <table contenteditable='false' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
                 <thead class="text-center">
                 <tr>
                     <th contenteditable='false'>الرقم</th>
                     <th contenteditable='false'>المادة</th>
                     <th contenteditable='false'>الوحدة</th>
-                    <th contenteditable='false'>عدد العبوات</th>
+                    <!-- <th contenteditable='false'>عدد العبوات</th> -->
                     <th contenteditable='false'>وزن قائم</th>
                     <th contenteditable='false'>وزن الصافي</th>
                     <th contenteditable='false'> الإفرادي </th>
@@ -91,33 +93,22 @@ include('include/nav.php');
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td name='bill_code_1'></td>
-                    <td name='item_name_1' ></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
                 </tbody>
             </table>
         </div>
-        <div class=">
+        <div class="">
             <label>الإجمالي</label>
-            <input type="text" name="total">
+            <input type="text" name="total_price" readonly>
         </div>
         <div class="row justify-content-end">
             <label>الكمسيون</label>
-            <input type="text" name="ratio">
+            <input type="text" name="com_ratio">
             <label>قيمته</label>
-            <input type="text" name="comm_value">
+            <input type="text" name="com_value" readonly>
         </div>
         <div class="row justify-content-end">
             <label>الصافي</label>
-            <input type="text" name="pure">
+            <input type="text" name="real_price" readonly>
         </div>
         <div class="row justify-content-start">
             <div class="col-4">
@@ -138,6 +129,37 @@ include('include/nav.php');
 <script src = "js/scripts/com_bill.js"></script>
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['save'])){
+    $insert_bill_query = insert('bills' , get_array_from_array( $_POST , ['seller_id' , 'seller_type_pay' , 'seller_note' , 
+       'buyer_id' , 'buyer_type_pay' , 'buyer_note' , 'total_price' , 'real_price' , 'com_ratio' , 'com_value' ]));
+       echo $insert_bill_query;
+    $insert_bill_exec = mysqli_query($con , $insert_bill_query);
+
+    $select_last_bill_id_query = select('bills' , 'max(id)');
+    $select_last_bill_id_exec = mysqli_query($con , $select_last_bill_id_query);
+    $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
+    echo $current_bill_id;
+    
+    foreach($_POST['items'] as $key => $item){
+        if($item != ''){
+            $insert_bill_item_query = insert('bill_item' , [
+                'bill_id' => $current_bill_id,
+                'item_id' => '1', // TODO
+                'total_weight' => $_POST['total_weights'][$key],
+                'real_weight' => $_POST['real_weights'][$key],
+                'price' => $_POST['prices'][$key],
+                'total_item_price' => $_POST['total_item_prices'][$key]
+            ]);
+            $insert_bill_item_exec = mysqli_query($con , $insert_bill_item_query);
+        }
+    }
+    
+}
+
+?>
 
 
 <?php

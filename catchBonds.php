@@ -18,34 +18,38 @@ include('include/nav.php');
             <div class="col-6" >
                 <label> الحساب </label>
                 <input type="text"  name ="" placeholder="الصندوق الأساسي" disabled>
+                <input type="hidden" name="main_account_id" value="1">
             </div>
             <div class="col-6">
                 <label name=" "> رقم الإيصال </label>
-                <input type=number  name =" " value= '' >       
+                <input type="text"  name ="code" value= "<?= get_auto_code($con , 'catch_bonds' , "code" ,"" , "child") ?>" readonly>       
             </div>
         </div> 
         <div class="row py-3 "> 
             <div class="col-6" >
                 <label> الحساب المقابل </label>
                 <input type="text"  name ="">
+                <input type="hidden" name="other_account_id" value="5">
             </div>
 
             <div class="col-6">
                 <label name=" "> التاريخ </label>
-                <input type="date" name="" id="" min="" max="" value="2022-01-22">       
+                <input type="date" name="date" id="" min="" max="" value="2022-01-22">       
             </div>
         </div> 
 
         <div class="row py-3 "> 
             <div class="col-6" >
                 <label> مدين </label>
-                <input type="text"  name ="">
+                <input type="text"  name ="maden">
             </div>
             <div class="col-6">
                 <label name=" "> العملة </label>
-                <select name="" id="">
+                <select name="currency" id="">
                     <optgroup>
-                    <option value="">ليرة سورية</option>
+                    <option value="ليرة سورية" >
+                        ليرة سورية
+                    </option>
                     </optgroup>
                 </select>       
             </div>
@@ -69,6 +73,19 @@ include('include/nav.php');
   </form>  
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['add'])){
+    $insert_catch_bond_query = insert('catch_bonds' , get_array_from_array($_POST , [
+        'main_account_id' , 'other_account_id' , 'maden' , 'note' , 'code' , 'date' , 'currency'
+    ]));
+    $insert_catch_bond_exec = mysqli_query($con , $insert_catch_bond_query);
+}
+
+?>
+
+
 
 <?php
 include('include/footer.php');

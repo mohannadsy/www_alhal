@@ -1,1 +1,15 @@
-{"deafult_database":"souq","database":"souq1","host":"localhost","user":"root","pass":"","sql_path":"backups\\deafult_database.sql","number_of_zeros_code":"5","prefix_code":{"account":"acc_","category":"cat_","item":"it_"}}
+{
+    "deafult_database": "souq",
+    "database": "souq1",
+    "host": "localhost",
+    "user": "root",
+    "pass": "",
+    "sql_path": "backups\\deafult_database.sql",
+    "number_of_zeros_code_child": "5",
+    "number_of_zeros_code_parent" : "3",
+    "prefix_code": {
+        "account": "acc_",
+        "category": "cat_",
+        "item": "it_"
+    }
+}
