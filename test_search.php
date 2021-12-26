@@ -11,12 +11,14 @@ include('include/nav.php');
     font-weight: bold;
 }
 </style>
+<input type="hidden" value="2">
 <div class="ui-widget">
   <input placeholder="ui-state-highlight" />
 </div>
 <div class="ui-widget">
     <input placeholder="bold-text" />
 </div>
+
 <div>hello</div>
 
 <?php
@@ -48,6 +50,9 @@ include('include/footer.php');
             // Create and return the custom menu item content.
             $( "<a/>" ).attr( "href", "#" )
                        .html( label )
+                       .click(function(){
+                           $('input[type=hidden]').val("5");
+                       })
                        .appendTo( $li );
             
             return $li;
@@ -57,29 +62,36 @@ include('include/footer.php');
     });
     
     // Demo data for autocomplete source.
+    
+    var ids = [
+      "1",
+      "2",
+      "3"  
+    ];
+    
     var tags = [
         "ActionScript",
         "AppleScript",
         "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
+        // "BASIC",
+        // "C",
+        // "C++",
+        // "Clojure",
+        // "COBOL",
+        // "ColdFusion",
+        // "Erlang",
+        // "Fortran",
+        // "Groovy",
+        // "Haskell",
+        // "Java",
+        // "JavaScript",
+        // "Lisp",
+        // "Perl",
+        // "PHP",
+        // "Python",
+        // "Ruby",
+        // "Scala",
+        // "Scheme"
     ];
     
     // Create autocomplete instances.
