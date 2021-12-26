@@ -20,8 +20,8 @@ function createCell(cell, text, style, id, name, row_number) {
     if (id == 'numbers') {
         div.setAttribute('value', row_number + 1);
     }
-    if( id == 'total_item_prices' || id=='total_weights' || id == 'prices'){
-        div.setAttribute('value' , '0');
+    if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
+        div.setAttribute('value', '0');
     }
 
     cell.appendChild(div); // append DIV to the table cell
@@ -47,7 +47,7 @@ function appendRow(row_number = '1') {
 
     if (tbl.rows.length < 20 && tbl.rows.length >= 12) {
         for (i = 0; i < tbl.rows[0].cells.length; i++) {
-            createCell(row.insertCell(i), i, 'row', item_bill_id[i], item_bill_name[i], tbl.rows.length-2);
+            createCell(row.insertCell(i), i, 'row', item_bill_id[i], item_bill_name[i], tbl.rows.length - 2);
         }
     }
 

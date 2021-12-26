@@ -121,7 +121,7 @@ include('include/nav.php');
                     <option value="">مشتري</option>
                     </optgroup>
                 </select>
-                <button type="submit" name="print">الطباعة</button>
+                <button  type="button" name="print" onclick="window.print()">طباعة</button>
             </div>
         </div>
     </div>
