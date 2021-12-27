@@ -11,7 +11,7 @@ function createCell(cell, text, style, id, name, row_number) {
     div.setAttribute('class', style + ' text-center'); // set DIV class attribute
     div.setAttribute('className', style); // set DIV class attribute for IE (?!)
 
-    div.setAttribute('id', id + '_' + text);
+    div.setAttribute('id', id + '_' + row_number);
     div.setAttribute('name', name);
 
     if (text == '0' || text == '2' || text == '4' || text == '6') { // 0 => numbers || 2 => units || 4 => real_weights || 6 => toal_prices
@@ -75,10 +75,21 @@ deafultRows();
 
 
 
-function printSection(el) {
-    var getFullContent = document.body.innerHTML;
-    var printsection = document.getElementById(el).innerHTML;
-    document.body.innerHTML = printsection;
-    window.print();
-    document.body.innerHTML = getFullContent;
+function printComPill(ids) {
+    var tbl = document.getElementById("tbl"), // table reference
+        i;
+    document.getElementById('add_row').hidden = true;
+    document.getElementById('add_col').hidden = true;
+    document.getElementById('notes').hidden = true;
+    for (i = 0; i < tbl.rows.length - 1; i++)
+        document.getElementById("notes_" + i).parentElement.hidden = true;
+
+    preparePrint(ids);
+
+    document.getElementById('add_row').hidden = false;
+    document.getElementById('add_col').hidden = false;
+    document.getElementById('notes').hidden = false;
+    for (i = 0; i < tbl.rows.length; i++)
+        document.getElementById("notes_" + i).parentElement.hidden = false;
+
 }

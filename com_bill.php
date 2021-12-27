@@ -9,12 +9,13 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/com_bill.css">
+
 </head>
 <body>
 <form action="" method="post">
     <div class="container">
         <div class="row" style="height:200px;">
-            <div class="col-6">
+            <div id='seller' class="col-6">
                 <label>البائع</label>
                 <input type="text" name="seller">
                 <input type="hidden" name="seller_id" value="6">
@@ -78,7 +79,7 @@ include('include/nav.php');
         <button type="button" id="add_col">adding column</button>
         <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
-            <table contenteditable='false' class="col-10 table table-bordered table-hover"  name="table" id="tbl">
+            <table contenteditable='false' class="col-10 table table-bordered table-hover text-center"  name="table" id="tbl">
                 <thead class="text-center">
                 <tr>
                     <th contenteditable='false'>الرقم</th>
@@ -89,7 +90,7 @@ include('include/nav.php');
                     <th contenteditable='false'>وزن الصافي</th>
                     <th contenteditable='false'> الإفرادي </th>
                     <th contenteditable='false'>الإجمالي </th>
-                    <th contenteditable='false'>ملاحظات</th>
+                    <th id="notes" contenteditable='false'>ملاحظات</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -110,7 +111,7 @@ include('include/nav.php');
             <label>الصافي</label>
             <input type="text" name="real_price" readonly>
         </div>
-        <div class="row justify-content-start">
+        <div id='buttons' class="row justify-content-start">
             <div class="col-4">
                 <button type="submit" name="save">حفظ</button>
                 <button type="submit" name="modify">تعديل</button>
@@ -121,7 +122,7 @@ include('include/nav.php');
                     <option value="">مشتري</option>
                     </optgroup>
                 </select>
-                <button  type="button" name="print" onclick="window.print()">طباعة</button>
+                <button  type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button>
             </div>
         </div>
     </div>

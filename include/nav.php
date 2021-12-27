@@ -11,7 +11,7 @@
     include('helper/notification_functions.php');
 ?>
 
-<ul class="nav nav-tabs">
+<ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active" href="index.php">Home</a>
   </li>
