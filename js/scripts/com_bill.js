@@ -17,6 +17,9 @@ function createCell(cell, text, style, id, name, row_number) {
     if (text == '0' || text == '2' || text == '4' || text == '6') { // 0 => numbers || 2 => units || 4 => real_weights || 6 => toal_prices
         div.setAttribute('readonly', 'true');
     }
+    if (text == '1') {
+        div.setAttribute('class', 'item_auto');
+    }
     if (id == 'numbers') {
         div.setAttribute('value', row_number + 1);
     }

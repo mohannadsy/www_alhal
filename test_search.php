@@ -11,12 +11,17 @@ include('include/nav.php');
     font-weight: bold;
 }
 </style>
-<input type="hidden" value="2">
+<!-- <input type="hidden" value="2"> -->
 <div class="ui-widget">
-  <input placeholder="ui-state-highlight" />
+  <input class="item_auto" placeholder="ui-state-highlight" />
 </div>
+
 <div class="ui-widget">
-    <input placeholder="bold-text" />
+    <input class="account_auto" placeholder="bold-text" />
+</div>
+
+<div class="ui-widget">
+    <input class="account_auto" placeholder="bold-text" />
 </div>
 
 <div>hello</div>
@@ -50,9 +55,6 @@ include('include/footer.php');
             // Create and return the custom menu item content.
             $( "<a/>" ).attr( "href", "#" )
                        .html( label )
-                       .click(function(){
-                           $('input[type=hidden]').val("5");
-                       })
                        .appendTo( $li );
             
             return $li;
@@ -68,6 +70,15 @@ include('include/footer.php');
         $('input:hidden').val(id);
     }
 
+    var tags_items = [
+        <?php
+            $query =  select('items');
+            $query_exec = mysqli_query($con , $query);
+            while($row = mysqli_fetch_row($query_exec)){
+                echo "'$row[1] - $row[2]',";
+            }
+            ?>
+    ];
     var tags = [
         <?php
             $query =  select('accounts');
@@ -103,11 +114,11 @@ include('include/footer.php');
     // Create autocomplete instances.
     $(function() {
         
-        $( "input:first" ).autocomplete({
-            source: tags    
+        $( ".item_auto" ).autocomplete({
+            source: tags_items
         });
 
-        $( "input:last" ).autocomplete({
+        $( ".account_auto" ).autocomplete({
             highlightClass: "bold-text",
             source: tags
         });

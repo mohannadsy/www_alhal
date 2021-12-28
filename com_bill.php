@@ -17,7 +17,9 @@ include('include/nav.php');
         <div class="row" style="height:200px;">
             <div id='seller' class="col-6">
                 <label>البائع</label>
-                <input type="text" name="seller">
+                <!-- <div class="ui-widget"> -->
+                    <input name="seller" class="account_auto" />
+                <!-- </div> -->
                 <input type="hidden" name="seller_id" value="6">
                 <label>طريقة الدفع </label>
                 <input type="radio" name="seller_type_pay" checked value="cash">
@@ -29,7 +31,7 @@ include('include/nav.php');
             </div>
             <div class="col-6">
                 <label>المشتري</label>
-                <input type="text" name="buyer">
+                <input type="text" name="buyer" class="account_auto">
                 <input type="hidden" name="buyer_id" value="7">
                 <label>طريقة الدفع </label>
                 <input type="radio" name="buyer_type_pay" checked value="cash">
@@ -162,7 +164,77 @@ if(isset($_POST['save'])){
 
 ?>
 
-
 <?php
 include('include/footer.php');
 ?>
+
+<script>
+    (function( $ ) {
+    
+    // Custom autocomplete instance.
+    $.widget( "app.autocomplete", $.ui.autocomplete, {
+        
+        // Which class get's applied to matched text in the menu items.
+        options: {
+            highlightClass: "ui-state-highlight"
+        },
+        
+        _renderItem: function( ul, item ) {
+
+            // Replace the matched text with a custom span. This
+            // span uses the class found in the "highlightClass" option.
+            var re = new RegExp( "(" + this.term + ")", "gi" ),
+                cls = this.options.highlightClass,
+                template = "<span class='" + cls + "'>$1</span>",
+                label = item.label.replace( re, template ),
+                $li = $( "<li/>" ).appendTo( ul );
+            
+            // Create and return the custom menu item content.
+            $( "<a/>" ).attr( "href", "#" )
+                       .html( label )
+                       .appendTo( $li );
+            
+            return $li;
+            
+        }
+        
+    });
+    
+
+    var tags_items = [
+        <?php
+            $query =  select('items');
+            $query_exec = mysqli_query($con , $query);
+            while($row = mysqli_fetch_row($query_exec)){
+                echo "'$row[1] - $row[2]',";
+            }
+            ?>
+    ];
+    var tags = [
+        <?php
+            $query =  select('accounts');
+            $query_exec = mysqli_query($con , $query);
+            while($row = mysqli_fetch_row($query_exec)){
+                echo "'$row[1] - $row[2]',";
+            }
+            ?>
+    ];
+    
+    // Create autocomplete instances.
+    $(function() {
+        
+        $( ".item_auto" ).autocomplete({
+            source: tags_items
+        });
+
+        $( ".account_auto" ).autocomplete({
+            highlightClass: "bold-text",
+            source: tags
+        });
+        
+  });
+    
+})( jQuery );
+</script>
+
+
