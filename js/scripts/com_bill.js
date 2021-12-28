@@ -1,6 +1,14 @@
 /**
  * deafult item_bill
  */
+
+function count_total_price(){
+
+}
+
+
+
+
 var item_bill_name = ['numbers[]', 'items[]', 'units[]', 'total_weights[]', 'real_weights[]', 'prices[]', 'total_item_prices[]', 'notes[]'];
 var item_bill_id = ['numbers', 'items', 'units', 'total_weights', 'real_weights', 'prices', 'total_item_prices', 'notes'];
 
@@ -25,7 +33,23 @@ function createCell(cell, text, style, id, name, row_number) {
     }
     if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
         div.setAttribute('value', '0');
+        div.addEventListener('click' , function(){
+            div.value = '';
+        });
     }
+
+    if(text == '3'){ // action to real weight => 2% of total weight
+        div.addEventListener('blur' , function(){
+            document.getElementById('real_weights_' + row_number).value = div.value * 0.98;
+        });
+    }
+
+    if(text == '5'){ // action to total prices (prices * real_weight)
+        div.addEventListener('blur' , function(){
+            document.getElementById('total_item_prices_' + row_number).value = div.value * document.getElementById('real_weights_' + row_number).value;
+        });
+    }
+
 
     cell.appendChild(div); // append DIV to the table cell
 
