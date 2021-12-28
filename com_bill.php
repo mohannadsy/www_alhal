@@ -18,8 +18,9 @@ include('include/nav.php');
             <div id='seller' class="col-6">
                 <label>البائع</label>
                 <!-- <div class="ui-widget"> -->
-                    <input name="seller" class="account_auto" />
+                    <input name="seller" class="account_auto" onblur="get_seller_id()"/>
                 <!-- </div> -->
+                <input id="seller_id" type="text" placeholder="put id here"> 
                 <input type="hidden" name="seller_id" value="6">
                 <label>طريقة الدفع </label>
                 <input type="radio" name="seller_type_pay" checked value="cash">
