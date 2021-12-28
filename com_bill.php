@@ -18,9 +18,8 @@ include('include/nav.php');
             <div id='seller' class="col-6">
                 <label>البائع</label>
                 <!-- <div class="ui-widget"> -->
-                    <input name="seller" class="account_auto" onblur="get_seller_id()"/>
+                    <input name="seller" class="account_auto"/>
                 <!-- </div> -->
-                <input id="seller_id" type="text" placeholder="put id here"> 
                 <input type="hidden" name="seller_id" value="6">
                 <label>طريقة الدفع </label>
                 <input type="radio" name="seller_type_pay" checked value="cash">
@@ -43,42 +42,6 @@ include('include/nav.php');
                 <textarea name="buyer_note"></textarea>
             </div>
         </div>
-            <!-- <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>البائع</label>
-                    <input type="text" name="seller">
-                </div>
-                <div class="col-6">
-                    <label>المشتري</label>
-                    <input type="text" name="buyer">
-                </div>
-            </div>
-            <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>طريقة الدفع </label>
-                    <input type="radio" name="rad_seller" checked>
-                    <label>نقدي</label>
-                    <input type="radio" name="rad_seller" disabled>
-                    <label>آجل</label>
-                </div>
-                <div class="col-6">
-                    <label>طريقة الدفع </label>
-                    <input type="radio" name="rad_buyer">
-                    <label>نقدي</label>
-                    <input type="radio" name="rad_buyer">
-                    آجل
-                </div>
-            </div>
-            <div class="row align-items-center" >
-                <div class="col-6">
-                    <label>ملاحظات</label>
-                    <textarea name="seller_notes"></textarea>
-                </div>
-                <div class="col-6">
-                    <label>ملاحظات</label>
-                    <textarea name="buyer_notes"></textarea>
-                </div> 
-            </div> -->
         <button type="button" id="add_col">adding column</button>
         <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
@@ -136,22 +99,44 @@ include('include/nav.php');
 
 <?php
 
+// if(isset($_POST['delete'])){
+//     message_box($seller_code = substr($_POST['seller'] , 0 , 5));
+// }
+
 if(isset($_POST['save'])){
+    print_r($_POST);
+    $seller_code = substr($_POST['seller'] , 0 , 5);
+    $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
+    
+    $select_seller_id_using_code_exec = mysqli_query($con , $select_seller_id_using_code_query);
+    $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
+   
+    $buyer_code = substr($_POST['buyer'] , 0 , 5);
+    $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
+    $select_buyer_id_using_code_exec = mysqli_query($con , $select_buyer_id_using_code_query);
+    $buyer_id = mysqli_fetch_row($select_buyer_id_using_code_exec)[0];
+
+    $_POST['seller_id'] = $seller_id;
+    $_POST['buyer_id'] = $buyer_id;
+
     $insert_bill_query = insert('bills' , get_array_from_array( $_POST , ['seller_id' , 'seller_type_pay' , 'seller_note' , 
        'buyer_id' , 'buyer_type_pay' , 'buyer_note' , 'total_price' , 'real_price' , 'com_ratio' , 'com_value' ]));
-       echo $insert_bill_query;
     $insert_bill_exec = mysqli_query($con , $insert_bill_query);
 
     $select_last_bill_id_query = select('bills' , 'max(id)');
     $select_last_bill_id_exec = mysqli_query($con , $select_last_bill_id_query);
     $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
-    echo $current_bill_id;
     
     foreach($_POST['items'] as $key => $item){
         if($item != ''){
+            $item_code = substr($_POST['items'][$key] , 0 , 5);
+            message_box($item_code);
+            $select_item_id_from_code_query = "select id,code from items where code = '$item_code'";
+            $select_item_id_from_code_exec = mysqli_query($con , $select_item_id_from_code_query);
+            $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
             $insert_bill_item_query = insert('bill_item' , [
                 'bill_id' => $current_bill_id,
-                'item_id' => '1', // TODO
+                'item_id' => $item_id, // TODO
                 'total_weight' => $_POST['total_weights'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
@@ -207,13 +192,13 @@ include('include/footer.php');
             $query =  select('items');
             $query_exec = mysqli_query($con , $query);
             while($row = mysqli_fetch_row($query_exec)){
-                echo "'$row[1] - $row[2]',";
+                echo "'$row[9] - $row[1]',";
             }
             ?>
     ];
     var tags = [
         <?php
-            $query =  select('accounts');
+            $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
             $query_exec = mysqli_query($con , $query);
             while($row = mysqli_fetch_row($query_exec)){
                 echo "'$row[1] - $row[2]',";

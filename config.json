@@ -4,7 +4,7 @@
     "host": "localhost",
     "user": "root",
     "pass": "",
-    "sql_path": "backups\\deafult_database.sql",
+    "sql_path": "backups\\default_database.sql",
     "number_of_zeros_code_child": "5",
     "number_of_zeros_code_parent" : "3",
     "prefix_code": {

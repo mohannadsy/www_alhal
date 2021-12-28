@@ -16,12 +16,11 @@ CREATE TABLE `accounts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts VALUES("1","acc_00000","jablah","","","0","","","","","0","","2021-12-22 09:32:36","2021-12-22 09:32:36");
-INSERT INTO accounts VALUES("2","acc_00001","ahmad","","","1","","","","","-20000","","2021-12-22 09:32:54","2021-12-22 11:43:37");
-INSERT INTO accounts VALUES("3","acc_00002","ali","","","1","","","","","0","","2021-12-22 09:33:03","2021-12-22 09:33:03");
-INSERT INTO accounts VALUES("4","acc_00003","New","","","1","","","","","-70000","","2021-12-22 11:44:19","2021-12-22 11:48:57");
+INSERT INTO accounts VALUES("1","00001","الصندوق","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
+INSERT INTO accounts VALUES("2","00002","المشتريات","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
+INSERT INTO accounts VALUES("3","00003","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");
 
 
 
@@ -74,9 +73,8 @@ CREATE TABLE `catch_bonds` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO catch_bonds VALUES("2","00001","1","5","50000","2022-01-26","ليرة سورية"," قبضنا 50000","2021-12-25 18:50:27","2021-12-25 18:50:27");
 
 
 

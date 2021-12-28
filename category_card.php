@@ -39,7 +39,7 @@ include('include/nav.php');
                     <div class="col-md-6">
                         <input value="<?php
                                         if (isset($_GET['id'])) echo $category['code'];
-                                        else echo get_auto_code($con, 'categories', 'code', 'cat_')
+                                        else echo get_auto_code($con, 'categories', 'code', '' , 'parent');
                                         ?>" type="text" id="" class="form-control" name="code" readonly>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
  */
 function get_main_accounts($con)
 {
-    $select = select('accounts') . where('account_id', '0') . " and name <> ''";
+    $select = select('accounts') . where('account_id', '0') . " and name <> '' and id <> '1' and id <> '2' and id <> '3'";
     $select_exec = mysqli_query($con, $select);
     $result_array = [];
     if ($select_exec)
