@@ -81,6 +81,7 @@ if(isset($_POST['add'])){
         'main_account_id' , 'other_account_id' , 'maden' , 'note' , 'code' , 'date' , 'currency'
     ]));
     $insert_catch_bond_exec = mysqli_query($con , $insert_catch_bond_query);
+    open_window_self('catchBonds.php');
 }
 
 ?>

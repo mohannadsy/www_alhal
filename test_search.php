@@ -1,7 +1,7 @@
 <?php
 include('include/nav.php');
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"> -->
 <style>
     body {
     font-size: 0.8em;
@@ -24,8 +24,8 @@ include('include/nav.php');
 <?php
 include('include/footer.php');
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gumby/2.6.0/js/libs/jquery-2.0.2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gumby/2.6.0/js/libs/jquery-2.0.2.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 <script>
     (function( $ ) {
     
@@ -63,16 +63,22 @@ include('include/footer.php');
     
     // Demo data for autocomplete source.
     
-    var ids = [
-      "1",
-      "2",
-      "3"  
-    ];
-    
+
+    function set_id(id){
+        $('input:hidden').val(id);
+    }
+
     var tags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
+        <?php
+            $query =  select('accounts');
+            $query_exec = mysqli_query($con , $query);
+            while($row = mysqli_fetch_row($query_exec)){
+                echo "'$row[1] - $row[2]',";
+            }
+            ?>
+        // "ActionScript",
+        // "AppleScript",
+        // "Asp",
         // "BASIC",
         // "C",
         // "C++",

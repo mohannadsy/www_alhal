@@ -74,22 +74,7 @@ include('include/footer.php');
                 $.ajax({
                     url:"search.php",
                     method:"POST",
-                    data:{account_search : account_search},
-                    success:function(data){
-                        $('#show').fadeIn();
-                        $('#show').html(data);
-                    }
-                });
-            }
-        });
-        
-        $('#search').click(function(){
-            var account_search = $('#search_text').val();
-            if(account_search != ''){
-                $.ajax({
-                    url:"search.php",
-                    method:"POST",
-                    data:{account_search : account_search},
+                    data:{account_search_part : account_search},
                     success:function(data){
                         $('#show').fadeIn();
                         $('#show').html(data);
