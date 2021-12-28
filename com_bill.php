@@ -104,13 +104,15 @@ include('include/nav.php');
 // }
 
 if(isset($_POST['save'])){
-    print_r($_POST);
+    
+    // get seller id from seller code
     $seller_code = substr($_POST['seller'] , 0 , 5);
     $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
-    
     $select_seller_id_using_code_exec = mysqli_query($con , $select_seller_id_using_code_query);
     $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
    
+
+    // get buyer id from buyer code
     $buyer_code = substr($_POST['buyer'] , 0 , 5);
     $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
     $select_buyer_id_using_code_exec = mysqli_query($con , $select_buyer_id_using_code_query);
@@ -119,14 +121,15 @@ if(isset($_POST['save'])){
     $_POST['seller_id'] = $seller_id;
     $_POST['buyer_id'] = $buyer_id;
 
+    // make bill insertion
     $insert_bill_query = insert('bills' , get_array_from_array( $_POST , ['seller_id' , 'seller_type_pay' , 'seller_note' , 
        'buyer_id' , 'buyer_type_pay' , 'buyer_note' , 'total_price' , 'real_price' , 'com_ratio' , 'com_value' ]));
     $insert_bill_exec = mysqli_query($con , $insert_bill_query);
 
+    // insert all items to bill_item table
     $select_last_bill_id_query = select('bills' , 'max(id)');
     $select_last_bill_id_exec = mysqli_query($con , $select_last_bill_id_query);
     $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
-    
     foreach($_POST['items'] as $key => $item){
         if($item != ''){
             $item_code = substr($_POST['items'][$key] , 0 , 5);
@@ -136,7 +139,7 @@ if(isset($_POST['save'])){
             $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
             $insert_bill_item_query = insert('bill_item' , [
                 'bill_id' => $current_bill_id,
-                'item_id' => $item_id, // TODO
+                'item_id' => $item_id,
                 'total_weight' => $_POST['total_weights'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
@@ -146,6 +149,9 @@ if(isset($_POST['save'])){
         }
     }
     
+    // make mid bonds
+
+
 }
 
 ?>
