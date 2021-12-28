@@ -14,7 +14,7 @@ include('include/nav.php');
 </head>
 
 <body>
-    <form action="" method="post">
+    <form id="form" action="" method="post">
         <div class="container">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
@@ -83,6 +83,26 @@ include('include/nav.php');
                         </div>
                     </div>
                     <div class="col-10 py-3">
+                        <a class=" btn btn-primary" href="#" data-target="#add_category" data-toggle="modal">إضافة صنف</a>
+                        <div id="" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                            
+                            <div class="modal-content">
+                            <div class="modal-body">
+                                <button data-dismiss="modal" class="close">&times;</button>
+                                <h4>إضافة صنف</h4>
+                                <div id="add_category">
+                                <iframe src="category_card.php#category" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                            </div>
+                        </div>  
+                        </div>
+
+
+
+
+
                         <a href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
 
                         <button <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">

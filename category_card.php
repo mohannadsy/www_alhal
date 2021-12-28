@@ -13,7 +13,7 @@ include('include/nav.php');
 
 <body>
 
-    <form action="" method="post">
+    <form id="category" action="" method="post">
 
         <?php
         success_error_create_message('تم انشاء الصنف بنجاح', 'عئرا لم يتم انشاء الصنف');
