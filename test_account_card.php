@@ -13,10 +13,9 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style> 
     body{
-        margin: 0;
-    font-family: var(--bs-body-font-family);
-    font-size: var(--bs-body-font-size);
-    font-weight: var(--bs-body-font-weight);
+
+    
+    
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
@@ -24,30 +23,6 @@ include('include/nav.php');
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     }
-    .input-group {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch;
-            width: 100%;
-                                    }
-  .input-group-text {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            white-space: nowrap;
-                                    }
-.form-label {
-    margin-bottom: 0.5rem;
-                                    }
-label {
-    display: inline-block;
-                                    }
-.form-control {}
-    button, input, optgroup, select, textarea {}
-    input {}
-
-
     </style>
 </head>
 
