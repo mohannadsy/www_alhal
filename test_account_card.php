@@ -3,7 +3,7 @@ include('include/nav.php');
 ?>
 
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,44 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style> 
+    body{
+        margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    }
+    .input-group {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            width: 100%;
+                                    }
+  .input-group-text {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            white-space: nowrap;
+                                    }
+.form-label {
+    margin-bottom: 0.5rem;
+                                    }
+label {
+    display: inline-block;
+                                    }
+.form-control {}
+    button, input, optgroup, select, textarea {}
+    input {}
+
+
+    </style>
 </head>
 
 <body>
@@ -34,7 +72,7 @@ include('include/nav.php');
                     <h4 class="mb-3">معلومات الحساب</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row g-3">
-                            <div class="col-12">
+                            <div class="col-10">
                                 <label for="code" class="form-label">رمز الحساب</label>
                                 <div class="input-group">
                                     <input type="number" name="code" class="form-control" readonly value="<?php
@@ -43,7 +81,7 @@ include('include/nav.php');
                                                                             echo get_auto_code($con, "accounts", "code", get_value_from_config("prefix_code", "account"))  ?>">
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                             <label for="" class="form-label"> الحساب</label>
                                 <div class="input-group has-validation">
                                     <input type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
@@ -51,8 +89,8 @@ include('include/nav.php');
                                 </div>
 
                             </div>
-                            <div class="col-12">
-                            <label for="" class="form-label"> الحساب الرئيسي</label>
+                            <div class="col-10 py-3">
+                            <label for="account_id" class="form-label"> الحساب الرئيسي</label>
                             <!-- <input type="text" name="account_id"> -->
                                 
                             <select class="form-select" name="account_id" id="" required>
@@ -73,14 +111,14 @@ include('include/nav.php');
                     <h4 class="mb-3"> الرصيدالافتتاحي</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row g-3">
-                            <div class="col-12">
+                            <div class="col-10">
                             <label for="credit" class="form-label"> له</label>
                                 <div class="input-group">
                                     <input type="number" name="credit" class="form-control" id=""
                                      value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                             <label for="debit" class="form-label"> عليه</label>
                                 <div class="input-group">
                                     <input type="number" name="debit" class="form-control" id=""
@@ -96,32 +134,32 @@ include('include/nav.php');
                 <h4 class="mb-3">معلومات التواصل</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row g-3">
-                            <div class="col-12">
+                            <div class="col-10">
                                 <label for="" class="form-label" >المحافظة </label>
                                 <input type="text" class="form-control" id="" placeholder=""
                                 value="<?php if(isset($account['state'])) echo $account['state'] ?>">
 
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                                     <label for="" class="form-label" >المدينة</label>
                                     <input type="text" class="form-control" id="" placeholder=""
                                      value="<?php if(isset($account['city'])) echo $account['city'] ?>">
 
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                                     <label for="" class="form-label" >مكان السكن</label>
                                     <input type="text" class="form-control" id="" placeholder=""
                                     value="<?php if(isset($account['location'])) echo $account['location'] ?>">
 
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                                     <label for="" class="form-label" >الهاتف</label>
                                     <input type="number" class="form-control" id="" placeholder=""
                                     value="<?php if(isset($account['phone'])) echo $account['phone'] ?>">
 
 
                             </div>
-                            <div class="col-12">
+                            <div class="col-10">
                                     <label for="" class="form-label" >ملاحظات </label>
                                     <textarea rows="3" type="text" class="form-control" name="note"><?php if(isset($account['note'])) echo $account['note'] ?></textarea>
 
