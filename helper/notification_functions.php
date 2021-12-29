@@ -1,11 +1,16 @@
+<script>
+    setTimeout(function() {
+    $('#message').fadeOut('fast');
+    }, 1000);
+</script>
 <?php
 
 function success_error_message($get , $value , $success , $error){
     if (isset($_GET[$get])) {
         if ($_GET[$get] == $value)
-            echo "<div class='text-center alert-success'>$success</div>";
+            echo "<div id='message' class='text-center alert-success'>$success</div>";
         if ($_GET[$get] != $value)
-            echo "<div class='text-center alert-danger'>$error</div>";
+            echo "<div id='message' class='text-center alert-danger'>$error</div>";
     }
 }
 

@@ -2,10 +2,19 @@
  * deafult item_bill
  */
 
-function count_total_price(){
-
+function count_total_price() {
+    var sum = 0;
+    for (i = 0; i < document.getElementById('tbl').rows.length - 1; i++) {
+        sum = sum + parseInt(document.getElementById('total_item_prices_' + i).value);
+    }
+    document.getElementById('total_price').value = sum;
+    var com_ratio = document.getElementById('com_ratio').value,
+        com_value = document.getElementById('com_value').value,
+        total_price = document.getElementById('total_price').value;
+    var percent = (parseInt(com_ratio) / 100)*parseInt(total_price);
+    document.getElementById('real_price').value = parseInt(total_price) - percent;
+    document.getElementById('com_value').value = percent;
 }
-
 
 
 
@@ -33,20 +42,23 @@ function createCell(cell, text, style, id, name, row_number) {
     }
     if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
         div.setAttribute('value', '0');
-        div.addEventListener('click' , function(){
-            div.value = '';
+        div.addEventListener('click', function () {
+            if (div.value == '0')
+                div.value = '';
         });
     }
 
-    if(text == '3'){ // action to real weight => 2% of total weight
-        div.addEventListener('blur' , function(){
+    if (text == '3') { // action to real weight => 2% of total weight
+        div.addEventListener('blur', function () {
             document.getElementById('real_weights_' + row_number).value = div.value * 0.98;
+            count_total_price();
         });
     }
 
-    if(text == '5'){ // action to total prices (prices * real_weight)
-        div.addEventListener('blur' , function(){
-            document.getElementById('total_item_prices_' + row_number).value = div.value * document.getElementById('real_weights_' + row_number).value;
+    if (text == '5') { // action to total prices (prices * real_weight)
+        div.addEventListener('blur', function () {
+            document.getElementById('total_item_prices_' + row_number).value = Math.round(div.value * document.getElementById('real_weights_' + row_number).value);
+            count_total_price();
         });
     }
 

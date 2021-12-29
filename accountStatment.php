@@ -62,8 +62,8 @@ include('include/nav.php');
                     <thead class="text-center">
                         <tr>
                             <th contenteditable='false'>التاريخ</th>
-                            <th contenteditable='false'>لنا</th>
-                            <th contenteditable='false'>علينا</th>
+                            <th contenteditable='false'>مدين</th>
+                            <th contenteditable='false'>دائن</th>
                             <th contenteditable='false'>الحساب المقابل</th>
                             <th contenteditable='false'>البيان</th>
                             <!-- <th contenteditable='false'>رقم الحركة</th>
@@ -87,7 +87,7 @@ include('include/nav.php');
                             $select_account_statements_exec = mysqli_query($con , $select_account_statements_query);
                             $current_currency = 0;
                             while($row = mysqli_fetch_array($select_account_statements_exec)){
-                                $current_currency +=  $row['maden'] - $row['daen'];
+                                $current_currency +=  ($row['maden'] - $row['daen']);
                                 echo "<tr>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['maden'] . "</td>";
@@ -97,7 +97,7 @@ include('include/nav.php');
                                 // echo "<td>" . $row['code_number'] . "</td>";
                                 echo "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
                                 echo "<td>" . $row['note'] . "</td>";
-                                echo "<td>" . $row['maden'] . $row['daen'] . "</td>";
+                                echo "<td>" . max( $row['maden'] , $row['daen']) . "</td>";
                                 echo "<td>" . "$current_currency". "</td>";
                                 echo "</tr>";
                             }
