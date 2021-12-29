@@ -53,7 +53,7 @@ include('include/nav.php');
                                     <input type="number" name="code" class="form-control" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
-                                                                            echo get_auto_code($con, "accounts", "code", get_value_from_config("prefix_code", "account"))  ?>">
+                                                                            echo get_auto_code($con, "accounts", "code", "" , "child")  ?>">
                                 </div>
                             </div>
                             <div class="col-10">
@@ -188,7 +188,7 @@ if (isset($_POST['add'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?message_create=success');
+        open_window_self('test_account_card.php?message_create=success');
 }
 
 if (isset($_POST['update'])) {
@@ -206,7 +206,7 @@ if (isset($_POST['update'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+        open_window_self('test_account_card.php?id=' . $_GET['id'] . '&message_update=success');
 }
 
 
