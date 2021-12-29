@@ -13,10 +13,9 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style> 
     body{
-        margin: 0;
-    font-family: var(--bs-body-font-family);
-    font-size: var(--bs-body-font-size);
-    font-weight: var(--bs-body-font-weight);
+
+    
+    
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
@@ -24,30 +23,6 @@ include('include/nav.php');
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     }
-    .input-group {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch;
-            width: 100%;
-                                    }
-  .input-group-text {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            white-space: nowrap;
-                                    }
-.form-label {
-    margin-bottom: 0.5rem;
-                                    }
-label {
-    display: inline-block;
-                                    }
-.form-control {}
-    button, input, optgroup, select, textarea {}
-    input {}
-
-
     </style>
 </head>
 
@@ -78,7 +53,7 @@ label {
                                     <input type="number" name="code" class="form-control" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
-                                                                            echo get_auto_code($con, "accounts", "code", get_value_from_config("prefix_code", "account"))  ?>">
+                                                                            echo get_auto_code($con, "accounts", "code", "" , "child")  ?>">
                                 </div>
                             </div>
                             <div class="col-10">
@@ -213,7 +188,7 @@ if (isset($_POST['add'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?message_create=success');
+        open_window_self('test_account_card.php?message_create=success');
 }
 
 if (isset($_POST['update'])) {
@@ -231,7 +206,7 @@ if (isset($_POST['update'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+        open_window_self('test_account_card.php?id=' . $_GET['id'] . '&message_update=success');
 }
 
 

@@ -11,11 +11,29 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: LightGray;
+            box-shadow: 10px 10px 5px grey;
+        }
+        .container-fluide{
+            margin-top:10%;
+           
+        }
+        button{
+            /* width: 80px;  */
+            padding: 10px 24px;
+        }
+        a{
+            /* width: 100px; */
+            margin-right: 50px;
+        }
+    </style>
 </head>
 
 <body>
     <form id="form" action="" method="post">
-        <div class="container">
+        <div class="container-fluide">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
@@ -34,8 +52,8 @@ include('include/nav.php');
 
 
 
-            <div class="row">
-                <div class="col-6">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 py-5" style="background-color:#5F9EA0 ; border-style:groove; border-radius: 25px; ">
 
                     <div class="form-group row">
                         <label for="code" class="col-md-4 col-form-label text-md-right">رمز المادة</label>
@@ -82,46 +100,32 @@ include('include/nav.php');
                             <textarea type="text" id="" class="form-control" name="note"><?php if (isset($_GET['id'])) echo $item['note']; ?></textarea>
                         </div>
                     </div>
-                    <div class="col-10 py-3">
-                        <a class=" btn btn-primary" href="#" data-target="#add_category" data-toggle="modal">إضافة صنف</a>
-                        <div id="" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                            
-                            <div class="modal-content">
-                            <div class="modal-body">
-                                <button data-dismiss="modal" class="close">&times;</button>
-                                <h4>إضافة صنف</h4>
-                                <div id="add_category">
-                                <iframe src="category_card.php#category" frameborder="0"></iframe>
-                                </div>
-                            </div>
-                            </div>
-                        </div>  
-                        </div>
 
 
+                    <div class="col-md-12 text-center" style=" margin-top:5%; text-align:center; ">
+                        <a style="margin-left: 20px;" href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
 
-
-
-                        <a href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
-
-                        <button <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
+                        <a style="margin-left: 20px;" href="#" class=" btn btn-primary"  data-target="#add_category" data-toggle="modal">إضافة صنف</a>
+                    
+                        <button style="margin-left: 20px;" <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
                             إضافة
                         </button>
-                        <button <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
+                        <button style="margin-left: 20px;" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
                             تعديل
                         </button>
-                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
+                        <button style="margin-left: 20px;" onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
                             حذف
                         </button>
-                        <button type="button" class="btn btn-primary" name="close">
+                        <button type="button" class="btn btn-primary" name="close" style="margin-left:20px;">
                             إغلاق
                         </button>
-                    </div>
-                    <div class="col-6">
-
+                        
                     </div>
                 </div>
+
+            </div>
+
+        </div>
 
 
 

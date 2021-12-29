@@ -6,8 +6,8 @@ include('include/nav.php');
 <a href="item_card.php">المادة</a>
 <a href="account_list.php">قائمة الحساب</a>
 <a href="account_card.php">بطاقة حساب</a>
-<a href="item_list.php">قائمة المواد</a>
-<a href="test_account_card.php"> test</a> <br><br>
+<a href="item_list.php">قائمة المواد</a> <br>
+<a href="test_account_card.php"> test account card</a> <br><br>
 <a href="test_open_file_pop_up.php"> test opn pop up</a>
 
 <a href="test_raghad_stole.php">Theif</a>

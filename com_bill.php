@@ -9,7 +9,6 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/com_bill.css">
-
 </head>
 <body>
 <form action="" method="post">
@@ -20,30 +19,42 @@ include('include/nav.php');
         <input type="text" name="code" id="" value="<?php echo get_auto_code($con , 'bills' , 'code' , '' , 'child') ?>" readonly>
         <div class="row" style="height:200px;">
             <div id='seller' class="col-6">
-                <label>البائع</label>
-                <!-- <div class="ui-widget"> -->
-                    <input id="seller" name="seller" class="account_auto"/>
-                <!-- </div> -->
-                <input type="hidden" name="seller_id" value="6">
-                <label>طريقة الدفع </label>
-                <input type="radio" name="seller_type_pay" checked value="cash">
-                <label>نقدي</label>
-                <input type="radio" name="seller_type_pay" value="agel">
-                <label>آجل</label>
-                <label>ملاحظات</label>
-                <textarea name="seller_note"></textarea>
+                <div>
+                    <label>البائع</label>
+                    <!-- <div class="ui-widget"> -->
+                        <input id="seller" name="seller" class="account_auto"/>
+                    <!-- </div> -->
+                    <input type="hidden" name="seller_id" value="6">
+                </div>
+                <div>
+                    <label>طريقة الدفع </label>
+                    <input type="radio" name="seller_type_pay" checked value="cash">
+                    <label>نقدي</label>
+                    <input type="radio" name="seller_type_pay" value="agel">
+                    <label>آجل</label>
+                </div>
+                <div>
+                    <label>ملاحظات</label>
+                    <textarea name="seller_note"></textarea>
+                </div>
             </div>
             <div class="col-6">
-                <label>المشتري</label>
-                <input type="text" name="buyer" class="account_auto">
-                <input type="hidden" name="buyer_id" value="7">
-                <label>طريقة الدفع </label>
-                <input type="radio" name="buyer_type_pay" checked value="cash">
-                <label>نقدي</label>
-                <input type="radio" name="buyer_type_pay" value="agel">
-                <label>آجل</label>
-                <label>ملاحظات</label>
-                <textarea name="buyer_note"></textarea>
+                <div>
+                    <label>المشتري</label>
+                    <input type="text" name="buyer" class="account_auto">
+                    <input type="hidden" name="buyer_id" value="7">
+                </div>
+                <div>
+                    <label>طريقة الدفع </label>
+                    <input type="radio" name="buyer_type_pay" checked value="cash">
+                    <label>نقدي</label>
+                    <input type="radio" name="buyer_type_pay" value="agel">
+                    <label>آجل</label>
+                </div>
+                <div>
+                    <label>ملاحظات</label>
+                    <textarea name="buyer_note"></textarea>
+                </div>
             </div>
         </div>
         <button hidden type="button" id="add_col">adding column</button>
