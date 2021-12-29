@@ -9,43 +9,58 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/com_bill.css">
-
 </head>
 <body>
 <form action="" method="post">
     <div class="container">
+        <div>
+            <label for="date">تاريخ الفاتورة</label>
+            <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
+        </div>
         <div class="row" style="height:200px;">
             <div id='seller' class="col-6">
-                <label>البائع</label>
-                <!-- <div class="ui-widget"> -->
-                    <input name="seller" class="account_auto"/>
-                <!-- </div> -->
-                <input type="hidden" name="seller_id" value="6">
-                <label>طريقة الدفع </label>
-                <input type="radio" name="seller_type_pay" checked value="cash">
-                <label>نقدي</label>
-                <input type="radio" name="seller_type_pay" value="agel">
-                <label>آجل</label>
-                <label>ملاحظات</label>
-                <textarea name="seller_note"></textarea>
+                <div>
+                    <label>البائع</label>
+                    <!-- <div class="ui-widget"> -->
+                        <input id="seller" name="seller" class="account_auto"/>
+                    <!-- </div> -->
+                    <input type="hidden" name="seller_id" value="6">
+                </div>
+                <div>
+                    <label>طريقة الدفع </label>
+                    <input type="radio" name="seller_type_pay" checked value="cash">
+                    <label>نقدي</label>
+                    <input type="radio" name="seller_type_pay" value="agel">
+                    <label>آجل</label>
+                </div>
+                <div>
+                    <label>ملاحظات</label>
+                    <textarea name="seller_note"></textarea>
+                </div>
             </div>
             <div class="col-6">
-                <label>المشتري</label>
-                <input type="text" name="buyer" class="account_auto">
-                <input type="hidden" name="buyer_id" value="7">
-                <label>طريقة الدفع </label>
-                <input type="radio" name="buyer_type_pay" checked value="cash">
-                <label>نقدي</label>
-                <input type="radio" name="buyer_type_pay" value="agel">
-                <label>آجل</label>
-                <label>ملاحظات</label>
-                <textarea name="buyer_note"></textarea>
+                <div>
+                    <label>المشتري</label>
+                    <input type="text" name="buyer" class="account_auto">
+                    <input type="hidden" name="buyer_id" value="7">
+                </div>
+                <div>
+                    <label>طريقة الدفع </label>
+                    <input type="radio" name="buyer_type_pay" checked value="cash">
+                    <label>نقدي</label>
+                    <input type="radio" name="buyer_type_pay" value="agel">
+                    <label>آجل</label>
+                </div>
+                <div>
+                    <label>ملاحظات</label>
+                    <textarea name="buyer_note"></textarea>
+                </div>
             </div>
         </div>
         <button type="button" id="add_col">adding column</button>
         <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
-            <table contenteditable='false' class="col-10 table table-bordered table-hover text-center"  name="table" id="tbl">
+            <table contenteditable='false' class="col-10 table table-hover table-bordered  text-center"  name="table" id="tbl">
                 <thead class="text-center">
                 <tr>
                     <th contenteditable='false'>الرقم</th>
@@ -65,17 +80,17 @@ include('include/nav.php');
         </div>
         <div class="">
             <label>الإجمالي</label>
-            <input type="text" name="total_price" readonly>
+            <input type="text" name="total_price" value="0" readonly>
         </div>
         <div class="row justify-content-end">
             <label>الكمسيون</label>
-            <input type="text" name="com_ratio">
+            <input onfocus="this.value = ''" type="text" name="com_ratio" value="0">
             <label>قيمته</label>
-            <input type="text" name="com_value" readonly>
+            <input type="text" name="com_value" value="0" readonly>
         </div>
         <div class="row justify-content-end">
             <label>الصافي</label>
-            <input type="text" name="real_price" readonly>
+            <input type="text" name="real_price" value="0" readonly>
         </div>
         <div id='buttons' class="row justify-content-start">
             <div class="col-4">
@@ -99,18 +114,20 @@ include('include/nav.php');
 
 <?php
 
-// if(isset($_POST['delete'])){
-//     message_box($seller_code = substr($_POST['seller'] , 0 , 5));
-// }
 
 if(isset($_POST['save'])){
-    print_r($_POST);
+    
+
+    
+    // get seller id from seller code
+    
     $seller_code = substr($_POST['seller'] , 0 , 5);
     $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
-    
     $select_seller_id_using_code_exec = mysqli_query($con , $select_seller_id_using_code_query);
     $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
    
+
+    // get buyer id from buyer code
     $buyer_code = substr($_POST['buyer'] , 0 , 5);
     $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
     $select_buyer_id_using_code_exec = mysqli_query($con , $select_buyer_id_using_code_query);
@@ -119,14 +136,15 @@ if(isset($_POST['save'])){
     $_POST['seller_id'] = $seller_id;
     $_POST['buyer_id'] = $buyer_id;
 
+    // make bill insertion
     $insert_bill_query = insert('bills' , get_array_from_array( $_POST , ['seller_id' , 'seller_type_pay' , 'seller_note' , 
        'buyer_id' , 'buyer_type_pay' , 'buyer_note' , 'total_price' , 'real_price' , 'com_ratio' , 'com_value' ]));
     $insert_bill_exec = mysqli_query($con , $insert_bill_query);
 
+    // insert all items to bill_item table
     $select_last_bill_id_query = select('bills' , 'max(id)');
     $select_last_bill_id_exec = mysqli_query($con , $select_last_bill_id_query);
     $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
-    
     foreach($_POST['items'] as $key => $item){
         if($item != ''){
             $item_code = substr($_POST['items'][$key] , 0 , 5);
@@ -136,7 +154,7 @@ if(isset($_POST['save'])){
             $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
             $insert_bill_item_query = insert('bill_item' , [
                 'bill_id' => $current_bill_id,
-                'item_id' => $item_id, // TODO
+                'item_id' => $item_id,
                 'total_weight' => $_POST['total_weights'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
@@ -146,6 +164,44 @@ if(isset($_POST['save'])){
         }
     }
     
+    // make mid bonds
+    if($_POST['seller_type_pay'] == 'cash'){
+        // سند قيد
+        $_POST['main_account_id'] = '1';
+        $_POST['other_account_id'] = '2';
+        $_POST['daen'] = $_POST['real_price'];
+        $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
+        $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
+            'main_account_id' , 'other_account_id' , 'daen' , 'date' , 'note' , 'code'
+        ]));
+        $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
+        // كشف حساب صندوق
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements' , get_array_from_array($_POST , [
+            'main_account_id' , 'other_account_id' , 'daen' , 'note' , 'date' , 'code_number' , 'code_type' , 'note'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con , $insert_account_statement_query);
+        
+        // سند قيد
+        $_POST['main_account_id'] = '2';
+        $_POST['other_account_id'] = '1';
+        $_POST['maden'] = $_POST['real_price'];    
+        $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
+        $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
+            'main_account_id' , 'other_account_id' , 'maden' , 'date' , 'note' , 'code'
+        ]));
+        $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
+        // كشف حساب مشتريات
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements' , get_array_from_array($_POST , [
+            'main_account_id' , 'other_account_id' , 'maden' , 'note' , 'date' , 'code_number' , 'code_type' , 'note'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con , $insert_account_statement_query);
+        
+    }
+
 }
 
 ?>
