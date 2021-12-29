@@ -45,7 +45,7 @@ include('include/nav.php');
         <button type="button" id="add_col">adding column</button>
         <button type="button" id="add_row">adding Row</button>
         <div class="row justify-content-center">
-            <table contenteditable='false' class="col-10 table table-bordered table-hover text-center"  name="table" id="tbl">
+            <table contenteditable='false' class="col-10 table table-hover table-bordered  text-center"  name="table" id="tbl">
                 <thead class="text-center">
                 <tr>
                     <th contenteditable='false'>الرقم</th>

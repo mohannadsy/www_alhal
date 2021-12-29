@@ -5,8 +5,3 @@ function preparePrint(ids) {
     for (var id of ids)
         document.getElementById(id).hidden = false;
 }
-
-
-function items() {
-
-}
