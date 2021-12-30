@@ -9,13 +9,14 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/styles/paymentBonds.css" media="print">
 </head>
 <body>
   <form action="" method="post">
     <div class="container">
-        <h2>سند دفع</h2>
+        <h2 id="payment_lable">سند دفع</h2>
         <div class="row py-3 "> 
-            <div class="col-6" >
+            <div class="col-6" id="main_box">
                 <label> الحساب </label>
                 <input type="text"  name ="" placeholder="الصندوق الأساسي" disabled>
                 <input type="hidden" name="main_account_id" value="1">
@@ -34,7 +35,7 @@ include('include/nav.php');
 
             <div class="col-6">
                 <label name=" "> التاريخ </label>
-                <input type="date" name="date" id="" min="" max="" value="2022-01-22">       
+                <input type="date" name="date" id="date" min="" max="" value="2022-01-22">       
             </div>
         </div> 
 
@@ -61,16 +62,17 @@ include('include/nav.php');
             </div>         
         </div>
         
-        <div class="row justify-content-end py-5">
+        <div id='buttons' class="row justify-content-end py-5">
               <div class="col-10">
                   <button type="submit" class="btn btn-primary" name="add"> إضافة </button>
-                  <button type="submit" class="btn btn-primary"  name="print"> طباعة </button>
+                  <button type="button" class="btn btn-primary"  name="print" onclick="printPaymetBonds(['nav','buttons'])"> طباعة </button>
                   <button type="submit" class="btn btn-primary" name="close"> إغلاق </button>
               </div>   
               
         </div>
     </div>
   </form>  
+<script src = "js/scripts/paymentBonds.js"></script>
 </body>
 </html>
 
