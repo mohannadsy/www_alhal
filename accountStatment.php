@@ -18,15 +18,17 @@ include('include/nav.php');
         <div class="container">
             <div>
                 <label>العميل</label>
-                <input class="account_auto" type="text" name="account" id="">
+                <input class="account_auto" type="text" name="account" id="" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>">
                 <label for="">العملة</label>
                 <select name="" id="">
                     <option value="">ليرة سورية</option>
                 </select>
                 <label for="">من تاريخ</label>
-                <input type="date" name="" id="" min="" max="" value="2022-01-22">
+                <input type="date" name="from_date" id="" min="" max="" 
+                        value="<?php if(isset($_POST['from_date'])) echo $_POST['from_date']; else echo date('Y-m-d') ?>">
                 <label for="">إلى تاريخ</label>
-                <input type="date" name="" id="" min="" max="" value="2022-01-22">
+                <input type="date" name="to_date" id="" min="" max="" 
+                        value="<?php if(isset($_POST['to_date'])) echo $_POST['to_date']; else echo date('Y-m-d') ?>">
                 <label for="">نوع التقرير</label>
                 <label for="">تفصيلي</label>
                 <input type="radio" name="rad_pay" id="delailes" onclick='clickradio()' checked>
@@ -80,12 +82,15 @@ include('include/nav.php');
                             $main_account_code = substr($_POST['account'], 0, 5);
                             $select_main_accounta_id_using_code_query = "select id,code from accounts where code = '$main_account_code'";
                             $select_main_accounta_id_using_code_exec = mysqli_query($con, $select_main_accounta_id_using_code_query);
-                            
+                            $main_account_id = 0;
+                            if(mysqli_num_rows($select_main_accounta_id_using_code_exec) > 0)
                             $main_account_id = mysqli_fetch_row($select_main_accounta_id_using_code_exec)[0];
                             
-                            $select_account_statements_query = select('account_statements').where('main_account_id' , $main_account_id);
+                            $select_account_statements_query = select('account_statements').where('main_account_id' , $main_account_id)."
+                             and date between '" . $_POST['from_date'] ."' and '". $_POST['to_date'] ."'";
                             $select_account_statements_exec = mysqli_query($con , $select_account_statements_query);
                             $current_currency = 0;
+                            if(mysqli_num_rows($select_account_statements_exec) > 0)
                             while($row = mysqli_fetch_array($select_account_statements_exec)){
                                 $current_currency +=  ($row['maden'] - $row['daen']);
                                 echo "<tr>";

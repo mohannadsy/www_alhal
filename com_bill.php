@@ -16,7 +16,7 @@ include('include/nav.php');
         <label for="date">تاريخ الفاتورة</label>
         <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
         <label for="">رقم الفاتورة</label>
-        <input type="text" name="code" id="" value="<?php echo get_auto_code($con , 'bills' , 'code' , '' , 'child') ?>" readonly>
+        <input type="text" name="code" id="" value="<?php echo get_auto_code($con , 'bills' , 'code' , '001' , 'child') ?>" readonly>
         <div class="row" style="height:200px;">
             <div id='seller' class="col-6">
                 <div>
@@ -121,14 +121,16 @@ if(isset($_POST['save'])){
     
     // get seller id from seller code
     
-    $seller_code = substr($_POST['seller'] , 0 , 5);
+    // $seller_code = substr($_POST['seller'] , 0 , strpos($_POST['seller'] , '-')-1);
+    $seller_code = get_code_from_input($_POST['seller']);
     $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
     $select_seller_id_using_code_exec = mysqli_query($con , $select_seller_id_using_code_query);
     $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
    
 
     // get buyer id from buyer code
-    $buyer_code = substr($_POST['buyer'] , 0 , 5);
+    // $buyer_code = substr($_POST['buyer'] , 0 , strpos($_POST['buyer'] , '-')-1);
+    $buyer_code = get_code_from_input($_POST['buyer']);
     $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
     $select_buyer_id_using_code_exec = mysqli_query($con , $select_buyer_id_using_code_query);
     $buyer_id = mysqli_fetch_row($select_buyer_id_using_code_exec)[0];
@@ -137,7 +139,8 @@ if(isset($_POST['save'])){
     $_POST['buyer_id'] = $buyer_id;
 
     // make bill insertion
-    $insert_bill_query = insert('bills' , get_array_from_array( $_POST , ['seller_id' , 'seller_type_pay' , 'seller_note' , 
+    $insert_bill_query = insert('bills' , get_array_from_array( $_POST , [
+       'code', 'seller_id' , 'seller_type_pay' , 'seller_note' , 
        'buyer_id' , 'buyer_type_pay' , 'buyer_note' , 'total_price' , 'real_price' , 'com_ratio' , 'com_value' ]));
     $insert_bill_exec = mysqli_query($con , $insert_bill_query);
 
@@ -149,7 +152,8 @@ if(isset($_POST['save'])){
     
     foreach($_POST['items'] as $key => $item){
         if($item != ''){
-            $item_code = substr($_POST['items'][$key] , 0 , 5);
+            // $item_code = substr($_POST['items'][$key] , 0 , 5);
+            $item_code = get_code_from_input($_POST['items'][$key]);
             message_box($item_code);
             $select_item_id_from_code_query = "select id,code from items where code = '$item_code'";
             $select_item_id_from_code_exec = mysqli_query($con , $select_item_id_from_code_query);
@@ -172,9 +176,10 @@ if(isset($_POST['save'])){
         $_POST['main_account_id'] = '1';
         $_POST['other_account_id'] = '2';
         $_POST['daen'] = $_POST['real_price'];
+        $_POST['bill_id'] = $current_bill_id;
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'daen' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id' , 'daen' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب صندوق
@@ -191,7 +196,7 @@ if(isset($_POST['save'])){
         $_POST['maden'] = $_POST['real_price'];    
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'maden' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'maden' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب مشتريات
@@ -211,7 +216,7 @@ if(isset($_POST['save'])){
         $_POST['daen'] = $_POST['real_price'];
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'maden' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'maden' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب البائع
@@ -228,7 +233,7 @@ if(isset($_POST['save'])){
         $_POST['maden'] = $_POST['real_price'];    
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'daen' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'daen' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب مشتريات
@@ -244,10 +249,10 @@ if(isset($_POST['save'])){
         // سند قيد
         $_POST['main_account_id'] = '1';
         $_POST['other_account_id'] = '3';
-        $_POST['maden'] = $_POST['real_price'];
+        $_POST['maden'] = $_POST['total_price'];
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'maden' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'maden' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب الصندوق
@@ -261,10 +266,10 @@ if(isset($_POST['save'])){
         // سند قيد
         $_POST['main_account_id'] = '3';
         $_POST['other_account_id'] = '1';
-        $_POST['daen'] = $_POST['real_price'];    
+        $_POST['daen'] = $_POST['total_price'];    
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'daen' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'daen' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب المبيعات
@@ -289,10 +294,10 @@ if(isset($_POST['save'])){
         // سند قيد
         $_POST['main_account_id'] = $buyer_id;
         $_POST['other_account_id'] = '3';
-        $_POST['maden'] = $_POST['real_price'];
+        $_POST['maden'] = $_POST['total_price'];
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'maden' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'maden' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب المشتري
@@ -306,10 +311,10 @@ if(isset($_POST['save'])){
         // سند قيد
         $_POST['main_account_id'] = '3';
         $_POST['other_account_id'] = $buyer_id;
-        $_POST['daen'] = $_POST['real_price'];    
+        $_POST['daen'] = $_POST['total_price'];    
         $_POST['code'] = get_auto_code($con , 'mid_bonds' , 'code' , '' , 'child');
         $insert_mid_bond_query = insert('mid_bonds' , get_array_from_array($_POST , [
-            'main_account_id' , 'other_account_id' , 'daen' , 'date' , 'note' , 'code'
+            'main_account_id' , 'other_account_id' , 'bill_id'  , 'daen' , 'date' , 'note' , 'code'
         ]));
         $insert_mid_bond_exec = mysqli_query($con , $insert_mid_bond_query);
         // كشف حساب المبيعات

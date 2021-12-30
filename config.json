@@ -5,8 +5,8 @@
     "user": "root",
     "pass": "",
     "sql_path": "backups\\default_database.sql",
-    "number_of_zeros_code_child": "0",
-    "number_of_zeros_code_parent" : "0",
+    "number_of_zeros_code_child": "4",
+    "number_of_zeros_code_parent" : "2",
     "prefix_code": {
         "account": "acc_",
         "category": "cat_",
