@@ -1,7 +1,6 @@
 <?php
 include('include/nav.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -13,16 +12,37 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style> 
     body{
-
-    
-    
-    line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
-    text-align: var(--bs-body-text-align);
-    background-color: var(--bs-body-bg);
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
+    background-color: LightGray;
+    text-align: right;
+    line-height: ;
     }
+    .container{
+        margin-top: 8%;
+        margin-right: 20%;
+        border-style:groove;
+        width: 60%;
+
+    }
+    #account_col{
+        background-color:#5F9EA0;
+        /* padding: 0px 50px 0px ; */
+        
+
+    }
+    #connect_col{
+        background-color:#5F9EA0 ;
+        /* padding: 0px 50px 0px ; */
+    }
+    #button_col{
+        background-color: #5F9EA0;
+        padding: 5px;
+        text-align: left;
+
+    }
+    #button-col button {
+     }
+
     </style>
 </head>
 
@@ -42,14 +62,15 @@ include('include/nav.php');
                 $account = mysqli_fetch_array($select_where_exec);
             }
             ?>
-            <div class="row g-3">
-                <div class="col-md-6">
+            <div class="row">
+
+                <div id="account_col" class="col-md-6">
                     <h4 class="mb-3">معلومات الحساب</h4>
                     <form class="needs-validation" novalidate>
-                        <div class="row g-3">
+                        <div class="row ">
                             <div class="col-10">
-                                <label for="code" class="form-label">رمز الحساب</label>
-                                <div class="input-group">
+                                <label for="code" class="col-form-label">رمز الحساب</label>
+                                <div class="col-md-5">
                                     <input type="number" name="code" class="form-control" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
@@ -66,7 +87,6 @@ include('include/nav.php');
                             </div>
                             <div class="col-10 py-3">
                             <label for="account_id" class="form-label"> الحساب الرئيسي</label>
-                            <!-- <input type="text" name="account_id"> -->
                                 
                             <select class="form-select" name="account_id" id="" required>
                                 <option value="0"> حساب رئيسي</option>
@@ -85,12 +105,12 @@ include('include/nav.php');
                     </form>
                     <h4 class="mb-3"> الرصيدالافتتاحي</h4>
                     <form class="needs-validation" novalidate>
-                        <div class="row g-3">
+                        <div class="row">
                             <div class="col-10">
                             <label for="credit" class="form-label"> له</label>
                                 <div class="input-group">
                                     <input type="number" name="credit" class="form-control" id=""
-                                     value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
+                                    value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
                                 </div>
                             </div>
                             <div class="col-10">
@@ -103,12 +123,12 @@ include('include/nav.php');
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> 
 
-                <div class="col-md-6">
+                <div id="connect_col" class="col-md-6 ">
                 <h4 class="mb-3">معلومات التواصل</h4>
                     <form class="needs-validation" novalidate>
-                        <div class="row g-3">
+                        <div class="row">
                             <div class="col-10">
                                 <label for="" class="form-label" >المحافظة </label>
                                 <input type="text" class="form-control" id="" placeholder=""
@@ -118,7 +138,7 @@ include('include/nav.php');
                             <div class="col-10">
                                     <label for="" class="form-label" >المدينة</label>
                                     <input type="text" class="form-control" id="" placeholder=""
-                                     value="<?php if(isset($account['city'])) echo $account['city'] ?>">
+                                    value="<?php if(isset($account['city'])) echo $account['city'] ?>">
 
                             </div>
                             <div class="col-10">
@@ -143,24 +163,24 @@ include('include/nav.php');
                     </form>
                     
                 </div>
-            </div>
+            </div> 
 
 
 
 
 
-            <div class="row g-3">
-                <div class="col-md-6 col-lg-4">
+            <div class="row">
+                <div class="col-md-12" id="button_col">
 
-                    <button type="submit" class="btn btn-primary" name="add">إضافة</button>
+                <button type="submit" class="btn btn-primary " name="add">إضافة</button>
 
-                    <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+                <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
-                    <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
+                <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
 
-                    <button type="button" class="btn btn-primary" name="close">إغلاق</button>
-
+                <button type="button" class="btn btn-primary" name="close">إغلاق</button>
                 </div>
+
 
             </div>
         </div>

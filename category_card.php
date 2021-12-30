@@ -15,24 +15,23 @@ include('include/nav.php');
             align-items:center ;
             background-color: LightGray;
         }
-        .container-fluide{
-            margin-top:12%;
-           
+        .container{
+            margin-top:12%; 
         }
-        
-        .col-md-10 .btn btn-primary{
-            width: 100px;
-            /* margin-right: 8px; */
-            color: grey;
+        #category_col{
+            background-color:#5F9EA0 ;
+            border-style:groove; 
+            border-radius: 25px;
+        }
+        #button_col{
+            margin-top:5%;
 
         }
     </style>
 </head>
 
 <body>
-
     <form id="category" action="" method="post">
-
         <?php
         success_error_create_message('تم انشاء الصنف بنجاح', 'عئرا لم يتم انشاء الصنف');
         success_error_update_message('تم تعديل الصنف بنجاح', 'عئرا لم يتم تعديل الصنف');
@@ -47,10 +46,9 @@ include('include/nav.php');
             $category = mysqli_fetch_array($select_category_exec);
         }
         ?>
-
-        <div class="container-fluide" >
+        <div class="container" >
             <div class="row justify-content-center">
-                <div class="col-sm-10 col-md-6 py-5" style="background-color:#5F9EA0 ; border-style:groove; border-radius: 25px;">
+                <div id="category_col" class="col-sm-10 col-md-8 py-5">
 
                     <div class="form-group row">
                         <label for="code" class="col-md-4 col-form-label text-md-right">رمز الصنف</label>
@@ -76,7 +74,7 @@ include('include/nav.php');
                            
                         </div>
                     </div>
-                    <div class="col-md-10 " style="margin-top:5%; ">
+                    <div id="button_col" class="col-md-10 ">
                         <button type="submit" class="btn btn-primary" name="add">
                             إضافة
                         </button>
@@ -89,16 +87,12 @@ include('include/nav.php');
                         <button type="button" class="btn btn-primary" name="close">
                             إغلاق
                         </button>
-
                     </div>
-                   
                 </div>
         </div>
     </form>
 </body>
-
 </html>
-
 <?php
 
 if (isset($_POST['add'])) {
@@ -123,11 +117,7 @@ if (isset($_POST['delete'])) {
         open_window_self("category_card.php?message_delete=success");
     }
 }
-
 ?>
-
-
-
 <?php
 // mysqli_query($con , resetAutoIncrement('categories'));
 include('include/footer.php');

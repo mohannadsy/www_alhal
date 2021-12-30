@@ -16,24 +16,32 @@ include('include/nav.php');
             background-color: LightGray;
             box-shadow: 10px 10px 5px grey;
         }
-        .container-fluide{
-            margin-top:10%;
-           
+        .container{
+            margin-top:10%;    
         }
-        button{
-            /* width: 80px;  */
-            padding: 10px 24px;
+        #item_col{
+            background-color:#5F9EA0 ; 
+            border-style:groove;
+            border-radius: 25px;
         }
-        a{
+        #button_col{
+            margin-top:5%; 
+            text-align:center;
+        }
+        #button_col button{ 
+            /* padding: 10px 24px; */
+            margin-left:20px;
+        }
+        #button_col a{
             /* width: 100px; */
-            margin-right: 50px;
+            margin-left: 20px;
         }
     </style>
 </head>
 
 <body>
     <form id="form" action="" method="post">
-        <div class="container-fluide">
+        <div class="container">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
@@ -53,7 +61,7 @@ include('include/nav.php');
 
 
             <div class="row justify-content-center">
-                <div class="col-sm-10 col-md-6 py-5" style="background-color:#5F9EA0 ; border-style:groove; border-radius: 25px; ">
+                <div id="item_col" class="col-sm-10 col-md-8 py-5">
 
                     <div class="form-group row">
                         <label for="code" class="col-md-4 col-form-label text-md-right">رمز المادة</label>
@@ -102,21 +110,21 @@ include('include/nav.php');
                     </div>
 
 
-                    <div class="col-md-12 text-center" style=" margin-top:5%; text-align:center; ">
-                        <a style="margin-left: 20px;" href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
+                    <div id="button_col" class="col-md-12 text-center">
+                        <a  href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
 
-                        <a style="margin-left: 20px;" href="#" class=" btn btn-primary"  data-target="#add_category" data-toggle="modal">إضافة صنف</a>
+                        <a  href="#" class=" btn btn-primary"  data-target="#add_category" data-toggle="modal">إضافة صنف</a>
                     
-                        <button style="margin-left: 20px;" <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
+                        <button <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
                             إضافة
                         </button>
-                        <button style="margin-left: 20px;" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
+                        <button  <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
                             تعديل
                         </button>
-                        <button style="margin-left: 20px;" onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
+                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
                             حذف
                         </button>
-                        <button type="button" class="btn btn-primary" name="close" style="margin-left:20px;">
+                        <button type="button" class="btn btn-primary" name="close">
                             إغلاق
                         </button>
                         
