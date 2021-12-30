@@ -68,7 +68,7 @@ include('include/nav.php');
                         <div class="col-md-6">
                             <input type="text" value="<?php
                                                         if (isset($_GET['id'])) echo $item['code'];
-                                                        else echo get_auto_code($con, 'items', 'code', '');  ?>" id="" class="form-control" name="code" readonly>
+                                                        else echo get_auto_code($con, 'items', 'code', '' , 'child');  ?>" id="" class="form-control" name="code" readonly>
                         </div>
                     </div>
 

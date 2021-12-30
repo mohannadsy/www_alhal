@@ -39,10 +39,10 @@ include('include/nav.php');
                         <legend class="w-auto">معلومات الحساب</legend>
 
                         <label for="code">رمز الحساب</label>
-                        <input name="code" type="text" readonly value="<?php
+                        <input id="code" name="code" type="text" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
-                                                                            echo get_auto_code($con, "accounts", "code", "" , "child")  ?>">
+                                                                            echo get_auto_code($con, "accounts", "code", "" , "parent")  ?>">
 
                         <br><br>
 
@@ -54,7 +54,7 @@ include('include/nav.php');
                         <label for="main account">الحساب الرئيسي</label>
                         <!-- <input type="text" name="account_id"> -->
 
-                        <select name="account_id" id="">
+                        <select name="account_id" id="account_id">
                             <option value="0">حساب رئيسي</option>
                             <?php
                             foreach (get_main_accounts($con) as $id => $value) {
@@ -184,3 +184,32 @@ if (isset($_POST['update'])) {
 <?php
 include('include/footer.php');
 ?>
+
+<!-- 
+<script>
+    function change_code(){
+        var account_id = document.getElementById('account_id').value;
+        document.getElementById('code').value = account_id +  "<?php // get_auto_code($con , 'accounts' , 'code' ,'' , 'child' ,  '4') ?>";
+    }
+</script> -->
+
+
+<script>
+    $(function(){
+        $('#account_id').change(function(){
+            var account_id = $(this).val();
+            if(account_id != ''){
+                $.ajax({
+                    url:"search.php",
+                    method:"POST",
+                    data:{account_id : account_id},
+                    success:function(data){
+                        // $('#code').fadeIn(data);
+                        $('#code').val(data);
+                        // alert(data);
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -213,4 +213,12 @@ function drop_all_tables($con){
     }
 }
 
+function truncate_all_tables($con){
+    $select_tables_query = "show tables";
+    $select_tables_exec = mysqli_query($con , $select_tables_query);
+    while($table = mysqli_fetch_row($select_tables_exec)){
+        $query = "truncate table $table[0]";
+        $query_exec = mysqli_query($con , $query);
+    }
+}
 

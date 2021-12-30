@@ -17,8 +17,11 @@ function generate_code($prefix, $code, $type)
         }
     return $prefix . $code_result . $code_trim;
 }
-function get_auto_code($con, $table, $column, $prefix, $type = "child")
+function get_auto_code($con, $table, $column, $prefix, $type = "child" , $account_id = '')
 {
+    if($account_id != '')
+        $select_max_id_query = "select max(id),account_id from $table where account_id = '$account_id'";
+    else
     $select_max_id_query = "select max(id) from $table";
     $select_max_id_exec = mysqli_query($con, $select_max_id_query);
     $max_id = mysqli_fetch_row($select_max_id_exec)[0];
