@@ -27,12 +27,24 @@ function get_auto_code($con, $table, $column, $prefix, $type = "child")
     $select_code_exec = mysqli_query($con, $select_code_query);
     @$code = mysqli_fetch_row($select_code_exec)[0];
     if ($code == null)
-        if ($type == "child")
-            return $prefix . "00001";
-        else
-            return $prefix . "001";
+        if ($type == "child"){
+            $zeros = '';
+            for($i=1 ; $i<NUMBER_OF_ZEROS_CHILD ; $i++)
+                $zeros .= "0";
+            return $prefix . $zeros ."1";
+        }
+        else{
+            $zeros = '';
+            for($i=1 ; $i<NUMBER_OF_ZEROS_PARENT ; $i++)
+                $zeros .= "0";
+            return $prefix . $zeros . "1";
+        }
     return generate_code($prefix, $code, $type);
 }
+function get_code_from_input($input){
+    return substr($input , 0 , strpos($input , '-')-1);
+}
+
 ################################################################################################
 /**
  * Dictionary
