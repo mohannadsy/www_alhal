@@ -66,9 +66,8 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label for="code" class="col-md-4 col-form-label text-md-right">رمز المادة</label>
                         <div class="col-md-6">
-                            <input type="text" value="<?php
-                                                        if (isset($_GET['id'])) echo $item['code'];
-                                                        else echo get_auto_code($con, 'items', 'code', '' , 'child');  ?>" id="" class="form-control" name="code" readonly>
+                            <input id="code" type="text" value="<?php
+                                                        if (isset($_GET['id'])) echo $item['code']; ?>" id="" class="form-control" name="code" readonly>
                         </div>
                     </div>
 
@@ -87,7 +86,7 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label for="category_id" class="col-md-4 col-form-label text-md-right">الصنف </label>
                         <div class="col-md-6">
-                            <select class="form-control" name="category_id">
+                            <select class="form-control" name="category_id" id="category_id">
                                 <?php
                                 $select_categories_query = select('categories');
                                 $select_categories_exec = mysqli_query($con, $select_categories_query);
@@ -175,3 +174,41 @@ if (isset($_POST['delete'])) {
 <?php
 include('include/footer.php');
 ?>
+
+
+
+
+<script>
+    $(function(){
+        $('#category_id').change(function(){
+            var category_id = $(this).val();
+            if(category_id != ''){
+                $.ajax({
+                    url:"search.php",
+                    method:"POST",
+                    data:{category_id : category_id},
+                    success:function(data){
+                        // $('#code').fadeIn(data);
+                        $('#code').val(data);
+                        // alert(data);
+                    }
+                });
+            }
+        });
+        $(function(){
+            var category_id = $('#category_id').val();
+            if(category_id != ''){
+                $.ajax({
+                    url:"search.php",
+                    method:"POST",
+                    data:{category_id : category_id},
+                    success:function(data){
+                        // $('#code').fadeIn(data);
+                        $('#code').val(data);
+                        // alert(data);
+                    }
+                });
+            }
+        });
+    });
+</script>

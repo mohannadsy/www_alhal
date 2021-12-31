@@ -17,12 +17,15 @@ function generate_code($prefix, $code, $type)
         }
     return $prefix . $code_result . $code_trim;
 }
-function get_auto_code($con, $table, $column, $prefix, $type = "child" , $account_id = '')
+function get_auto_code($con, $table, $column, $prefix, $type = "child", $parent_col_name = '', $parent_id = '')
 {
-    if($account_id != '')
-        $select_max_id_query = "select max(id),account_id from $table where account_id = '$account_id'";
+    if ($parent_id != '')
+        $select_max_id_query = "select max(id),$parent_col_name from $table where $parent_col_name = '$parent_id'";
+    // if ($parent_id == '' && $parent_col_name != '')
+    //     $select_max_id_query = "select max(id),$parent_col_name from $table where $parent_col_name = '$parent_id'";
+
     else
-    $select_max_id_query = "select max(id) from $table";
+        $select_max_id_query = "select max(id) from $table";
     $select_max_id_exec = mysqli_query($con, $select_max_id_query);
     $max_id = mysqli_fetch_row($select_max_id_exec)[0];
 
@@ -30,22 +33,22 @@ function get_auto_code($con, $table, $column, $prefix, $type = "child" , $accoun
     $select_code_exec = mysqli_query($con, $select_code_query);
     @$code = mysqli_fetch_row($select_code_exec)[0];
     if ($code == null)
-        if ($type == "child"){
+        if ($type == "child") {
             $zeros = '';
-            for($i=1 ; $i<NUMBER_OF_ZEROS_CHILD ; $i++)
+            for ($i = 1; $i < NUMBER_OF_ZEROS_CHILD; $i++)
                 $zeros .= "0";
-            return $prefix . $zeros ."1";
-        }
-        else{
+            return $prefix . $zeros . "1";
+        } else {
             $zeros = '';
-            for($i=1 ; $i<NUMBER_OF_ZEROS_PARENT ; $i++)
+            for ($i = 1; $i < NUMBER_OF_ZEROS_PARENT; $i++)
                 $zeros .= "0";
             return $prefix . $zeros . "1";
         }
     return generate_code($prefix, $code, $type);
 }
-function get_code_from_input($input){
-    return substr($input , 0 , strpos($input , '-')-1);
+function get_code_from_input($input)
+{
+    return substr($input, 0, strpos($input, '-') - 1);
 }
 
 ################################################################################################

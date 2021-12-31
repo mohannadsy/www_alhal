@@ -112,7 +112,7 @@ if (isset($_POST["item_search"])) {
  */
 if (isset($_POST['account_id'])) {
     if ($_POST['account_id'] == '0')
-        echo get_auto_code($con, "accounts", "code", "", "parent");
+        echo get_auto_code($con, "accounts", "code", "", "parent", 'account_id', '0');
     else {
         $select_code_using_account_id_query = "select code,account_id from accounts where account_id = '" . $_POST['account_id'] . "'";
         $prefix = '';
@@ -120,6 +120,18 @@ if (isset($_POST['account_id'])) {
             $prefix = $_POST['account_id'];
         echo get_auto_code($con, 'accounts', 'code', $prefix, 'child',  $_POST['account_id']);
     }
+}
+/**
+ * linked to item_card.php
+ * return auto code
+ */
+if (isset($_POST['category_id'])) {
+    $select_code_using_category_id_query = "select id,code from categories where id = '" . $_POST['category_id'] . "'";
+    $prefix = '';
+    $select_code_using_category_id_exec = mysqli_query($con, $select_code_using_category_id_query);
+    if ($row = mysqli_fetch_array($select_code_using_category_id_exec))
+        $prefix = $row['code'];
+    echo get_auto_code($con, 'items', 'code', $prefix, 'child',  $_POST['category_id']);
 }
 
 

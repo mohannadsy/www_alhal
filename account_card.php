@@ -42,7 +42,7 @@ include('include/nav.php');
                         <input id="code" name="code" type="text" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
-                                                                            echo get_auto_code($con, "accounts", "code", "" , "parent")  ?>">
+                                                                            echo get_auto_code($con, "accounts", "code", "" , "parent" ,'account_id', '0')  ?>">
 
                         <br><br>
 
