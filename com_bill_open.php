@@ -142,7 +142,7 @@ if (isset($_GET['id'])) {
             </div>
             <div id='buttons' class="row justify-content-start">
                 <div class="col-4">
-                    <button <?php if(isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">تعديل</button>
+                    <button <?php if(isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
                     <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>

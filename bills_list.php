@@ -64,9 +64,13 @@ include('include/nav.php');
                                     }
                                     echo "<td>" . $row['total_price'] . "</td>";
                                     if ($row['buyer_id'] != '0') {
-                                        echo "<td style='background-color:green'>" . "مباعة" . "</td>";
+                                        echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
+                                        <a href='com_bill_open.php?id=".$row['id']."'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
+                                        </td>";
                                     } else {
-                                        echo "<td style='background-color:red'>" . "غير مباعة" . "</td>";
+                                        echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
+                                        <a href='com_bill_open.php?id=".$row['id']."'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
+                                        </td>";
                                     }
                                     echo "</tr>";
                                 }
