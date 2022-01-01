@@ -116,7 +116,7 @@ if (isset($_POST['account_id'])) {
     else {
         $select_code_using_account_id_query = "select code,account_id from accounts where id = '" . $_POST['account_id'] . "'";
         $prefix = '';
-        if (mysqli_query($con, $select_code_using_account_id_query)){
+        if (mysqli_query($con, $select_code_using_account_id_query)) {
             $prefix = mysqli_fetch_array(mysqli_query($con, $select_code_using_account_id_query))['code'];
         }
         echo get_auto_code($con, 'accounts', 'code', $prefix, 'child', 'account_id', $_POST['account_id']);
@@ -147,6 +147,52 @@ if (isset($_POST['item_code'])) {
     $select_item_id_from_code_exec = mysqli_query($con, $select_item_id_from_code_query);
     echo @mysqli_fetch_array($select_item_id_from_code_exec)['unit'];
 }
+
+
+/**
+ * linked to com_bill_open.php 
+ *  return bills
+ */
+if (isset($_POST['radio_bill_value'])) {
+    $select_all_bills_query = select('bills');
+    if ($_POST['radio_bill_value'] == 'not_sell_bills')
+        $select_all_bills_query = select('bills') . where('buyer_id', 0);
+    if ($_POST['radio_bill_value'] == 'sell_bills')
+        $select_all_bills_query = select('bills') . where('buyer_id', 0 , '<>');
+    if ($_POST['radio_bill_value'] == 'all_bills')
+        $select_all_bills_query = select('bills');
+    $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
+    while ($row = mysqli_fetch_array($select_all_bills_exec)) {
+        echo "<tr>";
+        echo "<td>" . $row['code'] . "</td>";
+        $select_seller_query = selectWhereId('accounts', $row['seller_id']);
+        $select_seller_exec = mysqli_query($con, $select_seller_query);
+        $seller = mysqli_fetch_array($select_seller_exec);
+        echo "<td>" . $seller['code'] . " - " . $seller['name'] . "</td>";
+        echo "<td>" . $row['real_price'] . "</td>";
+
+        if ($row['buyer_id'] != '0') {
+            $select_buyer_query = selectWhereId('accounts', $row['buyer_id']);
+            $select_buyer_exec = mysqli_query($con, $select_buyer_query);
+            $buyer = mysqli_fetch_array($select_buyer_exec);
+            echo "<td>" . $buyer['code'] . " - " . $buyer['name'] . "</td>";
+        } else {
+            echo "<td>" . "لا يوجد مشتري" . "</td>";
+        }
+        echo "<td>" . $row['total_price'] . "</td>";
+        if ($row['buyer_id'] != '0') {
+            echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
+            <a href='com_bill_open.php?id=" . $row['id'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
+            </td>";
+        } else {
+            echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
+            <a href='com_bill_open.php?id=" . $row['id'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
+            </td>";
+        }
+        echo "</tr>";
+    }
+}
+
 
 ?>
 

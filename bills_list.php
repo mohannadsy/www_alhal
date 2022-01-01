@@ -19,8 +19,16 @@ include('include/nav.php');
             <div class="row py-4">
 
                 <div class="col-4">
-                    <input id="search_text" type="search" class="" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                    <button id="search" type="button" class="btn btn-primary">بحث</button>
+                    <label for="all_bills">جميع الفواتير</label>
+                    <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
+
+                    <label for="not_sell_bills">الفواتير الغير مباعة</label>
+                    <input name="search_bill" value="not_sell_bills" id="not_sell_bills" type="radio" />
+                    
+                    <label for="sell_bills">الفواتير المباعة</label>
+                    <input name="search_bill" value="sell_bills" id="sell_bills"  type="radio" />
+                    
+                    <!-- <button id="search" type="button" class="btn btn-primary">بحث</button> -->
 
                 </div>
                 <div class="col-6">
@@ -41,41 +49,39 @@ include('include/nav.php');
                             </tr>
                         </thead>
                         <tbody id="show">
-                            <tr>
-                                <?php
-                                $select_all_bills_query = select('bills');
-                                $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
-                                while ($row = mysqli_fetch_array($select_all_bills_exec)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['code'] . "</td>";
-                                    $select_seller_query = selectWhereId('accounts', $row['seller_id']);
-                                    $select_seller_exec = mysqli_query($con, $select_seller_query);
-                                    $seller = mysqli_fetch_array($select_seller_exec);
-                                    echo "<td>" . $seller['code'] . " - " . $seller['name'] . "</td>";
-                                    echo "<td>" . $row['real_price'] . "</td>";
+                            <?php
+                            $select_all_bills_query = select('bills');
+                            $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
+                            while ($row = mysqli_fetch_array($select_all_bills_exec)) {
+                                echo "<tr>";
+                                echo "<td>" . $row['code'] . "</td>";
+                                $select_seller_query = selectWhereId('accounts', $row['seller_id']);
+                                $select_seller_exec = mysqli_query($con, $select_seller_query);
+                                $seller = mysqli_fetch_array($select_seller_exec);
+                                echo "<td>" . $seller['code'] . " - " . $seller['name'] . "</td>";
+                                echo "<td>" . $row['real_price'] . "</td>";
 
-                                    if ($row['buyer_id'] != '0') {
-                                        $select_buyer_query = selectWhereId('accounts', $row['buyer_id']);
-                                        $select_buyer_exec = mysqli_query($con, $select_buyer_query);
-                                        $buyer = mysqli_fetch_array($select_buyer_exec);
-                                        echo "<td>" . $buyer['code'] . " - " . $buyer['name'] . "</td>";
-                                    } else {
-                                        echo "<td>" . "لا يوجد مشتري" . "</td>";
-                                    }
-                                    echo "<td>" . $row['total_price'] . "</td>";
-                                    if ($row['buyer_id'] != '0') {
-                                        echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
-                                        <a href='com_bill_open.php?id=".$row['id']."'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
-                                        </td>";
-                                    } else {
-                                        echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
-                                        <a href='com_bill_open.php?id=".$row['id']."'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
-                                        </td>";
-                                    }
-                                    echo "</tr>";
+                                if ($row['buyer_id'] != '0') {
+                                    $select_buyer_query = selectWhereId('accounts', $row['buyer_id']);
+                                    $select_buyer_exec = mysqli_query($con, $select_buyer_query);
+                                    $buyer = mysqli_fetch_array($select_buyer_exec);
+                                    echo "<td>" . $buyer['code'] . " - " . $buyer['name'] . "</td>";
+                                } else {
+                                    echo "<td>" . "لا يوجد مشتري" . "</td>";
                                 }
-                                ?>
-                            </tr>
+                                echo "<td>" . $row['total_price'] . "</td>";
+                                if ($row['buyer_id'] != '0') {
+                                    echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
+                                        <a href='com_bill_open.php?id=" . $row['id'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
+                                        </td>";
+                                } else {
+                                    echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
+                                        <a href='com_bill_open.php?id=" . $row['id'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
+                                        </td>";
+                                }
+                                echo "</tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
 
@@ -102,22 +108,22 @@ include('include/nav.php');
 include('include/footer.php');
 ?>
 
-<!-- 
+
 <script>
-    $(function(){
-        $('#search_text').keyup(function(){
-            var account_search = $(this).val();
-            if(account_search != ''){
-                $.ajax({
-                    url:"search.php",
-                    method:"POST",
-                    data:{account_search_part : account_search},
-                    success:function(data){
-                        $('#show').fadeIn();
-                        $('#show').html(data);
-                    }
-                });
-            }
+    $(function() {
+        $('input[name=search_bill]').click(function() {
+            var radio_bill_value = $('input[name=search_bill]:checked').val();
+            $.ajax({
+                url: "search.php",
+                method: "POST",
+                data: {
+                    radio_bill_value: radio_bill_value
+                },
+                success: function(data) {
+                    $('#show').fadeIn();
+                    $('#show').html(data);
+                }
+            });
         });
     });
-</script> -->
+</script>
