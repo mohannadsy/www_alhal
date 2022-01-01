@@ -22,7 +22,7 @@ include('include/nav.php');
             </div>
             <div class="col-6">
                 <label name=" "> رقم الإيصال </label>
-                <input type="text"  name ="code" value= "<?= get_auto_code($con , 'catch_bonds' , "code" ,"" , "child") ?>" readonly>       
+                <input type="text"  name ="code" value= "<?= get_auto_code($con , 'catch_bonds' , "code" ,"" , "parent") ?>" readonly>       
             </div>
         </div> 
         <div class="row py-3 "> 
