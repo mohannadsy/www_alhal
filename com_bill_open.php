@@ -16,6 +16,7 @@ include('include/nav.php');
 
 $bill = [];
 $seller = [];
+$buyer = [];
 $items = [];
 if (isset($_GET['id'])) {
     $select_bill_using_id_query = selectWhereId('bills', $_GET['id']);
@@ -25,6 +26,12 @@ if (isset($_GET['id'])) {
     $select_seller_details_query = selectWhereId('accounts', $bill['seller_id']);
     $select_seller_details_exec = mysqli_query($con, $select_seller_details_query);
     $seller = mysqli_fetch_array($select_seller_details_exec);
+
+    $select_buyer_details_query = selectWhereId('accounts', $bill['buyer_id']);
+    $select_buyer_details_exec = mysqli_query($con, $select_buyer_details_query);
+    $buyer = mysqli_fetch_array($select_buyer_details_exec);
+
+
 }
 
 
@@ -61,18 +68,20 @@ if (isset($_GET['id'])) {
                 <div class="col-6">
                     <div>
                         <label>المشتري</label>
-                        <input type="text" name="buyer" class="account_auto">
+                        <input <?php if(isset($buyer['name'])) echo 'readonly'?>
+                            value="<?php if(isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>"
+                            type="text" name="buyer" class="account_auto">
                     </div>
                     <div>
                         <label>طريقة الدفع </label>
-                        <input type="radio" name="buyer_type_pay" checked value="cash">
+                        <input <?php if(isset($buyer['name'])) echo 'disabled'?> type="radio" name="buyer_type_pay" checked value="cash">
                         <label>نقدي</label>
-                        <input type="radio" name="buyer_type_pay" value="agel">
+                        <input <?php if(isset($buyer['name'])) echo 'disabled'?> type="radio" name="buyer_type_pay" value="agel">
                         <label>آجل</label>
                     </div>
                     <div>
                         <label>ملاحظات</label>
-                        <textarea name="buyer_note"></textarea>
+                        <textarea <?php if(isset($buyer['name'])) echo 'readonly'?> name="buyer_note"></textarea>
                     </div>
                 </div>
             </div>
@@ -133,7 +142,7 @@ if (isset($_GET['id'])) {
             </div>
             <div id='buttons' class="row justify-content-start">
                 <div class="col-4">
-                    <button type="submit" name="update">تعديل</button>
+                    <button <?php if(isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">تعديل</button>
                     <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
