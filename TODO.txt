@@ -1,0 +1,5 @@
+
+Problems{
+    write account doesn't exist in com_bill,catch_bond,payment_bond
+    write items doesn't exist in com_bill
+}

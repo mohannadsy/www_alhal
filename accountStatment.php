@@ -17,12 +17,16 @@ include('include/nav.php');
     <form action="" method="post">
         <div class="container">
             <div>
-                <label>العميل</label>
-                <input class="account_auto" type="text" name="account" id="" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>">
+                <label>الحساب</label>
+                <input class="account_auto" type="text" name="account" id="" 
+                value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>"
+                onclick="this.value=''">
+                
                 <label for="">العملة</label>
                 <select name="" id="">
                     <option value="">ليرة سورية</option>
                 </select>
+                
                 <label for="">من تاريخ</label>
                 <input type="date" name="from_date" id="" min="" max="" 
                         value="<?php if(isset($_POST['from_date'])) echo $_POST['from_date']; else echo date('Y-m-d') ?>">
@@ -37,7 +41,7 @@ include('include/nav.php');
             </div>
             <?php
                 if (isset($_POST['view'])) {
-                    echo "<h2 class='text-center'> كشف حساب " . substr($_POST['account'], 7) . "</h2>";
+                    echo "<h2 class='text-center'> كشف حساب : " . $_POST['account'] . "</h2>";
                     
                 }
                 ?>
@@ -79,7 +83,7 @@ include('include/nav.php');
                         <?php
 
                         if (isset($_POST['view'])) {
-                            $main_account_code = substr($_POST['account'], 0, 5);
+                            $main_account_code = get_code_from_input($_POST['account']);
                             $select_main_accounta_id_using_code_query = "select id,code from accounts where code = '$main_account_code'";
                             $select_main_accounta_id_using_code_exec = mysqli_query($con, $select_main_accounta_id_using_code_query);
                             $main_account_id = 0;
@@ -87,7 +91,7 @@ include('include/nav.php');
                             $main_account_id = mysqli_fetch_row($select_main_accounta_id_using_code_exec)[0];
                             
                             $select_account_statements_query = select('account_statements').where('main_account_id' , $main_account_id)."
-                             and date between '" . $_POST['from_date'] ."' and '". $_POST['to_date'] ."'";
+                            or other_account_id = '$main_account_id' and date between '" . $_POST['from_date'] ."' and '". $_POST['to_date'] ."'";
                             $select_account_statements_exec = mysqli_query($con , $select_account_statements_query);
                             $current_currency = 0;
                             if(mysqli_num_rows($select_account_statements_exec) > 0)

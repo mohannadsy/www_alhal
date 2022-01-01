@@ -18,7 +18,7 @@ include('include/nav.php');
             <label for="date">تاريخ الفاتورة</label>
             <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
             <label for="">رقم الفاتورة</label>
-            <input type="text" name="code" id="" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'child') ?>" readonly>
+            <input type="text" name="code" id="" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'parent') ?>" readonly>
             <div class="row" style="height:200px;">
                 <div id='seller' class="col-6">
                     <div>
@@ -151,7 +151,7 @@ if (isset($_POST['save'])) {
 
     // make bill insertion
     $insert_bill_query = insert('bills', get_array_from_array($_POST, [
-        'code', 'seller_id', 'seller_type_pay', 'seller_note',
+        'code','date', 'seller_id', 'seller_type_pay', 'seller_note',
         'buyer_id', 'buyer_type_pay', 'buyer_note', 'total_price', 'real_price', 'com_ratio', 'com_value'
     ]));
     $insert_bill_exec = mysqli_query($con, $insert_bill_query);
@@ -188,7 +188,7 @@ if (isset($_POST['save'])) {
         $_POST['other_account_id'] = '2';
         $_POST['daen'] = $_POST['real_price'];
         $_POST['bill_id'] = $current_bill_id;
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
         ]));
@@ -205,7 +205,7 @@ if (isset($_POST['save'])) {
         $_POST['main_account_id'] = '2';
         $_POST['other_account_id'] = '1';
         $_POST['maden'] = $_POST['real_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
         ]));
@@ -224,7 +224,7 @@ if (isset($_POST['save'])) {
         $_POST['main_account_id'] = $seller_id;
         $_POST['other_account_id'] = '2';
         $_POST['daen'] = $_POST['real_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
         ]));
@@ -241,7 +241,7 @@ if (isset($_POST['save'])) {
         $_POST['main_account_id'] = '2';
         $_POST['other_account_id'] = $seller_id;
         $_POST['maden'] = $_POST['real_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
         ]));
@@ -268,7 +268,7 @@ if (isset($_POST['save'])) {
             $_POST['main_account_id'] = '1';
             $_POST['other_account_id'] = '3';
             $_POST['maden'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
             ]));
@@ -285,7 +285,7 @@ if (isset($_POST['save'])) {
             $_POST['main_account_id'] = '3';
             $_POST['other_account_id'] = '1';
             $_POST['daen'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));
@@ -312,7 +312,7 @@ if (isset($_POST['save'])) {
             $_POST['main_account_id'] = $buyer_id;
             $_POST['other_account_id'] = '3';
             $_POST['maden'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
             ]));
@@ -329,7 +329,7 @@ if (isset($_POST['save'])) {
             $_POST['main_account_id'] = '3';
             $_POST['other_account_id'] = $buyer_id;
             $_POST['daen'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));

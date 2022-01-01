@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <button hidden type="button" id="add_col">adding column</button>
-            <button type="button" id="add_row">adding Row</button>
+            <button hidden type="button" id="add_row">adding Row</button>
             <div class="row justify-content-center">
                 <table contenteditable='false' class="col-10 table table-hover table-bordered  text-center" name="table" id="tbl">
                     <thead class="text-center">
@@ -96,7 +96,8 @@ if (isset($_GET['id'])) {
                     <tbody>
 
                         <?php
-                        $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'";
+                        $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'
+                        and items.id = bill_item.item_id";
                         $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
                         $number = 1;
                         while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
@@ -176,7 +177,7 @@ if (isset($_POST['update'])) {
         $_POST['main_account_id'] = '1';
         $_POST['other_account_id'] = '3';
         $_POST['maden'] = $_POST['total_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
         ]));
@@ -193,7 +194,7 @@ if (isset($_POST['update'])) {
         $_POST['main_account_id'] = '3';
         $_POST['other_account_id'] = '1';
         $_POST['daen'] = $_POST['total_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
         ]));
@@ -220,7 +221,7 @@ if (isset($_POST['update'])) {
         $_POST['main_account_id'] = $buyer_id;
         $_POST['other_account_id'] = '3';
         $_POST['maden'] = $_POST['total_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
         ]));
@@ -237,7 +238,7 @@ if (isset($_POST['update'])) {
         $_POST['main_account_id'] = '3';
         $_POST['other_account_id'] = $buyer_id;
         $_POST['daen'] = $_POST['total_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'child');
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
         ]));

@@ -5,7 +5,7 @@ define("NUMBER_OF_ZEROS_CHILD", get_value_from_config('number_of_zeros_code_chil
 define("NUMBER_OF_ZEROS_PARENT", get_value_from_config('number_of_zeros_code_parent'));
 function generate_code($prefix, $code, $type)
 {
-    $code_trim = substr($code, strlen($prefix . "_") - 1) + 1;
+    $code_trim = substr($code, strlen($prefix . "-") - 1) + 1;
     $code_result = "";
     if ($type == "child")
         for ($i = NUMBER_OF_ZEROS_CHILD; $i > strlen($code_trim); $i--) {

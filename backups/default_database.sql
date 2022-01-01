@@ -1,5 +1,23 @@
 
 
+CREATE TABLE `account_statements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `maden` varchar(250) NOT NULL DEFAULT '0',
+  `daen` varchar(250) NOT NULL DEFAULT '0',
+  `main_account_id` int(11) NOT NULL,
+  `other_account_id` int(11) NOT NULL,
+  `code_number` varchar(250) DEFAULT NULL,
+  `code_type` varchar(250) NOT NULL,
+  `note` varchar(250) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(250) NOT NULL,
@@ -18,9 +36,9 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts VALUES("1","00001","الصندوق","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-INSERT INTO accounts VALUES("2","00002","المشتريات","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-INSERT INTO accounts VALUES("3","00003","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");
+INSERT INTO accounts VALUES("1","1","الصندوق","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
+INSERT INTO accounts VALUES("2","2","المشتريات","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
+INSERT INTO accounts VALUES("3","3","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");
 
 
 
@@ -40,6 +58,7 @@ CREATE TABLE `bill_item` (
 
 CREATE TABLE `bills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(250) DEFAULT NULL,
   `buyer_id` int(10) unsigned NOT NULL,
   `seller_id` int(10) unsigned NOT NULL,
   `buyer_type_pay` varchar(250) DEFAULT NULL,
@@ -52,7 +71,7 @@ CREATE TABLE `bills` (
   `com_value` varchar(250) DEFAULT NULL,
   `real_price` varchar(250) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -122,22 +141,41 @@ CREATE TABLE `fund_movements` (
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) NOT NULL,
-  `type` varchar(250) NOT NULL,
-  `unit` varchar(250) NOT NULL,
-  `unit_2` varchar(250) NOT NULL,
-  `unit_operator` varchar(250) NOT NULL,
-  `unit_3` varchar(250) NOT NULL,
-  `unit2_operator` varchar(250) NOT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `unit` varchar(250) DEFAULT NULL,
+  `unit_2` varchar(250) DEFAULT NULL,
+  `unit_operator` varchar(250) DEFAULT NULL,
+  `unit_3` varchar(250) DEFAULT NULL,
+  `unit2_operator` varchar(250) DEFAULT NULL,
+  `note` varchar(250) DEFAULT NULL,
+  `code` varchar(250) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `price_wholesale` varchar(250) DEFAULT NULL,
+  `price_retail` varchar(250) DEFAULT NULL,
+  `price_customer` varchar(250) DEFAULT NULL,
+  `price_distribution` varchar(250) DEFAULT NULL,
+  `cost` varchar(250) DEFAULT NULL,
+  `price_policy` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `mid_bonds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(250) DEFAULT NULL,
+  `main_account_id` int(11) NOT NULL,
+  `other_account_id` int(11) NOT NULL,
+  `bill_id` int(11) DEFAULT NULL,
+  `daen` varchar(250) NOT NULL DEFAULT '0',
+  `maden` varchar(250) NOT NULL DEFAULT '0',
+  `date` date DEFAULT NULL,
+  `currency` varchar(250) DEFAULT NULL,
   `note` varchar(250) NOT NULL,
-  `code` varchar(250) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `price_wholesale` varchar(250) NOT NULL,
-  `price_retail` varchar(250) NOT NULL,
-  `price_customer` varchar(250) NOT NULL,
-  `price_distribution` varchar(250) NOT NULL,
-  `cost` varchar(250) NOT NULL,
-  `price_policy` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)

@@ -114,11 +114,12 @@ if (isset($_POST['account_id'])) {
     if ($_POST['account_id'] == '0')
         echo get_auto_code($con, "accounts", "code", "", "parent", 'account_id', '0');
     else {
-        $select_code_using_account_id_query = "select code,account_id from accounts where account_id = '" . $_POST['account_id'] . "'";
+        $select_code_using_account_id_query = "select code,account_id from accounts where id = '" . $_POST['account_id'] . "'";
         $prefix = '';
-        if (mysqli_query($con, $select_code_using_account_id_query))
-            $prefix = $_POST['account_id'];
-        echo get_auto_code($con, 'accounts', 'code', $prefix, 'child',  $_POST['account_id']);
+        if (mysqli_query($con, $select_code_using_account_id_query)){
+            $prefix = mysqli_fetch_array(mysqli_query($con, $select_code_using_account_id_query))['code'];
+        }
+        echo get_auto_code($con, 'accounts', 'code', $prefix, 'child', 'account_id', $_POST['account_id']);
     }
 }
 /**
