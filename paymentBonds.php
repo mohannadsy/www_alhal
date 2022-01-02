@@ -11,7 +11,7 @@ include('include/nav.php');
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/paymentBonds.css" media="print">
 </head>
-<body>
+<body class="receipt">
   <form action="" method="post">
     <div class="container">
         <h2 id="payment_lable">سند دفع</h2>
@@ -21,7 +21,7 @@ include('include/nav.php');
                 <input type="text"  name ="" placeholder="الصندوق الأساسي" disabled>
                 <input type="hidden" name="main_account_id" value="1">
             </div>
-            <div class="col-6">
+            <div class="col-6" id ="receipt_num">
                 <label name=" "> رقم الإيصال </label>
                 <input type="text"  name ="code" value= "<?= get_auto_code($con , 'payment_bonds' , "code" ,"" , "parent") ?>" readonly>       
             </div>

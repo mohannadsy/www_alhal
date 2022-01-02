@@ -1,9 +1,38 @@
-@page {}
+@page {
+    size: 80mm 100mm;
+}
+
+body.receipt.sheet {
+    width: 58mm;
+    height: 100mm;
+}
+
+@media print {
+    body.receipt {
+        width: 80mm
+    }
+}
 
 * {
-    font-size: 15px;
+    font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    margin: none;
+    padding: none;
+}
+
+#main_box {
+    column-width: 50px;
+    width: 10px;
+}
+
+label,
+input {
+    width: 60px;
+}
+
+#receipt_num {
+    column-width: 50px;
 }
 
 #payment_lable {
@@ -12,6 +41,7 @@
 
 .container {
     border-style: solid;
-    padding: 20px;
-    width: 300px;
+    margin: none;
+    padding: none;
+    width: 80mm;
 }
