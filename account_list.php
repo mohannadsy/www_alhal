@@ -44,14 +44,12 @@ include('include/nav.php');
             <div class="row py-4">
 
                     <div class="col-3">
-                    <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                        <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                     </div>
                     <div class="col-2" >
-                        <button id="search" type="button" class=" btn btn-primary">بحث</button>
-
-
-
-                        </div>
+                      <button id="search" type="button" class=" btn btn-primary">بحث</button>
+                    </div>
+                    
                 <div class="col-6" id="new_account_col">
                     <a href="account_card.php"><button type="button" class=" btn btn-primary" name="new_account">
                         حساب جديد

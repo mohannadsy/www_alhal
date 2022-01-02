@@ -11,8 +11,8 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style> 
-    .body{
-         background-color: LightGray;
+    body{
+        background-color: LightGray;
         text-align:right;
     }
     .container{
@@ -20,27 +20,35 @@ include('include/nav.php');
         /* margin-right: 20%; */
         border-style:groove;
         background-color:#5F9EA0;
-        /* width: 60%; */
+       /* width: 60%; */
 
+    }
+    #categry_col{
+        text-align: left;
+    }
+    #close_col{
+        text-align: left;
+    }
+    #thead_col{
+        text-align: center; 
     }
     </style>
 </head>
 <body>
     <form action="" method="POST">
-        <div class="container">
+        <div class="container my-5">
             <div class="row py-4">
 
-                <div class="col-4">
-                        <input id="search_text" type="search" class=""  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                        <button id="search" type="button" class="btn btn-primary">بحث</button>
+            <div class="col-3">
+                        <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                    </div>
+                    
+                      <button id="search" type="button" class=" btn btn-primary">بحث</button>
 
-                </div>
-                <div class="col-5">
+                <div class="col-8 "id="categry_col" >
                     <a href="category_card.php"><button type="button" class=" btn btn-primary" name="new_category">
                         صنف جديد
                     </button></a>
-                </div>
-                <div class="col-1">
                     <a href="item_card.php"><button type="button" class=" btn btn-primary" name="item_card">
                          بطاقة مادة
                     </button></a>
@@ -48,8 +56,8 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-center" >
                 <div class="col-10">
-                    <table class=" text-center table table-bordered table-hover">
-                        <thead class="text-center bg-primary ">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-primary " id="thead_col">
                                 <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">المادة</th>
@@ -65,7 +73,7 @@ include('include/nav.php');
 
             </div>
             <div class="row py-3">
-                <div class="col-11 offset-8 ">
+                <div class="col-11" id="close_col">
                     <button type="button" class="btn btn-primary" name="close">
                         إغلاق
                 
