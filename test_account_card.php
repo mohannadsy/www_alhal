@@ -13,7 +13,7 @@ include('include/nav.php');
     <style> 
     body{
     color: var(--bs-body-color);
-    background-color: LightGray;
+    background-color:LightGray;
     text-align: right;
     line-height: ;
     }

@@ -10,18 +10,49 @@ include('include/nav.php');
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style> 
+    body{
+        background-color:lightgray;
+        text-align:right;
+    }
+    .container{
+        /* margin-top: 8%; */
+        /* margin-right: 20%; */
+        border-style:groove;
+        background-color:#5F9EA0;
+        /* width: 60%; */
+
+    }
+    #search{
+        text-align: right;
+        justify-content:right;
+    }
+    #new_account_col{
+        text-align: left;
+    }
+    #close-colum{
+        text-align: left;
+
+    }
+
+
+    </style>
 </head>
 <body>
     <form action="" method="POST">
-        <div class="container-fluid">
+        <div class="container my-5">
             <div class="row py-4">
 
-                <div class="col-4">
-                        <input id="search_text" type="search" class=""  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                        <button id="search" type="button" class="btn btn-primary">بحث</button>
+                    <div class="col-3">
+                    <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                    </div>
+                    <div class="col-2" >
+                        <button id="search" type="button" class=" btn btn-primary">بحث</button>
 
-                </div>
-                <div class="col-6">
+
+
+                        </div>
+                <div class="col-6" id="new_account_col">
                     <a href="account_card.php"><button type="button" class=" btn btn-primary" name="new_account">
                         حساب جديد
                     </button></a>
@@ -47,7 +78,7 @@ include('include/nav.php');
 
             </div>
             <div class="row py-3">
-                <div class="col-11 offset-8 ">
+                <div class="col-11" id="close-colum">
                     <button type="button" class="btn btn-primary" name="close">
                         إغلاق
                 

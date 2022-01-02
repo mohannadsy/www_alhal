@@ -10,10 +10,24 @@ include('include/nav.php');
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style> 
+    .body{
+         background-color: LightGray;
+        text-align:right;
+    }
+    .container{
+        /* margin-top: 8%; */
+        /* margin-right: 20%; */
+        border-style:groove;
+        background-color:#5F9EA0;
+        /* width: 60%; */
+
+    }
+    </style>
 </head>
 <body>
     <form action="" method="POST">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row py-4">
 
                 <div class="col-4">
