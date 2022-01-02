@@ -37,8 +37,8 @@ include('include/nav.php');
                     <h2> سند دفع</h2>
                 </div>
             
-                <div class="col-8" >
-                    <div class="row justify-content-center" style="padding-top: 10px;">
+                <div class="col-6" >
+                    <div class="row justify-content-end" style="padding-top: 10px;">
                         <label for="code" class="col-form-label" id="res_number" style=""> رقم الإيصال</label>
                         <div class="col-md-3">
                             <input id="code" type="text" id="" class="form-control" name="code" readonly>
@@ -56,19 +56,15 @@ include('include/nav.php');
                                     <input  type="text" id="" placeholder="الصندوق الأساسي" class="form-control" name="" readonly>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 col-form-label ">التاريخ  </label>
+                                <div class="col-md-6">
+                                <input type="date" class="form-control" name="" value="2022-01-22">
+                                </div>
+                            </div>
 
-                            <div class="form-group row">
-                                <label for="" class="col-md-4 col-form-label ">الحساب المقابل  </label>
-                                <div class="col-md-6">
-                                    <input  type="text" class="form-control" name="" required autofocus>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-md-4 col-form-label"> دائن </label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" name="">
-                                </div>
-                            </div>
+                            
+                            
                          </div>
                         <div id="" class="col-sm-10 col-md-6">
                             <div class="form-group row">
@@ -79,12 +75,7 @@ include('include/nav.php');
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="" class="col-md-4 col-form-label ">التاريخ  </label>
-                                <div class="col-md-6">
-                                <input type="date" class="form-control" name="" value="2022-01-22">
-                                </div>
-                            </div>
+                            
 
                             <div class="form-group row">
                                 <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
@@ -100,9 +91,9 @@ include('include/nav.php');
                                     <thead class="text-center bg-primary ">
                                             <tr>
                                             <th scope="col">رقم</th>
-                                            <th scope="col">دائن</th>
+                                            <th scope="col">مدين</th>
                                             <th scope="col">الحساب </th>
-                                            <th scope="col">البيان</th>
+                                            <th scope="col">ملاحظات</th>
                                             </tr>
                                     </thead>
                                     <tbody id="show">
