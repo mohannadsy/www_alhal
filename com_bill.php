@@ -106,13 +106,13 @@ include('include/nav.php');
                         </optgroup>
                     </select>
                     <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
-                    <div class="btn-group">
-                        <button type="button" class="btn dropdown-toggle" date-toggle="dropdown" aria-hasepopup="true" aria-expanded="false">
-                            طباعة
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="">فاتورة البائع</a>
-                            <a class="dropdown-item" href="">فاتورة المشتري</a>
+                    <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        طباعة
+                    </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
+                            <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
+                            <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
                         </div>
                     </div>
                 </div>
