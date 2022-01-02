@@ -12,42 +12,25 @@ include('include/nav.php');
 <body>
     <div class="container">
     <div class="row justify-content-start">
-        <h6>    حركة مادة  </h6>
+        <h6>    حركة وفقاً ل   </h6>
     </div>
 
     <form action="" method="post"> 
             <div class="row justify-content-start">
-                <div class="col-6">
+                <div class="col-3">
                     <label for="buyer">المادة</label>
                     <input type="text" name="buyer">
                     <label for="seller">الصنف</label>
                     <input type="text" name="seller">
-                </div>
-            </div>
-            <div class=" row justify-content-start" >
-                <div class="col-6">
-                    <label for="item">الوحدة</label>
-                    <input type="text" name="item">
-                    <label for="unit">العملة</label>
-                    <input type="text" name="unit"> 
-                   
-                </div>
-            </div>
-            
-            <div class="row justify-content-start">
-                <div class="col-6">
+                    <label for="item">العميل</label>
+                    <input type="text" name="client">
                     <label for="from_date">من تاريخ</label>
                     <input type="date" name="from_date"  value=" ">
                     <label for="to_date">إلى تاريخ</label>
                     <input type="date" name="to_date" value=" ">
                 </div>
             </div>
-             
-            <div class="row justify-content-start">
-                <div class="col-2">
-                    <label for="text">ملاحظات </label>
-                </div>
-            </div>
+           
             <div class="row justify-content-center">
                 <label for="">نوع التقرير</label>
                 <label for=""> تفصيلي </label>
@@ -56,7 +39,7 @@ include('include/nav.php');
                 <input type="radio" name="report_type" id="" checked>
             </div>
             <div class="row justify-content-end">
-                <button type="submit" name="view">معاينة</button>
+                <button type="submit" name="view">إظهار</button>
                 <button type="submit" name="print">إغلاق</button>
             </div>
     

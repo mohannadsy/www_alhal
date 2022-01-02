@@ -13,29 +13,46 @@ include('include/nav.php');
 <body>
     <div class="container">
         <div class="row justify-content-start">
-            <h6>تقرير عن حركة مادة</h6>
+            <h6>  تقرير عن حركة مادة وفقاً </h6>
         </div>
         <div>
             <table class="table">
                 <thead>
+                    <tr >
+                                <th  >  </th>
+                                <th  >  </th>
+                                <th  >  </th>
+                                <th  >  </th>
+                                <th  > الإدخالات </th>
+                                <th  >  </th>
+                                <th  >  </th>
+                                <th >الإخراجات</th>
+                                <th  >  </th>
+                                <th  >  </th>
+                                <th >الرصيد</th>
+                    </tr>
                     <tr>
-                        <th>رقم الفاتورة </th>
-                        <th>تاريخ الفاتورة </th>
-                        <th>اسم المادة  </th>
-                        <th> الصنف </th>
-                        <th>الوحدة  </th>
-                        <th>العملة  </th>
-                        <th> المشتري </th>
-                        <th>البائع </th>
-                        <th>قيمة الكمسيون </th>
+                            <th> التاريخ </th>
+                            <th> الفاتورة </th>
+                            <th>اسم المادة  </th>
+                            <th> الكمية </th>
+                            <th  >  </th>
+                            <th> السعر   </th>
+                            <th> الكمية   </th>
+                            <th  >  </th>
+                            <th> السعر </th>
+                            <th> الكمية  </th>
+                            <th  >  </th>
+                            <th> السعر   </th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-
         <div class="row justify-content-center">
             <button type="submit" name="print">إغلاق</button>
+            <button type="submit" name="print">طباعة</button>
+
         </div>
     </div>
 </body>

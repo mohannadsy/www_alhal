@@ -13,7 +13,7 @@ include('include/nav.php');
 <body>
     <div class="container">
         <div class="row justify-content-start">
-            <h6>تقرير عن حركة كمسيون</h6>
+            <h6>   تقرير عن حركة كمسيون وفقاً ل  </h6>
         </div>
         <div>
             <table class="table">
@@ -36,6 +36,8 @@ include('include/nav.php');
 
         <div class="row justify-content-center">
             <button type="submit" name="print">إغلاق</button>
+            <button type="submit" name="print">طباعة</button>
+
         </div>
     </div>
 </body>
