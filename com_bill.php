@@ -99,13 +99,22 @@ include('include/nav.php');
                     <button type="submit" name="save">حفظ</button>
                     <button type="submit" name="modify">تعديل</button>
                     <button type="submit" name="delete">حذف</button>
-                    <select name="print_option" id="">
+                    <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
                             <option value="">مشتري</option>
                         </optgroup>
                     </select>
-                    <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button>
+                    <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" date-toggle="dropdown" aria-hasepopup="true" aria-expanded="false">
+                            طباعة
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="">فاتورة البائع</a>
+                            <a class="dropdown-item" href="">فاتورة المشتري</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
