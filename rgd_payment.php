@@ -80,7 +80,7 @@ include('include/nav.php');
                     </div>
                     <div class="row justify-content-center">
                             <div class="col-10">
-                                <table class=" text-center table table-bordered table-hover">
+                                <table id="tbl" class=" text-center table table-bordered table-hover">
                                     <thead class="text-center bg-primary ">
                                             <tr>
                                             <th scope="col">رقم</th>
@@ -117,9 +117,22 @@ include('include/nav.php');
                     <button  type="submit" class=" btn btn-primary" name="add">
                         إضافة
                     </button>
-                    <button  type="button" class=" btn btn-primary" name="print" onclick="printPaymetBonds(['nav','buttons'])">
+                    <button  type="button" class=" btn btn-primary" name="print" onclick="var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+                        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+                        
+                        mywindow.document.write('</head><body >');
+                        mywindow.document.write('<h1>' + document.title  + '</h1>');
+                        mywindow.document.write(document.getElementById('tbl').innerHTML);
+                        mywindow.document.write('<style>table{margin:1000px;}</style>');
+                        mywindow.document.write('</body></html>');
+                        mywindow.document.close(); // necessary for IE >= 10
+                        mywindow.focus(); // necessary for IE >= 10*/
+                        mywindow.print();
+                        mywindow.close();
+                        return true;">
                         طباعة
-                    </button>
+                    </button> 
                     <button type="button" class="btn btn-primary" name="close">
                         إغلاق
                     </button>
