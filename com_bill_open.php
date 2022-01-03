@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div>
                         <label>ملاحظات</label>
-                        <textarea <?php if(isset($buyer['name'])) echo 'readonly'?> name="buyer_note"></textarea>
+                        <textarea <?php if(isset($buyer['name'])) echo 'readonly'?> name="buyer_note"><?= $bill['buyer_note']?></textarea>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@ if (isset($_GET['id'])) {
                             echo "<td>" . $row['real_weight'] . "</td>";
                             echo "<td>" . $row['price'] . "</td>";
                             echo "<td>" . $row['total_item_price'] . "</td>";
-                            echo "<td>" . $row['note'] . "</td>";
+                            echo "<td>" . $row['bill_item_note'] . "</td>";
                             echo "</tr>";
                         }
                         ?>

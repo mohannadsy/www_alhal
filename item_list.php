@@ -66,6 +66,22 @@ include('include/nav.php');
                                 </tr>
                         </thead>
                         <tbody id="show">
+                            <?php
+                                $select_all_items_query = select('items');
+                                $select_all_items_exec = mysqli_query($con , $select_all_items_query);
+                                $count = 1;
+                                while($item = mysqli_fetch_array($select_all_items_exec)){
+                                    echo "<tr>";
+                                    echo "<td>".$count++."</td>";
+                                    echo "<td>".$item['name']."</td>";
+                                    echo "<td>".$item['code']."</td>";
+                                    $select_category_query = select('categories').where('id' , $item['category_id'] );
+                                    $select_category_exec = mysqli_query($con, $select_category_query);
+                                    $category = mysqli_fetch_array($select_category_exec);
+                                    echo "<td>".$category['name']."</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
                         </tbody>
                     </table>
 

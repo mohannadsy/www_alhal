@@ -184,7 +184,9 @@ if (isset($_POST['save'])) {
                 'total_weight' => $_POST['total_weights'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
-                'total_item_price' => $_POST['total_item_prices'][$key]
+                'total_item_price' => $_POST['total_item_prices'][$key],
+                'bill_item_note' => $_POST['note'][$key]
+                
             ]);
             $insert_bill_item_exec = mysqli_query($con, $insert_bill_item_query);
         }
@@ -226,6 +228,16 @@ if (isset($_POST['save'])) {
             'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+       
+         // كشف حساب البائع
+         $_POST['code_number'] = $current_bill_id;
+         $_POST['code_type'] = 'bills';
+         $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
+         $_POST['main_account_id'] = $seller_id;
+         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+             'main_account_id', 'other_account_id', 'daen','maden', 'note', 'date', 'code_number', 'code_type', 'note'
+         ]));
+         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
 
     if ($_POST['seller_type_pay'] == 'agel') {
@@ -309,6 +321,7 @@ if (isset($_POST['save'])) {
 
             // كشف حساب مشتري
             $_POST['code_number'] = $current_bill_code;
+            $_POST['main_account_id'] = $buyer_id;
             $_POST['code_type'] = 'bills';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'

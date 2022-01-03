@@ -18,8 +18,8 @@ function count_total_price() {
 
 
 
-var item_bill_name = ['numbers[]', 'items[]', 'units[]', 'total_weights[]', 'real_weights[]', 'prices[]', 'total_item_prices[]', 'notes[]'];
-var item_bill_id = ['numbers', 'items', 'units', 'total_weights', 'real_weights', 'prices', 'total_item_prices', 'notes'];
+var item_bill_name = ['numbers[]', 'items[]', 'units[]', 'total_weights[]', 'real_weights[]', 'prices[]', 'total_item_prices[]', 'note[]'];
+var item_bill_id = ['numbers', 'items', 'units', 'total_weights', 'real_weights', 'prices', 'total_item_prices', 'note'];
 
 function createCell(cell, text, style, id, name, row_number) {
     var div = document.createElement('input'), // create DIV element
@@ -50,7 +50,7 @@ function createCell(cell, text, style, id, name, row_number) {
 
     if (text == '3') { // action to real weight => 2% of total weight
         div.addEventListener('blur', function () {
-            document.getElementById('real_weights_' + row_number).value = div.value * 0.98;
+            document.getElementById('real_weights_' + row_number).value = Math.round(div.value * 0.98);
             count_total_price();
         });
     }

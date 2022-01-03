@@ -91,7 +91,7 @@ include('include/nav.php');
                             $main_account_id = mysqli_fetch_row($select_main_accounta_id_using_code_exec)[0];
                             
                             $select_account_statements_query = select('account_statements').where('main_account_id' , $main_account_id)."
-                            or other_account_id = '$main_account_id' and date between '" . $_POST['from_date'] ."' and '". $_POST['to_date'] ."'";
+                             and date between '" . $_POST['from_date'] ."' and '". $_POST['to_date'] ."'";
                             $select_account_statements_exec = mysqli_query($con , $select_account_statements_query);
                             $current_currency = 0;
                             if(mysqli_num_rows($select_account_statements_exec) > 0)
