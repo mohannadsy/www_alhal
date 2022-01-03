@@ -15,7 +15,6 @@ include('include/nav.php');
     color: var(--bs-body-color);
     background-color:LightGray;
     text-align: right;
-    line-height: ;
     }
     .container{
         margin-top: 8%;
@@ -70,7 +69,7 @@ include('include/nav.php');
                         <div class="row ">
                             <div class="col-10">
                                 <label for="code" class="col-form-label">رمز الحساب</label>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <input type="number" name="code" class="form-control" readonly value="<?php
                                                                         if (isset($account['code'])) echo $account['code'];
                                                                         else
@@ -172,17 +171,16 @@ include('include/nav.php');
             <div class="row">
                 <div class="col-md-12" id="button_col">
 
-                <button type="submit" class="btn btn-primary " name="add">إضافة</button>
+                    <button type="submit" class="btn btn-primary " name="add">إضافة</button>
 
-                <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+                    <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
-                <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
+                    <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
 
-                <button type="button" class="btn btn-primary" name="close">إغلاق</button>
+                    <button type="button" class="btn btn-primary" name="close">إغلاق</button>
                 </div>
-
-
             </div>
+
         </div>
     </form>
 </body>
