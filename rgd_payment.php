@@ -33,14 +33,14 @@ include('include/nav.php');
     <form action="" method="">
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-4" id = "receipt_number1">
                     <h2> سند دفع</h2>
                 </div>
-                <div class="col-6" >
+                <div class="col-6" id = "receipt_number">
                     <div class="row justify-content-end" style="padding-top: 10px;">
                         <label name=" "> رقم الإيصال</label>
                         <div class="col-md-3">
-                            <input id="code" type="text" id="" class="form-control" name="code" readonly>
+                            <input type="text" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
@@ -48,23 +48,24 @@ include('include/nav.php');
                     <div class="row justify-content-center py-3" style="background-color: #5F9EA0;">
                         <div id="" class="col-sm-10 col-md-6">
                             <div class="form-group row">
-                                <label for="code" class="col-md-4 col-form-label">  الحساب</label>
+                                <label class="col-md-4 col-form-label">  الحساب</label>
                                 <div class="col-md-6">
-                                    <input  type="text" id="" placeholder="الصندوق الأساسي" class="form-control" name="" readonly>
+                                <input type="text"  name ="" placeholder="الصندوق الأساسي" disabled>
+                                <input type="hidden" name="main_account_id" value="1">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 col-form-label ">التاريخ  </label>
+                                <label class="col-md-4 col-form-label ">التاريخ  </label>
                                 <div class="col-md-6">
-                                <input type="date" class="form-control" name="" value="2022-01-22">
+                                <input type="date" class="form-control" name="date" id="date" min="" max="" value="2022-01-22">
                                 </div>
                             </div>
                          </div>
                         <div id="" class="col-sm-10 col-md-6">
                             <div class="form-group row">
-                                <label for="category_id" class="col-md-4 col-form-label text-md-right">العملة  </label>
+                                <label class="col-md-4 col-form-label text-md-right">العملة  </label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="category_id" id="category_id">
+                                    <select class="form-control">
                                         <option value="syrian-bounds">ليرة سورية</option>
                                     </select>
                                 </div>
@@ -72,7 +73,7 @@ include('include/nav.php');
                             <div class="form-group row">
                                 <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
                                 <div class="col-md-6">
-                                    <textarea type="text" id="" class="form-control" name="note"></textarea>
+                                    <textarea rows="2" type="text" id="" class="form-control" name="note"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -108,11 +109,11 @@ include('include/nav.php');
                     <div class="row justify-content-end px-5" >
                     <label for="code" class="col-form-label" id="res_number" style="">  المجموع</label>
                         <div class="col-md-2">
-                            <input id="code" type="text" id="" class="form-control" name="" >
+                            <input id="code" type="text" id="resault" class="form-control" name="" >
                         </div>
                     </div>
             <div class="row justify-content-end py-3" >   
-                <div class="col-md-4">
+                <div class="col-md-4" id='buttons'>
                     <button  type="submit" class=" btn btn-primary" name="add">
                         إضافة
                     </button>
@@ -126,6 +127,7 @@ include('include/nav.php');
             </div>
         </div>
     </form>
+<script src = "js/scripts/paymentBonds.js"></script>
 </body>
 </html>
 
