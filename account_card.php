@@ -44,7 +44,7 @@ include('include/nav.php');
                                                                         else
                                                                             echo get_auto_code($con, "accounts", "code", "" , "parent" ,'account_id', '0')  ?>">
 
-                        <br><br>
+                        <br><br><br>
 
                         <label for="name">الحساب</label>
                         <input type="text" name="name" value="<?php if (isset($account['name'])) echo $account['name'] ?>">

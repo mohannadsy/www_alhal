@@ -8,6 +8,16 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            text-align: right;
+            background-color:LightGray;
+        }
+        .container{
+            background-color: #5F9EA0;
+            border-style:groove;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,21 +26,7 @@ include('include/nav.php');
     </div>
 
     <form action="" method="post"> 
-            <div class="row justify-content-start">
-                <div class="col-3">
-                    <label for="buyer">المادة</label>
-                    <input type="text" name="buyer">
-                    <label for="seller">الصنف</label>
-                    <input type="text" name="seller">
-                    <label for="item">العميل</label>
-                    <input type="text" name="client">
-                    <label for="from_date">من تاريخ</label>
-                    <input type="date" name="from_date"  value=" ">
-                    <label for="to_date">إلى تاريخ</label>
-                    <input type="date" name="to_date" value=" ">
-                </div>
-            </div>
-           
+            
             <div class="row justify-content-center">
                 <label for="">نوع التقرير</label>
                 <label for=""> تفصيلي </label>

@@ -33,58 +33,65 @@ include('include/nav.php');
     <form action="" method="">
         <div class="container">
             <div class="row">
-                <div class="col-4" id = "receipt_number1">
-                    <h2> سند دفع</h2>
+                <div class="col-4">
+                    <h2> سند قبض</h2>
                 </div>
-                <div class="col-6" id = "receipt_number">
+            
+                <div class="col-6" >
                     <div class="row justify-content-end" style="padding-top: 10px;">
-                        <label name=" "> رقم الإيصال</label>
+                        <label for="code" class="col-form-label" id="res_number" style=""> رقم الإيصال</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="code" readonly>
+                            <input id="code" type="text" id="" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
             </div>
+            
                     <div class="row justify-content-center py-3" style="background-color: #5F9EA0;">
                         <div id="" class="col-sm-10 col-md-6">
+
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">  الحساب</label>
+                                <label for="code" class="col-md-4 col-form-label">  الحساب</label>
                                 <div class="col-md-6">
-                                <input type="text"  name ="" placeholder="الصندوق الأساسي" disabled>
-                                <input type="hidden" name="main_account_id" value="1">
+                                    <input  type="text" id="" placeholder="الصندوق الأساسي" class="form-control" name="" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label ">التاريخ  </label>
+                                <label for="" class="col-md-4 col-form-label ">التاريخ  </label>
                                 <div class="col-md-6">
-                                <input type="date" class="form-control" name="date" id="date" min="" max="" value="2022-01-22">
+                                <input type="date" class="form-control" name="" value="2022-01-22">
                                 </div>
                             </div>
+
+                            
+                            
                          </div>
                         <div id="" class="col-sm-10 col-md-6">
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right">العملة  </label>
+                                <label for="category_id" class="col-md-4 col-form-label text-md-right">العملة  </label>
                                 <div class="col-md-6">
-                                    <select class="form-control">
+                                    <select class="form-control" name="category_id" id="category_id">
                                         <option value="syrian-bounds">ليرة سورية</option>
                                     </select>
                                 </div>
                             </div>
+                            
+
                             <div class="form-group row">
                                 <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
                                 <div class="col-md-6">
-                                    <textarea rows="2" type="text" id="" class="form-control" name="note"></textarea>
+                                    <textarea type="text" id="" class="form-control" name="note"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                             <div class="col-10">
-                                <table id="tbl" class=" text-center table table-bordered table-hover">
+                                <table class=" text-center table table-bordered table-hover">
                                     <thead class="text-center bg-primary ">
                                             <tr>
                                             <th scope="col">رقم</th>
-                                            <th scope="col">مدين</th>
+                                            <th scope="col">دائن</th>
                                             <th scope="col">الحساب </th>
                                             <th scope="col">ملاحظات</th>
                                             </tr>
@@ -104,43 +111,39 @@ include('include/nav.php');
                                             </tr>
                                     </tbody>
                                 </table>
+
                             </div>
+
                     </div>
                     <div class="row justify-content-end px-5" >
                     <label for="code" class="col-form-label" id="res_number" style="">  المجموع</label>
                         <div class="col-md-2">
-                            <input id="code" type="text" id="resault" class="form-control" name="" >
+                            <input id="code" type="text" id="" class="form-control" name="" >
                         </div>
+
                     </div>
             <div class="row justify-content-end py-3" >   
-                <div class="col-md-4" id='buttons'>
+                <div class="col-md-4">
+                
                     <button  type="submit" class=" btn btn-primary" name="add">
                         إضافة
                     </button>
-                    <button  type="button" class=" btn btn-primary" name="print" onclick="var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-                        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-                        
-                        mywindow.document.write('</head><body >');
-                        mywindow.document.write('<h1>' + document.title  + '</h1>');
-                        mywindow.document.write(document.getElementById('tbl').innerHTML);
-                        mywindow.document.write('<style>table{margin:1000px;}</style>');
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close(); // necessary for IE >= 10
-                        mywindow.focus(); // necessary for IE >= 10*/
-                        mywindow.print();
-                        mywindow.close();
-                        return true;">
+                    <button  type="submit" class=" btn btn-primary" name="add">
                         طباعة
-                    </button> 
+                    </button>
+
                     <button type="button" class="btn btn-primary" name="close">
                         إغلاق
                     </button>
+                    
                 </div>
+
             </div>
+
+
         </div>
     </form>
-<script src = "js/scripts/paymentBonds.js"></script>
+  
 </body>
 </html>
 
