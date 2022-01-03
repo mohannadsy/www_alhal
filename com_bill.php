@@ -11,7 +11,6 @@ include('include/nav.php');
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/com_bill.css">
 </head>
-
 <body>
     <form action="" method="post">
         <div class="container">

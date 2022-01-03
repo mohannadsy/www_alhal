@@ -34,19 +34,22 @@ include('include/nav.php');
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <h2> سند دفع</h2>
+                    <h2> سند قبض</h2>
                 </div>
+            
                 <div class="col-6" >
                     <div class="row justify-content-end" style="padding-top: 10px;">
-                        <label name=" "> رقم الإيصال</label>
+                        <label for="code" class="col-form-label" id="res_number" style=""> رقم الإيصال</label>
                         <div class="col-md-3">
                             <input id="code" type="text" id="" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
             </div>
+            
                     <div class="row justify-content-center py-3" style="background-color: #5F9EA0;">
                         <div id="" class="col-sm-10 col-md-6">
+
                             <div class="form-group row">
                                 <label for="code" class="col-md-4 col-form-label">  الحساب</label>
                                 <div class="col-md-6">
@@ -59,6 +62,9 @@ include('include/nav.php');
                                 <input type="date" class="form-control" name="" value="2022-01-22">
                                 </div>
                             </div>
+
+                            
+                            
                          </div>
                         <div id="" class="col-sm-10 col-md-6">
                             <div class="form-group row">
@@ -69,6 +75,8 @@ include('include/nav.php');
                                     </select>
                                 </div>
                             </div>
+                            
+
                             <div class="form-group row">
                                 <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
                                 <div class="col-md-6">
@@ -83,7 +91,7 @@ include('include/nav.php');
                                     <thead class="text-center bg-primary ">
                                             <tr>
                                             <th scope="col">رقم</th>
-                                            <th scope="col">مدين</th>
+                                            <th scope="col">دائن</th>
                                             <th scope="col">الحساب </th>
                                             <th scope="col">ملاحظات</th>
                                             </tr>
@@ -103,29 +111,39 @@ include('include/nav.php');
                                             </tr>
                                     </tbody>
                                 </table>
+
                             </div>
+
                     </div>
                     <div class="row justify-content-end px-5" >
                     <label for="code" class="col-form-label" id="res_number" style="">  المجموع</label>
                         <div class="col-md-2">
                             <input id="code" type="text" id="" class="form-control" name="" >
                         </div>
+
                     </div>
             <div class="row justify-content-end py-3" >   
                 <div class="col-md-4">
+                
                     <button  type="submit" class=" btn btn-primary" name="add">
                         إضافة
                     </button>
-                    <button  type="button" class=" btn btn-primary" name="print" onclick="printPaymetBonds(['nav','buttons'])">
+                    <button  type="submit" class=" btn btn-primary" name="add">
                         طباعة
                     </button>
+
                     <button type="button" class="btn btn-primary" name="close">
                         إغلاق
                     </button>
+                    
                 </div>
+
             </div>
+
+
         </div>
     </form>
+  
 </body>
 </html>
 
