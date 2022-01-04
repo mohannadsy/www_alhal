@@ -107,11 +107,32 @@ include('include/nav.php');
                                 if(mysqli_num_rows($select_account_statements_exec) > 0)
                                 while($row = mysqli_fetch_array($select_account_statements_exec)){
                                     $current_currency +=  ($row['maden'] - $row['daen']);
-                                    $href_link = 'accountStatement.php';
+                                    /**
+                                     * make links section
+                                     */
+                                    $href_link = 'accountStatment.php';
                                     if($row['code_type'] == 'accounts') { // accounts -> رصيد افتتاحي
-                                        $href_link = '';
+                                        $account_id = getId($con , 'accounts' , 'code' , $row['code_number']);
+                                        $href_link = "account_card.php?id=$account_id";
                                     }
-                                    echo "<tr ondblclick='alert(\"$href_link\")'>";
+                                    if($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
+                                        $bill_id = getId($con , 'bills' , 'code' , $row['code_number']);
+                                        $href_link = "com_bill_open.php?id=$bill_id";
+                                    }
+                                    
+                                    if($row['code_type'] == 'payment_bonds') { // bills -> السطر تابع لفاتورة
+                                        $payment_bond_id = getId($con , 'payment_bonds' , 'code' , $row['code_number']);
+                                        $href_link = "payment_bonds_open.php?id=$payment_bond_id";
+                                    }
+                                    
+                                    if($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
+                                        $bill_id = getId($con , 'bills' , 'code' , $row['code_number']);
+                                        $href_link = "com_bill_open.php?id=$bill_id";
+                                    }
+                                    ///////////// End make links section //////////
+
+
+                                    echo "<tr ondblclick='window.open(\"$href_link\" , \"_self\")'>";
                                     echo "<td>" . $row['date'] . "</td>";
                                     echo "<td>" . $row['maden'] . "</td>";
                                     echo "<td>" . $row['daen'] . "</td>";

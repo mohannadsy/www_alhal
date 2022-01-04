@@ -96,8 +96,8 @@ include('include/nav.php');
             <div id='buttons' class="row justify-content-start">
                 <div class="col-4">
                     <button type="submit" name="save">حفظ</button>
-                    <button type="submit" name="modify">تعديل</button>
-                    <button type="submit" name="delete">حذف</button>
+                    <button type="submit" hidden name="modify">تعديل</button>
+                    <button type="submit" hidden name="delete">حذف</button>
                     <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>

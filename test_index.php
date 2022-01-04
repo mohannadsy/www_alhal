@@ -10,7 +10,8 @@ include('include/nav.php');
 <a href="test_blank.php">Test Blank</a> <br>
 <a href="account_card.php">Acocunt Card</a> <br>
 <a href="bills_list.php">Bills List</a> <br>
-<a href="rgd_payment.php">Payment Bond</a> <br>
+<a href="payment_bonds.php">Payment Bond</a> <br>
+<a href="accountStatment.php">Account Statment</a><br>
 
 
 <br><br>

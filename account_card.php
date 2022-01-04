@@ -161,7 +161,7 @@ include('include/nav.php');
             <div class="row">
                 <div class="col-md-12" id="button_col">
 
-                    <button type="submit" class="btn btn-primary " name="add">إضافة</button>
+                    <button type="submit" class="btn btn-primary " <?php if (isset($account['name'])) echo "hidden" ?> name="add">إضافة</button>
 
                     <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
@@ -213,7 +213,7 @@ if (isset($_POST['update'])) {
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('test_account_card.php?id=' . $_GET['id'] . '&message_update=success');
+        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
 }
 
 ?>

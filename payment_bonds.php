@@ -168,7 +168,7 @@ if (isset($_POST['add'])) {
         }
     }
 
-    open_window_self('rgd_payment.php');
+    open_window_self('payment_bonds.php');
 }
 ?>
 
