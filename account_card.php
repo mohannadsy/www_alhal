@@ -1,9 +1,8 @@
 <?php
 include('include/nav.php');
 ?>
-
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -11,6 +10,40 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            color: var(--bs-body-color);
+            background-color: LightGray;
+            text-align: right;
+        }
+
+        .container {
+            margin-top: 8%;
+            margin-right: 20%;
+            border-style: groove;
+            width: 60%;
+
+        }
+
+        #account_col {
+            background-color: #5F9EA0;
+            /* padding: 0px 50px 0px ; */
+
+
+        }
+
+        #connect_col {
+            background-color: #5F9EA0;
+            /* padding: 0px 50px 0px ; */
+        }
+
+        #button_col {
+            background-color: #5F9EA0;
+            padding: 5px;
+            text-align: left;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -29,107 +62,115 @@ include('include/nav.php');
                 $account = mysqli_fetch_array($select_where_exec);
             }
             ?>
+            <div class="row">
+
+                <div id="account_col" class="col-md-6">
+                    <h4 class="mb-3">معلومات الحساب</h4>
+                        <div class="row ">
+                            <div class="col-10">
+                                <label for="code" class="col-form-label">رمز الحساب</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="code" name="code" class="form-control" readonly value="<?php
+                                                                                                                    if (isset($account['code'])) echo $account['code'];
+                                                                                                                    else
+                                                                                                                        echo get_auto_code($con, "accounts", "code", "", "parent", 'account_id', '0')  ?>">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label for="" class="form-label"> الحساب</label>
+                                <div class="input-group has-validation">
+                                    <input name="name" type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
+                                    <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
+                                </div>
+
+                            </div>
+                            <div class="col-10 py-3">
+                                <label for="account_id" class="form-label"> الحساب الرئيسي</label>
+
+                                <select class="form-select" name="account_id" id="account_id" required>
+                                    <option value="0"> حساب رئيسي</option>
+                                    <?php
+                                    foreach (get_main_accounts($con) as $id => $value) {
+                                        echo "<option value='$id'";
+                                        if (isset($account['account_id']) && $id == $account['account_id']) echo ' selected ';
+                                        echo ">$value</option>";
+                                    }
+                                    ?>
+                                </select>
 
 
-            <div class="row g-3">
-                <div class="col-md-6 col-lg-4">
+                            </div>
+                        </div>
+                    <h4 class="mb-3"> الرصيدالافتتاحي</h4>
+                        <div class="row">
+                            <div class="col-10">
+                                <label for="maden" class="form-label"> مدين</label>
+                                <div class="input-group">
+                                    <input type="number" name="maden" class="form-control" id="" value="<?php if (isset($account['maden']) && $account['maden'] > 0) echo $account['maden'] ?>">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label for="daen" class="form-label"> دائن</label>
+                                <div class="input-group">
+                                    <input type="number" name="daen" class="form-control" id="" value="<?php if (isset($account['daen']) && $account['daen'] < 0) echo  trim($account['daen'], '-') ?>">
+                                </div>
 
-                    <br>
-                    <fieldset class="border p-2">
-                        <legend class="w-auto">معلومات الحساب</legend>
+                            </div>
+                        </div>
+                </div>
 
-                        <label for="code">رمز الحساب</label>
-                        <input id="code" name="code" type="text" readonly value="<?php
-                                                                        if (isset($account['code'])) echo $account['code'];
-                                                                        else
-                                                                            echo get_auto_code($con, "accounts", "code", "" , "parent" ,'account_id', '0')  ?>">
+                <div id="connect_col" class="col-md-6 ">
+                    <h4 class="mb-3">معلومات التواصل</h4>
+                        <div class="row">
+                            <div class="col-10">
+                                <label for="" class="form-label">المحافظة </label>
+                                <input type="text" class="form-control" name="state" id="" placeholder="" value="<?php if (isset($account['state'])) echo $account['state'] ?>">
 
-                        <br><br><br>
+                            </div>
+                            <div class="col-10">
+                                <label for="" class="form-label">المدينة</label>
+                                <input type="text" class="form-control" name="city" id="" placeholder="" value="<?php if (isset($account['city'])) echo $account['city'] ?>">
 
-                        <label for="name">الحساب</label>
-                        <input type="text" name="name" value="<?php if (isset($account['name'])) echo $account['name'] ?>">
+                            </div>
+                            <div class="col-10">
+                                <label for="" class="form-label">مكان السكن</label>
+                                <input type="text" class="form-control" name="location" id="" placeholder="" value="<?php if (isset($account['location'])) echo $account['location'] ?>">
 
-                        <br><br>
-
-                        <label for="main account">الحساب الرئيسي</label>
-                        <!-- <input type="text" name="account_id"> -->
-
-                        <select name="account_id" id="account_id">
-                            <option value="0">حساب رئيسي</option>
-                            <?php
-                            foreach (get_main_accounts($con) as $id => $value) {
-                                echo "<option value='$id'";
-                                if (isset($account['account_id']) && $id == $account['account_id']) echo ' selected ';
-                                echo ">$value</option>";
-                            }
-                            ?>
-                        </select>
-
-                        <br><br>
-
-                    </fieldset>
+                            </div>
+                            <div class="col-10">
+                                <label for="" class="form-label">الهاتف</label>
+                                <input type="text" class="form-control" id="" name="phone" placeholder="" value="<?php if (isset($account['phone'])) echo $account['phone'] ?>">
 
 
-                    <fieldset class="border p-2">
-                        <legend class="w-auto">الرصيد الافتتاحي</legend>
+                            </div>
+                            <div class="col-10">
+                                <label for="" class="form-label">ملاحظات </label>
+                                <textarea rows="3" type="text" class="form-control" name="note"><?php if (isset($account['note'])) echo $account['note'] ?></textarea>
 
-                        <label name="credit">له</label>
-                        <input type="number" name="credit"
-                        value="<?php if(isset($account['fund']) && $account['fund'] > 0) echo $account['fund'] ?>">
+                            </div>
+                        </div>
+                    
 
-                        <br><br>
+                </div>
+            </div>
 
-                        <label name="debit">علينا</label>
-                        <input type="number" name="debit"
-                        value="<?php if(isset($account['fund']) && $account['fund'] < 0) echo  trim($account['fund'] , '-') ?>">
 
-                    </fieldset>
 
-                    <button type="submit" class="btn btn-primary" name="add">إضافة</button>
+
+
+            <div class="row">
+                <div class="col-md-12" id="button_col">
+
+                    <button type="submit" class="btn btn-primary " name="add">إضافة</button>
 
                     <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
                     <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
 
                     <button type="button" class="btn btn-primary" name="close">إغلاق</button>
-
                 </div>
-                <div class="md-8">
-                    <br>
-                    <fieldset class="border p-2">
-                        <legend class="w-auto">معلومات التواصل </legend>
-                        <label name="">المحافظة</label>
-                        <input type="text" name="state" 
-                        value="<?php if(isset($account['state'])) echo $account['state'] ?>">
-
-                        <br><br>
-
-                        <label name="">المدينة</label>
-                        <input type="text" name="city"
-                        value="<?php if(isset($account['city'])) echo $account['city'] ?>">
-
-                        <br><br>
-
-                        <label name="">مكان السكن</label>
-                        <input type="text" name="location"
-                        value="<?php if(isset($account['location'])) echo $account['location'] ?>">
-
-                        <br><br>
-
-                        <label name="">الهاتف</label>
-                        <input type="text" name="phone"
-                        value="<?php if(isset($account['phone'])) echo $account['phone'] ?>">
-
-                        <br><br>
-
-                    </fieldset>
-
-                    <label name="">ملاحظات</label>
-                    <textarea rows="3" type="text" name="note"><?php if(isset($account['note'])) echo $account['note'] ?></textarea>
-                    <hr>
-                </div>
-
             </div>
+
         </div>
     </form>
 </body>
@@ -141,42 +182,39 @@ include('include/nav.php');
 
 
 if (isset($_POST['add'])) {
-    $credit = 0;
-    $debit = 0;
-    if ($_POST['credit'] != '')
-        $credit = $_POST['credit'];
-    if($_POST['debit'] != '')
-        $debit = $_POST['debit'];
-    $_POST['fund'] = $credit-$debit;
     $accounts =  insert('accounts', get_array_from_array($_POST, [
-        'name', 'account_id', 'phone', 'state',
-        'city', 'location', 'note', 'code', 'fund'
+        'name', 'account_id', 'phone', 'state', 'maden', 'daen',
+        'city', 'location', 'note', 'code'
     ]));
 
     $accounts_exec = mysqli_query($con, $accounts);
+    if($_POST['maden'] != '' || $_POST['daen'] != ''){
+        if($_POST['maden'] == '')$_POST['maden'] = '0';
+        if($_POST['daen'] == '')$_POST['daen'] = '0';
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['main_account_id'] = getId($con , 'accounts' , 'code' , $_POST['code']);
+        $_POST['other_account_id'] = $_POST['main_account_id'];
+        $_POST['code_type'] = 'accounts'; // accounts -> رصيد افتتاحي
+        $_POST['date'] = date('Y-m-d');
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden' , 'daen', 'note', 'date', 'code_number', 'code_type'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+    }
     if ($accounts_exec)
-        open_window_self('account_card.php?message_create=success');
+        open_window_self('test_account_card.php?message_create=success');
 }
 
 if (isset($_POST['update'])) {
-    $credit = 0;
-    $debit = 0;
-    if ($_POST['credit'] != '')
-        $credit = $_POST['credit'];
-    if($_POST['debit'] != '')
-        $debit = $_POST['debit'];
-    $_POST['fund'] = $credit-$debit;
     $accounts =  updateWhereId('accounts', $_GET['id'], get_array_from_array($_POST, [
         'name', 'account_id', 'phone', 'state',
-        'city', 'location', 'note', 'code', 'fund'
+        'city', 'location', 'note', 'code', 'maden', 'daen'
     ]));
 
     $accounts_exec = mysqli_query($con, $accounts);
     if ($accounts_exec)
-        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+        open_window_self('test_account_card.php?id=' . $_GET['id'] . '&message_update=success');
 }
-
-
 
 ?>
 
@@ -185,25 +223,19 @@ if (isset($_POST['update'])) {
 include('include/footer.php');
 ?>
 
-<!-- 
-<script>
-    function change_code(){
-        var account_id = document.getElementById('account_id').value;
-        document.getElementById('code').value = account_id +  "<?php // get_auto_code($con , 'accounts' , 'code' ,'' , 'child' ,  '4') ?>";
-    }
-</script> -->
-
 
 <script>
-    $(function(){
-        $('#account_id').change(function(){
+    $(function() {
+        $('#account_id').change(function() {
             var account_id = $(this).val();
-            if(account_id != ''){
+            if (account_id != '') {
                 $.ajax({
-                    url:"search.php",
-                    method:"POST",
-                    data:{account_id : account_id},
-                    success:function(data){
+                    url: "search.php",
+                    method: "POST",
+                    data: {
+                        account_id: account_id
+                    },
+                    success: function(data) {
                         // $('#code').fadeIn(data);
                         $('#code').val(data);
                         // alert(data);

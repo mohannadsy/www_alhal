@@ -22,6 +22,8 @@ CREATE TABLE `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(250) NOT NULL,
   `name` varchar(250) DEFAULT NULL,
+  `maden` varchar(250) DEFAULT NULL,
+  `daen` varchar(250) DEFAULT NULL,
   `phone` varchar(250) DEFAULT NULL,
   `email` varchar(250) DEFAULT NULL,
   `account_id` int(11) NOT NULL DEFAULT 0,
@@ -29,16 +31,15 @@ CREATE TABLE `accounts` (
   `state` varchar(250) DEFAULT NULL,
   `location` varchar(250) DEFAULT NULL,
   `note` varchar(250) DEFAULT NULL,
-  `fund` varchar(250) NOT NULL,
   `type` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts VALUES("1","1","الصندوق","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-INSERT INTO accounts VALUES("2","2","المشتريات","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-INSERT INTO accounts VALUES("3","3","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");
+INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
+INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
+INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","","2022-01-04 18:54:27","2022-01-04 18:54:27");
 
 
 
@@ -50,6 +51,7 @@ CREATE TABLE `bill_item` (
   `real_weight` varchar(250) DEFAULT NULL,
   `price` varchar(250) DEFAULT NULL,
   `total_item_price` varchar(250) DEFAULT NULL,
+  `bill_item_note` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

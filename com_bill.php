@@ -215,6 +215,7 @@ if (isset($_POST['save'])) {
         $_POST['main_account_id'] = '2';
         $_POST['other_account_id'] = '1';
         $_POST['maden'] = $_POST['real_price'];
+        $_POST['note'] = $_POST['seller_note'];
         $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
@@ -224,7 +225,7 @@ if (isset($_POST['save'])) {
         $_POST['code_number'] = $_POST['code'];
         $_POST['code_type'] = 'mid_bonds';
         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
+            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
        
@@ -234,7 +235,7 @@ if (isset($_POST['save'])) {
          $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
          $_POST['main_account_id'] = $seller_id;
          $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-             'main_account_id', 'other_account_id', 'daen','maden', 'note', 'date', 'code_number', 'code_type', 'note'
+             'main_account_id', 'other_account_id', 'daen','maden', 'note', 'date', 'code_number', 'code_type',
          ]));
          $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
@@ -243,6 +244,7 @@ if (isset($_POST['save'])) {
         // سند قيد
         $_POST['main_account_id'] = $seller_id;
         $_POST['other_account_id'] = '2';
+        $_POST['note'] = $_POST['seller_note'];
         $_POST['daen'] = $_POST['real_price'];
         $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
         $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
@@ -253,7 +255,7 @@ if (isset($_POST['save'])) {
         $_POST['code_number'] = $_POST['code'];
         $_POST['code_type'] = 'mid_bonds';
         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
+            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
@@ -270,7 +272,7 @@ if (isset($_POST['save'])) {
         $_POST['code_number'] = $_POST['code'];
         $_POST['code_type'] = 'mid_bonds';
         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
+            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
@@ -287,17 +289,18 @@ if (isset($_POST['save'])) {
             // سند قيد
             $_POST['main_account_id'] = '1';
             $_POST['other_account_id'] = '3';
+            $_POST['note'] = $_POST['buyer_note'];
             $_POST['maden'] = $_POST['total_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code','note'
             ]));
             $insert_mid_bond_exec = mysqli_query($con, $insert_mid_bond_query);
             // كشف حساب الصندوق
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
@@ -314,7 +317,7 @@ if (isset($_POST['save'])) {
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
+                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
@@ -323,7 +326,7 @@ if (isset($_POST['save'])) {
             $_POST['main_account_id'] = $buyer_id;
             $_POST['code_type'] = 'bills';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
+                'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type',
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
@@ -331,6 +334,7 @@ if (isset($_POST['save'])) {
         if ($_POST['buyer_type_pay'] == 'agel') {
             // سند قيد
             $_POST['main_account_id'] = $buyer_id;
+            $_POST['note'] = $_POST['buyer_note'];
             $_POST['other_account_id'] = '3';
             $_POST['maden'] = $_POST['total_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
@@ -342,7 +346,7 @@ if (isset($_POST['save'])) {
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
@@ -359,7 +363,7 @@ if (isset($_POST['save'])) {
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
+                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }

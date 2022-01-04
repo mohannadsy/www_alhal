@@ -37,9 +37,10 @@ function getId($con, $table, $column, $value)
 
 function insert_main_accounts($con)
 {
-    $insert_main_accounts_query = ' INSERT INTO accounts VALUES("1","1","الصندوق","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-                INSERT INTO accounts VALUES("2","2","المشتريات","","","0","","","","","","","2021-12-28 12:14:56","2021-12-28 12:14:56");
-                INSERT INTO accounts VALUES("3","3","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");          
+    $insert_main_accounts_query = ' 
+            INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
+            INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
+            INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","","2022-01-04 18:54:27","2022-01-04 18:54:27");    
     ';
     $insert_main_accounts_exec = mysqli_multi_query($con , $insert_main_accounts_query);
 }

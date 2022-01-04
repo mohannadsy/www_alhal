@@ -107,7 +107,11 @@ include('include/nav.php');
                                 if(mysqli_num_rows($select_account_statements_exec) > 0)
                                 while($row = mysqli_fetch_array($select_account_statements_exec)){
                                     $current_currency +=  ($row['maden'] - $row['daen']);
-                                    echo "<tr>";
+                                    $href_link = 'accountStatement.php';
+                                    if($row['code_type'] == 'accounts') { // accounts -> رصيد افتتاحي
+                                        $href_link = '';
+                                    }
+                                    echo "<tr ondblclick='alert(\"$href_link\")'>";
                                     echo "<td>" . $row['date'] . "</td>";
                                     echo "<td>" . $row['maden'] . "</td>";
                                     echo "<td>" . $row['daen'] . "</td>";
