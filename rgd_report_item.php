@@ -40,6 +40,7 @@ include('include/nav.php');
 </head>
 <body>
     <div class="container">
+        <form action="" method="post">
         <div class="row justify-content-start">
             <h6>  تقرير عن حركة مادة وفقاً </h6>
         </div>
@@ -168,6 +169,7 @@ include('include/nav.php');
             </div>
 
         </div>
+        </form>
     </div>
 </body>
 </html>
