@@ -79,14 +79,14 @@ include('include/nav.php');
                     <div class="row justify-content-center py-1">
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-7">
-                            <input type="date" name="from_date"  value=" " class="form-control">
+                            <input type="date" name="from_date" class="form-control"  value="<?php echo date('Y-m-d'); ?>" >
                         </div>
 
                     </div>
                     <div class="row justify-content-center">
                         <label for="to_date">إلى تاريخ</label>
                         <div class="col-md-7">
-                            <input type="date" name="to_date" class="form-control" value=" ">
+                            <input type="date" name="to_date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                 </div>

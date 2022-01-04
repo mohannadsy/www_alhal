@@ -41,10 +41,10 @@ include('include/nav.php');
 <body>
     <div class="container">
         <form action="" method="post">
-        <div class="row justify-content-start">
-            <h6>  تقرير عن حركة مادة وفقاً </h6>
-        </div>
-        <div class="row py-2">
+                <div class="row justify-content-start">
+                    <h6>  تقرير عن حركة مادة وفقاً </h6>
+                </div>
+                <div class="row py-2">
                     <div class="col-8">
                         <div class="row justify-content-center py-2" >
                             <div class="col-md-3" id="form1">
@@ -79,23 +79,23 @@ include('include/nav.php');
                         </div>
 
                     </div>
-            <div class="col-4">
-                <div class="row justify-content-center py-1">
-                    <label for="from_date">من تاريخ</label>
-                    <div class="col-md-7">
-                        <input type="date" name="from_date"  value=" " class="form-control">
+                    <div class="col-4">
+                        <div class="row justify-content-center py-1">
+                            <label for="from_date">من تاريخ</label>
+                            <div class="col-md-7">
+                                <input type="date" name="from_date"  value="<?php echo date('Y-m-d'); ?>" class="form-control">
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <label for="to_date">إلى تاريخ</label>
+                            <div class="col-md-7">
+                                <input type="date" name="to_date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <div class="row justify-content-center">
-                    <label for="to_date">إلى تاريخ</label>
-                    <div class="col-md-7">
-                        <input type="date" name="to_date" class="form-control" value=" ">
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
         <!-- <div class="row justify-content-start py-2">
                     <div class="col-md-2" id="form1">
@@ -164,8 +164,8 @@ include('include/nav.php');
         </div>
         <div class="row justify-content-end py-2" >
             <div class="col-2">
-            <button type="submit" class="btn btn-secondary" name="close">إغلاق</button>
-            <button type="submit" class="btn btn-secondary" name="print">طباعة</button>
+                <button type="submit" class="btn btn-secondary" name="close">إغلاق</button>
+                <button type="submit" class="btn btn-secondary" name="print">طباعة</button>
             </div>
 
         </div>

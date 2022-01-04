@@ -39,9 +39,9 @@ include('include/nav.php');
             <div class="row justify-content-start">
                 <div class="col-6">
                     <label for="from_date">من تاريخ</label>
-                    <input type="date" name="from_date"  value=" ">
+                    <input type="date" name="from_date"  value="<?php echo date('Y-m-d'); ?>">
                     <label for="to_date">إلى تاريخ</label>
-                    <input type="date" name="to_date" value=" ">
+                    <input type="date" name="to_date" value="<?php echo date('Y-m-d'); ?>">
                 </div>
             </div>
              
