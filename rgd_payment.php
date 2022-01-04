@@ -41,7 +41,7 @@ include('include/nav.php');
                     <div class="row justify-content-end" style="padding-top: 10px;">
                         <label name=" "> رقم الإيصال</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" name="code" readonly>
+                            <input type="text" value="<?php echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent') ?>" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label ">التاريخ </label>
                         <div class="col-md-6">
-                            <input type="date" class="form-control" name="date" id="date" min="" max="" value="2022-01-22">
+                            <input type="date" class="form-control" name="date" id="date" min="" max="" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">العملة </label>
                         <div class="col-md-6">
-                            <select class="form-control">
+                            <select name="currency" class="form-control">
                                 <option value="syrian-bounds">ليرة سورية</option>
                             </select>
                         </div>
@@ -122,44 +122,53 @@ include('include/nav.php');
 if (isset($_POST['add'])) {
 
     $main_account_code = get_code_from_input($_POST['main_account']);
-    $main_account_id = getId($con , 'accounts' , 'code' , $main_account_code);
+    $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
-    
-    $other_account_id = substr($_POST['other_account_id'], 0, 5);
-    $select_other_account_id_using_code_query = "select id,code from accounts where code = '$other_account_id'";
-    $select_other_account_id_using_code_exec = mysqli_query($con, $select_other_account_id_using_code_query);
-    $other_account_id = mysqli_fetch_row($select_other_account_id_using_code_exec)[0];
+    foreach ($_POST['account'] as $key => $value) {
+        if ($value != '' && $_POST['daen'][$key] != '') {
+            $other_account_code = get_code_from_input($value);
+            $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
+            $insert_payment_bond_query = insert('payment_bonds', [
+                'main_account_id' => $main_account_id,
+                'other_account_id' => $other_account_id,
+                'daen' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'code' => $_POST['code'],
+                'date' => $_POST['date'],
+                'currency' => $_POST['currency']
+            ]);
+            $insert_payment_bond_exec = mysqli_query($con, $insert_payment_bond_query);
+            /**
+             * make account statements
+             */
+            // كشف حساب الصندوق
+            $insert_account_statement_query = insert('account_statements', [
+                'main_account_id' => $main_account_id,
+                'other_account_id' => $other_account_id,
+                'daen' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'date' => $_POST['date'],
+                'code_number' => $_POST['code'],
+                'code_type' => 'payment_bonds'
+            ]);
+            message_box($insert_account_statement_query);
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
-    $_POST['other_account_id'] = $other_account_id;
+            // كشف حساب القابض
+            $insert_account_statement_query = insert('account_statements', [
+                'main_account_id' => $other_account_id,
+                'other_account_id' => $main_account_id,
+                'maden' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'date' => $_POST['date'],
+                'code_number' => $_POST['code'],
+                'code_type' => 'payment_bonds'
+            ]);
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        }
+    }
 
-    $insert_payment_bond_query = insert('payment_bonds', get_array_from_array($_POST, [
-        'main_account_id', 'other_account_id', 'daen', 'note', 'code', 'date', 'currency'
-    ]));
-    $insert_payment_bond_exec = mysqli_query($con, $insert_payment_bond_query);
-
-    /**
-     * make account statements
-     */
-    // كشف حساب الصندوق
-    $_POST['code_number'] = $_POST['code'];
-    $_POST['code_type'] = 'payment_bonds';
-    $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-        'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
-    ]));
-    $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-    // كشف حساب القابض
-    $_POST['other_account_id'] = $_POST['main_account_id']; // جعل الحساب الاساسي هو القابض
-    $_POST['main_account_id'] = $other_account_id;
-    $_POST['maden'] = $_POST['daen'];
-    $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-        'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type', 'note'
-    ]));
-    $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-
-
-    // open_window_self('paymentBonds.php');
+    open_window_self('rgd_payment.php');
 }
 ?>
 

@@ -74,7 +74,7 @@ include('include/nav.php');
                             <th contenteditable='false'>البيان</th>
                             <!-- <th contenteditable='false'>رقم الحركة</th>
                             <th contenteditable='false'>اسم الحركة</th> -->
-                            <th contenteditable='false'>القيمة</th>
+                            <!-- <th contenteditable='false'>القيمة</th> -->
                             <th contenteditable='false'>رصيد الحركة</th>
 
                         </tr>
@@ -106,7 +106,6 @@ include('include/nav.php');
                                 // echo "<td>" . $row['code_number'] . "</td>";
                                 echo "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
                                 echo "<td>" . $row['note'] . "</td>";
-                                echo "<td>" . max( $row['maden'] , $row['daen']) . "</td>";
                                 echo "<td>" . "$current_currency". "</td>";
                                 echo "</tr>";
                             }
