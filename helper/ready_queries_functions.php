@@ -30,7 +30,7 @@ function getId($con, $table, $column, $value)
 {
     $select = select($table, ['id', $column]) . where($column, $value);
     $select_exec = mysqli_query($con, $select);
-    return mysqli_fetch_row($select_exec)[0];
+    return mysqli_fetch_array($select_exec)['id'];
 }
 
 
@@ -42,4 +42,30 @@ function insert_main_accounts($con)
                 INSERT INTO accounts VALUES("3","3","المبيعات","","","0","","","","","","","2021-12-28 12:15:19","2021-12-28 12:15:19");          
     ';
     $insert_main_accounts_exec = mysqli_multi_query($con , $insert_main_accounts_query);
+}
+
+
+function get_box_account($con){
+    $select_box_account_query = select('accounts').where('id' , '1');
+    $select_box_account_exec = mysqli_query($con , $select_box_account_query);
+    $account = mysqli_fetch_array($select_box_account_exec);
+    return $account['code'] . ' - ' . $account['name'];
+}
+
+function get_all_accounts($con){
+    $select_box_accounts_query = select('accounts');
+    $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
+    $accounts = [];
+    while($account = mysqli_fetch_array($select_box_accounts_exec))
+        array_push($accounts , $account);
+    return $accounts;
+}
+
+function get_all_accounts_without_buying_selling($con){
+    $select_box_accounts_query = select('accounts').whereNotEqual('id' , '2').andWhereNotEqual('id' , '3');
+    $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
+    $accounts = [];
+    while($account = mysqli_fetch_array($select_box_accounts_exec))
+        array_push($accounts , $account);
+    return $accounts;
 }

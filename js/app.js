@@ -12,3 +12,29 @@ function disableEnterKey(evt) {
     if ((evt.keyCode == 13) && (elem.type == 'text')) { return false; }
 }
 document.onkeypress = disableEnterKey;
+
+
+function addRows(table, numberOfRows , names , ids){
+    let tbl = document.getElementById(table);
+    let tbody = document.createElement('tbody');
+    tbody.setAttribute('class' , 'text-center');
+    for(i = 0 ; i< numberOfRows ; i++){
+        let row = document.createElement('tr');
+        for(j = 0 ; j < tbl.rows[0].cells.length ; j++){
+            let col = document.createElement('td');
+            let input = document.createElement('input');
+            input.setAttribute('name' , names[j]);
+            input.setAttribute('id' , ids[j]+'_'+i);
+            if(j == 0){
+                input.setAttribute('value' , i+1);
+                input.setAttribute('readonly' , 'readonly');
+            }
+            input.setAttribute('class' , 'text-center');
+            col.appendChild(input);
+            row.appendChild(col);
+        }
+        tbody.appendChild(row);
+    }
+    tbl.appendChild(tbody);
+
+}

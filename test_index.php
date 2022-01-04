@@ -8,7 +8,9 @@ include('include/nav.php');
 
 <a href="open_file.php">Open File</a> <br>
 <a href="test_blank.php">Test Blank</a> <br>
-<a href="account_card.php">Acocunt Card</a>
+<a href="account_card.php">Acocunt Card</a> <br>
+<a href="bills_list.php">Bills List</a> <br>
+<a href="rgd_payment.php">Payment Bond</a> <br>
 
 
 <br><br>
