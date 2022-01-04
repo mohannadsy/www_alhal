@@ -16,6 +16,24 @@ include('include/nav.php');
         .container{
             background-color: #5F9EA0;
             border-style:groove;
+               
+        }
+        #form1 {
+            text-align: center;
+        }
+        #form2 {
+            text-align: center;
+        }
+        #form3{
+            text-align: center; 
+        }
+        #form_input{
+            /* background-color: chartreuse; */
+            text-align: right;
+
+        }
+        #form_btn{
+            text-align:right;
         }
     </style>
    
@@ -25,32 +43,85 @@ include('include/nav.php');
         <div class="row justify-content-start">
             <h6>  تقرير عن حركة مادة وفقاً </h6>
         </div>
-        <div class="row justify-content-center py-2">
-                    <div class="col-md-2">
-                        <div class="form-check form-check-inline">
+        <div class="row py-2">
+                    <div class="col-8">
+                        <div class="row justify-content-center py-2" >
+                            <div class="col-md-3" id="form1">
+                                <div class="form-check form-check-inline" >
+                                    <input class="form-check-input" type="radio" name="option" id="" value="">
+                                    <label class="form-check-label" for="buyer">المادة</label>
+                                </div>
+                    
+                            </div>
+                            <div class="col-md-3" id="form2">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="option" id="" value="">
+                                    <label class="form-check-label" for="seller">الصنف</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="form3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="option" id="" value="">
+                                    <label class="form-check-label" for="item">العميل</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center py-2">
+                            <div class="col-4"  id="form_input" >
+                                <input type="text" name="" class="form-control">
+                            </div>
+                            <div class="col-2" id="form_btn">
+                                <button type="submit" class="btn btn-secondary" name="search">بحث</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+            <div class="col-4">
+                <div class="row justify-content-center py-1">
+                    <label for="from_date">من تاريخ</label>
+                    <div class="col-md-7">
+                        <input type="date" name="from_date"  value=" " class="form-control">
+                    </div>
+
+                </div>
+                <div class="row justify-content-center">
+                    <label for="to_date">إلى تاريخ</label>
+                    <div class="col-md-7">
+                        <input type="date" name="to_date" class="form-control" value=" ">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <div class="row justify-content-start py-2">
+                    <div class="col-md-2" id="form1">
+                        <div class="form-check form-check-inline" >
                             <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="buyer">المادة</label>
                         </div>
             
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" id="form2">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="seller">الصنف</label>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" id="form3">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="item">العميل</label>
                         </div>
    
                     </div>
-                    <div class="col-3">
+                    <div class="col-3"  id="form_input">
                         <input type="text" name="" class="form-control">
                     </div>
-                    <div class="col-3">
-                        <button type="submit" class="btn btn-secondary" name="search">إغلاق</button>
+                    <div class="col-2" id="form_btn">
+                        <button type="submit" class="btn btn-secondary" name="search">بحث</button>
                     </div>
         </div>
         <div class="row justify-content-center  py-2 ">
@@ -62,7 +133,7 @@ include('include/nav.php');
                     <div class="col-md-3">
                     <input type="date" name="to_date" class="form-control" value=" ">
                     </div>
-        </div>
+        </div> -->
            
         <div>
             <table class=" table table-bordered table-hover text-center ">
@@ -90,7 +161,7 @@ include('include/nav.php');
                 <tbody></tbody>
             </table>
         </div>
-        <div class="row justify-content-end" >
+        <div class="row justify-content-end py-2" >
             <div class="col-2">
             <button type="submit" class="btn btn-secondary" name="close">إغلاق</button>
             <button type="submit" class="btn btn-secondary" name="print">طباعة</button>
