@@ -11,7 +11,7 @@ include('include/nav.php');
 <a href="test_open_file_pop_up.php"> test opn pop up</a> <br><br>
 <a href="rgd_payment.php"> test  payment </a> <br><br>
 <a href="rgd_catch.php"> test  catch </a> <br><br>
-
+<a href="rgd_report_item">حركة  مادة</a>
 
 <a href="test_raghad_stole.php">Theif</a>
 <?php

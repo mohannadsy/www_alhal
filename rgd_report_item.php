@@ -28,26 +28,29 @@ include('include/nav.php');
         <div class="row justify-content-center py-2">
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="buyer" id="" value="">
+                            <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="buyer">المادة</label>
                         </div>
             
                     </div>
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="seller" id="" value="">
+                            <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="seller">الصنف</label>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="client" id="" value="">
+                            <input class="form-check-input" type="radio" name="option" id="" value="">
                             <label class="form-check-label" for="item">العميل</label>
                         </div>
    
                     </div>
                     <div class="col-3">
                         <input type="text" name="" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-secondary" name="search">إغلاق</button>
                     </div>
         </div>
         <div class="row justify-content-center  py-2 ">
