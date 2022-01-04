@@ -78,3 +78,6 @@ function is_not_empty($text)
 {
     return !is_empty($text);
 }
+function print_account_to_tags_autocomplete($row){
+    return "'".$row['code']." - ".$row['name']."',";
+}

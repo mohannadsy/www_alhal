@@ -121,28 +121,35 @@ function whereNotEqual( $column , $value)
 
 function andWhere( $column, $value, $op = "=")
 {
-  return " and ". where( $column , $value , $op);
+  return " and $column $op '$value'" ;
+}
+function andWhereNotEqual($column , $value){
+  return andWhere($column , $value , '<>');
 }
 function andWhereLarger( $column , $value)
 {
-  return " and ". where($column , $value , ">");
+  return andWhere($column , $value , ">");
 }
 function andWhereSmaller( $column, $value)
 {
-  return " and ". where( $column , $value , "<");
+  return andWhere( $column , $value , "<");
 }
 
-function orWhere( $column , $value,$op="=")
+
+function orWhere( $column, $value, $op = "=")
 {
-  return " or" . where( $column , $value , $op);
+  return " or $column $op '$value'" ;
+}
+function orWhereNotEqual($column , $value){
+  return orWhere($column , $value , '<>');
 }
 function orWhereLarger( $column , $value)
 {
-  return "or ". where( $column , $value ,">");
+  return orWhere( $column , $value ,">");
 }
 function orWhereSmaller( $column , $value)
 {
-  return "or ". where( $column , $value,"<");
+  return orWhere( $column , $value,"<");
 }
 function whereBetween( $column , $first_value , $second_value)
 {
