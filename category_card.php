@@ -51,7 +51,7 @@ include('include/nav.php');
                 <div id="category_col" class="col-sm-10 col-md-8 py-5">
 
                     <div class="form-group row">
-                        <label for="code" class="col-md-4 col-form-label text-md-right">رمز الصنف</label>
+                        <label for="code" class="col-md-2 col-form-label text-md-right">رمز الصنف</label>
                         <div class="col-md-6">
                             <input value="<?php
                                             if (isset($_GET['id'])) echo $category['code'];
@@ -61,14 +61,14 @@ include('include/nav.php');
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">اسم الصنف</label>
+                        <label for="name" class="col-md-2 col-form-label text-md-right">اسم الصنف</label>
                         <div class="col-md-6">
                             <input value="<?php if (isset($_GET['id'])) echo $category['name']; ?>" type="text" class="form-control" name="name" required autofocus>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
+                        <label for="note" class="col-md-2 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
                             <textarea type="text" id="" class="form-control" name="note"> <?php if (isset($_GET['id'])) echo $category['note']; ?></textarea>
                            

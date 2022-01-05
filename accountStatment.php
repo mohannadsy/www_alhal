@@ -14,11 +14,19 @@ include('include/nav.php');
         body{
             text-align: right;
             background-color:LightGray;
+            justify-content:center ;
         }
         .container{
             background-color: #5F9EA0;
             border-style:groove;
                
+        }
+        #account_name{
+            border-radius: 5px;
+        }
+        #from-date,#to-date,#syrian-bounds{
+            border-radius: 5px;
+
         }
     </style>
 </head>
@@ -26,39 +34,42 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container">
-            <div class="row py-2">
-                <div class="col-8 " >
-                    <div class="row py-2">
-                        <label for="" class=" col-md-1 form-label"> الحساب</label>
-                        <div class="col-md-4 has-validation">
-                            <input class="account_auto form-control" type="text" name="account" id="" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>"
+        <div class="row justify-content-start px-5 py-2">
+                    <h3> كشف حساب </h3>
+                </div>
+            <div class="row">
+                <div class="col-3 "  >
+                    <div class="row ">
+                        <label for="" class=" col-md-3 form-label"> الحساب</label>
+                        <div class="col-md-9  has-validation">
+                            <input class="account_auto " type="text" name="account" id="account_name" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>"
                                     onclick="this.value=''" placeholder=" اسم الحساب" required >
                             <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <label for="" class=" col-md-1 form-label">العملة </label>
-                        <div class="col-md-4">
-                            <select name="currency" class="form-control">
-                                <option value="syrian-bounds">ليرة سورية</option>
+                    <div class="row py-2">
+                        <label for="" class=" col-md-3 form-label">العملة </label>
+                        <div class="col-md-8">
+                            <select name="currency" id="syrian-bounds" >
+                                <option value="syrian-bounds" >ليرة سورية</option>
                             </select>
                         </div>
                     </div>
             
                 </div>
                 <div class="col-4">
-                    <div class="row py-1">
-                        <label for="from_date">من تاريخ</label>
-                        <div class="col-md-7">
-                            <input type="date" name="from_date" class="form-control" min="" max="" 
+                    <div class="row ">
+                        <label for="from_date " >من تاريخ</label>
+                        <div class="col-md-6">
+                            <input type="date" name="from_date" id="from-date"  min="" max="" 
                                 value="<?php if(isset($_POST['from_date'])) echo $_POST['from_date']; else echo date('Y-m-d') ?>">
                         </div>
                     </div>
-                    <div class="row ">
-                        <label for="to_date">إلى تاريخ</label>
-                        <div class="col-md-7">
-                            <input type="date" name="to_date" class="form-control" id="" min="" max="" 
+                    <div class="row py-2">
+                        <label for="to_date" >إلى تاريخ</label>
+                        <div class="col-md-6">
+                            <input type="date" name="to_date"  id="to-date" min="" max="" 
                                 value="<?php if(isset($_POST['to_date'])) echo $_POST['to_date']; else echo date('Y-m-d') ?>">
                         </div>
                     </div>
@@ -153,9 +164,9 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-end py-2">
                 <div class="col-3">
-                    <button type="submit" class="btn btn-secondary" name="view">معاينة</button>
-                    <button type="submit" name="" class="btn btn-secondary">طباعة</button>
-                    <button type="submit"class="btn btn-secondary">إغلاق</button>
+                    <button type="submit"  name="view">معاينة</button>
+                    <button type="submit" name="" >طباعة</button>
+                    <button type="submit">إغلاق</button>
                     
                 </div>
             </div>
