@@ -17,22 +17,17 @@ include('include/nav.php');
             background-color: #5F9EA0;
             border-style:groove;
         }
-        #form1 {
-            text-align: center;
-        }
-        #form2 {
-            text-align: center;
-        }
-        #form3{
-            text-align: center; 
-        }
-        #form_input{
-            /* background-color: chartreuse; */
+          #form_input{
             text-align: right;
+            border-radius: 5px;
 
         }
+
         #form_btn{
             text-align:right;
+        } 
+        #from-date ,#to-date{
+            border-radius: 5px;
         }
     </style>
    
@@ -40,36 +35,33 @@ include('include/nav.php');
 <body>
     <div class="container">
         <form action="" method="">
-            <div class="row py-2">
-                <div class="col-8">
-                    <div class="row justify-content-center py-2" >
-                        <div class="col-md-3" id="form1">
-                            <div class="form-check form-check-inline" >
-                                <input class="form-check-input" type="radio" name="option" id="" value="">
-                                <label class="form-check-label" for="buyer">المادة</label>
-                            </div>
+        <div class="row justify-content-start px-5 py-2">
+                    <h3>    حركة كمسيون  </h3>
+                </div>
+            <div class="row ">
+                <div class="col-4">
+                    <div class="row  py-2" >
+                        <div class="col-md-4 text-center" >
+                            <input  type="radio" name="" id="form1" value="">
+                            <label for="form1" name="">المادة</label>
                 
                         </div>
-                        <div class="col-md-3" id="form2">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="option" id="" value="">
-                                <label class="form-check-label" for="seller">الصنف</label>
-                            </div>
+                        <div class="col-md-4 text-center" >
+                            <input  type="radio" name="" id="form2" value="">
+                            <label  for="form2" name="" >الصنف</label>
                         </div>
-                        <div class="col-md-3" id="form3">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="option" id="" value="">
-                                <label class="form-check-label" for="item">العميل</label>
-                            </div>
+                        <div class="col-md-4 text-center" >
+                            <input  type="radio" name="" id="form3" value="">
+                            <label  for="form3" name="" >العميل</label>
                         </div>
                     </div>
 
                     <div class="row justify-content-center py-2">
-                        <div class="col-4"  id="form_input" >
-                            <input type="text" name="" class="form-control">
+                        <div class="col-6" >
+                            <input type="text" name="" id="form_input" >
                         </div>
-                        <div class="col-2" id="form_btn">
-                            <button type="submit" class="btn btn-secondary" name="search">بحث</button>
+                        <div class="col-2" >
+                            <button type="submit" id="form_btn" name="search">بحث</button>
                         </div>
 
                     </div>
@@ -79,21 +71,21 @@ include('include/nav.php');
                     <div class="row justify-content-center py-1">
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-7">
-                            <input type="date" name="from_date" class="form-control"  value="<?php echo date('Y-m-d'); ?>" >
+                            <input type="date" name="from_date" id="from-date"   value="<?php echo date('Y-m-d'); ?>" >
                         </div>
 
                     </div>
                     <div class="row justify-content-center">
                         <label for="to_date">إلى تاريخ</label>
                         <div class="col-md-7">
-                            <input type="date" name="to_date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                            <input type="date" name="to_date" id="to-date"  value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                 </div>
 
             </div>
                     
-                    <div class="row justify-content-center ">
+                    <div class="row justify-content-center py-2 ">
                     <div class="col-11">
                         <table class=" table table-bordered table-hover text-center ">
                             <thead>
@@ -116,8 +108,8 @@ include('include/nav.php');
 
                     <div class="row justify-content-end py-2">
                         <div class="col-2">
-                        <button type="submit" class="btn btn-secondary" name="print">طباعة</button>
-                        <button type="submit" class="btn btn-secondary" name="close">إغلاق</button>
+                        <button type="submit"  name="print">طباعة</button>
+                        <button type="submit"  name="close">إغلاق</button>
                         </div>
                     </div>
         </form>
