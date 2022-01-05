@@ -9,11 +9,12 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
     <link rel="stylesheet" href="css/styles/com_bill.css">
 </head>
-<body>
+<body id='body'>
     <form action="" method="post">
-        <div class="container">
+        <div id="contextmenu" class="container">
             <label for="date">تاريخ الفاتورة</label>
             <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
             <label for="">رقم الفاتورة</label>
@@ -446,3 +447,15 @@ include('include/footer.php');
     })(jQuery);
 </script>
 
+<script>
+    /* Context menu only when you click in #page_wrapper (not in it's children) */
+    $(document).bind("contextmenu", function(event){
+    if(event.toElement.id == 'page_wrapper'){
+    $("#contextMenu").css({"top": event.pageY + "px", "left": event.pageX + "px"}).show();
+    event.preventDefault();
+    }
+    });
+    $(document).bind('click', function(){
+    $('#contextMenu').hide();
+    });
+</script>
