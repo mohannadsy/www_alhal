@@ -202,7 +202,7 @@ if (isset($_POST['add'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
     if ($accounts_exec)
-        open_window_self('test_account_card.php?message_create=success');
+        open_window_self('account_card.php?message_create=success');
 }
 
 if (isset($_POST['update'])) {

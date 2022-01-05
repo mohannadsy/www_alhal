@@ -132,7 +132,7 @@ if (isset($_POST['category_id'])) {
     $select_code_using_category_id_exec = mysqli_query($con, $select_code_using_category_id_query);
     if ($row = mysqli_fetch_array($select_code_using_category_id_exec))
         $prefix = $row['code'];
-    echo get_auto_code($con, 'items', 'code', $prefix, 'child',  $_POST['category_id']);
+    echo get_auto_code($con, 'items', 'code', $prefix, 'child', 'category_id' , $_POST['category_id']);
 }
 
 

@@ -51,7 +51,7 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label"> الحساب</label>
                         <div class="col-md-6">
-                            <input type="text" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
+                            <input type="text" onclick="return this.value=''" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,9 +93,9 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-end px-5">
-                <label for="code" class="col-form-label" id="res_number"> المجموع</label>
+                <label for="total" class="col-form-label" id="res_number"> المجموع</label>
                 <div class="col-md-2">
-                    <input id="code" type="text" id="resault" class="form-control" name="">
+                    <input id="total" type="text" id="resault" class="form-control" name="total">
                 </div>
             </div>
             <div class="row justify-content-end py-3">
@@ -245,4 +245,28 @@ include('include/footer.php');
         });
 
     })(jQuery);
+</script>
+
+<script>
+    function count_sum_ids(id , number_of_rows){
+        var count = 0;
+        for(var i = 0 ; i< number_of_rows ; i++){
+            var value = document.getElementById(id + "_" + i).value;
+            if(value == ''){
+                value = '0';
+            }
+            count+=parseFloat(value);
+        }
+        return count;
+    }
+    function set_event_to_ids(id , number_of_rows){
+        for(var i = 0 ; i< number_of_rows ; i++){
+            document.getElementById(id + "_" + i).addEventListener('onblur' , function(){
+                // document.getElementById('total').value = 'count_sum_ids(id, number_of_rows)';
+                alert('hello');
+            });
+        }
+        
+    }
+    set_event_to_ids('daen' , 5);
 </script>

@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label"> الحساب</label>
                         <div class="col-md-6">
-                            <input type="text" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
+                            <input type="text" name="main_account" id="main_account" readonly value="<?= @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']) ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
                                     echo "<tr>";
                                     echo "<td>" . $counter++ . "</td>";
                                     echo "<td>". $payment_bond_from_code['daen'] ."</td>";
-                                    echo "<td>" . "" . "</td>"; // TODO : make 2 functions return name of account, name-code of account
+                                    echo "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>"; 
                                     echo "</tr>";
                                 }
                             ?>
