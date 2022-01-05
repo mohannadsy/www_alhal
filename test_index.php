@@ -11,6 +11,7 @@ include('include/nav.php');
 <a href="account_card.php">Acocunt Card</a> <br>
 <a href="bills_list.php">Bills List</a> <br>
 <a href="payment_bonds.php">Payment Bond</a> <br>
+<a href="catch_bonds.php">Catch Bond</a> <br>
 <a href="accountStatment.php">Account Statment</a><br>
 
 

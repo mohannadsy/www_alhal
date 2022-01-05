@@ -1,3 +1,5 @@
+const number_of_rows = 5;
+
 function preparePrint(ids) {
     for (var id of ids)
         document.getElementById(id).hidden = true;
@@ -39,4 +41,28 @@ function addRows(table, numberOfRows, names, ids) {
     }
     tbl.appendChild(tbody);
 
+}
+
+
+/**
+ * 2 functions to make to sum to a column in table using id(daen-maden) and put the sum onblur in the total field(other_id)
+ */
+function count_sum_ids(id , number_of_rows){
+    var count = 0;
+    for(var i = 0 ; i< number_of_rows ; i++){
+        var value = document.getElementById(id + "_" + i).value;
+        if(value == ''){
+            value = '0';
+        }
+        count+=parseFloat(value);
+    }
+    return count;
+}
+function set_blur_to_input_ids_to_count_in_id(id , other_id, number_of_rows){
+    for(var i = 0 ; i< number_of_rows ; i++){
+        document.getElementById(id + "_" + i).addEventListener('blur' , function(){
+            document.getElementById(other_id).value = count_sum_ids(id, number_of_rows);
+        });
+    }
+    
 }

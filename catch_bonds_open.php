@@ -31,11 +31,11 @@ include('include/nav.php');
 </head>
 
 <?php
-$payment_bond = [];
+$catch_bond = [];
 if (isset($_GET['id'])) {
-    $select_payment_bond_query = selectWhereId('payment_bonds' , $_GET['id']);
-    $select_payment_bond_exec = mysqli_query($con , $select_payment_bond_query);
-    $payment_bond = mysqli_fetch_array($select_payment_bond_exec);
+    $select_catch_bond_query = selectWhereId('catch_bonds' , $_GET['id']);
+    $select_catch_bond_exec = mysqli_query($con , $select_catch_bond_query);
+    $catch_bond = mysqli_fetch_array($select_catch_bond_exec);
 }
 ?>
 
@@ -44,13 +44,13 @@ if (isset($_GET['id'])) {
         <div class="container">
             <div class="row">
                 <div class="col-4" id="receipt_number1">
-                    <h2> سند دفع</h2>
+                    <h2> سند قبض</h2>
                 </div>
                 <div class="col-6" id="receipt_number">
                     <div class="row justify-content-end" style="padding-top: 10px;">
                         <label name=" "> رقم الإيصال</label>
                         <div class="col-md-3">
-                            <input type="text" value="<?= @$payment_bond['code'] ?>" class="form-control" name="code" readonly>
+                            <input type="text" value="<?= @$catch_bond['code'] ?>" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label"> الحساب</label>
                         <div class="col-md-6">
-                            <input type="text" name="main_account" id="main_account" readonly value="<?= @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']) ?>">
+                            <input type="text" name="main_account" id="main_account" readonly value="<?= @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']) ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                     <div class="form-group row">
                         <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
-                            <textarea readonly rows="2" type="text" id="" class="form-control" name="notes"><?= @$payment_bond['main_note'] ?></textarea>
+                            <textarea readonly rows="2" type="text" id="" class="form-control" name="notes"><?= @$catch_bond['main_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -93,26 +93,26 @@ if (isset($_GET['id'])) {
                         <thead class="text-center bg-primary ">
                             <tr>
                                 <th scope="col">رقم</th>
-                                <th scope="col">مدين</th>
+                                <th scope="col">دائن</th>
                                 <th scope="col">الحساب </th>
                                 <th scope="col">ملاحظات</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $select_all_payment_bonds_with_same_code_query = select('payment_bonds').where('code' , $payment_bond['code']);
-                                $select_all_payment_bonds_with_same_code_exec = mysqli_query($con , $select_all_payment_bonds_with_same_code_query);
+                                $select_all_catch_bonds_with_same_code_query = select('catch_bonds').where('code' , $catch_bond['code']);
+                                $select_all_catch_bonds_with_same_code_exec = mysqli_query($con , $select_all_catch_bonds_with_same_code_query);
                                 $counter = 1;
                                 $total_payment = 0;
-                                while ($payment_bond_from_code = mysqli_fetch_array($select_all_payment_bonds_with_same_code_exec)){
+                                while ($catch_bond_from_code = mysqli_fetch_array($select_all_catch_bonds_with_same_code_exec)){
                                     echo "<tr>";
                                     echo "<td>" . $counter++ . "</td>";
-                                    echo "<td>". $payment_bond_from_code['daen'] ."</td>";
-                                    echo "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>"; 
-                                    echo "<td>" . $payment_bond_from_code['note'] . "</td>";
+                                    echo "<td>". $catch_bond_from_code['maden'] ."</td>";
+                                    echo "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>"; 
+                                    echo "<td>" . $catch_bond_from_code['note'] . "</td>";
                                     echo "</tr>";
 
-                                    $total_payment += $payment_bond_from_code['daen'];
+                                    $total_payment += $catch_bond_from_code['maden'];
                                 }
                             ?>
                         </tbody>

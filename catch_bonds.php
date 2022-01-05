@@ -35,13 +35,13 @@ include('include/nav.php');
         <div class="container">
             <div class="row">
                 <div class="col-4" id="receipt_number1">
-                    <h2> سند دفع</h2>
+                    <h2> سند قبض</h2>
                 </div>
                 <div class="col-6" id="receipt_number">
                     <div class="row justify-content-end" style="padding-top: 10px;">
                         <label name=" "> رقم الإيصال</label>
                         <div class="col-md-3">
-                            <input type="text" value="<?php echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent') ?>" class="form-control" name="code" readonly>
+                            <input type="text" value="<?php echo get_auto_code($con, 'catch_bonds', 'code', '', 'parent') ?>" class="form-control" name="code" readonly>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ include('include/nav.php');
                         <thead class="text-center bg-primary ">
                             <tr>
                                 <th scope="col">رقم</th>
-                                <th scope="col">مدين</th>
+                                <th scope="col">دائن</th>
                                 <th scope="col">الحساب </th>
                                 <th scope="col">ملاحظات</th>
                             </tr>
@@ -125,20 +125,20 @@ if (isset($_POST['add'])) {
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
     foreach ($_POST['account'] as $key => $value) {
-        if ($value != '' && $_POST['daen'][$key] != '') {
+        if ($value != '' && $_POST['maden'][$key] != '') {
             $other_account_code = get_code_from_input($value);
             $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
-            $insert_payment_bond_query = insert('payment_bonds', [
+            $insert_catch_bond_query = insert('catch_bonds', [
                 'main_account_id' => $main_account_id,
                 'other_account_id' => $other_account_id,
-                'daen' => $_POST['daen'][$key],
+                'maden' => $_POST['maden'][$key],
                 'note' => $_POST['note'][$key],
                 'code' => $_POST['code'],
                 'date' => $_POST['date'],
                 'currency' => $_POST['currency'],
                 'main_note' => $_POST['notes']
             ]);
-            $insert_payment_bond_exec = mysqli_query($con, $insert_payment_bond_query);
+            $insert_catch_bond_exec = mysqli_query($con, $insert_catch_bond_query);
             /**
              * make account statements
              */
@@ -146,11 +146,11 @@ if (isset($_POST['add'])) {
             $insert_account_statement_query = insert('account_statements', [
                 'main_account_id' => $main_account_id,
                 'other_account_id' => $other_account_id,
-                'daen' => $_POST['daen'][$key],
+                'maden' => $_POST['maden'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date'],
                 'code_number' => $_POST['code'],
-                'code_type' => 'payment_bonds'
+                'code_type' => 'catch_bonds'
             ]);
             message_box($insert_account_statement_query);
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
@@ -159,17 +159,17 @@ if (isset($_POST['add'])) {
             $insert_account_statement_query = insert('account_statements', [
                 'main_account_id' => $other_account_id,
                 'other_account_id' => $main_account_id,
-                'maden' => $_POST['daen'][$key],
+                'daen' => $_POST['maden'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date'],
                 'code_number' => $_POST['code'],
-                'code_type' => 'payment_bonds',
+                'code_type' => 'catch_bonds',
             ]);
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
 
-    open_window_self('payment_bonds.php');
+    open_window_self('catch_bonds.php');
 }
 ?>
 
@@ -178,8 +178,8 @@ include('include/footer.php');
 
 ?>
 <script>
-    let ids = ['number', 'daen', 'account', 'note'];
-    let names = ['number[]', 'daen[]', 'account[]', 'note[]'];
+    let ids = ['number', 'maden', 'account', 'note'];
+    let names = ['number[]', 'maden[]', 'account[]', 'note[]'];
     addRows('tbl', number_of_rows, names, ids);
 </script>
 
@@ -249,5 +249,5 @@ include('include/footer.php');
 </script>
 
 <script>
-    set_blur_to_input_ids_to_count_in_id('daen' , 'total' , number_of_rows);
+    set_blur_to_input_ids_to_count_in_id('maden' , 'total' , number_of_rows);
 </script>
