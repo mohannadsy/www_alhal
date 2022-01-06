@@ -146,11 +146,6 @@ include('include/nav.php');
                                         $href_link = "catch_bonds_open.php?id=$catch_bond_id";
                                         $document_type = 'سند قبض رقم ' . $row['code_number'];;
                                     }
-                                    
-                                    if($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
-                                        $bill_id = getId($con , 'bills' , 'code' , $row['code_number']);
-                                        $href_link = "com_bill_open.php?id=$bill_id";
-                                    }
                                     ///////////// End make links section //////////
 
 

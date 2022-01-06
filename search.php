@@ -3,7 +3,8 @@ include('sql/sql_queries.php');
 include('sql/connection.php');
 include('helper/config_functions.php');
 include('helper/operation_functions.php');
-
+include('helper/ready_queries_functions.php');
+include('helper/html_functions.php');
 ?>
 
 <?php
@@ -132,7 +133,7 @@ if (isset($_POST['category_id'])) {
     $select_code_using_category_id_exec = mysqli_query($con, $select_code_using_category_id_query);
     if ($row = mysqli_fetch_array($select_code_using_category_id_exec))
         $prefix = $row['code'];
-    echo get_auto_code($con, 'items', 'code', $prefix, 'child', 'category_id' , $_POST['category_id']);
+    echo get_auto_code($con, 'items', 'code', $prefix, 'child', 'category_id', $_POST['category_id']);
 }
 
 
@@ -158,7 +159,7 @@ if (isset($_POST['radio_bill_value'])) {
     if ($_POST['radio_bill_value'] == 'not_sell_bills')
         $select_all_bills_query = select('bills') . where('buyer_id', 0);
     if ($_POST['radio_bill_value'] == 'sell_bills')
-        $select_all_bills_query = select('bills') . where('buyer_id', 0 , '<>');
+        $select_all_bills_query = select('bills') . where('buyer_id', 0, '<>');
     if ($_POST['radio_bill_value'] == 'all_bills')
         $select_all_bills_query = select('bills');
     $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
@@ -193,6 +194,59 @@ if (isset($_POST['radio_bill_value'])) {
     }
 }
 
+
+
+
+/**
+ * linked to report comission reports search
+ */
+if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
+    $and_where_condition = '';
+    
+    if($_POST['radio_value'] == 'items' && $_POST['text_value'] != ''){
+        $and_where_condition = " and items.code = '". get_code_from_input($_POST['text_value']) ."'";
+    }
+    if($_POST['radio_value'] == 'accounts' && $_POST['text_value'] != ''){
+        $and_where_condition = " and (seller_id = '". getId($con , 'accounts' , 'code' ,get_code_from_input($_POST['text_value'] )) ."'
+                                or buyer_id = '". getId($con , 'accounts' , 'code' ,get_code_from_input($_POST['text_value'] )) ."')";
+    }
+    if($_POST['radio_value'] == 'categories' && $_POST['text_value'] != ''){
+        $and_where_condition = " and category_id = '". getId($con , 'categories' , 'code' , get_code_from_input($_POST['text_value']))  ."'";
+    }
+    $total_comission = '0';
+    $from_date = $_POST['from_date'];
+    $to_date = $_POST['to_date'];
+    $select_items_using_id_query = "select DISTINCT items.code as item_code,
+                                                            bills.code as bill_code,
+                                                            bills.id as bill_id,
+                                                            unit, date, buyer_id,seller_id,
+                                                            name,currency,
+                                                            com_value,category_id
+                                                             from bill_item, items,bills 
+                                                             where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
+                                                             and date between '$from_date' and '$to_date'";
+    $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+    $counter_for_com_id = 0;
+    while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
+        $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
+        $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
+        $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
+        echo "<tr ondblclick='window.open(\"com_bill_open.php?id=".$row['bill_id']."\" , \"_self\")'>";
+        echo "<td>" . $row['bill_code'] . "</td>";
+        echo "<td>" . $row['date'] . "</td>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $category_name . "</td>";
+        echo "<td>" . $row['unit'] . "</td>";
+        echo "<td>" . $row['currency'] . "</td>";
+        echo "<td>" . $buyer_name . "</td>";
+        echo "<td>" . $seller_name . "</td>";
+        echo "<td>" . $row['com_value'] . "</td>";
+        echo "<input type='hidden' id='com_".$counter_for_com_id++."' value = '".$row['com_value']."'";
+        echo "</tr>";
+        $total_comission += $row['com_value'];
+    }
+    echo "<input type='hidden' id='total_hidden_comission' value = '".$counter_for_com_id."'";
+}
 
 ?>
 
