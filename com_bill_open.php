@@ -169,7 +169,6 @@ if (isset($_POST['update'])) {
     $select_buyer_id_using_code_exec = mysqli_query($con, $select_buyer_id_using_code_query);
     $buyer_id = mysqli_fetch_row($select_buyer_id_using_code_exec)[0];
     $_POST['buyer_id'] = $buyer_id;
-
     /**
      * Buyer Section
      */
@@ -261,7 +260,7 @@ if (isset($_POST['update'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
 
-    // open_window_self('com_bill_open.php?id='.$bill['id']);
+    open_window_self('com_bill_open.php?id='.$bill['id']);
 }
 
 ?>
