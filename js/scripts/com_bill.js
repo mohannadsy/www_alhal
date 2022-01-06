@@ -42,35 +42,35 @@ function createCell(cell, text, style, id, name, row_number) {
     }
     if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
         div.setAttribute('value', '0');
-        div.addEventListener('click', function () {
+        div.addEventListener('click', function() {
             if (div.value == '0')
                 div.value = '';
         });
     }
 
     if (text == '3') { // action to real weight => 2% of total weight
-        div.addEventListener('blur', function () {
+        div.addEventListener('blur', function() {
             document.getElementById('real_weights_' + row_number).value = Math.round(div.value * 0.98);
             count_total_price();
         });
     }
 
     if (text == '5') { // action to total prices (prices * real_weight)
-        div.addEventListener('blur', function () {
+        div.addEventListener('blur', function() {
             document.getElementById('total_item_prices_' + row_number).value = Math.round(div.value * document.getElementById('real_weights_' + row_number).value);
             count_total_price();
         });
 
     }
     if (text == '1') { // action to items to set default unit
-        div.addEventListener('blur', function () {
+        div.addEventListener('blur', function() {
             var item_code = $(this).val();
             if (item_code != '') {
                 $.ajax({
                     url: "search.php",
                     method: "POST",
                     data: { item_code: item_code },
-                    success: function (data) {
+                    success: function(data) {
                         // $('#code').fadeIn(data);
                         document.getElementById('units_' + row_number).value = data;
                         // alert(data);
@@ -130,16 +130,21 @@ function deafultRows() {
 
 deafultRows();
 
-
-
 function printComPill(ids) {
+    // //var head = document.getElementsByTagName('HEAD')[0];
+    // var link = document.createElement('link');
+    // link.rel = 'stylesheet';
+    // link.type = 'text/css';
+    // link.href = 'css/styles/print_com_bill.css';
+    // document.head.appendChild(link);
+
     var tbl = document.getElementById("tbl"), // table reference
         i;
     document.getElementById('add_row').hidden = true;
     document.getElementById('add_col').hidden = true;
     document.getElementById('notes').hidden = true;
     for (i = 0; i < tbl.rows.length - 1; i++)
-        document.getElementById("notes_" + i).parentElement.hidden = true;
+        document.getElementById("note_" + i).parentElement.hidden = true;
 
     preparePrint(ids);
 
@@ -147,7 +152,7 @@ function printComPill(ids) {
     document.getElementById('add_col').hidden = false;
     document.getElementById('notes').hidden = false;
     for (i = 0; i < tbl.rows.length; i++)
-        document.getElementById("notes_" + i).parentElement.hidden = false;
+        document.getElementById("note_" + i).parentElement.hidden = false;
 }
 
 function get_seller_id() {
