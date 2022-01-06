@@ -47,7 +47,7 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-center py-3" style="background-color: #5F9EA0;">
-                <div id="" class="col-sm-10 col-md-6">
+                <div id="account" class="col-sm-10 col-md-6">
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label"> الحساب</label>
                         <div class="col-md-6">
@@ -61,7 +61,7 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
-                <div id="" class="col-sm-10 col-md-6">
+                <div id="currency_notes" class="col-sm-10 col-md-6">
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">العملة </label>
                         <div class="col-md-6">
@@ -103,7 +103,8 @@ include('include/nav.php');
                     <button type="submit" class=" btn btn-primary" name="add">
                         إضافة
                     </button>
-                    <button type="button" class=" btn btn-primary" name="print">
+                    <button type="button" class=" btn btn-primary" name="print"
+                     onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
                         طباعة
                     </button>
                     <button type="button" class="btn btn-primary" name="close">

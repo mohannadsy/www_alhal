@@ -2,8 +2,30 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
+
+/* body {
     width: 21cm;
     height: 29.7cm;
     margin: 20mm 45mm 30mm 45mm;
+} */
+
+body {
+    background: rgb(204, 204, 204);
+}
+
+page[size="A4"] {
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+}
+
+@media print {
+    body,
+    page[size="A4"] {
+        margin: 0;
+        box-shadow: 0;
+    }
 }

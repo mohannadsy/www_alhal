@@ -1,3 +1,4 @@
-function printPaymetBonds(ids) {
+function printBonds(ids) {
+
     preparePrint(ids);
 }

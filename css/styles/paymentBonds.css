@@ -1,55 +1,29 @@
-    /* @page {
-    size: 80mm;
-} */
-    /* body.receipt.sheet {
-    width: 58mm;
-    height: 100mm;
-} */
-    
-    @media print {
-        @page {
-            size: a5;
-            margin: 0;
-        }
-    }
-    /* 
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: rgb(204, 204, 204);
+}
+
+page[size="A4"] {
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+}
+
+.container {
+    max-width: 1500px;
+    margin-top: none;
+    font-size: 30px;
+}
+
 @media print {
-    body.receipt {
-        width: 80mm
+    body,
+    page[size="A4"] {
+        margin: 0;
+        box-shadow: 0;
     }
-} */
-    
-    * {
-        font-size: 2px;
-        font-family: Arial, Helvetica, sans-serif;
-        /* margin: none;
-        padding: none; */
-    }
-    /* #main_box {
-    column-width: 50px;
-    width: 10px;
-} */
-    /* label,
-input {
-    width: 60px;
-} */
-    /* #receipt_num {
-    column-width: 50px;
-} */
-    /* 
-#payment_lable {
-    text-align: right;
-} */
-    
-    .container {
-        border-style: solid;
-        margin: none;
-        padding: none;
-        width: 50%;
-    }
-    
-    #receipt_number,
-    #receipt_number1 {
-        column-width: 10px;
-        font-size: 8pt;
-    }
+}
