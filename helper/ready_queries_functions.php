@@ -33,6 +33,12 @@ function getId($con, $table, $column, $value)
     return mysqli_fetch_array($select_exec)['id'];
 }
 
+function get_value_from_table_using_column($con , $table , $column , $value , $column_return){
+    $select = select($table).where($column,$value);
+    $select_exec = mysqli_query($con , $select);
+    return mysqli_fetch_array($select_exec)[$column_return];
+}
+
 function get_value_from_table_using_id($con , $table , $column , $id){
     $select = selectWhereId($table , $id );
     $select_exec = mysqli_query($con, $select);
