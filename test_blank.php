@@ -2,6 +2,11 @@
 include('include/nav.php');
 ?>
 
+<!-- // "prefix_code": {
+    //     "account": "acc_",
+    //     "category": "cat_",
+    //     "item": "it_"
+    // } -->
 <h1>Test Blank</h1>
 <div class="container" id="container">
 

@@ -59,22 +59,18 @@ if (isset($_POST["account_search_main"])) {
 
 if (isset($_POST["account_search_part"])) {
     $output = '';
-    $query = "select * from accounts where name like '%" . $_POST['account_search_part'] . "%' and account_id <> '0'";
+    $query = "select * from accounts where code like '%" . $_POST['account_search_part'] . "%'
+                                        or name like '%" . $_POST['account_search_part'] . "%' and account_id <> '0'";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
-            $output .= '<td>' . $row['id'] . '</td>
-            <td>' . $row['name'] . '</td>';
-            if ($row['fund'] > 0) {
-                $output .= '<td>' . trim($row['fund'], '-') . '</td>';
-                $output .= '<td></td>';
-            }
-            if ($row['fund'] < 0) {
-                $output .= '<td></td>';
-                $output .= '<td>' . trim($row['fund'], '-') . '</td>';
-            }
+            $output .= '<td>' . $row['code'] . '</td>
+            <td>' . $row['name'] . '</td>'.
+            '<td>' . $row['maden'] . '</td>'.
+            '<td>' . $row['daen'] . '</td>';
+            
             $output .= '</tr>';
         }
     }

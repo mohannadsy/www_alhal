@@ -37,7 +37,7 @@ include('include/nav.php');
 
             </table>
             <input type="hidden" name="selected_database" value="" id="selected_database"> 
-            <div>
+            <!-- <div>
                 <h3>معلومات الملف</h3>
                 <label name="file">الملف</label>
                 <hr>
@@ -45,11 +45,11 @@ include('include/nav.php');
                 <hr>
                 <label name="server">المخدم</label>
                 <hr>
-            </div>
+            </div> -->
             <button type="submit" name="open_db">فتح</button>
             <button type="submit" name="delete_db">حذف</button>
             <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
-            <button type="button" name="close">إغلاق</button>
+            <button type="button" name="restore">استرجاع</button>
             <div id="new_text" hidden>
                 <label for="">اسم الملف</label>
                 <input type="text" name="database_name">
@@ -75,12 +75,16 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
         message_box("لقد دخلت على قاعدة البيانات الافتراضية");
         update_value_in_config('database', $selected_database);
     }
+    else{
+        message_box(" لقد دخلت على قاعدة البيانات " . $selected_database);
+        update_value_in_config('database', $selected_database);
+    }
 }
 
 if (isset($_POST['create_db'])) {
     $database_name = $_POST['database_name'];
     if (is_not_empty($database_name)) {
-        create_database($con , $database_name);
+        create_database($con , 'souq_'.$database_name);
         open_window_self('open_file.php');
     }
 }

@@ -1,15 +1,10 @@
 {
     "deafult_database": "souq",
-    "database": "souq1",
+    "database": "souq_\u062c\u0628\u0644\u0629",
     "host": "localhost",
     "user": "root",
     "pass": "",
     "sql_path": "backups\\default_database.sql",
     "number_of_zeros_code_child": "4",
-    "number_of_zeros_code_parent" : "0",
-    "prefix_code": {
-        "account": "acc_",
-        "category": "cat_",
-        "item": "it_"
-    }
+    "number_of_zeros_code_parent": "0"
 }
