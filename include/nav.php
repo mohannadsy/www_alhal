@@ -10,6 +10,7 @@
     include('helper/ready_queries_functions.php');
     include('helper/notification_functions.php');
     include('helper/html_functions.php');
+    include('helper/links.php');
 ?>
 
 <ul id='nav' class="nav nav-tabs">

@@ -6,7 +6,7 @@ include('include/nav.php');
 
 </style>
 
-<a href="open_file.php">Open File</a> <br>
+<a href="<?= OPEN_FILE ?>">Open File</a> <br>
 <a href="test_blank.php">Test Blank</a> <br>
 <a href="account_card.php">Acocunt Card</a> <br>
 <a href="bills_list.php">Bills List</a> <br>

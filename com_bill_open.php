@@ -30,8 +30,6 @@ if (isset($_GET['id'])) {
     $select_buyer_details_query = selectWhereId('accounts', $bill['buyer_id']);
     $select_buyer_details_exec = mysqli_query($con, $select_buyer_details_query);
     $buyer = mysqli_fetch_array($select_buyer_details_exec);
-
-
 }
 
 
@@ -41,10 +39,12 @@ if (isset($_GET['id'])) {
 <body>
     <form action="" method="post">
         <div class="container">
+            <div id="details">
             <label for="date">تاريخ الفاتورة</label>
-            <input readonly type="date" name="date" id="date" value="<?= $bill['date'] ?>">
+            <input readonly type="text" name="date" id="date" value="<?= $bill['date'] ?>">
             <label for="">رقم الفاتورة</label>
             <input type="text" name="code" id="" value="<?= @$bill['code'] ?>" readonly>
+            </div>
             <div class="row" style="height:200px;">
                 <div id='seller' class="col-6">
                     <div>
@@ -65,23 +65,21 @@ if (isset($_GET['id'])) {
                         <textarea readonly name="seller_note"><?= @$bill['seller_note'] ?></textarea>
                     </div>
                 </div>
-                <div class="col-6">
+                <div id="buyer" class="col-6">
                     <div>
                         <label>المشتري</label>
-                        <input <?php if(isset($buyer['name'])) echo 'readonly'?>
-                            value="<?php if(isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>"
-                            type="text" name="buyer" class="account_auto">
+                        <input <?php if (isset($buyer['name'])) echo 'readonly' ?> value="<?php if (isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>" type="text" name="buyer" class="account_auto">
                     </div>
                     <div>
                         <label>طريقة الدفع </label>
-                        <input <?php if(isset($buyer['name'])) echo 'disabled'?> type="radio" name="buyer_type_pay" checked value="cash">
+                        <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" checked value="cash">
                         <label>نقدي</label>
-                        <input <?php if(isset($buyer['name'])) echo 'disabled'?> type="radio" name="buyer_type_pay" value="agel">
+                        <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" value="agel">
                         <label>آجل</label>
                     </div>
                     <div>
                         <label>ملاحظات</label>
-                        <textarea <?php if(isset($buyer['name'])) echo 'readonly'?> name="buyer_note"><?= $bill['buyer_note']?></textarea>
+                        <textarea <?php if (isset($buyer['name'])) echo 'readonly' ?> name="buyer_note"><?= $bill['buyer_note'] ?></textarea>
                     </div>
                 </div>
             </div>
@@ -142,14 +140,14 @@ if (isset($_GET['id'])) {
             </div>
             <div id='buttons' class="row justify-content-start">
                 <div class="col-4">
-                    <button <?php if(isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
+                    <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
                     <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
                             <option value="">مشتري</option>
                         </optgroup>
                     </select>
-                    <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button>
+                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','buyer','tbl'])">طباعة</button>
                 </div>
             </div>
         </div>
@@ -173,12 +171,12 @@ if (isset($_POST['update'])) {
      * Buyer Section
      */
 
-     $update_bill_query = updateWhereId('bills' , $bill['id'] , get_array_from_array($_POST , [
-         'buyer_id' , 'buyer_type_pay' , 'buyer_note'
-     ]));
-     $update_bill_exec = mysqli_query($con , $update_bill_query);
+    $update_bill_query = updateWhereId('bills', $bill['id'], get_array_from_array($_POST, [
+        'buyer_id', 'buyer_type_pay', 'buyer_note'
+    ]));
+    $update_bill_exec = mysqli_query($con, $update_bill_query);
 
-     $current_bill_code = $bill['code'];
+    $current_bill_code = $bill['code'];
 
     if ($_POST['buyer_type_pay'] == 'cash') {
         // سند قيد
@@ -260,7 +258,7 @@ if (isset($_POST['update'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
 
-    open_window_self('com_bill_open.php?id='.$bill['id']);
+    open_window_self_id(COM_BILL_OPEN, $bill['id']);
 }
 
 ?>
@@ -336,4 +334,27 @@ include('include/footer.php');
         });
 
     })(jQuery);
+</script>
+
+
+<script>
+    function printComPillOpen(ids) {
+        var printDoc = window.open('', '', 'height=800, width=1200');
+        printDoc.document.write(`<html dir='rtl'><head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery_ui.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        </head>
+        `);
+        printDoc.document.write('<body class="container text-center"> <h1>طباعة الفاتورة </h1>');
+        for (id of ids) {
+            var id_print = document.getElementById(id).outerHTML;
+            printDoc.document.write(id_print);
+        }
+        printDoc.document.write('</body></html>');
+        printDoc.document.close();
+        printDoc.print();
+        printDoc.close();
+    }
 </script>

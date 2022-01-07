@@ -126,26 +126,32 @@ include('include/nav.php');
                                     $document_type = '';
                                     if($row['code_type'] == 'accounts') { // accounts -> رصيد افتتاحي
                                         $account_id = getId($con , 'accounts' , 'code' , $row['code_number']);
-                                        $href_link = "account_card.php?id=$account_id";
+                                        $href_link = href_id(ACCOUNT_CARD , $account_id);
                                         $document_type = 'رصيد افتتاحي';
                                     }
                                     if($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
                                         $bill_id = getId($con , 'bills' , 'code' , $row['code_number']);
-                                        $href_link = "com_bill_open.php?id=$bill_id";
+                                        $href_link = href_id(COM_BILL_OPEN , $bill_id);
                                         $document_type = 'فاتورة رقم ' . $row['code_number'];
                                     }
-                                    
+                                    // if($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
+                                    //     $bill_id = getId($con , 'mid_bonds' , 'code' , $row['code_number']);
+                                    //     $href_link = href_id(COM_BILL_OPEN , $bill_id);
+                                    //     $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                    //     $document_type = 'سند قيد لفاتورة رقم ' . $bill_code;
+                                    // }
                                     if($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
                                         $payment_bond_id = getId($con , 'payment_bonds' , 'code' , $row['code_number']);
-                                        $href_link = "payment_bonds_open.php?id=$payment_bond_id";
+                                        $href_link = href_id(PAYMENT_BONDS_OPEN , $payment_bond_id);
                                         $document_type = 'سند دفع رقم ' . $row['code_number'];;
                                     }
                                     
                                     if($row['code_type'] == 'catch_bonds') { // تابع لسند القبض
                                         $catch_bond_id = getId($con , 'catch_bonds' , 'code' , $row['code_number']);
-                                        $href_link = "catch_bonds_open.php?id=$catch_bond_id";
+                                        $href_link = href_id(CATCH_BONDS_OPEN , $catch_bond_id);
                                         $document_type = 'سند قبض رقم ' . $row['code_number'];;
                                     }
+                                    
                                     ///////////// End make links section //////////
 
 

@@ -369,7 +369,7 @@ if (isset($_POST['save'])) {
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
-    open_window_self('com_bill.php');
+    open_window_self(COM_BILL);
 }
 
 ?>
