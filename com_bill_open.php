@@ -40,18 +40,21 @@ if (isset($_GET['id'])) {
     <form action="" method="post">
         <div class="container">
             <div id="details">
-            <label for="date">تاريخ الفاتورة</label>
-            <input readonly type="text" name="date" id="date" value="<?= $bill['date'] ?>">
-            <label for="">رقم الفاتورة</label>
-            <input type="text" name="code" id="" value="<?= @$bill['code'] ?>" readonly>
+                <div id="num">
+                    <label for=""> رقم الفاتورة :</label>
+                    <input type="text" name="code" id="" value="<?= @$bill['code'] ?>" readonly>
+                </div>
+                <div>
+                    <label for="date"> تاريخ الفاتورة : </label>
+                    <input readonly type="text" name="date" id="date" value="<?= $bill['date'] ?>">
+                </div>
             </div>
             <div class="row" style="height:200px;">
                 <div id='seller' class="col-6">
                     <div>
                         <label>البائع</label>
                         <!-- <div class="ui-widget"> -->
-                        <input readonly id="seller" value="<?= @$seller['code'] . " - " . @$seller['name'] ?>" name="seller" class="account_auto" />
-
+                        <input readonly value="<?= @$seller['code'] . " - " . @$seller['name'] ?>" name="seller" class="account_auto" />
                     </div>
                     <div>
                         <label>طريقة الدفع </label>
@@ -147,7 +150,7 @@ if (isset($_GET['id'])) {
                             <option value="">مشتري</option>
                         </optgroup>
                     </select>
-                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','buyer','tbl'])">طباعة</button>
+                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button>
                 </div>
             </div>
         </div>
@@ -345,6 +348,44 @@ include('include/footer.php');
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/jquery_ui.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <style>
+        .container{
+            margin:20px;
+        }
+        table{
+            border: 2px solid #000;
+            height:200px;
+            text-align: center;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top:20px;
+        }
+        td, th {  
+            border: 2px solid #000;
+            padding: 15px;
+        }
+        #buyer{
+            padding: 15px;
+            margin:15px;
+        }
+        #details{
+            width: 100%;
+            padding: 10px;
+            margin-bottom:15px;
+        }
+        input[type=text] {
+            border: none;
+            //border-bottom: 1px solid black;
+            //text-align:center;
+            //width:100px;
+        }
+        #seller{
+            padding: 10px;
+        }
+        #num{
+            margin-bottom:10px;
+        }
+        </style>
         </head>
         `);
         printDoc.document.write('<body class="container text-center"> <h1>طباعة الفاتورة </h1>');
