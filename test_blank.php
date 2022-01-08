@@ -53,15 +53,19 @@ include('include/nav.php');
         <?php
         $select = select('accounts');
         $select_exec = mysqli_query($con, $select);
-
-        foreach (mysqli_fetch_all($select_exec) as $row)
-            echo "<tr ondblclick='open_account_with_id(\"" . $row[0] . "\")'>
+        $number_of_rows = mysqli_num_rows($select_exec);
+        $counter = 0;
+        foreach (mysqli_fetch_all($select_exec) as $row) {
+            echo "<tr id='row_$counter' ondblclick='open_account_with_id(\"" . $row[0] . "\")'>
                     <td>" .
                 $row[1]
                 . "</td>
-                </tr></a>"
+                </tr></a>";
+            $counter++;
+        }
         ?>
     </table>
+
 </div>
 <script>
     function open_account_with_id(id) {
@@ -76,24 +80,29 @@ include('include/footer.php');
 <script>
     /* Context menu only when you click in #page_wrapper (not in it's children) */
 
+    function addDictionary(menu_id, dictionary = {}) {
+        for (var element in dictionary) {
+            $(`#${menu_id}`).children(0).append(`<a href='${dictionary[element]}'><li>${element}</li></a>`);
+        }
+    }
 
-    function rightClick(container_id, menu_id, dictionary={}) {
-        $(`#${container_id}`).bind("contextmenu", function(event) {
-            for (var element in dictionary) {
-                $(`#${menu_id}`).children(0).append(`<a href='${dictionary[element]}'><li>${element}</li></a>`);
-            }
-            $(`#${menu_id}`).css({
-                "top": event.pageY + "px",
-                "left": event.pageX + "px"
-            }).show();
-            event.preventDefault();
-
-        });
+    function rightClick(container_id, menu_id, ids) {
+        for (id of ids) {
+            $(`#${id}`).bind("contextmenu", function(event) {
+                $(`#${menu_id}`).css({
+                    "top": event.pageY + "px",
+                    "left": event.pageX + "px"
+                }).show();
+                event.preventDefault();
+                
+            });
+        }
         $(`#${container_id}`).bind('click', function() {
             $(`#${menu_id}`).hide();
         });
     }
-    rightClick('container', 'contextMenu', {
-        'index_test.php':'Test Index'
+    addDictionary('contextMenu', {
+        'hello': 'hello'
     });
+    rightClick('container', 'contextMenu', ['row_0' , 'row_1' , 'row_2']);
 </script>
