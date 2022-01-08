@@ -16,11 +16,8 @@ include('include/nav.php');
         text-align:right;
     }
     .container{
-        /* margin-top: 8%; */
-        /* margin-right: 20%; */
         border-style:groove;
         background-color:#5F9EA0;
-       /* width: 60%; */
 
     }
     #categry_col{
@@ -31,6 +28,10 @@ include('include/nav.php');
     }
     #thead_col{
         text-align: center; 
+    }
+    #btn_grp{
+        /* margin-right: 10px; */
+
     }
     </style>
 </head>
@@ -46,10 +47,10 @@ include('include/nav.php');
                       <button id="search" type="button" class=" btn btn-primary">بحث</button>
 
                 <div class="col-8 "id="categry_col" >
-                    <a href="category_card.php"><button type="button" class=" btn btn-primary" name="new_category">
+                    <a href="category_card.php"><button type="button" id="btn_grp" class=" btn btn-primary" name="new_category">
                         صنف جديد
                     </button></a>
-                    <a href="item_card.php"><button type="button" class=" btn btn-primary" name="item_card">
+                    <a href="item_card.php"><button type="button" id="btn_grp" class=" btn btn-primary" name="item_card">
                          بطاقة مادة
                     </button></a>
                 </div>
@@ -57,9 +58,9 @@ include('include/nav.php');
             <div class="row justify-content-center" >
                 <div class="col-10">
                     <table class="table table-bordered table-hover">
-                        <thead class="bg-primary " id="thead_col">
+                        <thead  id="thead_col">
                                 <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">الرقم</th>
                                 <th scope="col">المادة</th>
                                 <th scope="col">رمز المادة</th>
                                 <th scope="col">الصنف</th>
@@ -89,8 +90,8 @@ include('include/nav.php');
 
             </div>
             <div class="row py-3">
-                <div class="col-11" id="close_col">
-                    <button type="button" class="btn btn-primary" name="close">
+                <div class="col-12 " id="close_col">
+                    <button type="button" class="btn btn-primary" name="close" style="margin-left:45px;">
                         إغلاق
                 
                     </button>

@@ -15,7 +15,6 @@ include('include/nav.php');
             position: relative;
         }
         .container{
-            /* margin-top:12%;  */
             position: absolute;
             top:25% ;
             left:25%;
@@ -25,6 +24,7 @@ include('include/nav.php');
             border-style:groove; 
             background-color:#5F9EA0 ;
             margin-bottom: 0;
+            font-size: 17px;
             
         }
         #category_col{
