@@ -1,10 +1,6 @@
 {
     "deafult_database": "souq",
-<<<<<<< HEAD
-    "database": "souq1",
-=======
     "database": "souq",
->>>>>>> 76aa6ad4aab0caa7ba1eb412d41428780f71a9a9
     "host": "localhost",
     "user": "root",
     "pass": "",

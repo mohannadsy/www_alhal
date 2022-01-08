@@ -53,7 +53,7 @@ include('include/nav.php');
                     <div>
                         <label>البائع</label>
                         <!-- <div class="ui-widget"> -->
-                        <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')" required id="seller" name="seller" class="account_auto" />
+                        <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')" required id="seller" id="seller" name="seller" class="account_auto" />
                         <!-- </div> -->
                         <input type="hidden" name="seller_id" value="6">
                     </div>
@@ -485,7 +485,7 @@ include('include/footer.php');
 
 <script>
     function check_account_to_insert(tags_accounts , value , button_id_to_fire = ''){
-        if(!tags_accounts.includes(value)) {
+        if(!tags_accounts.includes(value) && value != '') {
             if(confirm('هذا العميل غير موجود في قاعدة البيانات ! هل تريد انشاء بطاقة حساب له ؟')){
                 $('#iframe_account_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
@@ -493,7 +493,7 @@ include('include/footer.php');
         }
     }
     function check_item_to_insert(tags_items , value , button_id_to_fire = ''){
-        if(!tags_items.includes(value)) {
+        if(!tags_items.includes(value) && value != '') {
             if(confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')){
                 $('#iframe_item_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
