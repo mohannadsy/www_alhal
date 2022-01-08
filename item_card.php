@@ -15,26 +15,31 @@ include('include/nav.php');
         body{
             background-color: LightGray;
             box-shadow: 10px 10px 5px grey;
+            position: relative;
         }
         .container{
-            margin-top:10%;    
-        }
-        #item_col{
-            background-color:#5F9EA0 ; 
-            border-style:groove;
+            position: absolute;
+            /* margin-top:10%;     */
+            top:20% ;
+            left:20%;
+            width: 700px ;
+            height: 430px ;
             border-radius: 25px;
+            border-style:groove; 
+            background-color:#5F9EA0 ;
+            margin-bottom: 0;
+
         }
-        #button_col{
-            margin-top:5%; 
-            text-align:center;
+        #button-grp1,#button-grp2{
+            border-radius: 4px;
+            text-align: center;
+            margin: 3px;
         }
-        #button_col button{ 
-            /* padding: 10px 24px; */
-            margin-left:20px;
+
+        #button-grp1{
         }
-        #button_col a{
-            /* width: 100px; */
-            margin-left: 20px;
+        #button-grp2{
+            width: 80px;   
         }
     </style>
 </head>
@@ -61,30 +66,30 @@ include('include/nav.php');
 
 
             <div class="row justify-content-center">
-                <div id="item_col" class="col-sm-10 col-md-8 py-5">
+                <div id="item_col" class="col-sm-10 col-md-12 text-center py-5">
 
-                    <div class="form-group row">
-                        <label for="code" class="col-md-4 col-form-label text-md-right">رمز المادة</label>
+                    <div class="form-group row justify-content-center">
+                        <label for="code" class="col-md-2 col-form-label text-md-right">رمز المادة</label>
                         <div class="col-md-6">
                             <input id="code" type="text" value="<?php
                                                         if (isset($_GET['id'])) echo $item['code']; ?>" id="" class="form-control" name="code" readonly>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">المادة </label>
+                    <div class="form-group row justify-content-center">
+                        <label for="name" class="col-md-2 col-form-label text-md-right">المادة </label>
                         <div class="col-md-6">
                             <input value="<?php if (isset($_GET['id'])) echo $item['name']; ?>" type="text" class="form-control" name="name" required autofocus>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="unit" class="col-md-4 col-form-label text-md-right">وحدة القياس </label>
+                    <div class="form-group row justify-content-center">
+                        <label for="unit" class="col-md-2 col-form-label text-md-right">وحدة القياس </label>
                         <div class="col-md-6">
                             <input  value="<?php if (isset($_GET['id'])) echo $item['unit']; ?>" type="text" class="form-control" name="unit">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="category_id" class="col-md-4 col-form-label text-md-right">الصنف </label>
+                    <div class="form-group row justify-content-center">
+                        <label for="category_id" class="col-md-2 col-form-label text-md-right">الصنف </label>
                         <div class="col-md-6">
                             <select class="form-control" name="category_id" id="category_id">
                                 <?php
@@ -101,29 +106,30 @@ include('include/nav.php');
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
+                    <div class="form-group row justify-content-center">
+                        <label for="note" class="col-md-2 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
                             <textarea type="text" id="" class="form-control" name="note"><?php if (isset($_GET['id'])) echo $item['note']; ?></textarea>
                         </div>
                     </div>
 
 
-                    <div id="button_col" class="col-md-12 text-center">
-                        <a  href="item_list.php"><button type="button" class="btn btn-primary" name="view_items">استعراض المواد</button></a>
+                    <div id="button_col" class="col-md-12 text-center py-3" >
+                        <a  href="item_list.php"><button type="button"  id="button-grp1" name="view_items">استعراض المواد</button></a>
 
-                        <a  href="#" class=" btn btn-primary"  data-target="#add_category" data-toggle="modal">إضافة صنف</a>
+                        <!-- <a  href="#" class=" btn"  data-target="#add_category" data-toggle="modal">إضافة صنف</a> -->
+                        <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a>
                     
-                        <button <?php if (isset($_GET['id'])) echo 'hidden' ?> type="submit" class=" btn btn-primary" name="add">
+                        <button <?php //if (isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="add" id="button-grp2">
                             إضافة
                         </button>
-                        <button  <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
+                        <button  <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="update"id="button-grp2">
                             تعديل
                         </button>
-                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
+                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="delete" id="button-grp2">
                             حذف
                         </button>
-                        <button type="button" class="btn btn-primary" name="close">
+                        <button type="button"  name="close"  id="button-grp2">
                             إغلاق
                         </button>
                         

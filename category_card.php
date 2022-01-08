@@ -11,22 +11,36 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body{
-            justify-content:center ;
-            align-items:center ;
             background-color: LightGray;
+            position: relative;
         }
         .container{
-            margin-top:12%; 
+            /* margin-top:12%;  */
+            position: absolute;
+            top:25% ;
+            left:25%;
+            width: 600px ;
+            height: 330px ;
+            border-radius: 25px;
+            border-style:groove; 
+            background-color:#5F9EA0 ;
+            margin-bottom: 0;
+            
         }
         #category_col{
-            background-color:#5F9EA0 ;
-            border-style:groove; 
-            border-radius: 25px;
+            position: absolute;
+            width: 90%;
+            height: 90%;
         }
-        #button_col{
-            margin-top:5%;
+        #button_grp{
+            border-radius: 5px;
+            margin: 6px;
+            width: 80px;
+      
 
         }
+        
+
     </style>
 </head>
 
@@ -47,11 +61,12 @@ include('include/nav.php');
         }
         ?>
         <div class="container" >
-            <div class="row justify-content-center">
-                <div id="category_col" class="col-sm-10 col-md-8 py-5">
+            
+            <!-- <div class="row justify-content-center"> -->
+                <div id="category_col" class=" col-sm-12  col-md-12 col-lg-12 py-5"  >
 
-                    <div class="form-group row">
-                        <label for="code" class="col-md-2 col-form-label text-md-right">رمز الصنف</label>
+                    <div class="form-group row justify-content-center ">
+                        <label for="code" class=" col-sm-3 col-md-3 col-form-label text-md-right">رمز الصنف</label>
                         <div class="col-md-6">
                             <input value="<?php
                                             if (isset($_GET['id'])) echo $category['code'];
@@ -60,35 +75,38 @@ include('include/nav.php');
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="name" class="col-md-2 col-form-label text-md-right">اسم الصنف</label>
+                    <div class="form-group row justify-content-center ">
+                        <label for="name" class="col-sm-3  col-md-3 col-form-label text-md-right" >اسم الصنف</label>
                         <div class="col-md-6">
                             <input value="<?php if (isset($_GET['id'])) echo $category['name']; ?>" type="text" class="form-control" name="name" required autofocus>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="note" class="col-md-2 col-form-label text-md-right"> ملاحظات</label>
+                    <div class="form-group row justify-content-center ">
+                        <label for="note" class="col-sm-3  col-md-3 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
                             <textarea type="text" id="" class="form-control" name="note"> <?php if (isset($_GET['id'])) echo $category['note']; ?></textarea>
                            
                         </div>
                     </div>
-                    <div id="button_col" class="col-md-10 ">
-                        <button type="submit" class="btn btn-primary" name="add">
+                    
+                    <div id="button_col" class="col-sm-12  col-md-12 text-center py-4 ">
+                        <button type="submit" class="col-3" name="add" id="button_grp">
                             إضافة
                         </button>
-                        <button <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="update">
+                        <button <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
                             تعديل
                         </button>
-                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" class="btn btn-primary" name="delete">
+                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
                             حذف
                         </button>
-                        <button type="button" class="btn btn-primary" name="close">
+                        <button type="button" class="col-3" name="close" id="button_grp">
                             إغلاق
                         </button>
                     </div>
-                </div>
+
+                <!-- </div> -->
+            </div>
         </div>
     </form>
 </body>
