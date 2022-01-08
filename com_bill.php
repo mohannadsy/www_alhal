@@ -12,6 +12,35 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
     <link rel="stylesheet" href="css/styles/com_bill.css">
 </head>
+<button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
+<div id="modal_account_card" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="min-width: 1000px">
+
+    <div class="modal-content" style="min-height: 600px;"> 
+      <div class="modal-body">
+        <button onclick="" data-dismiss="modal" class="close">&times;</button>
+        <h4>Account Card</h4>
+        <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">Account Card</button>
+<div id="modal_item_card" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="min-width: 1000px">
+
+    <div class="modal-content" style="min-height: 600px;"> 
+      <div class="modal-body">
+        <button onclick="" data-dismiss="modal" class="close">&times;</button>
+        <h4>Item Card</h4>
+        <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
 <body id='body'>
     <form action="" method="post">
         <div id="contextmenu" class="container">
@@ -24,7 +53,7 @@ include('include/nav.php');
                     <div>
                         <label>البائع</label>
                         <!-- <div class="ui-widget"> -->
-                        <input required id="seller" name="seller" class="account_auto" />
+                        <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')" required id="seller" name="seller" class="account_auto" />
                         <!-- </div> -->
                         <input type="hidden" name="seller_id" value="6">
                     </div>
@@ -379,6 +408,26 @@ include('include/footer.php');
 ?>
 
 <script>
+    
+    var tags_items = [
+            <?php
+            $query =  select('items');
+            $query_exec = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_row($query_exec)) {
+                echo "'$row[9] - $row[1]',";
+            }
+            ?>
+        ];
+        var tags_accounts = [
+            <?php
+            $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
+            $query_exec = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_row($query_exec)) {
+                echo "'$row[1] - $row[2]',";
+            }
+            ?>
+        ];
+
     (function($) {
 
         // Custom autocomplete instance.
@@ -410,26 +459,6 @@ include('include/footer.php');
 
         });
 
-
-        var tags_items = [
-            <?php
-            $query =  select('items');
-            $query_exec = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_row($query_exec)) {
-                echo "'$row[9] - $row[1]',";
-            }
-            ?>
-        ];
-        var tags = [
-            <?php
-            $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
-            $query_exec = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_row($query_exec)) {
-                echo "'$row[1] - $row[2]',";
-            }
-            ?>
-        ];
-
         // Create autocomplete instances.
         $(function() {
 
@@ -439,7 +468,7 @@ include('include/footer.php');
 
             $(".account_auto").autocomplete({
                 highlightClass: "bold-text",
-                source: tags
+                source: tags_accounts
             });
 
         });
@@ -448,14 +477,35 @@ include('include/footer.php');
 </script>
 
 <script>
-    /* Context menu only when you click in #page_wrapper (not in it's children) */
-    $(document).bind("contextmenu", function(event){
-    if(event.toElement.id == 'page_wrapper'){
-    $("#contextMenu").css({"top": event.pageY + "px", "left": event.pageX + "px"}).show();
-    event.preventDefault();
+      $('#iframe_account_card').load(function(){
+        $('#iframe_account_card').contents().find('#nav').hide();
+      });
+    </script>
+
+
+<script>
+    function check_account_to_insert(tags_accounts , value , button_id_to_fire = ''){
+        if(!tags_accounts.includes(value)) {
+            if(confirm('هذا العميل غير موجود في قاعدة البيانات ! هل تريد انشاء بطاقة حساب له ؟')){
+                $('#iframe_account_card').contents().find('#name').val(value);
+                document.getElementById(button_id_to_fire).click();
+            }
+        }
     }
-    });
-    $(document).bind('click', function(){
-    $('#contextMenu').hide();
+    function check_item_to_insert(tags_items , value , button_id_to_fire = ''){
+        if(!tags_items.includes(value)) {
+            if(confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')){
+                $('#iframe_item_card').contents().find('#name').val(value);
+                document.getElementById(button_id_to_fire).click();
+            }
+        }
+    }
+    $(document).ready(function(){
+        for(let i = 0 ; i < document.getElementById('tbl').rows.length -1  ; i++){
+            $(`#items_${i}`).blur(function(){
+                check_item_to_insert(tags_items , $(`#items_${i}`).val , 'modal_item_card_button');
+            });
+            
+        }
     });
 </script>

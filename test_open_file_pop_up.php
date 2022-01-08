@@ -74,13 +74,13 @@ h4 {
 <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
 
 <div id="login" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <div class="modal-content">
+  <div class="modal-dialog" style="min-width: 1000px">
+
+    <div class="modal-content" style="min-height: 600px;"> 
       <div class="modal-body">
-        <button data-dismiss="modal" class="close">&times;</button>
-        <h4>Login</h4>
-        <iframe src="item_card.php#form" frameborder="0"></iframe>
+        <button onclick="" data-dismiss="modal" class="close">&times;</button>
+        <h4>Item Account Card</h4>
+        <iframe id="iframe" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
       </div>
     </div>
   </div>  
@@ -89,3 +89,8 @@ h4 {
 <?php
 include('include/footer.php');
 ?>
+    <script>
+      $('iframe').load(function(){
+        $('iframe').contents().find('#nav').hide();
+      });
+    </script>
