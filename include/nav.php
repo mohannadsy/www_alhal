@@ -45,4 +45,7 @@
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.history.back()">BACK</button>
   </li>
+  <li class="nav-item">
+    <button class="nav-link" type="button" onclick="window.location.reload()">Reload</button>
+  </li>
 </ul>

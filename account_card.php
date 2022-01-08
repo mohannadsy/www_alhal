@@ -79,7 +79,7 @@ include('include/nav.php');
                             <div class="col-10">
                                 <label for="" class="form-label"> الحساب</label>
                                 <div class="input-group has-validation">
-                                    <input name="name" type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
+                                    <input id="name" name="name" type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
                                     <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
                                 </div>
 
