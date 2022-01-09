@@ -2,7 +2,7 @@
 include('include/nav.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -17,27 +17,32 @@ include('include/nav.php');
             text-align: right;
             position: relative;
             font-family: Arial, Helvetica, sans-serif;
-
         }
         .container-fluide{
             position: absolute;
             border-style: groove;
-            /* top:20% ; */
-            /* left:22%; */
-            /* width: 700px ; */
-            /* height: 545px ; */
+            top:5% ;
+            width: 1200px ;
+            /* height: 700px ; */
             border-radius: 25px;
             border-style:groove; 
             background-color:#5F9EA0 ;
-            font-size: 17px;
-            
+            font-size: 19px;
         }
-        td{
-            
+        td input{
+           width:100%;
+           height:100%;
+           margin:0px;
+           padding:0px;
         }
-
-
-
+        table{
+            width:60%;
+        }
+        #btn-grp{
+            border-radius: 5px;
+            margin: 6px;
+            width: 80px;
+        }
     </style>
 </head>
 
@@ -75,47 +80,87 @@ include('include/nav.php');
 <body id='body'>
     <form action="" method="post">
         <div id="contextmenu" class="container-fluide">
-            <label for="date">تاريخ الفاتورة</label>
-            <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
-            <label for="">رقم الفاتورة</label>
-            <input type="text" name="code" id="" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'parent') ?>" readonly>
-            <div class="row" style="height:200px;">
+            <div class="row py-4">
+                <div class="col-4">
+                    <h2>فاتورة كمسيون</h2>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <label for="date" class="col-5">تاريخ الفاتورة</label>
+                        <div class="col-6">
+                            <input type="date" name="date" id="date"  value="<?php echo date('Y-m-d'); ?>" class="form-control"
+                            style="padding:2px">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <label for="" class="col-5">رقم الفاتورة</label>
+                        <div class="col-6">
+                            <input type="text" name="code" id="" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'parent') ?>" 
+                            readonly class="form-control" style="padding:2px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
                 <div id='seller' class="col-6">
-                    <div>
-                        <label>البائع</label>
+                    <div class="row">
+                        <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
-                        <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')" required id="seller" id="seller" name="seller" class="account_auto" />
-                        <!-- </div> -->
-                        <input type="hidden" name="seller_id" value="6">
+                        <div class="col-4">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')"
+                             required id="seller" id="seller" name="seller" class="account_auto form-control"
+                             style="padding:2px" />
+                            <!-- </div> -->
+                            <input type="hidden" name="seller_id" value="6">
+                        </div>
+                        
                     </div>
-                    <div>
-                        <label>طريقة الدفع </label>
-                        <input type="radio" name="seller_type_pay" checked value="cash">
-                        <label>نقدي</label>
-                        <input type="radio" name="seller_type_pay" value="agel">
-                        <label>آجل</label>
+                    <div class="row">
+                        <label class="col-2">طريقة الدفع </label>
+                        <div class="col-2">
+                            <input type="radio" name="seller_type_pay" checked value="cash">
+                            <label>نقدي</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" name="seller_type_pay" value="agel">
+                            <label>آجل</label>
+                        </div>
                     </div>
-                    <div>
-                        <label>ملاحظات</label>
-                        <textarea name="seller_note"></textarea>
+                    <div class="row">
+                        <label class="col-2">ملاحظات</label>
+                        <div class="col-4">
+                            <textarea name="seller_note" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div>
-                        <label>المشتري</label>
-                        <input type="text" name="buyer" class="account_auto">
-                        <input type="hidden" name="buyer_id" value="7">
+                    <div class="row">
+                        <label class="col-2">المشتري</label>
+                        <div class="col-4">
+                            <input type="text" name="buyer" class="account_auto form-control"
+                            style="padding:2px">
+                            <input type="hidden" name="buyer_id" value="7">
+                        </div>
                     </div>
-                    <div>
-                        <label>طريقة الدفع </label>
-                        <input type="radio" name="buyer_type_pay" checked value="cash">
-                        <label>نقدي</label>
-                        <input type="radio" name="buyer_type_pay" value="agel">
-                        <label>آجل</label>
+
+                    <div class="row">
+                        <label class="col-2">طريقة الدفع </label>
+                        <div class="coi-2">
+                            <input type="radio" name="buyer_type_pay" checked value="cash">
+                            <label>نقدي</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" name="buyer_type_pay" value="agel">
+                            <label>آجل</label>
+                        </div>
                     </div>
-                    <div>
-                        <label>ملاحظات</label>
-                        <textarea name="buyer_note"></textarea>
+                    <div class="row">
+                        <label class="col-2">ملاحظات</label>
+                        <div class="col-4">
+                            <textarea name="buyer_note"  class="form-control"></textarea>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -143,25 +188,37 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="">
-                <label>الإجمالي</label>
-                <input type="text" id="total_price" name="total_price" value="0" readonly>
+            <div class="row justify-content-end px-5" >
+                    <label class="col-1">الإجمالي</label>
+                    <div class="col-2">
+                        <input type="text" id="total_price" name="total_price" value="0" readonly class="form-control"
+                        style="padding:2px">
+                    </div>
             </div>
-            <div class="row justify-content-end">
-                <label>الكمسيون</label>
-                <input onblur="count_total_price()" onfocus="this.value = ''" type="text" id="com_ratio" name="com_ratio" value="0">
-                <label>قيمته</label>
-                <input type="text" name="com_value" id="com_value" value="0" readonly>
+            <div class="row justify-content-end px-5">
+                <label >الكمسيون</label>
+                <div class="col-1">
+                    <input onblur="count_total_price()" onfocus="this.value = ''" type="text" id="com_ratio" 
+                    name="com_ratio" value="0" class="form-control" style="padding:2px">
+                </div>
+                <label >قيمته</label>
+                <div class="col-1">
+                    <input type="text" name="com_value" id="com_value" value="0" readonly class="form-control"
+                    style="padding:2px">
+                </div>
             </div>
-            <div class="row justify-content-end">
-                <label>الصافي</label>
-                <input type="text" name="real_price" id="real_price" value="0" readonly>
+            <div class="row justify-content-end px-5">
+                <label class="col-1">الصافي</label>
+                <div class="col-2">
+                    <input type="text" name="real_price" id="real_price" value="0" readonly class="form-control"
+                    style="padding:2px">
+                </div>
             </div>
-            <div id='buttons' class="row justify-content-start">
-                <div class="col-4">
-                    <button type="submit" name="save">حفظ</button>
-                    <button type="submit" hidden name="modify">تعديل</button>
-                    <button type="submit" hidden name="delete">حذف</button>
+            <div id='buttons' class="row justify-content-center">
+                <div class="col-5">
+                    <button type="submit" name="save"id="btn-grp">حفظ</button>
+                    <button type="submit" name="modify" id="btn-grp">تعديل</button>
+                    <button type="submit" name="delete" id="btn-grp">حذف</button>
                     <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
@@ -169,15 +226,16 @@ include('include/nav.php');
                         </optgroup>
                     </select>
                     <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
-                    <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         طباعة
                     </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
                             <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
                             <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

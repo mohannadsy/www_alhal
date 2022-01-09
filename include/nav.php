@@ -18,14 +18,11 @@
     <a class="nav-link active" href="index.php">Home</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ملف</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
-    </div>
+      <a class="dropdown-item" href="#">فتح ملف</a>
+      <a class="dropdown-item" href="#">ملف جديد</a>
+      <a class="dropdown-item" href="#">استيراد</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
