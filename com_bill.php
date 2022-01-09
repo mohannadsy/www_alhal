@@ -28,8 +28,6 @@ include('include/nav.php');
             border-style:groove; 
             background-color:#5F9EA0 ;
             font-size: 19px;
-            
-        
         }
         td input{
            width:100%;
