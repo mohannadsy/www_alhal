@@ -10,8 +10,39 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
-    <link rel="stylesheet" href="css/styles/com_bill.css">
+    <!-- <link rel="stylesheet" href="css/styles/com_bill.css"> -->
+    <style>
+        body{
+            background-color: LightGray;
+            text-align: right;
+            position: relative;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+        .container-fluide{
+            position: absolute;
+            border-style: groove;
+            /* top:20% ; */
+            /* left:22%; */
+            /* width: 700px ; */
+            /* height: 545px ; */
+            border-radius: 25px;
+            border-style:groove; 
+            background-color:#5F9EA0 ;
+            font-size: 17px;
+            
+        }
+        td{
+            
+        }
+
+
+
+    </style>
 </head>
+
+
+
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
 <div id="modal_account_card" class="modal fade" role="dialog">
   <div class="modal-dialog" style="min-width: 1000px">
@@ -43,7 +74,7 @@ include('include/nav.php');
 
 <body id='body'>
     <form action="" method="post">
-        <div id="contextmenu" class="container">
+        <div id="contextmenu" class="container-fluide">
             <label for="date">تاريخ الفاتورة</label>
             <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
             <label for="">رقم الفاتورة</label>
@@ -90,24 +121,27 @@ include('include/nav.php');
             </div>
             <button hidden type="button" id="add_col">adding column</button>
             <button type="button" id="add_row">adding Row</button>
+
             <div class="row justify-content-center">
-                <table contenteditable='false' class="col-10 table table-hover table-bordered  text-center" name="table" id="tbl">
-                    <thead class="text-center">
-                        <tr>
-                            <th contenteditable='false'>الرقم</th>
-                            <th contenteditable='false'>المادة</th>
-                            <th contenteditable='false'>الوحدة</th>
-                            <!-- <th contenteditable='false'>عدد العبوات</th> -->
-                            <th contenteditable='false'>وزن قائم</th>
-                            <th contenteditable='false'>وزن الصافي</th>
-                            <th contenteditable='false'> الإفرادي </th>
-                            <th contenteditable='false'>الإجمالي </th>
-                            <th id="notes" contenteditable='false'>ملاحظات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="col-12">
+                    <table contenteditable='false' class=" table table-hover table-bordered  text-center" name="table" id="tbl">
+                        <thead class="text-center">
+                            <tr>
+                                <th contenteditable='false'>الرقم</th>
+                                <th contenteditable='false'>المادة</th>
+                                <th contenteditable='false'>الوحدة</th>
+                                <!-- <th contenteditable='false'>عدد العبوات</th> -->
+                                <th contenteditable='false'>وزن قائم</th>
+                                <th contenteditable='false'>وزن الصافي</th>
+                                <th contenteditable='false'> الإفرادي </th>
+                                <th contenteditable='false'>الإجمالي </th>
+                                <th id="notes" contenteditable='false'>ملاحظات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="">
                 <label>الإجمالي</label>

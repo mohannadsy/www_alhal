@@ -30,7 +30,7 @@ function createCell(cell, text, style, id, name, row_number) {
 
     div.setAttribute('id', id + '_' + row_number);
     div.setAttribute('name', name);
-
+    div.setAttribute('style', 'min-width:100%; min-height:100%; padding:2%; border-radius:5px;');
     if (text == '0' || text == '2' || text == '4' || text == '6') { // 0 => numbers || 2 => units || 4 => real_weights || 6 => toal_prices
         div.setAttribute('readonly', 'true');
     }

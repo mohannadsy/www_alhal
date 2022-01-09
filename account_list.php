@@ -45,7 +45,7 @@ include('include/nav.php');
                         <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                     </div>
                     <div class="col-2" >
-                      <button id="search" type="button" class=" btn btn-primary">بحث</button>
+                      <button id="search" type="button" class=" btn btn-primary" >بحث</button>
                     </div>
                     
                 <div class="col-6" id="new_account_col">

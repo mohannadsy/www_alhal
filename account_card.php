@@ -24,31 +24,17 @@ include('include/nav.php');
             top:20% ;
             left:22%;
             width: 700px ;
-            height: 530px ;
+            height: 545px ;
             border-radius: 25px;
             border-style:groove; 
             background-color:#5F9EA0 ;
             margin-bottom: 0;
             font-size: 17px;
-
+            padding-top: 10px;
         }
-        #code{
-            
-        }
-
-        #account_col {
-            /* padding: 0px 50px 0px ; */
-
-
-        }
-
-        #connect_col {
-            /* padding: 0px 50px 0px ; */
-        }
-
         #button_col {
-            text-align: start;
-
+            text-align: center;
+            margin-top: 10px;
         }
         #btn-grp{
             border-radius: 4px;
@@ -78,11 +64,11 @@ include('include/nav.php');
             <div class="row">
 
                 <div id="account_col" class="col-md-6">
-                    <h4 class="mb-3">معلومات الحساب</h4>
+                    <h4 class="mb-3 ">معلومات الحساب</h4>
                         <div class="row ">
                             <div class="col-12">
-                                <label for="code" class="col-form-label">رمز الحساب</label>
-                                <div class="col-md-6 " >
+                                <label for="code" class="col-form-label" style="margin-right: 15px;">رمز الحساب</label>
+                                <div class="col-md-10 " >
                                     <input type="text" id="code" name="code" class="form-control" readonly value="<?php
                                                                                                                     if (isset($account['code'])) echo $account['code'];
                                                                                                                     else
@@ -90,7 +76,7 @@ include('include/nav.php');
                                 </div>
                             </div>
                             <div class="col-12" >
-                                <label for="" class="form-label"> الحساب</label>
+                                <label for="" class="form-label" style="margin-right: 15px;"> الحساب</label>
                                 <div class="input-group col-md-10 has-validation">
                                     <input id="name" name="name" type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
                                     <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
@@ -98,7 +84,7 @@ include('include/nav.php');
 
                             </div>
                             <div class="col-10 py-3">
-                                <label for="account_id" class="form-label"> الحساب الرئيسي</label>
+                                <label for="account_id" class="form-label" style="margin-right: 15px;"> الحساب الرئيسي</label>
 
                                 <select class="form-select" name="account_id" id="account_id" required>
                                     <option value="0"> حساب رئيسي</option>
@@ -117,13 +103,13 @@ include('include/nav.php');
                     <h4 class="mb-3"> الرصيدالافتتاحي</h4>
                         <div class="row">
                             <div class="col-12" >
-                                <label for="maden" class="form-label"> مدين</label>
+                                <label for="maden" class="form-label" style="margin-right: 15px;"> مدين</label>
                                 <div class="input-group col-md-10">
                                     <input type="number" name="maden" class="form-control" id="" value="<?php if (isset($account['maden']) && $account['maden'] > 0) echo $account['maden'] ?>">
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="daen" class="form-label"> دائن</label>
+                                <label for="daen" class="form-label" style="margin-right: 15px;"> دائن</label>
                                 <div class="input-group col-md-10">
                                     <input type="number" name="daen" class="form-control" id="" value="<?php if (isset($account['daen']) && $account['daen'] < 0) echo  trim($account['daen'], '-') ?>">
                                 </div>
