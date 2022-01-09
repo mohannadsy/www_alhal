@@ -143,9 +143,23 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <label for="">قيمة الكمسيون الكلية</label>
-            <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
-            <div class="row justify-content-end py-2">
+            <div class="row justify-content-end " style="padding-left: 65px;"> 
+                <div class="px-1" >       
+                    <label for="">إجمالي الفواتير  </label>
+                        <input type="text"  readonly id="" value="">
+                </div>
+                    
+                    <div  class="px-1">
+                    <label for="">قيمة الكمسيون </label>
+                    <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
+                    </div>
+                    
+                    <div >
+                    <label for="" class="px-1">صافي الفواتير  </label>
+                    <input type="text"  readonly id="" value="">
+                    </div>
+            </div>
+                    <div class="row justify-content-end py-2">
                 <div class="col-2">
                     <button type="submit" name="print">طباعة</button>
                     <button type="submit" name="close">إغلاق</button>
