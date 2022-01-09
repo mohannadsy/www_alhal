@@ -25,12 +25,12 @@ function createCell(cell, text, style, id, name, row_number) {
     var div = document.createElement('input'), // create DIV element
         txt = document.createTextNode(text); // create text node
     // div.appendChild(txt);                    // append text node to the DIV
-    div.setAttribute('class', style + ' text-center'); // set DIV class attribute
+    //div.setAttribute('class', style + ' text-center'); // set DIV class attribute
     div.setAttribute('className', style); // set DIV class attribute for IE (?!)
 
     div.setAttribute('id', id + '_' + row_number);
     div.setAttribute('name', name);
-    div.setAttribute('style', 'min-width:100%; min-height:100%; padding:2%; border-radius:5px;');
+    div.setAttribute('style', 'border-radius:5px; text-align:center; margin:0px; padding:0px;');
     if (text == '0' || text == '2' || text == '4' || text == '6') { // 0 => numbers || 2 => units || 4 => real_weights || 6 => toal_prices
         div.setAttribute('readonly', 'true');
     }
