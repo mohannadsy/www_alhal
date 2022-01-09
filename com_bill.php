@@ -480,6 +480,9 @@ include('include/footer.php');
       $('#iframe_account_card').load(function(){
         $('#iframe_account_card').contents().find('#nav').hide();
       });
+      $('#iframe_item_card').load(function(){
+        $('#iframe_item_card').contents().find('#nav').hide();
+      });
     </script>
 
 
