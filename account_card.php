@@ -15,33 +15,46 @@ include('include/nav.php');
             color: var(--bs-body-color);
             background-color: LightGray;
             text-align: right;
+            position: relative;
         }
 
         .container {
-            margin-top: 8%;
-            margin-right: 20%;
+            position: absolute;
             border-style: groove;
-            width: 60%;
+            top:20% ;
+            left:22%;
+            width: 700px ;
+            height: 530px ;
+            border-radius: 25px;
+            border-style:groove; 
+            background-color:#5F9EA0 ;
+            margin-bottom: 0;
+            font-size: 17px;
 
+        }
+        #code{
+            
         }
 
         #account_col {
-            background-color: #5F9EA0;
             /* padding: 0px 50px 0px ; */
 
 
         }
 
         #connect_col {
-            background-color: #5F9EA0;
             /* padding: 0px 50px 0px ; */
         }
 
         #button_col {
-            background-color: #5F9EA0;
-            padding: 5px;
-            text-align: left;
+            text-align: start;
 
+        }
+        #btn-grp{
+            border-radius: 4px;
+            text-align: center;
+            /* margin: 3px; */
+            width: 80px;
         }
     </style>
 </head>
@@ -67,18 +80,18 @@ include('include/nav.php');
                 <div id="account_col" class="col-md-6">
                     <h4 class="mb-3">معلومات الحساب</h4>
                         <div class="row ">
-                            <div class="col-10">
+                            <div class="col-12">
                                 <label for="code" class="col-form-label">رمز الحساب</label>
-                                <div class="col-md-6">
+                                <div class="col-md-6 " >
                                     <input type="text" id="code" name="code" class="form-control" readonly value="<?php
                                                                                                                     if (isset($account['code'])) echo $account['code'];
                                                                                                                     else
                                                                                                                         echo get_auto_code($con, "accounts", "code", "", "parent", 'account_id', '0')  ?>">
                                 </div>
                             </div>
-                            <div class="col-10">
+                            <div class="col-12" >
                                 <label for="" class="form-label"> الحساب</label>
-                                <div class="input-group has-validation">
+                                <div class="input-group col-md-10 has-validation">
                                     <input id="name" name="name" type="text" class="form-control" placeholder=" اسم الحساب" required value="<?php if (isset($account['name'])) echo $account['name'] ?>">
                                     <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
                                 </div>
@@ -103,15 +116,15 @@ include('include/nav.php');
                         </div>
                     <h4 class="mb-3"> الرصيدالافتتاحي</h4>
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-12" >
                                 <label for="maden" class="form-label"> مدين</label>
-                                <div class="input-group">
+                                <div class="input-group col-md-10">
                                     <input type="number" name="maden" class="form-control" id="" value="<?php if (isset($account['maden']) && $account['maden'] > 0) echo $account['maden'] ?>">
                                 </div>
                             </div>
-                            <div class="col-10">
+                            <div class="col-12">
                                 <label for="daen" class="form-label"> دائن</label>
-                                <div class="input-group">
+                                <div class="input-group col-md-10">
                                     <input type="number" name="daen" class="form-control" id="" value="<?php if (isset($account['daen']) && $account['daen'] < 0) echo  trim($account['daen'], '-') ?>">
                                 </div>
 
@@ -158,16 +171,16 @@ include('include/nav.php');
 
 
 
-            <div class="row">
+            <div class="row py-4">
                 <div class="col-md-12" id="button_col">
 
-                    <button type="submit" class="btn btn-primary " <?php if (isset($account['name'])) echo "hidden" ?> name="add">إضافة</button>
+                    <button type="submit" id="btn-grp" class="" <?php //if (isset($account['name'])) echo "hidden" ?> name="add">إضافة</button>
 
-                    <button type="submit" class="btn btn-primary" <?php if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+                    <button type="submit" id="btn-grp" class="" <?php //if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
 
-                    <button type="submit" class="btn btn-primary" hidden name="delete">حذف</button>
+                    <button type="submit" id="btn-grp" class=""  name="delete">حذف</button>
 
-                    <button type="button" class="btn btn-primary" name="close">إغلاق</button>
+                    <button type="button" id="btn-grp" class="" name="close">إغلاق</button>
                 </div>
             </div>
 

@@ -16,6 +16,7 @@ include('include/nav.php');
             background-color: LightGray;
             box-shadow: 10px 10px 5px grey;
             position: relative;
+            text-align: right;
         }
         .container{
             position: absolute;
@@ -28,6 +29,7 @@ include('include/nav.php');
             border-style:groove; 
             background-color:#5F9EA0 ;
             margin-bottom: 0;
+            font-size: 17px;
 
         }
         #button-grp1,#button-grp2{
@@ -69,7 +71,7 @@ include('include/nav.php');
                 <div id="item_col" class="col-sm-10 col-md-12 text-center py-5">
 
                     <div class="form-group row justify-content-center">
-                        <label for="code" class="col-md-2 col-form-label text-md-right">رمز المادة</label>
+                        <label for="code" class="col-md-3 col-form-label text-md-right">رمز المادة</label>
                         <div class="col-md-6">
                             <input id="code" type="text" value="<?php
                                                         if (isset($_GET['id'])) echo $item['code']; ?>" id="" class="form-control" name="code" readonly>
@@ -77,19 +79,19 @@ include('include/nav.php');
                     </div>
 
                     <div class="form-group row justify-content-center">
-                        <label for="name" class="col-md-2 col-form-label text-md-right">المادة </label>
+                        <label for="name" class="col-md-3 col-form-label text-md-right">المادة </label>
                         <div class="col-md-6">
                             <input value="<?php if (isset($_GET['id'])) echo $item['name']; ?>" type="text" class="form-control" name="name" required autofocus>
                         </div>
                     </div>
                     <div class="form-group row justify-content-center">
-                        <label for="unit" class="col-md-2 col-form-label text-md-right">وحدة القياس </label>
+                        <label for="unit" class="col-md-3 col-form-label text-md-right">وحدة القياس </label>
                         <div class="col-md-6">
                             <input  value="<?php if (isset($_GET['id'])) echo $item['unit']; ?>" type="text" class="form-control" name="unit">
                         </div>
                     </div>
                     <div class="form-group row justify-content-center">
-                        <label for="category_id" class="col-md-2 col-form-label text-md-right">الصنف </label>
+                        <label for="category_id" class="col-md-3 col-form-label text-md-right">الصنف </label>
                         <div class="col-md-6">
                             <select class="form-control" name="category_id" id="category_id">
                                 <?php
@@ -107,7 +109,7 @@ include('include/nav.php');
                     </div>
 
                     <div class="form-group row justify-content-center">
-                        <label for="note" class="col-md-2 col-form-label text-md-right"> ملاحظات</label>
+                        <label for="note" class="col-md-3 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-6">
                             <textarea type="text" id="" class="form-control" name="note"><?php if (isset($_GET['id'])) echo $item['note']; ?></textarea>
                         </div>

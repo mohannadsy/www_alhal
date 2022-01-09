@@ -16,11 +16,9 @@ include('include/nav.php');
         text-align:right;
     }
     .container{
-        /* margin-top: 8%; */
-        /* margin-right: 20%; */
         border-style:groove;
         background-color:#5F9EA0;
-        /* width: 60%; */
+    
 
     }
     #search{
@@ -58,17 +56,17 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-center" >
                 <div class="col-10">
-                    <table class=" text-center table table-bordered table-hover">
-                        <thead class="text-center bg-primary ">
-                                <tr>
-                                <th scope="col">#</th>
+                    <table class=" table table-bordered table-hover text-center">
+                        <thead class="">
+                            <tr>
+                                <th scope="col ">الرقم</th>
                                 <th scope="col">الحساب</th>
                                 <th scope="col">له</th>
                                 <th scope="col">علينا</th>
-                                </tr>
+                            </tr>
                         </thead>
                         <tbody id="show">
-                            
+                        
                         </tbody>
                     </table>
 
