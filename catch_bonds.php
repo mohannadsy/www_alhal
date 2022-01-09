@@ -15,17 +15,37 @@ include('include/nav.php');
         body {
             text-align: right;
             background-color: LightGray;
+            position: relative;
         }
 
         .container {
+            position: absolute;
             background-color: #5F9EA0;
             border-style: groove;
-            /* width: 50%; */
-            margin-top: 5%;
+            border-radius: 25px;
+            top:13% ;
+            left:20%;
+            width: 1000px ;
+            height: 620px ;
+            font-size: 17px;
+            padding: 5px;
         }
 
         #res_number {
             column-width: 50px;
+        }
+        #res_num{
+            padding-right: 125px;
+
+        }
+        h2,#inf_row{
+            padding-right: 20px;
+        }
+        #btn-grp{
+            border-radius: 4px;
+            text-align: center;
+            margin: 1px;
+            width: 80px;
         }
     </style>
 </head>
@@ -38,7 +58,7 @@ include('include/nav.php');
                     <h2> سند قبض</h2>
                 </div>
                 <div class="col-6" id="receipt_number">
-                    <div class="row justify-content-end" style="padding-top: 10px;">
+                    <div class="row" style=" padding-top: 10px; padding-right: 30px; ">
                         <label name=" "> رقم الإيصال</label>
                         <div class="col-md-3">
                             <input type="text" value="<?php echo get_auto_code($con, 'catch_bonds', 'code', '', 'parent') ?>" class="form-control" name="code" readonly>
@@ -46,42 +66,42 @@ include('include/nav.php');
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center py-3" style="background-color: #5F9EA0;">
-                <div id="" class="col-sm-10 col-md-6">
+            <div class="row py-3" id="inf_row" >
+                <div id="" class="col-sm-8 col-md-4">
                     <div class="form-group row">
-                        <label class="col-md-4 col-form-label"> الحساب</label>
-                        <div class="col-md-6">
-                            <input type="text" onclick="return this.value=''" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
+                        <label class="col-sm-6 col-md-3 col-form-label"> الحساب</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-4 col-form-label ">التاريخ </label>
-                        <div class="col-md-6">
+                        <label class="col-sm-6 col-md-3 col-form-label ">التاريخ </label>
+                        <div class="col-md-9">
                             <input type="date" class="form-control" name="date" id="date" min="" max="" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                 </div>
-                <div id="" class="col-sm-10 col-md-6">
+                <div id="" class="col-sm-10 col-md-5">
                     <div class="form-group row">
-                        <label class="col-md-4 col-form-label text-md-right">العملة </label>
-                        <div class="col-md-6">
+                        <label class="col-md-3 col-form-label text-md-right">العملة </label>
+                        <div class="col-md-8">
                             <select name="currency" class="form-control">
                                 <option value="syrian-bounds">ليرة سورية</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="note" class="col-md-4 col-form-label text-md-right"> ملاحظات</label>
-                        <div class="col-md-6">
+                        <label for="note" class="col-sm-6 col-md-3 col-form-label text-md-right"> ملاحظات</label>
+                        <div class="col-md-8">
                             <textarea rows="2" type="text" id="" class="form-control" name="notes"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-10">
+            <div class="row" style=" padding-right: 20px;">
+                <div class="col-11">
                     <table id="tbl" class=" text-center table table-bordered table-hover">
-                        <thead class="text-center bg-primary ">
+                        <thead class="text-center ">
                             <tr>
                                 <th scope="col">رقم</th>
                                 <th scope="col">دائن</th>
@@ -92,21 +112,21 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end px-5">
+            <div class="row justify-content-end px-5" style="padding-left:70px ;">
                 <label for="total" class="col-form-label" id="res_number"> المجموع</label>
-                <div class="col-md-2">
+                <div class="col-md-3"  style="padding-left: 60px;">
                     <input id="total" type="text" id="resault" class="form-control" name="total">
                 </div>
             </div>
-            <div class="row justify-content-end py-3">
+            <div class="row justify-content-end  py-3 px-5">
                 <div class="col-md-4" id='buttons'>
-                    <button type="submit" class=" btn btn-primary" name="add">
+                    <button type="submit" class="" id="btn-grp" name="add">
                         إضافة
                     </button>
-                    <button type="button" class=" btn btn-primary" name="print">
+                    <button type="button" class="" id="btn-grp" name="print">
                         طباعة
                     </button>
-                    <button type="button" class="btn btn-primary" name="close">
+                    <button type="button" class="" id="btn-grp" name="close">
                         إغلاق
                     </button>
                 </div>

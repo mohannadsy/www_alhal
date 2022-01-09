@@ -8,7 +8,7 @@ include('include/nav.php');
 <a href="account_list.php">قائمة الحساب</a> <br>
 <a href="item_list.php">قائمة المواد</a> <br>
 <a href="payment_bonds.php"> test  payment </a> <br>
-<a href="rgd_catch.php"> test  catch </a> <br>
+<a href="catch_bonds.php"> test  catch </a> <br>
 <a href="report_item.php">حركة  مادة</a> <br> 
 <a href="report_comission.php">حركة كمسيون</a> <br> 
 <a href="accountStatment.php">كشف حساب</a> <br>
