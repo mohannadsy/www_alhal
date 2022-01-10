@@ -21,7 +21,8 @@ include('include/nav.php');
         .container-fluide{
             position: absolute;
             border-style: groove;
-            top:5% ;
+            top:5%;
+            
             width: 1200px ;
             /* height: 700px ; */
             border-radius: 25px;
