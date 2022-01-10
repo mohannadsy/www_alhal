@@ -138,7 +138,7 @@ include('include/nav.php');
                                         $bill_id = get_value_from_table_using_column($con , 'mid_bonds' , 'code' , $row['code_number'] , 'bill_id');
                                         $href_link = href_id(COM_BILL_OPEN , $bill_id);
                                         // $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
-                                        $document_type = 'سند قيد لفاتورة رقم ' . $bill_id;
+                                        $document_type = 'فاتورة رقم ' . $bill_id;
                                     }
                                     if($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
                                         $payment_bond_id = getId($con , 'payment_bonds' , 'code' , $row['code_number']);
