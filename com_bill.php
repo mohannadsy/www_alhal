@@ -251,7 +251,7 @@ include('include/nav.php');
 if (isset($_POST['save'])) {
 
 
-
+    $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
     // get seller id from seller code
 
     // $seller_code = substr($_POST['seller'] , 0 , strpos($_POST['seller'] , '-')-1);
@@ -329,7 +329,7 @@ if (isset($_POST['save'])) {
         $_POST['code_number'] = $_POST['code'];
         $_POST['code_type'] = 'mid_bonds';
         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type', 'note'
+            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 

@@ -160,11 +160,11 @@ include('include/nav.php');
             <div class="row py-4">
                 <div class="col-md-12" id="button_col">
 
-                    <button type="submit" id="btn-grp" class="" <?php //if (isset($account['name'])) echo "hidden" ?> name="add">إضافة</button>
+                    <button type="submit" id="btn-grp" class="" <?php if (isset($account['name'])) echo "disabled" ?> name="add">إضافة</button>
 
-                    <button type="submit" id="btn-grp" class="" <?php //if (!isset($account['name'])) echo "hidden" ?> name="update">تعديل</button>
+                    <button type="submit" id="btn-grp" class="" <?php if (!isset($account['name'])) echo "disabled" ?> name="update">تعديل</button>
 
-                    <button type="submit" id="btn-grp" class=""  name="delete">حذف</button>
+                    <button type="submit" id="btn-grp" class="" <?php if (!isset($account['name'])) echo "disabled" ?> name="delete">حذف</button>
 
                     <button type="button" id="btn-grp" class="" name="close">إغلاق</button>
                 </div>
