@@ -13,11 +13,17 @@ include('include/nav.php');
         body {
             text-align: right;
             background-color: LightGray;
+            position: relative;
         }
 
         .container {
             background-color: #5F9EA0;
             border-style: groove;
+            font-size: 17px;
+            border-radius: 25px;
+            position: absolute;
+            left: 12%;
+            top:10%;
 
         }
 
@@ -64,7 +70,7 @@ include('include/nav.php');
                     </div>
 
                     <div class="row justify-content-center py-2">
-                        <div class="col-6">
+                        <div class="col-7">
                             <input type="text" class="text_search" name="text_search" id="text_search">
                         </div>
                         <div class="col-2">
