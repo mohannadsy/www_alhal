@@ -2,7 +2,7 @@
 include('include/nav.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -13,11 +13,18 @@ include('include/nav.php');
         body {
             text-align: right;
             background-color: LightGray;
+            position: relative;
+            
         }
 
         .container {
             background-color: #5F9EA0;
             border-style: groove;
+            font-size: 17px;
+            border-radius: 25px;
+            position: absolute;
+            left: 12%;
+            top:10%;
         }
 
         #form_input {
@@ -64,7 +71,7 @@ include('include/nav.php');
                     </div>
 
                     <div class="row justify-content-center py-2">
-                        <div class="col-6">
+                        <div class="col-7">
                             <input onclick="return this.value=''" type="text" class="text_search" name="text_search" id="text_search">
                         </div>
                         <div class="col-2">
