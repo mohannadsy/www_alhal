@@ -49,7 +49,7 @@ include('include/nav.php');
                     </div>
                     
                 <div class="col-6" id="new_account_col">
-                    <a href="account_card.php"><button type="button" class=" btn btn-primary" name="new_account">
+                    <a href="<?=ACCOUNT_CARD?>"><button type="button" class=" btn btn-primary" name="new_account">
                         حساب جديد
                     </button></a>
                 </div>

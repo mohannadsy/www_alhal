@@ -122,7 +122,7 @@ document.querySelector('#add_row').onclick = appendRow;
 
 function deafultRows() {
     var i = 0;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 5; i++) {
         appendRow(i);
     }
 }

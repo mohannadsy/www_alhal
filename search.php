@@ -56,7 +56,9 @@ if (isset($_POST["account_search_main"])) {
     }
     echo $output;
 }
-
+/**
+ * linked to account list file
+ */
 if (isset($_POST["account_search_part"])) {
     $output = '';
     $query = "select * from accounts where code like '%" . $_POST['account_search_part'] . "%'
