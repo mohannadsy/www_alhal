@@ -21,8 +21,7 @@ include('include/nav.php');
         .container-fluide{
             position: absolute;
             border-style: groove;
-            top:5%;
-            
+            top:5% ;
             width: 1200px ;
             /* height: 700px ; */
             border-radius: 25px;
@@ -140,8 +139,7 @@ include('include/nav.php');
                     <div class="row">
                         <label class="col-2">المشتري</label>
                         <div class="col-4">
-                            <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')"
-                            type="text" id="buyer" name="buyer" class="account_auto form-control"
+                            <input type="text" name="buyer" class="account_auto form-control"
                             style="padding:2px">
                             <input type="hidden" name="buyer_id" value="7">
                         </div>
@@ -590,7 +588,7 @@ include('include/footer.php');
         }
     }
     function check_item_to_insert(tags_items , value , button_id_to_fire = ''){
-        if(!this.tags_items.includes(value) && value != '') {
+        if(!tags_items.includes(value) && value != '') {
             if(confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')){
                 $('#iframe_item_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
