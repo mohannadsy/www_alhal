@@ -160,6 +160,7 @@ if (isset($_POST['add'])) {
     $insert_item_exec = mysqli_query($con, $insert_item_query);
     if ($insert_item_exec) {
         open_window_self('item_card.php?message_create=success&category_id='.$_POST['category_id']);
+        set_local_storage('item_card_code_name' , $_POST['code'] . " - ". $_POST['name'] );
     }
 }
 if (isset($_POST['update'])) {

@@ -12,33 +12,37 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
     <!-- <link rel="stylesheet" href="css/styles/com_bill.css"> -->
     <style>
-        body{
+        body {
             background-color: LightGray;
             text-align: right;
             position: relative;
             font-family: Arial, Helvetica, sans-serif;
         }
-        .container-fluide{
+
+        .container-fluide {
             position: absolute;
             border-style: groove;
-            top:5% ;
-            width: 1200px ;
+            top: 5%;
+            width: 1200px;
             /* height: 700px ; */
             border-radius: 25px;
-            border-style:groove; 
-            background-color:#5F9EA0 ;
+            border-style: groove;
+            background-color: #5F9EA0;
             font-size: 19px;
         }
-        td input{
-           width:100%;
-           height:100%;
-           margin:0px;
-           padding:0px;
+
+        td input {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
         }
-        table{
-            width:60%;
+
+        table {
+            width: 60%;
         }
-        #btn-grp{
+
+        #btn-grp {
             border-radius: 5px;
             margin: 6px;
             width: 80px;
@@ -50,30 +54,30 @@ include('include/nav.php');
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
 <div id="modal_account_card" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="min-width: 1000px">
+    <div class="modal-dialog" style="min-width: 1000px">
 
-    <div class="modal-content" style="min-height: 600px;"> 
-      <div class="modal-body">
-        <button onclick="" data-dismiss="modal" class="close">&times;</button>
-        <h4>Account Card</h4>
-        <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
-      </div>
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-body">
+                <button onclick="" data-dismiss="modal" class="close">&times;</button>
+                <h4>Account Card</h4>
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+            </div>
+        </div>
     </div>
-  </div>  
 </div>
 
 <button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">Account Card</button>
 <div id="modal_item_card" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="min-width: 1000px">
+    <div class="modal-dialog" style="min-width: 1000px">
 
-    <div class="modal-content" style="min-height: 600px;"> 
-      <div class="modal-body">
-        <button onclick="" data-dismiss="modal" class="close">&times;</button>
-        <h4>Item Card</h4>
-        <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
-      </div>
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-body">
+                <button onclick="" data-dismiss="modal" class="close">&times;</button>
+                <h4>Item Card</h4>
+                <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+            </div>
+        </div>
     </div>
-  </div>  
 </div>
 
 
@@ -88,8 +92,7 @@ include('include/nav.php');
                     <div class="row">
                         <label for="date" class="col-5">تاريخ الفاتورة</label>
                         <div class="col-6">
-                            <input type="date" name="date" id="date"  value="<?php echo date('Y-m-d'); ?>" class="form-control"
-                            style="padding:2px">
+                            <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" class="form-control" style="padding:2px">
                         </div>
                     </div>
                 </div>
@@ -97,25 +100,22 @@ include('include/nav.php');
                     <div class="row">
                         <label for="" class="col-5">رقم الفاتورة</label>
                         <div class="col-6">
-                            <input type="text" name="code" id="" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'parent') ?>" 
-                            readonly class="form-control" style="padding:2px">
+                            <input type="text" name="code" id="code" value="<?php echo get_auto_code($con, 'bills', 'code', '', 'parent') ?>" readonly class="form-control" style="padding:2px">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" >
-                <div id='seller' class="col-6">
+            <div class="row">
+                <div class="col-6">
                     <div class="row">
                         <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
                         <div class="col-4">
-                            <input onblur="check_account_to_insert(tags_accounts , this.value , 'modal_account_card_button')"
-                             required id="seller" id="seller" name="seller" class="account_auto form-control"
-                             style="padding:2px" />
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" required id="seller" id="seller" name="seller" class="account_auto form-control" style="padding:2px" />
                             <!-- </div> -->
                             <input type="hidden" name="seller_id" value="6">
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <label class="col-2">طريقة الدفع </label>
@@ -139,8 +139,7 @@ include('include/nav.php');
                     <div class="row">
                         <label class="col-2">المشتري</label>
                         <div class="col-4">
-                            <input type="text" name="buyer" class="account_auto form-control"
-                            style="padding:2px">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer" style="padding:2px">
                             <input type="hidden" name="buyer_id" value="7">
                         </div>
                     </div>
@@ -159,8 +158,8 @@ include('include/nav.php');
                     <div class="row">
                         <label class="col-2">ملاحظات</label>
                         <div class="col-4">
-                            <textarea name="buyer_note"  class="form-control"></textarea>
-                        </div> 
+                            <textarea name="buyer_note" class="form-control"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,35 +187,31 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end px-5" >
-                    <label class="col-1">الإجمالي</label>
-                    <div class="col-2">
-                        <input type="text" id="total_price" name="total_price" value="0" readonly class="form-control"
-                        style="padding:2px">
-                    </div>
+            <div class="row justify-content-end px-5">
+                <label class="col-1">الإجمالي</label>
+                <div class="col-2">
+                    <input type="text" id="total_price" name="total_price" value="0" readonly class="form-control" style="padding:2px">
+                </div>
             </div>
             <div class="row justify-content-end px-5">
-                <label >الكمسيون</label>
+                <label>الكمسيون</label>
                 <div class="col-1">
-                    <input onblur="count_total_price()" onfocus="this.value = ''" type="text" id="com_ratio" 
-                    name="com_ratio" value="0" class="form-control" style="padding:2px">
+                    <input onblur="count_total_price()" onfocus="this.value = ''" type="text" id="com_ratio" name="com_ratio" value="0" class="form-control" style="padding:2px">
                 </div>
-                <label >قيمته</label>
+                <label>قيمته</label>
                 <div class="col-1">
-                    <input type="text" name="com_value" id="com_value" value="0" readonly class="form-control"
-                    style="padding:2px">
+                    <input type="text" name="com_value" id="com_value" value="0" readonly class="form-control" style="padding:2px">
                 </div>
             </div>
             <div class="row justify-content-end px-5">
                 <label class="col-1">الصافي</label>
                 <div class="col-2">
-                    <input type="text" name="real_price" id="real_price" value="0" readonly class="form-control"
-                    style="padding:2px">
+                    <input type="text" name="real_price" id="real_price" value="0" readonly class="form-control" style="padding:2px">
                 </div>
             </div>
             <div id='buttons' class="row justify-content-center">
                 <div class="col-5">
-                    <button type="submit" name="save"id="btn-grp">حفظ</button>
+                    <button type="submit" name="save" id="btn-grp">حفظ</button>
                     <button type="submit" name="modify" id="btn-grp">تعديل</button>
                     <button type="submit" name="delete" id="btn-grp">حذف</button>
                     <!-- <select name="print_option" id="">
@@ -226,16 +221,15 @@ include('include/nav.php');
                         </optgroup>
                     </select>
                     <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
-                    
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         طباعة
                     </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
-                            <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
-                            <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
-                        </div>
-                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
+                        <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -281,7 +275,7 @@ if (isset($_POST['save'])) {
 
     // make bill insertion
     $insert_bill_query = insert('bills', get_array_from_array($_POST, [
-        'code','date', 'seller_id', 'seller_type_pay', 'seller_note',
+        'code', 'date', 'seller_id', 'seller_type_pay', 'seller_note',
         'buyer_id', 'buyer_type_pay', 'buyer_note', 'total_price', 'real_price', 'com_ratio', 'com_value'
     ]));
     $insert_bill_exec = mysqli_query($con, $insert_bill_query);
@@ -307,7 +301,7 @@ if (isset($_POST['save'])) {
                 'price' => $_POST['prices'][$key],
                 'total_item_price' => $_POST['total_item_prices'][$key],
                 'bill_item_note' => $_POST['note'][$key]
-                
+
             ]);
             $insert_bill_item_exec = mysqli_query($con, $insert_bill_item_query);
         }
@@ -350,16 +344,16 @@ if (isset($_POST['save'])) {
             'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
         ]));
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-       
-         // كشف حساب البائع
-         $_POST['code_number'] = $current_bill_id;
-         $_POST['code_type'] = 'bills';
-         $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
-         $_POST['main_account_id'] = $seller_id;
-         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-             'main_account_id', 'other_account_id', 'daen','maden', 'note', 'date', 'code_number', 'code_type',
-         ]));
-         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+        // كشف حساب البائع
+        $_POST['code_number'] = $current_bill_id;
+        $_POST['code_type'] = 'bills';
+        $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
+        $_POST['main_account_id'] = $seller_id;
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'daen', 'maden', 'note', 'date', 'code_number', 'code_type',
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
 
     if ($_POST['seller_type_pay'] == 'agel') {
@@ -415,7 +409,7 @@ if (isset($_POST['save'])) {
             $_POST['maden'] = $_POST['total_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bond_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code','note'
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code', 'note'
             ]));
             $insert_mid_bond_exec = mysqli_query($con, $insert_mid_bond_query);
             // كشف حساب الصندوق
@@ -500,25 +494,24 @@ include('include/footer.php');
 ?>
 
 <script>
-    
     var tags_items = [
-            <?php
-            $query =  select('items');
-            $query_exec = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_row($query_exec)) {
-                echo "'$row[9] - $row[1]',";
-            }
-            ?>
-        ];
-        var tags_accounts = [
-            <?php
-            $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
-            $query_exec = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_row($query_exec)) {
-                echo "'$row[1] - $row[2]',";
-            }
-            ?>
-        ];
+        <?php
+        $query =  select('items');
+        $query_exec = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_row($query_exec)) {
+            echo "'$row[9] - $row[1]',";
+        }
+        ?>
+    ];
+    var tags_accounts = [
+        <?php
+        $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
+        $query_exec = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_row($query_exec)) {
+            echo "'$row[1] - $row[2]',";
+        }
+        ?>
+    ];
 
     (function($) {
 
@@ -568,39 +561,52 @@ include('include/footer.php');
     })(jQuery);
 </script>
 
+
+<!-- Check wrong insertion -->
 <script>
-      $('#iframe_account_card').load(function(){
+    $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-      });
-      $('#iframe_item_card').load(function(){
+    });
+    $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
-      });
-    </script>
-
-
+    });
+</script>
 <script>
-    function check_account_to_insert(tags_accounts , value , button_id_to_fire = ''){
-        if(!tags_accounts.includes(value) && value != '') {
-            if(confirm('هذا العميل غير موجود في قاعدة البيانات ! هل تريد انشاء بطاقة حساب له ؟')){
+    function check_account_to_insert(tags_accounts, value, id, button_id_to_fire = '') {
+        if (!tags_accounts.includes(value) && value != '') {
+            if (confirm('هذا العميل غير موجود في قاعدة البيانات ! هل تريد انشاء بطاقة حساب له ؟')) {
                 $('#iframe_account_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
             }
+            document.getElementById(id).value = '';
         }
     }
-    function check_item_to_insert(tags_items , value , button_id_to_fire = ''){
-        if(!tags_items.includes(value) && value != '') {
-            if(confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')){
+
+    function check_item_to_insert(tags_items, value, id, button_id_to_fire = '') {
+        if (!tags_items.includes(value) && value != '') {
+            if (confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')) {
                 $('#iframe_item_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
             }
+            document.getElementById(id).value = '';
         }
     }
-    $(document).ready(function(){
-        for(let i = 0 ; i < document.getElementById('tbl').rows.length -1  ; i++){
-            $(`#items_${i}`).blur(function(){
-                check_item_to_insert(tags_items , this.value , 'modal_item_card_button');
+    $(document).ready(function() {
+        for (let i = 0; i < document.getElementById('tbl').rows.length - 1; i++) {
+            $(`#items_${i}`).blur(function() {
+                check_item_to_insert(tags_items, this.value, this.id, 'modal_item_card_button');
             });
-            
+
+        }
+    });
+    $(document).focus(function() {
+        if (!tags_accounts.includes(localStorage.getItem('account_card_code_name'))) {
+            tags_accounts.push(localStorage.getItem('account_card_code_name'));
+        }
+        if (!tags_items.includes(localStorage.getItem('account_item_code_name'))) {
+            tags_items.push(localStorage.getItem('account_item_code_name'));
         }
     });
 </script>
+
+<!-- End chec worng insertion -->

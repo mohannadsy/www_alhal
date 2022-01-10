@@ -23,4 +23,14 @@ function open_window_self_after_confirm($message , $path){
         </script>";
 }
 
-?>
+function set_local_storage($key , $value){
+    echo "<script>
+        if(localStorage) {
+            localStorage.setItem('$key' , '$value');
+        }
+        </script>";
+}
+
+function close_window(){
+    echo "<script>window.close()</script>";
+}
