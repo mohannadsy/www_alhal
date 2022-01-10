@@ -589,7 +589,7 @@ include('include/footer.php');
         }
     }
     function check_item_to_insert(tags_items , value , button_id_to_fire = ''){
-        if(!this.tags_items.includes(value) && value != '') {
+        if(!tags_items.includes(value) && value != '') {
             if(confirm('هذه المادة غير موجودة في قاعدة البيانات ! هل تريد اضافتها ؟')){
                 $('#iframe_item_card').contents().find('#name').val(value);
                 document.getElementById(button_id_to_fire).click();
@@ -599,7 +599,7 @@ include('include/footer.php');
     $(document).ready(function(){
         for(let i = 0 ; i < document.getElementById('tbl').rows.length -1  ; i++){
             $(`#items_${i}`).blur(function(){
-                check_item_to_insert(tags_items , $(`#items_${i}`).val , 'modal_item_card_button');
+                check_item_to_insert(tags_items , this.value , 'modal_item_card_button');
             });
             
         }
