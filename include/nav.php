@@ -47,7 +47,6 @@
       <a class="dropdown-item"  href="payment_bonds.php" >سند قبض</a>
       <a class="dropdown-item" href="catch_bonds.php">سند دفع</a>
   </li>
-
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
   </li>
