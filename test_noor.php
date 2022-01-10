@@ -61,6 +61,11 @@ $columns = ['id' , 'name' , 'phone'];
 <a href="report_item.php"> report_item </a>
 <br>
 <a href="report_comission.php"> report_comission </a>
+<br>
+<a href="help_file.php"> help_file </a>
+<br>
+<a href="about.php"> about </a>
+
 
 
 
