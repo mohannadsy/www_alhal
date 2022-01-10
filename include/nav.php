@@ -12,8 +12,8 @@
     include('helper/html_functions.php');
     include('helper/links.php');
 ?>
-
-<ul id='nav' class="nav nav-tabs">
+<html dir="rtl" lang="ar">
+<ul id='nav' class="nav nav-tabs navbar-light bg-light">
   <li class="nav-item">
     <a class="nav-link active" href="index.php">Home</a>
   </li>
@@ -22,7 +22,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#">فتح ملف</a>
       <a class="dropdown-item" href="#">ملف جديد</a>
-      <a class="dropdown-item" href="#">استيراد</a>0
+      <a class="dropdown-item" href="#">استيراد</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
@@ -46,3 +46,4 @@
     <button class="nav-link" type="button" onclick="window.location.reload()">Reload</button>
   </li>
 </ul>
+</html>
