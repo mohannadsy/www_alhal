@@ -81,7 +81,7 @@ include('include/nav.php');
                     <div class="form-group row justify-content-center">
                         <label for="name" class="col-md-3 col-form-label text-md-right">المادة </label>
                         <div class="col-md-6">
-                            <input value="<?php if (isset($_GET['id'])) echo $item['name']; ?>" type="text" class="form-control" name="name" required autofocus>
+                            <input value="<?php if (isset($_GET['id'])) echo $item['name']; ?>" type="text" class="form-control" id="name" name="name" required autofocus>
                         </div>
                     </div>
                     <div class="form-group row justify-content-center">

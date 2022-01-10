@@ -598,7 +598,7 @@ include('include/footer.php');
     $(document).ready(function(){
         for(let i = 0 ; i < document.getElementById('tbl').rows.length -1  ; i++){
             $(`#items_${i}`).blur(function(){
-                check_item_to_insert(tags_items , $(`#items_${i}`).val , 'modal_item_card_button');
+                check_item_to_insert(tags_items , this.value , 'modal_item_card_button');
             });
             
         }
