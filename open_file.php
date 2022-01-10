@@ -3,7 +3,7 @@ include('include/nav.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -11,31 +11,62 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- <link rel="stylesheet" href="css/styles/open_file.css"> -->
+    <style>
+        body {
+            text-align: right;
+            background-color: LightGray;
+            position: relative;
+        }
+
+        .container {
+            background-color: #5F9EA0;
+            border-style: groove;
+            font-size: 17px;
+            border-radius: 25px;
+            position: absolute;
+            left: 25%;
+            top:20%;
+            width: 50%;
+            /* height:50% ; */
+            padding: 30px;
+
+        }
+        #btn-grp, #new, #add{
+            border-radius: 4px;
+            text-align: center;
+            margin: 1px;
+            width: 70px;
+        }
+    </style>
 </head>
 
 <body>
     <form action="" method="post">
-        <div class="center">
-            <table name="table" class="table border table-hover" id="table">
-                <tr>
-                    <th>اسم قاعدة البيانات</th>
-                </tr>
-                <!-- Start Code Section -->
-                <?php
-                $select_db_query = "show databases like 'souq%';";
-                $select_db_execute = mysqli_query($con, $select_db_query);
-                while ($row = mysqli_fetch_row($select_db_execute)) {
-                    echo "<tr>
-                            <td 
-                                id = '".$row[0]."' 
-                                onclick='get_selected_database(\"".$row[0]."\")'>" . $row[0] . "  
-                            </td>
-                        </tr>";
-                }
-                ?>
-                <!-- End Code Section -->
+        <div class="container" >
+            <div class="col-12">
+                    <table name="table" class="table border table-hover" id="table">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="font-size: 23px;">اسم قاعدة البيانات</th>
+                            </tr>
+                        </thead>
+                        <!-- Start Code Section -->
+                        <?php
+                        $select_db_query = "show databases like 'souq%';";
+                        $select_db_execute = mysqli_query($con, $select_db_query);
+                        while ($row = mysqli_fetch_row($select_db_execute)) {
+                            echo "<tr>
+                                    <td 
+                                        id = '".$row[0]."' 
+                                        onclick='get_selected_database(\"".$row[0]."\")'>" . $row[0] . "  
+                                    </td>
+                                </tr>";
+                        }
+                        ?>
+                        <!-- End Code Section -->
 
-            </table>
+                    </table>
+            </div>
             <input type="hidden" name="selected_database" value="" id="selected_database"> 
             <!-- <div>
                 <h3>معلومات الملف</h3>
@@ -46,15 +77,22 @@ include('include/nav.php');
                 <label name="server">المخدم</label>
                 <hr>
             </div> -->
-            <button type="submit" name="open_db">فتح</button>
-            <button type="submit" name="delete_db">حذف</button>
-            <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
-            <button type="button" name="restore">استرجاع</button>
-            <div id="new_text" hidden>
-                <label for="">اسم الملف</label>
-                <input type="text" name="database_name">
-                <button type="submit" name="create_db" id="add" onclick="test2()">إضافة</button>
+            <div class="row py-2" id="new_text" hidden >
+                <div class="col-8" style=" padding-right: 30px;">
+                    <label for="">اسم الملف</label>
+                    <input type="text" name="database_name">
+                    <button type="submit" name="create_db" id="add" onclick="test2()">إضافة</button>
+                </div>
             </div>
+            <div class="row text-center ">
+                <div class="col-12 ">
+                    <button type="submit" name="open_db" id="btn-grp">فتح</button>
+                    <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
+                    <button type="submit" name="delete_db" id="btn-grp">حذف</button>
+                    <button type="button" name="restore" id="btn-grp" hidden>استرجاع</button>
+                </div>
+            </div>
+            
         </div>
     </form>
 
@@ -74,10 +112,12 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
     elseif ($selected_database == get_value_from_config('deafult_database')){
         message_box("لقد دخلت على قاعدة البيانات الافتراضية");
         update_value_in_config('database', $selected_database);
+        open_window_self(INDEX);
     }
     else{
         message_box(" لقد دخلت على قاعدة البيانات " . $selected_database);
         update_value_in_config('database', $selected_database);
+        open_window_self(INDEX);
     }
 }
 

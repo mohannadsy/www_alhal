@@ -11,10 +11,10 @@ function test2() {
 function get_selected_database(id) {
     var table = document.getElementById(id).innerHTML;
     document.getElementById("selected_database").value = table;
-    $('table tr').each(function(a, b) {
+    $('tbody tr').each(function(a, b) {
         $(b).click(function() {
-            $('table tr').css('background', '#ffffff');
-            $(this).css('background', 'blue');
+            $('table tr').css('background', '#5F9EA0');
+            $(this).css('background', 'lightgray');
         });
     });
 }
