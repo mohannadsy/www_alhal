@@ -22,7 +22,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#">فتح ملف</a>
       <a class="dropdown-item" href="#">ملف جديد</a>
-      <a class="dropdown-item" href="#">استيراد</a>
+      <a class="dropdown-item" href="#">استيراد</a>0
   </li>
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
