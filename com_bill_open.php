@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
             <div class="row" style="height:200px;">
                 <div id='seller' class="col-6">
                     <div>
-                        <label>البائع</label>
+                        <label>البائع:</label>
                         <!-- <div class="ui-widget"> -->
                         <input readonly value="<?= @$seller['code'] . " - " . @$seller['name'] ?>" name="seller" class="account_auto" />
                     </div>
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div id="buyer" class="col-6">
                     <div>
-                        <label>المشتري</label>
+                        <label>المشتري:</label>
                         <input <?php if (isset($buyer['name'])) echo 'readonly' ?> value="<?php if (isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>" type="text" name="buyer" class="account_auto">
                     </div>
                     <div>
@@ -144,13 +144,24 @@ if (isset($_GET['id'])) {
             <div id='buttons' class="row justify-content-start">
                 <div class="col-4">
                     <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
-                    <select name="print_option" id="">
+                    <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
                             <option value="">مشتري</option>
                         </optgroup>
                     </select>
-                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button>
+                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button> -->
+
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        طباعة
+                    </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
+                            <a class="dropdown-item" href="" onclick="printComPillOpen(['details','seller','tbl'])">فاتورة البائع</a>
+                            <a class="dropdown-item" href="" onclick="printComPillOpen(['details','buyer','tbl'])">فاتورة المشتري</a>
+                        </div>
+
+
                 </div>
             </div>
         </div>
