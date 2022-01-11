@@ -52,8 +52,9 @@ function get_code_from_table_using_id($con , $table , $id){
     return get_value_from_table_using_id($con , $table , 'code' , $id);
 }
 function get_name_and_code_from_table_using_id($con , $table , $id){
-    return get_code_from_table_using_id($con , $table, $id) . 
+    $result = get_code_from_table_using_id($con , $table, $id) . 
     ' - ' . get_name_from_table_using_id($con , $table , $id);
+    return ($result == ' - ' )?'' : $result;
 }
 
 

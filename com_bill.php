@@ -599,7 +599,7 @@ include('include/footer.php');
 
         }
     });
-    $(document).focus(function() {
+    $('input').focus(function() {
         if (!tags_accounts.includes(localStorage.getItem('account_card_code_name'))) {
             tags_accounts.push(localStorage.getItem('account_card_code_name'));
         }

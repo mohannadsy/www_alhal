@@ -23,10 +23,10 @@ include('include/nav.php');
             background-color: #5F9EA0;
             border-style: groove;
             border-radius: 25px;
-            top:13% ;
-            left:20%;
-            width: 1000px ;
-            height: 620px ;
+            top: 13%;
+            left: 20%;
+            width: 1000px;
+            height: 620px;
             font-size: 17px;
             padding: 5px;
 
@@ -35,14 +35,18 @@ include('include/nav.php');
         #res_number {
             column-width: 50px;
         }
-        #res_num{
+
+        #res_num {
             padding-right: 125px;
 
         }
-        h2,#inf_row{
+
+        h2,
+        #inf_row {
             padding-right: 20px;
         }
-        #btn-grp{
+
+        #btn-grp {
             border-radius: 4px;
             text-align: center;
             margin: 1px;
@@ -51,19 +55,73 @@ include('include/nav.php');
     </style>
 </head>
 
+<?php
+$select_all_Payment_bonds_query = select('payment_bonds');
+$select_all_Payment_bonds_exec = mysqli_query($con, $select_all_Payment_bonds_query);
+$number_of_payment_bonds = mysqli_num_rows($select_all_Payment_bonds_exec);
+$current_payment_code = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+$next_payment_code = $current_payment_code;
+if (isset($_POST['code']))
+    $current_payment_code = $_POST['code'];
+$previous_payment_code = 1;
+if ($current_payment_code < $next_payment_code) {
+    $next_payment_code_query = select('payment_bonds') . whereLarger('code', $current_payment_code);
+    $next_payment_code_exec = mysqli_query($con, $next_payment_code_query);
+    $next_payment_code = mysqli_fetch_array($next_payment_code_exec)['code'];
+}
+if ($current_payment_code > $previous_payment_code) {
+    $previous_payment_code_query = select('payment_bonds') . whereSmaller('code', $current_payment_code) . ' order by code desc';
+    $previous_payment_code_exec = mysqli_query($con, $previous_payment_code_query);
+    $previous_payment_code = mysqli_fetch_array($previous_payment_code_exec)['code'];
+}
+$payment_bonds = [];
+if (isset($_POST['next'])) {
+    $payment_bond_select = select('payment_bonds') . where('code', $next_payment_code);
+    $payment_bond_exec = mysqli_query($con, $payment_bond_select);
+    $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
+    while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
+        $payment_bonds[] = $payment_bond;
+    }
+}
+if (isset($_POST['previous'])) {
+    $payment_bond_select = select('payment_bonds') . where('code', $previous_payment_code);
+    $payment_bond_exec = mysqli_query($con, $payment_bond_select);
+    $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
+    while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
+        $payment_bonds[] = $payment_bond;
+    }
+}
+
+
+// message_box($current_payment_code);
+// message_box($next_payment_code);
+// message_box($previous_payment_code);
+?>
+
 <body class="receipt">
     <form action="" method="post">
         <div class="container">
             <div class="row ">
-                <div class="col-4" id="receipt_number1"  >
+                <div class="col-4" id="receipt_number1">
                     <h2> سند دفع</h2>
                 </div>
-                <div class="col-6 " id="receipt_number"  >
+                <div class="col-6 " id="receipt_number">
                     <div class="row" style=" padding-top: 10px;padding-right: 30px; ">
                         <label name=" "> رقم الإيصال</label>
+
                         <div class="col-md-3">
-                            <input type="text" value="<?php echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent') ?>" class="form-control" name="code" readonly>
+                            <input type="text" value="<?php if (($next_payment_code == '' && isset($_POST['next'])) ||
+                                                            (isset($_POST['previous']) && $previous_payment_code == '') ||
+                                                            (!isset($_POST['code']) && !isset($_POST['code']))
+                                                        )
+                                                            echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+                                                        elseif (isset($_POST['next'])) echo $next_payment_code;
+                                                        elseif (isset($_POST['previous'])) echo $previous_payment_code;
+                                                        ?>" class="form-control" name="code">
                         </div>
+                        <button name="next" id="next">
+                            <<
+                                <button name="previous" id="previous">>></button>
                     </div>
                 </div>
             </div>
@@ -72,14 +130,16 @@ include('include/nav.php');
                 <div id="account" class="col-sm-6 col-md-4">
                     <div class="form-group row">
                         <label class="col-sm-6 col-md-3 col-form-label"> الحساب</label>
-                        <div class="col-md-9" >
-                            <input type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?= get_box_account($con) ?>">
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?php if (empty($payment_bonds)) echo get_box_account($con);
+                                                                                                                                                else echo get_name_and_code_from_table_using_id($con, 'accounts', $payment_bonds[0]['main_account_id']); ?>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-6 col-md-3 col-form-label ">التاريخ </label>
-                        <div class="col-md-9" >
-                            <input type="date" class="form-control" name="date" id="date" min="" max="" value="<?php echo date('Y-m-d'); ?>">
+                        <div class="col-md-9">
+                            <input type="date" class="form-control" name="date" id="date" min="" max="" value="<?php if (empty($payment_bonds)) echo date('Y-m-d');
+                                                                                                                else echo $payment_bonds[0]['date'] ?>">
                         </div>
                     </div>
                 </div>
@@ -87,15 +147,14 @@ include('include/nav.php');
                     <div class="form-group row">
                         <label class=" col-sm-6 col-md-3 col-form-label text-md-right">العملة </label>
                         <div class="col-md-8">
-                            <select name="currency" class="form-control">
-                                <option value="syrian-bounds">ليرة سورية</option>
-                            </select>
+                            <input class="form-control" value="ليرة سورية" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="note" class="col-sm-6 col-md-3 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-8">
-                            <textarea rows="2" type="text" id="" class="form-control" name="notes"></textarea>
+                            <textarea rows="2" type="text" id="" class="form-control" name="notes"><?php if (empty($payment_bonds)) echo '';
+                                                                                                    else echo $payment_bonds[0]['main_note']; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -117,20 +176,22 @@ include('include/nav.php');
             <div class="row justify-content-end" style="padding-left:70px ;">
                 <label for="total" class="col-form-label" id="res_number"> المجموع</label>
                 <div class="col-md-3" style="padding-left: 60px;">
-                    <input id="total" type="text" id="resault" class="form-control" name="total" >
+                    <input id="total" type="text" id="resault" class="form-control" name="total">
                 </div>
             </div>
             <div class="row justify-content-end  py-3 px-5">
                 <div class="col-md-4" id='buttons'>
-                    <button type="submit" class="" id="btn-grp" name="add">
+                <button type="submit" class="" id="btn-grp" name="add" <?php if(!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="button" class="" id="btn-grp" name="print"
-                     onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
+                    <button type="submit" class="" id="btn-grp" name="update" <?php if(empty($payment_bonds)) echo 'disabled'; ?>>
+                        تعديل
+                    </button>
+                    <button type="button" class="" id="btn-grp" name="print" onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
                         طباعة
                     </button>
-                    <button type="button" class=" " id="btn-grp" name="close">
-                        إغلاق
+                    <button type="button" class=" " id="btn-grp" name="delete" <?php if(empty($payment_bonds)) echo 'disabled'; ?>>
+                        حذف
                     </button>
                 </div>
             </div>
@@ -271,6 +332,16 @@ include('include/footer.php');
     })(jQuery);
 </script>
 
+<!-- Add values to table if next or previous -->
+<?php
+for ($i = 0; $i < 5; $i++)
+    echo "<script>
+        document.getElementById('daen_' + $i).value = '" . @$payment_bonds[$i]['daen'] . "';
+        document.getElementById('account_' + $i).value = '" . @get_name_and_code_from_table_using_id($con , 'accounts' ,$payment_bonds[$i]['other_account_id']) . "';
+        document.getElementById('note_' + $i).value = '" . @$payment_bonds[$i]['note'] . "';
+</script>"
+?>
 <script>
-    set_blur_to_input_ids_to_count_in_id('daen' , 'total' , number_of_rows);
+    document.getElementById('total').value = count_sum_ids('daen' , number_of_rows);
+    set_blur_to_input_ids_to_count_in_id('daen', 'total', number_of_rows);
 </script>
