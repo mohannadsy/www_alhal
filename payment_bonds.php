@@ -55,10 +55,30 @@ include('include/nav.php');
     </style>
 </head>
 
+<button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
+<div id="modal_account_card" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="min-width: 1000px">
+
+        <div class="modal-content" style="min-height: 600px;">
+            <div class="modal-body">
+                <button onclick="" data-dismiss="modal" class="close">&times;</button>
+                <h4>Account Card</h4>
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <?php
-$select_all_Payment_bonds_query = select('payment_bonds');
-$select_all_Payment_bonds_exec = mysqli_query($con, $select_all_Payment_bonds_query);
-$number_of_payment_bonds = mysqli_num_rows($select_all_Payment_bonds_exec);
+$select_last_next_Payment_bonds_query = select('payment_bonds') . ' order by code desc limit 1 ';
+$select_last_next_Payment_bonds_exec = mysqli_query($con, $select_last_next_Payment_bonds_query);
+$last_next_code = mysqli_fetch_array($select_last_next_Payment_bonds_exec)['code'];
+
+$select_last_previous_Payment_bonds_query = select('payment_bonds') . ' limit 1 ';
+$select_last_previous_Payment_bonds_exec = mysqli_query($con, $select_last_previous_Payment_bonds_query);
+$last_previous_code = mysqli_fetch_array($select_last_previous_Payment_bonds_exec)['code'];
+
 $current_payment_code = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
 $next_payment_code = $current_payment_code;
 if (isset($_POST['code']))
@@ -83,6 +103,14 @@ if (isset($_POST['next'])) {
         $payment_bonds[] = $payment_bond;
     }
 }
+if (isset($_POST['last_next'])) {
+    $payment_bond_select = select('payment_bonds') . where('code', $last_next_code);
+    $payment_bond_exec = mysqli_query($con, $payment_bond_select);
+    $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
+    while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
+        $payment_bonds[] = $payment_bond;
+    }
+}
 if (isset($_POST['previous'])) {
     $payment_bond_select = select('payment_bonds') . where('code', $previous_payment_code);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
@@ -92,6 +120,26 @@ if (isset($_POST['previous'])) {
     }
 }
 
+if (isset($_POST['last_previous'])) {
+    $payment_bond_select = select('payment_bonds') . where('code', $last_previous_code);
+    $payment_bond_exec = mysqli_query($con, $payment_bond_select);
+    $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
+    while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
+        $payment_bonds[] = $payment_bond;
+    }
+}
+if (isset($_POST['current'])) {
+    $payment_bond_select = select('payment_bonds') . where('code', $_POST['code']);
+    $payment_bond_exec = mysqli_query($con, $payment_bond_select);
+    $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
+    if ($payment_bond_rows > 0)
+        while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
+            $payment_bonds[] = $payment_bond;
+        }
+    else {
+        $_POST['code'] = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+    }
+}
 
 // message_box($current_payment_code);
 // message_box($next_payment_code);
@@ -110,18 +158,26 @@ if (isset($_POST['previous'])) {
                         <label name=" "> رقم الإيصال</label>
 
                         <div class="col-md-3">
-                            <input type="text" value="<?php if (($next_payment_code == '' && isset($_POST['next'])) ||
-                                                            (isset($_POST['previous']) && $previous_payment_code == '') ||
-                                                            (!isset($_POST['code']) && !isset($_POST['code']))
-                                                        )
-                                                            echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
-                                                        elseif (isset($_POST['next'])) echo $next_payment_code;
-                                                        elseif (isset($_POST['previous'])) echo $previous_payment_code;
-                                                        ?>" class="form-control" name="code">
+                            <input type="number" id="code" value="<?php if (($next_payment_code == '' && isset($_POST['next'])) ||
+                                                                        (isset($_POST['previous']) && $previous_payment_code == '') ||
+                                                                        (!isset($_POST['code']))
+                                                                    )
+                                                                        echo get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+                                                                    elseif (isset($_POST['next'])) echo $next_payment_code;
+                                                                    elseif (isset($_POST['last_next'])) echo $last_next_code;
+                                                                    elseif (isset($_POST['previous'])) echo $previous_payment_code;
+                                                                    elseif (isset($_POST['last_previous'])) echo $last_previous_code;
+                                                                    elseif (isset($_POST['current'])) echo $_POST['code'];
+                                                                    ?>" class="form-control" name="code">
                         </div>
-                        <button name="next" id="next">
-                            <<
-                                <button name="previous" id="previous">>></button>
+
+                        <button name="last_previous" id="last_previous">
+                            <<<< </button>
+                                <button name="previous" id="previous">
+                                    << </button>
+                                        <button name="next" id="next"> >> </button>
+                                        <button name="last_next" id="last_next"> >>>> </button>
+                                        <button name="current" id="current" hidden></button>
                     </div>
                 </div>
             </div>
@@ -131,8 +187,8 @@ if (isset($_POST['previous'])) {
                     <div class="form-group row">
                         <label class="col-sm-6 col-md-3 col-form-label"> الحساب</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?php if (empty($payment_bonds)) echo get_box_account($con);
-                                                                                                                                                else echo get_name_and_code_from_table_using_id($con, 'accounts', $payment_bonds[0]['main_account_id']); ?>">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?php if (empty($payment_bonds)) echo get_box_account($con);
+                                                                                                                                                                                                                                                    else echo get_name_and_code_from_table_using_id($con, 'accounts', $payment_bonds[0]['main_account_id']); ?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -181,16 +237,16 @@ if (isset($_POST['previous'])) {
             </div>
             <div class="row justify-content-end  py-3 px-5">
                 <div class="col-md-4" id='buttons'>
-                <button type="submit" class="" id="btn-grp" name="add" <?php if(!empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="" id="btn-grp" name="update" <?php if(empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button class="" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         تعديل
                     </button>
                     <button type="button" class="" id="btn-grp" name="print" onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
                         طباعة
                     </button>
-                    <button type="button" class=" " id="btn-grp" name="delete" <?php if(empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class=" " id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
                 </div>
@@ -255,6 +311,14 @@ if (isset($_POST['add'])) {
 
     open_window_self('payment_bonds.php');
 }
+
+if (isset($_POST['delete'])) {
+    $delete_paymnet_bond_query = delete('payment_bonds') . where('code', $_POST['code']);
+    $delete_paymnet_bond_exec = mysqli_query($con, $delete_paymnet_bond_query);
+    $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'payment_bonds');
+    $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
+    echo "<script>document.getElementById('next').click()</script>";
+}
 ?>
 
 <?php
@@ -265,9 +329,21 @@ include('include/footer.php');
     let ids = ['number', 'daen', 'account', 'note'];
     let names = ['number[]', 'daen[]', 'account[]', 'note[]'];
     addRows('tbl', number_of_rows, names, ids);
+
+    for(var i = 0 ; i < number_of_rows ; i++){
+        $('#daen_'+i).prop('type' , 'number');
+    }
+
 </script>
 
 <script>
+    var tags_accounts = [
+        <?php
+        foreach (get_all_accounts_without_buying_selling($con) as $row) {
+            echo print_account_to_tags_autocomplete($row);
+        }
+        ?>
+    ];
     (function($) {
 
         // Custom autocomplete instance.
@@ -299,33 +375,19 @@ include('include/footer.php');
 
         });
 
-        var tags = [
-            <?php
-            foreach (get_all_accounts($con) as $row) {
-                echo print_account_to_tags_autocomplete($row);
-            }
-            ?>
-        ];
-        var tags_main_account = [
-            <?php
-            foreach (get_all_accounts_without_buying_selling($con) as $row) {
-                echo print_account_to_tags_autocomplete($row);
-            }
-            ?>
-        ];
         // Create autocomplete instances.
         $(function() {
             for (i = 0; i < document.getElementById('tbl').rows.length; i++) {
                 $("#account_" + i).autocomplete({
                     highlightClass: "bold-text",
-                    source: tags
+                    source: tags_accounts
                 });
             }
         });
         $(function() {
             $("#main_account").autocomplete({
                 highlightClass: "bold-text",
-                source: tags_main_account
+                source: tags_accounts
             });
         });
 
@@ -337,11 +399,54 @@ include('include/footer.php');
 for ($i = 0; $i < 5; $i++)
     echo "<script>
         document.getElementById('daen_' + $i).value = '" . @$payment_bonds[$i]['daen'] . "';
-        document.getElementById('account_' + $i).value = '" . @get_name_and_code_from_table_using_id($con , 'accounts' ,$payment_bonds[$i]['other_account_id']) . "';
+        document.getElementById('account_' + $i).value = '" . @get_name_and_code_from_table_using_id($con, 'accounts', $payment_bonds[$i]['other_account_id']) . "';
         document.getElementById('note_' + $i).value = '" . @$payment_bonds[$i]['note'] . "';
 </script>"
 ?>
 <script>
-    document.getElementById('total').value = count_sum_ids('daen' , number_of_rows);
+    document.getElementById('total').value = count_sum_ids('daen', number_of_rows);
     set_blur_to_input_ids_to_count_in_id('daen', 'total', number_of_rows);
 </script>
+
+<script>
+    document.getElementById('code').onkeyup = function(event) {
+        if (event.keyCode == 13) {
+            document.getElementById('current').click();
+        }
+    };
+</script>
+
+
+
+<!-- Check wrong insertion -->
+<script>
+    $('#iframe_account_card').load(function() {
+        $('#iframe_account_card').contents().find('#nav').hide();
+    });
+</script>
+<script>
+    function check_account_to_insert(tags_accounts, value, id, button_id_to_fire = '') {
+        if (!tags_accounts.includes(value) && value != '') {
+            if (confirm('هذا العميل غير موجود في قاعدة البيانات ! هل تريد انشاء بطاقة حساب له ؟')) {
+                $('#iframe_account_card').contents().find('#name').val(value);
+                document.getElementById(button_id_to_fire).click();
+            }
+            document.getElementById(id).value = '';
+        }
+    }
+    $('input').focus(function() {
+        if (localStorage.getItem('account_card_code_name') != null)
+            if (!tags_accounts.includes(localStorage.getItem('account_card_code_name'))) {
+                tags_accounts.push(localStorage.getItem('account_card_code_name'));
+            }
+    });
+    $(document).ready(function() {
+        for (i = 0; i < document.getElementById('tbl').rows.length; i++) {
+            $('#account_' + i).blur(function() {
+                check_account_to_insert(tags_accounts, this.value, this.id, 'modal_account_card_button');
+            });
+        }
+    })
+</script>
+
+<!-- End chec worng insertion -->

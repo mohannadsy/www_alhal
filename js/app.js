@@ -11,7 +11,7 @@ function preparePrint(ids) {
 function disableEnterKey(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-    if ((evt.keyCode == 13) && (elem.type == 'text')) { return false; }
+    if ((evt.keyCode == 13)) { return false; }
 }
 document.onkeypress = disableEnterKey;
 
