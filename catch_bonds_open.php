@@ -119,7 +119,7 @@ if (isset($_GET['id'])) {
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end px-5">
+            <div class="row justify-content-end px-5 py-3">
                 <label for="code" class="col-form-label" id="res_number"> المجموع</label>
                 <div class="col-md-2">
                     <input readonly id="code" type="text" id="resault" class="form-control" name="" value="<?= @$total_payment?>">

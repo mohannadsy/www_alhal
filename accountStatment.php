@@ -17,16 +17,21 @@ include('include/nav.php');
             justify-content:center ;
         }
         .container{
+            position: absolute;
             background-color: #5F9EA0;
             border-style:groove;
-               
-        }
-        #account_name{
-            border-radius: 5px;
-        }
-        #from-date,#to-date,#syrian-bounds{
-            border-radius: 5px;
+            border-radius: 25px;
+            top:13% ;
+            left:15%;
+            font-size: 17px;
+            padding: 5px;
 
+        }
+        #btn-grp{
+            border-radius: 4px;
+            text-align: center;
+            margin: 1px;
+            width: 80px;
         }
     </style>
 </head>
@@ -41,9 +46,9 @@ include('include/nav.php');
                 <div class="col-3 "  >
                     <div class="row ">
                         <label for="" class=" col-md-3 form-label"> الحساب</label>
-                        <div class="col-md-9  has-validation">
-                            <input class="account_auto " type="text" name="account" id="account_name" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>"
-                                    onclick="this.value=''" placeholder=" اسم الحساب" required >
+                        <div class="col-md-8  has-validation">
+                            <input class="account_auto form-control " type="text" name="account" id="account_name" value="<?php if(isset($_POST['account'])) echo $_POST['account'] ?>"
+                                    onclick="this.value=''" placeholder=" اسم الحساب"  required style="background-color: burlywood margin: left 5px;" >
                             <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
                         </div>
                     </div>
@@ -51,28 +56,48 @@ include('include/nav.php');
                     <div class="row py-2">
                         <label for="" class=" col-md-3 form-label">العملة </label>
                         <div class="col-md-8">
-                            <select name="currency" id="syrian-bounds" >
+                            <select name="currency" id="syrian-bounds"  class="form-control">
                                 <option value="syrian-bounds" >ليرة سورية</option>
                             </select>
                         </div>
                     </div>
             
                 </div>
-                <div class="col-4">
+                <div class="col-3 ">
                     <div class="row ">
                         <label for="from_date " >من تاريخ</label>
-                        <div class="col-md-6">
-                            <input type="date" name="from_date" id="from-date"  min="" max="" 
+                        <div class="col-md-8">
+                            <input type="date" name="from_date" id="from-date"  min="" max=""  class="form-control" 
                                 value="<?php if(isset($_POST['from_date'])) echo $_POST['from_date']; else echo date('Y-m-d') ?>">
                         </div>
                     </div>
                     <div class="row py-2">
                         <label for="to_date" >إلى تاريخ</label>
-                        <div class="col-md-6">
-                            <input type="date" name="to_date"  id="to-date" min="" max="" 
+                        <div class="col-md-8">
+                            <input type="date" name="to_date"  id="to-date" min="" max="" class="form-control" 
                                 value="<?php if(isset($_POST['to_date'])) echo $_POST['to_date']; else echo date('Y-m-d') ?>">
                         </div>
                     </div>
+                </div>
+                <div class="col-4" >
+                    <div class="row">
+                            <label for="">نوع التقرير:</label>
+
+                        <div class="col-3 text-right" >
+                            <input type="radio" name=""  value="">
+                            <label>مختصر</label>
+                        </div>
+                        <div class="col-4 text-right">
+                            <input type="radio" name="" value="">
+                            <label>تفصيلي</label>
+                        </div>
+                            
+
+                        
+
+                    </div>
+
+
                 </div>
             </div>
 
@@ -82,22 +107,23 @@ include('include/nav.php');
                     
                 }
                 ?>
-            <div class="row justify-content-center">
-                <div class="col-10">
+            <div class="row justify-content-center py-2">
+                <div class="col-11">
                 
                     <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tbl2">
                         <thead class="text-center">
                             <tr>
                                 <th contenteditable='false'>التاريخ</th>
-                                <th contenteditable="false">نوع المستند</th>
+                                <th contenteditable="false"> المستند</th>
                                 <th contenteditable='false'>مدين</th>
                                 <th contenteditable='false'>دائن</th>
                                 <th contenteditable='false'>الحساب المقابل</th>
-                                <th contenteditable='false'>البيان</th>
-                                <!-- <th contenteditable='false'>رقم الحركة</th>
-                                <th contenteditable='false'>اسم الحركة</th> -->
-                                <!-- <th contenteditable='false'>القيمة</th> -->
                                 <th contenteditable='false'>رصيد الحركة</th>
+                                <th contenteditable='false'>المادة</th>
+                                <th contenteditable='false'> الوزن الصافي</th>
+                                <th contenteditable='false'> الإفرادي</th>
+                                <th contenteditable='false'>الإجمالي</th>
+                                
 
                             </tr>
                         </thead>
@@ -175,11 +201,17 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
+            <div class="row justify-content-end py-3" style=" padding-left:150px; ">
+                <label for="code" class="col-form-label" id="res_number"> المجموع</label>
+                <div class="col-md-2">
+                    <input readonly id="code" type="text" id="resault" class="form-control" name="" value="<?= @$total_payment?>">
+                </div>
+            </div>
             <div class="row justify-content-end py-2">
-                <div class="col-3">
-                    <button type="submit"  name="view">معاينة</button>
-                    <button type="submit" name="" >طباعة</button>
-                    <button type="submit">إغلاق</button>
+                <div class="col-4">
+                    <button type="submit"  name="view" id="btn-grp">معاينة</button>
+                    <button type="submit" name=""  id="btn-grp">طباعة</button>
+                    <button type="submit" id="btn-grp">إغلاق</button>
                     
                 </div>
             </div>
