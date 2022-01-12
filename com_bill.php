@@ -47,6 +47,9 @@ include('include/nav.php');
             margin: 6px;
             width: 80px;
         }
+        iframe .container-fluide {
+            background-color: blue;
+        }
     </style>
 </head>
 

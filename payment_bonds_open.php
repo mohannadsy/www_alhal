@@ -11,22 +11,9 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/paymentBonds.css" media="print">
+    <link rel="stylesheet" href="css/styles/payment_bonds_open.css">
     <style>
-        body {
-            text-align: right;
-            background-color: LightGray;
-        }
-
-        .container {
-            background-color: #5F9EA0;
-            border-style: groove;
-            /* width: 50%; */
-            margin-top: 5%;
-        }
-
-        #res_number {
-            column-width: 50px;
-        }
+       
     </style>
 </head>
 

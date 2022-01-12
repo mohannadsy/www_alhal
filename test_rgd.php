@@ -13,6 +13,7 @@ include('include/nav.php');
 <a href="report_comission.php">حركة كمسيون</a> <br> 
 <a href="accountStatment.php">كشف حساب</a> <br>
 <a href="test_raghad_stole.php">Theif</a><br>
+<a href="payment_bonds_open.php">iframe</a><br>
 <a href="test_open_file_pop_up.php"> test opn pop up</a> <br>
 <?php
 include('include/footer.php');
