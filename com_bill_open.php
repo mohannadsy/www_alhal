@@ -2,7 +2,7 @@
 include('include/nav.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html  dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -38,9 +38,9 @@ if (isset($_GET['id'])) {
 
 <body>
     <form action="" method="post">
-        <div class="container">
-            <div id="details">
-                <div id="num">
+        <div class="container card">
+            <div id="details" class="card-header p-4">
+                <div id="num" class="float-right">
                     <label for=""> رقم الفاتورة :</label>
                     <input type="text" name="code" id="" value="<?= @$bill['code'] ?>" readonly>
                 </div>
@@ -49,121 +49,129 @@ if (isset($_GET['id'])) {
                     <input readonly type="text" name="date" id="date" value="<?= $bill['date'] ?>">
                 </div>
             </div>
-            <div class="row" style="height:200px;">
-                <div id='seller' class="col-6">
-                    <div>
-                        <label>البائع:</label>
-                        <!-- <div class="ui-widget"> -->
-                        <input readonly value="<?= @$seller['code'] . " - " . @$seller['name'] ?>" name="seller" class="account_auto" />
-                    </div>
-                    <div>
-                        <label>طريقة الدفع </label>
-                        <input disabled type="radio" name="seller_type_pay" value="cash" <?php if (@$bill['seller_type_pay'] == 'cash') echo 'checked' ?>>
-                        <label>نقدي</label>
-                        <input disabled type="radio" name="seller_type_pay" value="agel" <?php if (@$bill['seller_type_pay'] == 'agel') echo 'checked' ?>>
-                        <label>آجل</label>
-                    </div>
-                    <div>
-                        <label>ملاحظات</label>
-                        <textarea readonly name="seller_note"><?= @$bill['seller_note'] ?></textarea>
-                    </div>
-                </div>
-                <div id="buyer" class="col-6">
-                    <div>
-                        <label>المشتري:</label>
-                        <input <?php if (isset($buyer['name'])) echo 'readonly' ?> value="<?php if (isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>" type="text" name="buyer" class="account_auto">
-                    </div>
-                    <div>
-                        <label>طريقة الدفع </label>
-                        <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" checked value="cash">
-                        <label>نقدي</label>
-                        <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" value="agel">
-                        <label>آجل</label>
-                    </div>
-                    <div>
-                        <label>ملاحظات</label>
-                        <textarea <?php if (isset($buyer['name'])) echo 'readonly' ?> name="buyer_note"><?= $bill['buyer_note'] ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <button hidden type="button" id="add_col">adding column</button>
-            <button hidden type="button" id="add_row">adding Row</button>
-            <div class="row justify-content-center">
-                <table contenteditable='false' class="col-10 table table-hover table-bordered  text-center" name="table" id="tbl">
-                    <thead class="text-center">
-                        <tr>
-                            <th contenteditable='false'>الرقم</th>
-                            <th contenteditable='false'>المادة</th>
-                            <th contenteditable='false'>الوحدة</th>
-                            <!-- <th contenteditable='false'>عدد العبوات</th> -->
-                            <th contenteditable='false'>وزن قائم</th>
-                            <th contenteditable='false'>وزن الصافي</th>
-                            <th contenteditable='false'> الإفرادي </th>
-                            <th contenteditable='false'>الإجمالي </th>
-                            <th id="notes" contenteditable='false'>ملاحظات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <?php
-                        $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'
-                        and items.id = bill_item.item_id";
-                        $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
-                        $number = 1;
-                        while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
-                            echo "<tr>";
-                            echo "<td>" . $number++ . "</td>";
-                            echo "<td>" . $row['code'] . " - " . $row['name'] . "</td>";
-                            echo "<td>" . $row['unit'] . "</td>";
-                            echo "<td>" . $row['total_weight'] . "</td>";
-                            echo "<td>" . $row['real_weight'] . "</td>";
-                            echo "<td>" . $row['price'] . "</td>";
-                            echo "<td>" . $row['total_item_price'] . "</td>";
-                            echo "<td>" . $row['bill_item_note'] . "</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="">
-                <label>الإجمالي</label>
-                <input type="text" id="total_price" name="total_price" value="<?= @$bill['total_price'] ?>" readonly>
-            </div>
-            <div class="row justify-content-end">
-                <label>الكمسيون</label>
-                <input readonly type="text" id="com_ratio" name="com_ratio" value="<?= @$bill['com_ratio'] ?>">
-                <label>قيمته</label>
-                <input type="text" name="com_value" id="com_value" value="<?= @$bill['com_value'] ?>" readonly>
-            </div>
-            <div class="row justify-content-end">
-                <label>الصافي</label>
-                <input type="text" name="real_price" id="real_price" value="<?= @$bill['real_price'] ?>" readonly>
-            </div>
-            <div id='buttons' class="row justify-content-start">
-                <div class="col-4">
-                    <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
-                    <!-- <select name="print_option" id="">
-                        <optgroup>
-                            <option value="">بائع</option>
-                            <option value="">مشتري</option>
-                        </optgroup>
-                    </select>
-                    <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button> -->
-
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        طباعة
-                    </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
-                            <a class="dropdown-item" href="" onclick="printComPillOpen(['details','seller','tbl'])">فاتورة البائع</a>
-                            <a class="dropdown-item" href="" onclick="printComPillOpen(['details','buyer','tbl'])">فاتورة المشتري</a>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div id='seller' class="col-6">
+                        <div>
+                            <label>البائع:</label>
+                            <!-- <div class="ui-widget"> -->
+                            <input readonly value="<?= @$seller['code'] . " - " . @$seller['name'] ?>" name="seller" class="account_auto" />
                         </div>
+                        <div>
+                            <label>طريقة الدفع </label>
+                            <input disabled type="radio" name="seller_type_pay" value="cash" <?php if (@$bill['seller_type_pay'] == 'cash') echo 'checked' ?>>
+                            <label>نقدي</label>
+                            <input disabled type="radio" name="seller_type_pay" value="agel" <?php if (@$bill['seller_type_pay'] == 'agel') echo 'checked' ?>>
+                            <label>آجل</label>
+                        </div>
+                        <div>
+                            <label>ملاحظات</label>
+                            <textarea readonly name="seller_note"><?= @$bill['seller_note'] ?></textarea>
+                        </div>
+                    </div>
+                    <div id="buyer" class="col-6">
+                        <div>
+                            <label>المشتري:</label>
+                            <input <?php if (isset($buyer['name'])) echo 'readonly' ?> value="<?php if (isset($buyer['name'])) echo @$buyer['code'] . " - " . @$buyer['name'] ?>" type="text" name="buyer" class="account_auto">
+                        </div>
+                        <div>
+                            <label>طريقة الدفع </label>
+                            <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" checked value="cash">
+                            <label>نقدي</label>
+                            <input <?php if (isset($buyer['name'])) echo 'disabled' ?> type="radio" name="buyer_type_pay" value="agel">
+                            <label>آجل</label>
+                        </div>
+                        <div>
+                            <label>ملاحظات</label>
+                            <textarea <?php if (isset($buyer['name'])) echo 'readonly' ?> name="buyer_note"><?= $bill['buyer_note'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button hidden type="button" id="add_col">adding column</button>
+                <button hidden type="button" id="add_row">adding Row</button>
+                <div class="row">
+                    <table contenteditable='false' class="table table-hover table-striped text-center" name="table" id="tbl">
+                        <thead class="text-center">
+                            <tr>
+                                <th contenteditable='false'>الرقم</th>
+                                <th contenteditable='false'>المادة</th>
+                                <th contenteditable='false'>الوحدة</th>
+                                <!-- <th contenteditable='false'>عدد العبوات</th> -->
+                                <th contenteditable='false'>وزن قائم</th>
+                                <th contenteditable='false'>وزن الصافي</th>
+                                <th contenteditable='false'> الإفرادي </th>
+                                <th contenteditable='false'>الإجمالي </th>
+                                <th id="notes" contenteditable='false'>ملاحظات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+                            <?php
+                            $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'
+                            and items.id = bill_item.item_id";
+                            $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+                            $number = 1;
+                            while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
+                                echo "<tr>";
+                                echo "<td>" . $number++ . "</td>";
+                                echo "<td>" . $row['code'] . " - " . $row['name'] . "</td>";
+                                echo "<td>" . $row['unit'] . "</td>";
+                                echo "<td>" . $row['total_weight'] . "</td>";
+                                echo "<td>" . $row['real_weight'] . "</td>";
+                                echo "<td>" . $row['price'] . "</td>";
+                                echo "<td>" . $row['total_item_price'] . "</td>";
+                                echo "<td>" . $row['bill_item_note'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
 
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="">
+                    <div class="row  justify-content-end">
+                        <label>الإجمالي</label>
+                        <input type="text" id="total_price" name="total_price" value="<?= @$bill['total_price'] ?>" readonly>
+                    </div>
+                    <div class="row justify-content-end">
+                        <label>الكمسيون</label>
+                        <input readonly type="text" id="com_ratio" name="com_ratio" value="<?= @$bill['com_ratio'] ?>">
+                        <label>قيمته</label>
+                        <input type="text" name="com_value" id="com_value" value="<?= @$bill['com_value'] ?>" readonly>
+                    </div>
+                    <div class="row justify-content-end">
+                        <label>الصافي</label>
+                        <input type="text" name="real_price" id="real_price" value="<?= @$bill['real_price'] ?>" readonly>
+                    </div>
                 </div>
             </div>
+            <div class="card-footer">
+                <div id='buttons' class="row justify-content-start">
+                    <div class="col-4">
+                        <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
+                        <!-- <select name="print_option" id="">
+                            <optgroup>
+                                <option value="">بائع</option>
+                                <option value="">مشتري</option>
+                            </optgroup>
+                        </select>
+                        <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button> -->
+
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            طباعة
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
+                                <a class="dropdown-item" href="" onclick="printComPillOpen(['details','seller','tbl'])">فاتورة البائع</a>
+                                <a class="dropdown-item" href="" onclick="printComPillOpen(['details','buyer','tbl'])">فاتورة المشتري</a>
+                            </div>
+
+
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </form>
 </body>
