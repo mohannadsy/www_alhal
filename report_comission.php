@@ -8,41 +8,8 @@ include('include/nav.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            text-align: right;
-            background-color: LightGray;
-            position: relative;
-            
-        }
-
-        .container {
-            background-color: #5F9EA0;
-            border-style: groove;
-            font-size: 17px;
-            border-radius: 25px;
-            position: absolute;
-            left: 12%;
-            top:10%;
-        }
-
-        #form_input {
-            text-align: right;
-            border-radius: 5px;
-
-        }
-
-        #form_btn {
-            text-align: right;
-        }
-
-        #from-date,
-        #to-date {
-            border-radius: 5px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/styles/report_comission.css">
+    <title>Document</title> 
 </head>
 
 
@@ -150,7 +117,7 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end " style="padding-left: 65px;"> 
+            <div class="row justify-content-end " id="total_row"> 
                 <div class="px-1" >       
                     <label for="">إجمالي الفواتير  </label>
                         <input type="text"  readonly id="" value="">

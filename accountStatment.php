@@ -9,31 +9,8 @@ include('include/nav.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles/accountStatment.css">
     <title>Document</title>
-    <style>
-        body{
-            text-align: right;
-            background-color:LightGray;
-            justify-content:center ;
-        }
-        .container{
-            position: absolute;
-            background-color: #5F9EA0;
-            border-style:groove;
-            border-radius: 25px;
-            top:13% ;
-            left:15%;
-            font-size: 17px;
-            padding: 5px;
-
-        }
-        #btn-grp{
-            border-radius: 4px;
-            text-align: center;
-            margin: 1px;
-            width: 80px;
-        }
-    </style>
 </head>
 
 <body>

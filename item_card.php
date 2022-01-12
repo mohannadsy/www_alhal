@@ -10,45 +10,13 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        body{
-            background-color: LightGray;
-            box-shadow: 10px 10px 5px grey;
-            position: relative;
-            text-align: right;
-        }
-        .container{
-            position: absolute;
-            /* margin-top:10%;     */
-            top:20% ;
-            left:20%;
-            width: 700px ;
-            height: 430px ;
-            border-radius: 25px;
-            border-style:groove; 
-            background-color:#5F9EA0 ;
-            margin-bottom: 0;
-            font-size: 17px;
-
-        }
-        #button-grp1,#button-grp2{
-            border-radius: 4px;
-            text-align: center;
-            margin: 3px;
-        }
-
-        #button-grp1{
-        }
-        #button-grp2{
-            width: 80px;   
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles/item_card.css">
+   
 </head>
 
 <body>
     <form id="form" action="" method="post">
-        <div class="container">
+        <div class="container py-5">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
@@ -67,10 +35,10 @@ include('include/nav.php');
 
 
 
-            <div class="row justify-content-center">
-                <div id="item_col" class="col-sm-10 col-md-12 text-center py-5">
+            <!-- <div class="row justify-content-center"> -->
+                <!-- <div id="item_col" class="col-sm-10 col-md-12 text-center py-5"> -->
 
-                    <div class="form-group row justify-content-center">
+                    <div class="form-group row justify-content-center  ">
                         <label for="code" class="col-md-3 col-form-label text-md-right">رمز المادة</label>
                         <div class="col-md-6">
                             <input id="code" type="text" value="<?php
@@ -117,30 +85,36 @@ include('include/nav.php');
                         </div>
                     </div>
 
+                    <div class="row py-4" >
+                        <div class="col-md-12 text-center" >
+                            <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a>
+                            <a  href="item_list.php"><button type="button"  id="button-grp1" name="view_items">استعراض المواد</button></a>
+                            <!-- <a  href="#" class=" btn"  data-target="#add_category" data-toggle="modal">إضافة صنف</a> -->
+                            
 
-                    <div id="button_col" class="col-md-12 text-center py-3" >
-                        <a  href="item_list.php"><button type="button"  id="button-grp1" name="view_items">استعراض المواد</button></a>
-
-                        <!-- <a  href="#" class=" btn"  data-target="#add_category" data-toggle="modal">إضافة صنف</a> -->
-                        <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a>
-                    
-                        <button <?php //if (isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="add" id="button-grp2">
-                            إضافة
-                        </button>
-                        <button  <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="update"id="button-grp2">
-                            تعديل
-                        </button>
-                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="delete" id="button-grp2">
-                            حذف
-                        </button>
-                        <button type="button"  name="close"  id="button-grp2">
-                            إغلاق
-                        </button>
+                        <!-- </div> -->
+                        <!-- <div id="button_col" class="col-md-6 text-center" > -->
                         
+                        
+                            <button <?php //if (isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="add" id="button-grp2">
+                                إضافة
+                            </button>
+                            <button  <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="update"id="button-grp2">
+                                تعديل
+                            </button>
+                            <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit"  name="delete" id="button-grp2">
+                                حذف
+                            </button>
+                            <a href="ready.php"><button type="button" id="button-grp2" name="close"> إغلاق</button></a>
+                            
+                        </div>
                     </div>
-                </div>
 
-            </div>
+
+
+                <!-- </div> -->
+
+            <!-- </div> -->
 
         </div>
 

@@ -8,41 +8,8 @@ include('include/nav.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles/report_item.css">
     <title>Document</title>
-    <style>
-        body {
-            text-align: right;
-            background-color: LightGray;
-            position: relative;
-        }
-
-        .container {
-            background-color: #5F9EA0;
-            border-style: groove;
-            font-size: 17px;
-            border-radius: 25px;
-            position: absolute;
-            left: 12%;
-            top:10%;
-
-        }
-
-        #form_input {
-            text-align: right;
-            border-radius: 5px;
-        }
-
-        #form_btn {
-            text-align: right;
-        }
-
-        #from-date,
-        #to-date {
-            border-radius: 5px;
-
-        }
-    </style>
-
 </head>
 
 <body>
@@ -97,45 +64,6 @@ include('include/nav.php');
                 </div>
 
             </div>
-
-            <!-- <div class="row justify-content-start py-2">
-                    <div class="col-md-2" id="form1">
-                        <div class="form-check form-check-inline" >
-                            <input class="form-check-input" type="radio" name="option" id="" value="">
-                            <label class="form-check-label" for="buyer">المادة</label>
-                        </div>
-            
-                    </div>
-                    <div class="col-md-2" id="form2">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="option" id="" value="">
-                            <label class="form-check-label" for="seller">الصنف</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2" id="form3">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="option" id="" value="">
-                            <label class="form-check-label" for="item">العميل</label>
-                        </div>
-   
-                    </div>
-                    <div class="col-3"  id="form_input">
-                        <input type="text" name="" class="form-control">
-                    </div>
-                    <div class="col-2" id="form_btn">
-                        <button type="submit" class="btn btn-secondary" name="search">بحث</button>
-                    </div>
-        </div>
-        <div class="row justify-content-center  py-2 ">
-                    <label for="from_date">من تاريخ</label>
-                    <div class="col-md-3">
-                    <input type="date" name="from_date"  value=" " class="form-control">
-                    </div>
-                    <label for="to_date">إلى تاريخ</label>
-                    <div class="col-md-3">
-                    <input type="date" name="to_date" class="form-control" value=" ">
-                    </div>
-        </div> -->
 
             <div class="row justify-content-center py-2">
                 <div class="col-11">

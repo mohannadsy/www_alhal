@@ -8,33 +8,9 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <style> 
-    body{
-        background-color:lightgray;
-        text-align:right;
-    }
-    .container{
-        border-style:groove;
-        background-color:#5F9EA0;
-    
-
-    }
-    #search{
-        text-align: right;
-        justify-content:right;
-    }
-    #new_account_col{
-        text-align: left;
-    }
-    #close-colum{
-        text-align: left;
-
-    }
-
-
-    </style>
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/styles/account_list.css">
 </head>
 <body>
     <form action="" method="POST">
@@ -45,11 +21,11 @@ include('include/nav.php');
                         <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                     </div>
                     <div class="col-2" >
-                      <button id="search" type="button" class=" btn btn-primary" >بحث</button>
+                      <button id="search" type="button" class=" btn" >بحث</button>
                     </div>
                     
                 <div class="col-6" id="new_account_col">
-                    <a href="<?=ACCOUNT_CARD?>"><button type="button" class=" btn btn-primary" name="new_account">
+                    <a href="<?=ACCOUNT_CARD?>"><button type="button" class=" btn" name="new_account">
                         حساب جديد
                     </button></a>
                 </div>
@@ -75,10 +51,10 @@ include('include/nav.php');
             </div>
             <div class="row py-3">
                 <div class="col-11" id="close-colum">
-                    <button type="button" class="btn btn-primary" name="close">
+                   <a href="ready.php"> <button type="button" class="btn " name="close">
                         إغلاق
                 
-                    </button>
+                    </button></a>
                                 
                 </div>
             </div>

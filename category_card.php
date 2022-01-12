@@ -8,40 +8,8 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        body{
-            background-color: LightGray;
-            position: relative;
-        }
-        .container{
-            position: absolute;
-            top:25% ;
-            left:25%;
-            width: 600px ;
-            height: 330px ;
-            border-radius: 25px;
-            border-style:groove; 
-            background-color:#5F9EA0 ;
-            margin-bottom: 0;
-            font-size: 17px;
-            
-        }
-        #category_col{
-            position: absolute;
-            width: 90%;
-            height: 90%;
-        }
-        #button_grp{
-            border-radius: 5px;
-            margin: 6px;
-            width: 80px;
-      
+    <link rel="stylesheet" href="css/styles/category_card.css">
 
-        }
-        
-
-    </style>
 </head>
 
 <body>

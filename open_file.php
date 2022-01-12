@@ -12,18 +12,8 @@ include('include/nav.php');
     <title>Document</title>
     <!-- <link rel="stylesheet" href="css/styles/open_file.css"> -->
     <style>
-        body {
-            text-align: right;
-            background-color: LightGray;
-            position: relative;
-        }
 
         .container {
-            background-color: #5F9EA0;
-            border-style: groove;
-            font-size: 17px;
-            border-radius: 25px;
-            position: absolute;
             left: 25%;
             top:20%;
             width: 50%;

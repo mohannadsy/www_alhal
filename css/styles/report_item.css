@@ -1,0 +1,20 @@
+.container {
+    left: 12%;
+    top:10%;
+
+}
+
+#form_input {
+    text-align: right;
+    border-radius: 5px;
+}
+
+#form_btn {
+    text-align: right;
+}
+
+#from-date,
+#to-date {
+    border-radius: 5px;
+
+}

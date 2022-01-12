@@ -8,31 +8,9 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles/item_list.css">
     <style> 
-    body{
-        background-color: LightGray;
-        text-align:right;
-    }
-    .container{
-        border-style:groove;
-        background-color:#5F9EA0;
-
-    }
-    #categry_col{
-        text-align: left;
-    }
-    #close_col{
-        text-align: left;
-    }
-    #thead_col{
-        text-align: center; 
-    }
-    #btn_grp{
-        /* margin-right: 10px; */
-
-    }
+    
     </style>
 </head>
 <body>
@@ -44,13 +22,13 @@ include('include/nav.php');
                         <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                     </div>
                     
-                      <button id="search" type="button" class=" btn btn-primary">بحث</button>
+                      <button id="search" type="button" class=" btn">بحث</button>
 
                 <div class="col-8 "id="categry_col" >
-                    <a href="category_card.php"><button type="button" id="btn_grp" class=" btn btn-primary" name="new_category">
+                    <a href="category_card.php"><button type="button" id="btn_grp" class=" btn " name="new_category">
                         صنف جديد
                     </button></a>
-                    <a href="item_card.php"><button type="button" id="btn_grp" class=" btn btn-primary" name="item_card">
+                    <a href="item_card.php"><button type="button" id="btn_grp" class=" btn" name="item_card">
                          بطاقة مادة
                     </button></a>
                 </div>
@@ -91,7 +69,7 @@ include('include/nav.php');
             </div>
             <div class="row py-3">
                 <div class="col-12 " id="close_col">
-                    <button type="button" class="btn btn-primary" name="close" style="margin-left:45px;">
+                    <button type="button" class="btn" id="close_btn" name="close">
                         إغلاق
                 
                     </button>
