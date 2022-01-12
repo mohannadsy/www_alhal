@@ -169,6 +169,7 @@ if (isset($_POST['add'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
     }
     if ($accounts_exec){
+        if($_POST['account_id'] != '0')
         set_local_storage('account_card_code_name' , $_POST['code'] . " - ". $_POST['name'] );
         open_window_self('account_card.php?message_create=success');
         close_window();

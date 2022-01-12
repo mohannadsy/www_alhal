@@ -312,6 +312,53 @@ if (isset($_POST['add'])) {
     open_window_self('payment_bonds.php');
 }
 
+if (isset($_POST['update'])) {
+
+    $main_account_code = get_code_from_input($_POST['main_account']);
+    $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
+    foreach ($_POST['account'] as $key => $value) {
+        if ($value != '' && $_POST['daen'][$key] != '') {
+            $other_account_code = get_code_from_input($value);
+            $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
+            $update_payment_bond_query = update('payment_bonds', [
+                'main_account_id' => $main_account_id,
+                'other_account_id' => $other_account_id,
+                'daen' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'date' => $_POST['date'],
+                'currency' => $_POST['currency'],
+                'main_note' => $_POST['notes']
+            ]).where('code' , $_POST['code']);
+            $update_payment_bond_exec = mysqli_query($con, $update_payment_bond_query);
+            /**
+             * make account statements
+             */
+            // كشف حساب الدافع
+            $update_account_statement_query = update('account_statements', [
+                'main_account_id' => $main_account_id,
+                'other_account_id' => $other_account_id,
+                'daen' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'date' => $_POST['date']
+            ]).where('code_number' , $_POST['code']).andWhere('code_type' , 'payment_bonds').andWhere('main_account_id' , $main_account_id);
+            message_box($update_account_statement_query);
+            $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+
+            // كشف حساب القابض
+            $update_account_statement_query = update('account_statements', [
+                'main_account_id' => $other_account_id,
+                'other_account_id' => $main_account_id,
+                'maden' => $_POST['daen'][$key],
+                'note' => $_POST['note'][$key],
+                'date' => $_POST['date'],
+            ]).where('code_number' , $_POST['code']).andWhere('code_type' , 'payment_bonds').andWhere('main_account_id' , $main_account_id);;
+            $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+        }
+    }
+
+    open_window_self('payment_bonds.php');
+}
+
 if (isset($_POST['delete'])) {
     $delete_paymnet_bond_query = delete('payment_bonds') . where('code', $_POST['code']);
     $delete_paymnet_bond_exec = mysqli_query($con, $delete_paymnet_bond_query);
@@ -339,7 +386,7 @@ include('include/footer.php');
 <script>
     var tags_accounts = [
         <?php
-        foreach (get_all_accounts_without_buying_selling($con) as $row) {
+        foreach (get_all_accounts_without_buying_selling_main_accounts($con) as $row) {
             echo print_account_to_tags_autocomplete($row);
         }
         ?>

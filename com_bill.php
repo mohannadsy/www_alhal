@@ -604,11 +604,13 @@ include('include/footer.php');
         }
     });
     $('input').focus(function() {
+        if (localStorage.getItem('account_card_code_name') != null)
         if (!tags_accounts.includes(localStorage.getItem('account_card_code_name'))) {
             tags_accounts.push(localStorage.getItem('account_card_code_name'));
         }
-        if (!tags_items.includes(localStorage.getItem('account_item_code_name'))) {
-            tags_items.push(localStorage.getItem('account_item_code_name'));
+        if (localStorage.getItem('item_card_code_name') != null)
+        if (!tags_items.includes(localStorage.getItem('item_card_code_name'))) {
+            tags_items.push(localStorage.getItem('item_card_code_name'));
         }
     });
 </script>

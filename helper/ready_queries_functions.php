@@ -93,3 +93,14 @@ function get_all_accounts_without_buying_selling($con){
         array_push($accounts , $account);
     return $accounts;
 }
+
+function get_all_accounts_without_buying_selling_main_accounts($con){
+    $select_box_accounts_query = select('accounts').whereNotEqual('id' , '2')
+                                                    .andWhereNotEqual('id' , '3');
+                                                    // .andWhereNotEqual('account_id' , '0');
+    $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
+    $accounts = [];
+    while($account = mysqli_fetch_array($select_box_accounts_exec))
+        array_push($accounts , $account);
+    return $accounts;
+}
