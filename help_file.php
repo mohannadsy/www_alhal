@@ -9,98 +9,75 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-.button-63 {
-    align-items: center;
-    background-image:linear-gradient(144deg,#90a4ae, #607d8b 50%,#78909c);
-    border: 0;
-    border-radius: 8px;
-    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-    box-sizing: border-box;
-    color: #212121;
-    display: flex;
-    font-family: Phantomsans, sans-serif;
-    font-size: 20px;
-    justify-content: center;
-    line-height: 1em;
-    max-width: 100%;
-    min-width: 140px;
-    padding: 19px 24px;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    cursor: pointer;
-    }
-    .button-63:active,
-    .button-63:hover {
-    outline: 0;
-}
-
-@media (min-width: 768px) {
-.button-63 {
-    font-size: 24px;
-    min-width: 196px;
-  }
-}
-
-
-
         body {
             text-align: right;
             background-color: #b0bec5;
         }
 
-        .container {
-            background-color: #fbe9e7;
-            border-style: groove;
-            margin-top: 5%;
-        }
-
-        #res_number {
-            column-width: 50px;
-        }
     </style>
 
 
 </head>
 <body>
-    <div class="col-3" id="receipt_number1">
-        <div class="row justify-content-center" style="padding-top: 10px;">
-            <h2> التوثيق </h2>
+
+<div class="row " style="padding-top: 10px;">
+    <h2> المحتويات </h2>
+</div>
+
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="collapse bd-links  show" id="bd-docs-nav" >
+                <div class="bd-toc-item active ">
+                    <a class="bd-toc-link" href=""> ملف </a>
+                        
+                            
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href=""> حسابات </a>
+                        
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href=""> مواد </a>
+                       
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href=""> سندات </a>
+                        
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href=""> الأصناف </a>
+                </div>
+                
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href=""> النسخ الاحتياطي   </a>
+                </div>
+            </nav>
         </div>
-    </div>
-    <div class="container">
-                <div class="col-md-2" id="receipt_number">
-                    <div class="row justify-content-start" style="padding-top: 10px;">
-                       <div>
-                            <button class="button-63" role="button" onclick = " "> ملف </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> حسابات  </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> سندات  </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> مواد  </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> الأصناف </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> إنشاء قاعدة بيانات  </button>
-                        </div>
-                        <div>
-                            <button class="button-63" role="button" onclick = " "> نسخ احتياطي  </button>
-                        </div>                  
-                    </div>
-                </div>
-                <div class="col-md-8" id=" ">
-                        <textarea rows="20" type="text" id="" class="form-control" name="notes">الشرح</textarea>
-                </div>
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+            <textarea rows="20"  type="text" id="" class="form-control" name="notes"> 
+            </textarea>
+
+
+        </main>
+    
+        
 
     </div>
+
+</div>
+
+
+
+
+
+    
+
+    
+
+
+                    
+
 
 </body>
 </html>

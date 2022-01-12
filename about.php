@@ -71,7 +71,7 @@ include('include/nav.php');
     <div class="container">
         <div class="col-md-5" id="receipt_number">
             <div class="row justify-content-start" style="padding-top: 10px;">
-                 <textarea rows="10" type="text" id="" class="form-control" name="notes"></textarea>              
+            <br> g
             </div>
         </div>
     </div>
