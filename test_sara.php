@@ -16,6 +16,8 @@ include('include/nav.php');
 <br>
 <a href="test_search.php">Test Search</a>
 
+<button type="button" onclick='window.open("ms-calculator://")'> Test Search</button>
+
 
 <?php
 include('include/footer.php');

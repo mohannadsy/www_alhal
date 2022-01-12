@@ -225,6 +225,7 @@ include('include/nav.php');
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         طباعة
                     </a>
+                    <input type="checkbox" name="" id="">
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
                         <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
