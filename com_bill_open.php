@@ -9,7 +9,6 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles/com_bill.css">
 </head>
 
 <?php
@@ -89,89 +88,86 @@ if (isset($_GET['id'])) {
                 </div>
                 <button hidden type="button" id="add_col">adding column</button>
                 <button hidden type="button" id="add_row">adding Row</button>
-                <div class="row">
-                    <table contenteditable='false' class="table table-hover table-striped text-center" name="table" id="tbl">
-                        <thead class="text-center">
-                            <tr>
-                                <th contenteditable='false'>الرقم</th>
-                                <th contenteditable='false'>المادة</th>
-                                <th contenteditable='false'>الوحدة</th>
-                                <!-- <th contenteditable='false'>عدد العبوات</th> -->
-                                <th contenteditable='false'>وزن قائم</th>
-                                <th contenteditable='false'>وزن الصافي</th>
-                                <th contenteditable='false'> الإفرادي </th>
-                                <th contenteditable='false'>الإجمالي </th>
-                                <th id="notes" contenteditable='false'>ملاحظات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="row">
+                        <div class="col-12">
+                            <table contenteditable='false' class="table table-hover table-striped text-center" name="table" id="tbl">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th contenteditable='false'>الرقم</th>
+                                        <th contenteditable='false'>المادة</th>
+                                        <th contenteditable='false'>الوحدة</th>
+                                        <!-- <th contenteditable='false'>عدد العبوات</th> -->
+                                        <th contenteditable='false'>وزن قائم</th>
+                                        <th contenteditable='false'>وزن الصافي</th>
+                                        <th contenteditable='false'> الإفرادي </th>
+                                        <th contenteditable='false'>الإجمالي </th>
+                                        <th id="notes" contenteditable='false'>ملاحظات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            <?php
-                            $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'
-                            and items.id = bill_item.item_id";
-                            $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
-                            $number = 1;
-                            while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
-                                echo "<tr>";
-                                echo "<td>" . $number++ . "</td>";
-                                echo "<td>" . $row['code'] . " - " . $row['name'] . "</td>";
-                                echo "<td>" . $row['unit'] . "</td>";
-                                echo "<td>" . $row['total_weight'] . "</td>";
-                                echo "<td>" . $row['real_weight'] . "</td>";
-                                echo "<td>" . $row['price'] . "</td>";
-                                echo "<td>" . $row['total_item_price'] . "</td>";
-                                echo "<td>" . $row['bill_item_note'] . "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="">
-                    <div class="row  justify-content-end">
+                                    <?php
+                                    $select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $bill['id'] . "'
+                                    and items.id = bill_item.item_id";
+                                    $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+                                    $number = 1;
+                                    while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $number++ . "</td>";
+                                        echo "<td>" . $row['code'] . " - " . $row['name'] . "</td>";
+                                        echo "<td>" . $row['unit'] . "</td>";
+                                        echo "<td>" . $row['total_weight'] . "</td>";
+                                        echo "<td>" . $row['real_weight'] . "</td>";
+                                        echo "<td>" . $row['price'] . "</td>";
+                                        echo "<td>" . $row['total_item_price'] . "</td>";
+                                        echo "<td>" . $row['bill_item_note'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>  
+                <div class="card-footer">              
+                    <div class="row  justify-content-end  px-5">
                         <label>الإجمالي</label>
                         <input type="text" id="total_price" name="total_price" value="<?= @$bill['total_price'] ?>" readonly>
                     </div>
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-end  px-5">
                         <label>الكمسيون</label>
                         <input readonly type="text" id="com_ratio" name="com_ratio" value="<?= @$bill['com_ratio'] ?>">
                         <label>قيمته</label>
                         <input type="text" name="com_value" id="com_value" value="<?= @$bill['com_value'] ?>" readonly>
                     </div>
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-end px-5">
                         <label>الصافي</label>
                         <input type="text" name="real_price" id="real_price" value="<?= @$bill['real_price'] ?>" readonly>
                     </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div id='buttons' class="row justify-content-start">
-                    <div class="col-4">
-                        <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
-                        <!-- <select name="print_option" id="">
-                            <optgroup>
-                                <option value="">بائع</option>
-                                <option value="">مشتري</option>
-                            </optgroup>
-                        </select>
-                        <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button> -->
+                
 
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            طباعة
-                        </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
-                                <a class="dropdown-item" href="" onclick="printComPillOpen(['details','seller','tbl'])">فاتورة البائع</a>
-                                <a class="dropdown-item" href="" onclick="printComPillOpen(['details','buyer','tbl'])">فاتورة المشتري</a>
-                            </div>
+                    <div id='buttons' class="row justify-content-start">
+                        <div class="col-4">
+                            <button <?php if (isset($buyer['name'])) echo 'disabled' ?> type="submit" name="update">بيع الفاتورة</button>
+                            <!-- <select name="print_option" id="">
+                                <optgroup>
+                                    <option value="">بائع</option>
+                                    <option value="">مشتري</option>
+                                </optgroup>
+                            </select>
+                            <button type="button" name="print" onclick="printComPillOpen(['details','seller','tbl'])">طباعة</button> -->
 
-
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" 
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                طباعة
+                            </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">  
+                                    <a class="dropdown-item" href="" onclick="printComPillOpen(['details','seller','tbl'])">فاتورة البائع</a>
+                                    <a class="dropdown-item" href="" onclick="printComPillOpen(['details','buyer','tbl'])">فاتورة المشتري</a>
+                                </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
+                    </div>
         </div>
     </form>
 </body>
