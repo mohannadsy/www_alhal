@@ -15,8 +15,11 @@ include('include/nav.php');
 <a href="catchBonds.php">Catch Bonds</a>
 <br>
 <a href="test_search.php">Test Search</a>
+<br>
 
-<button type="button" onclick='window.open("ms-calculator://")'> Test Search</button>
+<a href="test_pdf.php">print page</a>
+<br>
+<!-- <button type="button" onclick='window.open("test_pdf" , "_blank")'>print page</button> -->
 
 
 <?php
