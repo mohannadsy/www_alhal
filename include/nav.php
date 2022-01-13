@@ -31,23 +31,33 @@
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >حسابات</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item"  href="account_card.php" >إنشاء حساب</a>
+      <a class="dropdown-item"  href="account_card.php" >بطاقة حساب</a>
       <a class="dropdown-item" href="accountStatment.php">كشف حساب</a>
+      <a class="dropdown-item" href="account_list.php">قائمة حسابات  </a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >مواد</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item"  href="category_card.php" >إنشاء صنف</a>
-      <a class="dropdown-item" href="item_card.php">إنشاء مادة</a>
+      <a class="dropdown-item"  href="category_card.php" >بطاقة صنف</a>
+      <a class="dropdown-item" href="item_card.php">بطاقة مادة</a>
+      <a class="dropdown-item" href="item_list.php"> قائمة المواد</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >سندات</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item"  href="payment_bonds.php" >سند قبض</a>
-      <a class="dropdown-item" href="catch_bonds.php">سند دفع</a>
+      <a class="dropdown-item"  href="payment_bonds.php" >سند دفع</a>
+      <a class="dropdown-item" href="catch_bonds.php">سند قبض</a>
   </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
+    aria-expanded="false" >حركات</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item"  href="report_item.php" > حركة مادة</a>
+      <a class="dropdown-item" href="report_comission.php">حركة كمسيون </a>
+  </li>
+
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
   </li>
@@ -59,9 +69,6 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="test_rgd.php">Raghad</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
   </li>
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.history.back()">BACK</button>

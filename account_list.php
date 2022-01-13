@@ -8,8 +8,6 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="css/styles/account_list.css">
 </head>
 <body>
@@ -17,14 +15,14 @@ include('include/nav.php');
         <div class="container my-5">
             <div class="row py-4">
 
-                    <div class="col-3">
+                    <div class="col-3" id="search_col">
                         <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                     </div>
-                    <div class="col-2" >
+                    <!-- <div class="col-2" > -->
                       <button id="search" type="button" class=" btn" >بحث</button>
-                    </div>
+                    <!-- </div> -->
                     
-                <div class="col-6" id="new_account_col">
+                <div class="col-8" id="new_account_col">
                     <a href="<?=ACCOUNT_CARD?>"><button type="button" class=" btn" name="new_account">
                         حساب جديد
                     </button></a>

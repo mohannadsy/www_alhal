@@ -18,11 +18,11 @@ include('include/nav.php');
         <div class="container my-5">
             <div class="row py-4">
 
-            <div class="col-3">
-                        <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                    </div>
-                    
-                      <button id="search" type="button" class=" btn">بحث</button>
+                <div class="col-3" id="search_col">
+                    <input id="search_text" type="search" class="form-control"  placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                </div>
+                
+                <button id="search" type="button" class=" btn">بحث</button>
 
                 <div class="col-8 "id="categry_col" >
                     <a href="category_card.php"><button type="button" id="btn_grp" class=" btn " name="new_category">

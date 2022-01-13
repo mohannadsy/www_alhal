@@ -3,12 +3,16 @@
     left: 12%;
     top:10%;
 }
+#search_col{
+    padding-right: 50px;
+}
 #search{
     text-align: right;
     justify-content:right;
 }
 #new_account_col{
     text-align: left;
+    padding-left: 70px;
 }
 #close-colum{
     text-align: left;
