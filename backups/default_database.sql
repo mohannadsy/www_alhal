@@ -10,6 +10,7 @@ CREATE TABLE `account_statements` (
   `code_type` varchar(250) NOT NULL,
   `note` varchar(250) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -31,15 +32,16 @@ CREATE TABLE `accounts` (
   `state` varchar(250) DEFAULT NULL,
   `location` varchar(250) DEFAULT NULL,
   `note` varchar(250) DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `type` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
-INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
-INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","","2022-01-04 18:54:27","2022-01-04 18:54:27");
+INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
+INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
+INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
 
 
 
@@ -52,6 +54,9 @@ CREATE TABLE `bill_item` (
   `price` varchar(250) DEFAULT NULL,
   `total_item_price` varchar(250) DEFAULT NULL,
   `bill_item_note` varchar(250) DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -73,6 +78,7 @@ CREATE TABLE `bills` (
   `com_value` varchar(250) DEFAULT NULL,
   `real_price` varchar(250) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `date` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -92,6 +98,7 @@ CREATE TABLE `catch_bonds` (
   `currency` varchar(250) DEFAULT NULL,
   `note` varchar(250) NOT NULL,
   `main_note` varchar(250) DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -105,6 +112,7 @@ CREATE TABLE `categories` (
   `name` varchar(250) NOT NULL,
   `code` varchar(250) NOT NULL,
   `note` varchar(250) NOT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -131,6 +139,7 @@ CREATE TABLE `items` (
   `price_distribution` varchar(250) DEFAULT NULL,
   `cost` varchar(250) DEFAULT NULL,
   `price_policy` varchar(250) DEFAULT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -150,6 +159,7 @@ CREATE TABLE `mid_bonds` (
   `date` date DEFAULT NULL,
   `currency` varchar(250) DEFAULT NULL,
   `note` varchar(250) NOT NULL,
+  `is_deleted` int(2) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
@@ -168,6 +178,7 @@ CREATE TABLE `payment_bonds` (
   `currency` varchar(250) DEFAULT NULL,
   `note` varchar(250) NOT NULL,
   `main_note` varchar(250) DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)

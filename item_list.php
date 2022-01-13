@@ -46,15 +46,15 @@ include('include/nav.php');
                         </thead>
                         <tbody id="show">
                             <?php
-                                $select_all_items_query = select('items');
+                                $select_all_items_query = selectND('items');
                                 $select_all_items_exec = mysqli_query($con , $select_all_items_query);
                                 $count = 1;
                                 while($item = mysqli_fetch_array($select_all_items_exec)){
-                                    echo "<tr>";
+                                    echo '<tr  ondblclick="window.open(\'item_card.php?id=' . $item['id'] . '\' , \'_self\')">';
                                     echo "<td>".$count++."</td>";
                                     echo "<td>".$item['name']."</td>";
                                     echo "<td>".$item['code']."</td>";
-                                    $select_category_query = select('categories').where('id' , $item['category_id'] );
+                                    $select_category_query = selectND('categories').andWhere('id' , $item['category_id'] );
                                     $select_category_exec = mysqli_query($con, $select_category_query);
                                     $category = mysqli_fetch_array($select_category_exec);
                                     echo "<td>".$category['name']."</td>";

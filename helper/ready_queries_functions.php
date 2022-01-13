@@ -69,11 +69,11 @@ function get_name_and_code_from_table_using_id($con , $table , $id){
 
 function insert_main_accounts($con)
 {
-    $insert_main_accounts_query = ' 
-            INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
-            INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","","2022-01-04 18:54:08","2022-01-04 18:54:08");
-            INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","","2022-01-04 18:54:27","2022-01-04 18:54:27");    
-    ';
+    $insert_main_accounts_query ="
+    INSERT INTO `accounts` (`id`, `code`, `name`, `maden`, `daen`, `phone`, `email`, `account_id`, `city`, `state`, `location`, `note`, `is_deleted`, `type`, `created_at`, `updated_at`) VALUES (NULL, '1', 'الصندوق', NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, '0', '', current_timestamp(), current_timestamp()); 
+    INSERT INTO `accounts` (`id`, `code`, `name`, `maden`, `daen`, `phone`, `email`, `account_id`, `city`, `state`, `location`, `note`, `is_deleted`, `type`, `created_at`, `updated_at`) VALUES (NULL, '2', 'المشتريات', NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, '0', '', current_timestamp(), current_timestamp()); 
+    INSERT INTO `accounts` (`id`, `code`, `name`, `maden`, `daen`, `phone`, `email`, `account_id`, `city`, `state`, `location`, `note`, `is_deleted`, `type`, `created_at`, `updated_at`) VALUES (NULL, '3', 'المبيعات', NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, '0', '', current_timestamp(), current_timestamp()); 
+    ";
     $insert_main_accounts_exec = mysqli_multi_query($con , $insert_main_accounts_query);
 }
 

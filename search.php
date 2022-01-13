@@ -88,7 +88,7 @@ if (isset($_POST["item_search"])) {
               c.id as cat_id,
               i.name as item_name,
               c.name as cat_name,
-              i.code as item_code from items as i , categories as c where c.id = i.category_id " . andLike('i.name', $_POST['item_search']);
+              i.code as item_code from items as i , categories as c where c.id = i.category_id " . andLike('i.name', $_POST['item_search']) . " and i.is_deleted <> '1' ";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {
