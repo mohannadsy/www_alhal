@@ -32,6 +32,15 @@ function getId($con, $table, $column, $value)
     $select_exec = mysqli_query($con, $select);
     return mysqli_fetch_array($select_exec)['id'];
 }
+function getIds($con, $table, $column, $value)
+{
+    $select = select($table, ['id', $column]) . where($column, $value);
+    $select_exec = mysqli_query($con, $select);
+    $ids = [];
+    while($id = mysqli_fetch_array($select_exec)['id'])
+        array_push($ids , $id);
+    return $ids;
+}
 
 function get_value_from_table_using_column($con , $table , $column , $value , $column_return){
     $select = select($table).where($column,$value);
@@ -95,11 +104,9 @@ function get_all_accounts_without_buying_selling($con){
 }
 
 function get_all_accounts_without_buying_selling_main_accounts($con){
-    $select_box_accounts_query = select('accounts').whereNotEqual('id' , '2')
-                                                    .andWhereNotEqual('id' , '3');
-                                                    // .andWhereNotEqual('account_id' , '0');
+    $select_box_accounts_query = select('accounts').whereNotEqual('account_id' , '0');
     $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
-    $accounts = [];
+    $accounts = [['name' => 'الصندوق' , 'code' => '1']];
     while($account = mysqli_fetch_array($select_box_accounts_exec))
         array_push($accounts , $account);
     return $accounts;

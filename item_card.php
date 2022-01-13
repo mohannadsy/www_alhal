@@ -133,8 +133,8 @@ if (isset($_POST['add'])) {
     $insert_item_query = insert('items', get_array_from_array($_POST, ['name', 'unit', 'category_id', 'code', 'note']));
     $insert_item_exec = mysqli_query($con, $insert_item_query);
     if ($insert_item_exec) {
-        open_window_self('item_card.php?message_create=success&category_id='.$_POST['category_id']);
         set_local_storage('item_card_code_name' , $_POST['code'] . " - ". $_POST['name'] );
+        open_window_self('item_card.php?message_create=success&category_id='.$_POST['category_id']);
     }
 }
 if (isset($_POST['update'])) {

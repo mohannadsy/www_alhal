@@ -76,11 +76,11 @@ include('include/nav.php');
 
 
 <?php
-$select_last_next_Payment_bonds_query = select('payment_bonds') . ' order by code desc limit 1 ';
+$select_last_next_Payment_bonds_query = selectND('payment_bonds') . ' order by code desc limit 1 ';
 $select_last_next_Payment_bonds_exec = mysqli_query($con, $select_last_next_Payment_bonds_query);
 $last_next_code = mysqli_fetch_array($select_last_next_Payment_bonds_exec)['code'];
 
-$select_last_previous_Payment_bonds_query = select('payment_bonds') . ' limit 1 ';
+$select_last_previous_Payment_bonds_query = selectND('payment_bonds') . ' limit 1 ';
 $select_last_previous_Payment_bonds_exec = mysqli_query($con, $select_last_previous_Payment_bonds_query);
 $last_previous_code = mysqli_fetch_array($select_last_previous_Payment_bonds_exec)['code'];
 
@@ -90,18 +90,18 @@ if (isset($_POST['code']))
     $current_payment_code = $_POST['code'];
 $previous_payment_code = 1;
 if ($current_payment_code < $next_payment_code) {
-    $next_payment_code_query = select('payment_bonds') . whereLarger('code', $current_payment_code);
+    $next_payment_code_query = selectND('payment_bonds') . andWhereLarger('code', $current_payment_code);
     $next_payment_code_exec = mysqli_query($con, $next_payment_code_query);
     $next_payment_code = mysqli_fetch_array($next_payment_code_exec)['code'];
 }
 if ($current_payment_code > $previous_payment_code) {
-    $previous_payment_code_query = select('payment_bonds') . whereSmaller('code', $current_payment_code) . ' order by code desc';
+    $previous_payment_code_query = selectND('payment_bonds') . andWhereSmaller('code', $current_payment_code) . ' order by code desc';
     $previous_payment_code_exec = mysqli_query($con, $previous_payment_code_query);
     $previous_payment_code = mysqli_fetch_array($previous_payment_code_exec)['code'];
 }
 $payment_bonds = [];
 if (isset($_POST['next'])) {
-    $payment_bond_select = select('payment_bonds') . where('code', $next_payment_code);
+    $payment_bond_select = selectND('payment_bonds') . andWhere('code', $next_payment_code);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
     while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
@@ -109,7 +109,7 @@ if (isset($_POST['next'])) {
     }
 }
 if (isset($_POST['last_next'])) {
-    $payment_bond_select = select('payment_bonds') . where('code', $last_next_code);
+    $payment_bond_select = selectND('payment_bonds') . andWhere('code', $last_next_code);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
     while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
@@ -117,7 +117,7 @@ if (isset($_POST['last_next'])) {
     }
 }
 if (isset($_POST['previous'])) {
-    $payment_bond_select = select('payment_bonds') . where('code', $previous_payment_code);
+    $payment_bond_select = selectND('payment_bonds') . andWhere('code', $previous_payment_code);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
     while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
@@ -126,15 +126,15 @@ if (isset($_POST['previous'])) {
 }
 
 if (isset($_POST['last_previous'])) {
-    $payment_bond_select = select('payment_bonds') . where('code', $last_previous_code);
+    $payment_bond_select = selectND('payment_bonds') . andWhere('code', $last_previous_code);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
     while ($payment_bond = mysqli_fetch_array($payment_bond_exec)) {
         $payment_bonds[] = $payment_bond;
     }
 }
-if (isset($_POST['current'])) {
-    $payment_bond_select = select('payment_bonds') . where('code', $_POST['code']);
+if (isset($_POST['current']) || isset($_POST['update'])) {
+    $payment_bond_select = selectND('payment_bonds') . andWhere('code', $_POST['code']);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
     if ($payment_bond_rows > 0)
@@ -172,7 +172,7 @@ if (isset($_POST['current'])) {
                                                                     elseif (isset($_POST['last_next'])) echo $last_next_code;
                                                                     elseif (isset($_POST['previous'])) echo $previous_payment_code;
                                                                     elseif (isset($_POST['last_previous'])) echo $last_previous_code;
-                                                                    elseif (isset($_POST['current'])) echo $_POST['code'];
+                                                                    elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
                         </div>
                     
@@ -211,7 +211,7 @@ if (isset($_POST['current'])) {
                     <div class="form-group row">
                         <label class=" col-sm-6 col-md-3 col-form-label text-md-right">العملة </label>
                         <div class="col-md-8">
-                            <input class="form-control" value="ليرة سورية" readonly>
+                            <input name="currency" id="currency" class="form-control" value="ليرة سورية" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -325,6 +325,7 @@ if (isset($_POST['update'])) {
 
     $main_account_code = get_code_from_input($_POST['main_account']);
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
+    $payment_bond_ids = getIds($con, 'payment_bonds', 'code', $_POST['code']);
     foreach ($_POST['account'] as $key => $value) {
         if ($value != '' && $_POST['daen'][$key] != '') {
             $other_account_code = get_code_from_input($value);
@@ -337,7 +338,7 @@ if (isset($_POST['update'])) {
                 'date' => $_POST['date'],
                 'currency' => $_POST['currency'],
                 'main_note' => $_POST['notes']
-            ]).where('code' , $_POST['code']);
+            ]) . where('code', $_POST['code']) . andWhere('id', $payment_bond_ids[$key]);
             $update_payment_bond_exec = mysqli_query($con, $update_payment_bond_query);
             /**
              * make account statements
@@ -349,7 +350,7 @@ if (isset($_POST['update'])) {
                 'daen' => $_POST['daen'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date']
-            ]).where('code_number' , $_POST['code']).andWhere('code_type' , 'payment_bonds').andWhere('main_account_id' , $main_account_id);
+            ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'payment_bonds') . andWhere('main_account_id', $main_account_id);
             message_box($update_account_statement_query);
             $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
 
@@ -360,12 +361,11 @@ if (isset($_POST['update'])) {
                 'maden' => $_POST['daen'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date'],
-            ]).where('code_number' , $_POST['code']).andWhere('code_type' , 'payment_bonds').andWhere('main_account_id' , $main_account_id);;
+            ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'payment_bonds') . andWhere('main_account_id', $main_account_id);;
             $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
         }
     }
-
-    open_window_self('payment_bonds.php');
+    do_script("document.getElementById('current').click()");
 }
 
 if (isset($_POST['delete'])) {
@@ -386,10 +386,9 @@ include('include/footer.php');
     let names = ['number[]', 'daen[]', 'account[]', 'note[]'];
     addRows('tbl', number_of_rows, names, ids);
 
-    for(var i = 0 ; i < number_of_rows ; i++){
-        $('#daen_'+i).prop('type' , 'number');
+    for (var i = 0; i < number_of_rows; i++) {
+        $('#daen_' + i).prop('type', 'number');
     }
-
 </script>
 
 <script>
