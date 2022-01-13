@@ -358,7 +358,6 @@ include('include/footer.php');
     })(jQuery);
 </script>
 
-
 <script>
     function printComPillOpen(ids) {
         var printDoc = window.open('', '', 'height=800, width=1200');
@@ -414,6 +413,7 @@ include('include/footer.php');
         }
         printDoc.document.write('</body></html>');
         printDoc.document.close();
+
         printDoc.print();
         printDoc.close();
     }

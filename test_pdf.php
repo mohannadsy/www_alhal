@@ -128,6 +128,12 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="pdf1">
+        <p>Hi I am Sara</p>
+        <input type="text" name="" id="">
+        <p>What are you doing</p>
+        <input type="button" value="">
+    </div>
     <button onclick="createPDF()">Create PDF</button>
     <div id="example1"></div>
 </body>
@@ -135,14 +141,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js"></script>
 <script>
-     function createPDF(){
-        var doc = new jsPDF();
-        doc.text("This is some text",20,20);
-        //doc.output('save','hello');
-        window.open(doc.output('bloburl'));
-    }
+    //  var doc = new jsPDF();
+    //  function createPDF(){
+    //     // doc.fromHTML(`<html><head><title>${title}</title></head><body>` +
+    //     //  document.getElementById(divId).innerHTML + `</body></html>`);
+    //     // doc.text(20,20,'Invoice', { align: 'left' });
+    //     //doc.output('save','hello');
+    //     var tt = document.getElementById('pdf1').value;
+    //     var someElementToString = tt.toString();
+    //     //var someElement = document.getElementById("id");
+    //     //var someElementToString = someElement.toString();
+    //     //var someElementToString = tt.innerHTML;
+    //     doc.text(someElementToString,20,20);
+    //     window.open(doc.output('bloburl'));
+    // }
     
     
+
+var doc = new jsPDF();          
+var elementHandler = {
+  '#ignorePDF': function (element, renderer) {
+    return true;
+  }
+};
+
+var source1 = window.document.getElementById('pdf1');
+
+doc.fromHTML(
+    source1,
+    15,
+    15,
+    {
+      'width': 180,'elementHandlers': elementHandler
+    });
+    window.open(doc.output('bloburl'));
 </script>
 
    
