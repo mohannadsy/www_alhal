@@ -47,8 +47,8 @@ include('include/nav.php');
             margin: 6px;
             width: 80px;
         }
-        iframe .container-fluide {
-            background-color: blue;
+        #iframe_item_card {
+            background-color: red;
         }
     </style>
 </head>
@@ -239,6 +239,7 @@ include('include/nav.php');
         </div>
     </form>
     <script src="js/scripts/com_bill.js"></script>
+    <script src="js/iframeResizer.min.js"></script>
 </body>
 
 </html>
@@ -570,9 +571,11 @@ include('include/footer.php');
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
+        // $('#iframe_account_card').css({'background-color': red})
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
+        // $('#iframe_item_card').height($(window).height());
     });
 </script>
 <script>

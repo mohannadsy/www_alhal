@@ -159,3 +159,4 @@ function get_seller_id() {
     var id = document.getElementsByName("seller")[0].value;
     document.getElementById("seller_id").value = id;
 }
+// iFrameResize({ log: true }, '#myIframe')

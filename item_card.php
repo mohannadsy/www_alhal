@@ -159,6 +159,7 @@ if (isset($_POST['delete'])) {
 <?php
 include('include/footer.php');
 ?>
+<script src="js/iframeResizer.contentWindow.min.js"></script>
 
 
 

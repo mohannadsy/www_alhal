@@ -52,6 +52,11 @@ include('include/nav.php');
             margin: 1px;
             width: 80px;
         }
+        #last_previous,#previous,#next,#last_next{
+            margin: 0px 4px;
+            border-radius: 4px;
+
+        }
     </style>
 </head>
 
@@ -153,11 +158,11 @@ if (isset($_POST['current'])) {
                 <div class="col-4" id="receipt_number1">
                     <h2> سند دفع</h2>
                 </div>
-                <div class="col-6 " id="receipt_number">
+                <div class="col-3 " id="receipt_number">
                     <div class="row" style=" padding-top: 10px;padding-right: 30px; ">
                         <label name=" "> رقم الإيصال</label>
 
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <input type="number" id="code" value="<?php if (($next_payment_code == '' && isset($_POST['next'])) ||
                                                                         (isset($_POST['previous']) && $previous_payment_code == '') ||
                                                                         (!isset($_POST['code']))
@@ -170,16 +175,19 @@ if (isset($_POST['current'])) {
                                                                     elseif (isset($_POST['current'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
                         </div>
-
-                        <button name="last_previous" id="last_previous">
-                            <<<< </button>
-                                <button name="previous" id="previous">
-                                    << </button>
-                                        <button name="next" id="next"> >> </button>
-                                        <button name="last_next" id="last_next"> >>>> </button>
-                                        <button name="current" id="current" hidden></button>
+                    
                     </div>
+                   
                 </div>
+                <div class="col-4 text-end">
+                        <div class="row justify-content-end" style="padding-top: 10px;">
+                            <button name="last_previous" id="last_previous"> << </button>
+                            <button name="previous" id="previous"> < </button>
+                            <button name="next" id="next"> > </button>
+                            <button name="last_next" id="last_next"> >> </button>
+                            <button name="current" id="current" hidden></button>
+                        </div>
+                    </div>
             </div>
 
             <div class="row py-3" id="inf_row">
@@ -236,16 +244,17 @@ if (isset($_POST['current'])) {
                 </div>
             </div>
             <div class="row justify-content-end  py-3 px-5">
-                <div class="col-md-4" id='buttons'>
+                <div class="col-md-5" id='buttons'>
                     <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
-                    </button>
-                    <button class="" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
-                        تعديل
                     </button>
                     <button type="button" class="" id="btn-grp" name="print" onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
                         طباعة
                     </button>
+                    <button class="" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
+                        تعديل
+                    </button>
+                    
                     <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class=" " id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>

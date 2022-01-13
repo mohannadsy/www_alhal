@@ -10,23 +10,10 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="css/styles/open_file.css"> -->
+    <link rel="stylesheet" href="css/styles/open_file.css">
     <style>
 
-        .container {
-            left: 25%;
-            top:20%;
-            width: 50%;
-            /* height:50% ; */
-            padding: 30px;
-
-        }
-        #btn-grp, #new, #add{
-            border-radius: 4px;
-            text-align: center;
-            margin: 1px;
-            width: 70px;
-        }
+       
     </style>
 </head>
 

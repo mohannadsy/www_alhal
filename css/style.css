@@ -3,13 +3,13 @@
 }
 body {
     text-align: right;
-    background-color: LightGray;
+    background-color: rgb(52,92,100);
     position: relative;
 }
 .container {
-    background-color: #5F9EA0;
+    background-color:rgb(75,129,137);
     border-style: groove;
     font-size: 17px;
     border-radius: 25px;
     position: absolute;
-    
+}

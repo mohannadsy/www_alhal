@@ -12,14 +12,15 @@
     include('helper/html_functions.php');
     include('helper/links.php');
 ?>
+<link rel="stylesheet" href="css/nav.css">
 
 <html dir="rtl" lang="ar">
-<ul id='nav' class="nav nav-tabs navbar-light bg-light">
+<ul id='nav' class="nav nav-tabs ">
   <li class="nav-item">
-    <a class="nav-link active" href="ready.php">Home</a>
+    <a class="nav-link active " href="ready.php">Home</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
+    <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >ملف</a>
     <div class="dropdown-menu">
       <a class="dropdown-item"  href="open_file.php" >فتح ملف</a>
