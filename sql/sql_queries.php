@@ -57,6 +57,15 @@ function select($table , $columns =' * ')
      return $sql;
 }
 
+/**
+ * merge with andWhere functions
+ */
+function selectND($table , $columns = ' * '){
+  return select($table , $columns).where('is_deleted' , '0');
+}
+function selectD($table , $columns = ' * '){
+  return select($table , $columns).where('is_deleted' , '1');
+}
 
 function selectWithTable($table1,$table2)
 {
@@ -93,10 +102,14 @@ function update($table ,$array)
     return $sql;
 }
 
-//delete from users
-function delete($table)
+//delete
+function forceDelete($table)
 {
     return "delete from $table ";
+}
+
+function delete($table){
+  return "update $table set is_deleted = '1'";
 }
 
 ########################

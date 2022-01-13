@@ -34,3 +34,8 @@ function set_local_storage($key , $value){
 function close_window(){
     echo "<script>window.close()</script>";
 }
+
+
+function do_script($script){
+    echo "<script>$script</script>";
+}
