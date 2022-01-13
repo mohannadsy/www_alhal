@@ -138,7 +138,8 @@
      function createPDF(){
         var doc = new jsPDF();
         doc.text("This is some text",20,20);
-        window.open(doc.output('bloburl'))
+        //doc.output('save','hello');
+        window.open(doc.output('bloburl'));
     }
     
     
