@@ -62,10 +62,10 @@ include('include/nav.php');
                         <button type="submit" class="col-3" name="add" id="button_grp">
                             إضافة
                         </button>
-                        <button <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
+                        <button <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
                             تعديل
                         </button>
-                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php //if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
+                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (!isset($_GET['id'])) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
                             حذف
                         </button>
                         <button type="button" class="col-3" name="close" id="button_grp">

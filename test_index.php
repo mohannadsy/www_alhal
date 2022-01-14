@@ -15,8 +15,12 @@ include('include/nav.php');
 <a href="accountStatment.php">Account Statment</a><br>
 <a href="report_comission.php">Report Comission</a><br>
 <a href="report_item.php">Report Item</a><br>
-
-
+<?php
+// $arr=getenv();
+// foreach ($arr as $key=>$val)
+// echo "$key=>$val<br>";
+// message_box(getenv('HOME'));
+?>
 
 <br><br>
 <form action="" method="post">
