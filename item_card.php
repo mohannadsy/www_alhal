@@ -107,7 +107,7 @@ include('include/nav.php');
                             </button>
                             <a href="ready.php"><button type="button" id="button-grp2" name="close"> إغلاق</button></a>
                             <a <?php if (!isset($_GET['id'])) echo 'hidden' ?> href="item_card.php"><button type="button" id="btn_grp" class="" name="item_card">
-                         بطاقة مادة
+                         مادة جديدة
                     </button></a>
                         </div>
                     </div>

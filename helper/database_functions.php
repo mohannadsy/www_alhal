@@ -222,3 +222,6 @@ function truncate_all_tables($con){
     }
 }
 
+function restore_backup_database($con , $file_path){
+    
+}

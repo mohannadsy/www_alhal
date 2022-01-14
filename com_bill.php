@@ -501,7 +501,7 @@ include('include/footer.php');
 <script>
     var tags_items = [
         <?php
-        $query =  select('items');
+        $query =  selectND('items');
         $query_exec = mysqli_query($con, $query);
         while ($row = mysqli_fetch_row($query_exec)) {
             echo "'$row[9] - $row[1]',";
@@ -510,7 +510,7 @@ include('include/footer.php');
     ];
     var tags_accounts = [
         <?php
-        $query =  select('accounts') . " where id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
+        $query =  selectND('accounts') . " and id <> '1' and id <> '2' and id <> '3' and account_id <> '0'";
         $query_exec = mysqli_query($con, $query);
         while ($row = mysqli_fetch_row($query_exec)) {
             echo "'$row[1] - $row[2]',";

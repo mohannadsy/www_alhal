@@ -5,7 +5,7 @@
  */
 function get_main_accounts($con)
 {
-    $select = select('accounts') . where('account_id', '0') . " and name <> '' and id <> '1' and id <> '2' and id <> '3'";
+    $select = selectND('accounts') . andWhere('account_id', '0') . " and name <> '' and id <> '1' and id <> '2' and id <> '3'";
     $select_exec = mysqli_query($con, $select);
     $result_array = [];
     if ($select_exec)
@@ -20,7 +20,7 @@ function get_main_accounts($con)
  */
 function get_accounts($con, $id = '')
 {
-    $select = select('accounts') . where('account_id', $id);
+    $select = selectND('accounts') . andWhere('account_id', $id);
     $select_exec = mysqli_query($con, $select);
     return mysqli_fetch_all($select_exec);
 }
@@ -86,7 +86,7 @@ function get_box_account($con){
 }
 
 function get_all_accounts($con){
-    $select_box_accounts_query = select('accounts');
+    $select_box_accounts_query = selectND('accounts');
     $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
     $accounts = [];
     while($account = mysqli_fetch_array($select_box_accounts_exec))
@@ -95,7 +95,7 @@ function get_all_accounts($con){
 }
 
 function get_all_accounts_without_buying_selling($con){
-    $select_box_accounts_query = select('accounts').whereNotEqual('id' , '2').andWhereNotEqual('id' , '3');
+    $select_box_accounts_query = selectND('accounts').andWhereNotEqual('id' , '2').andWhereNotEqual('id' , '3');
     $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
     $accounts = [];
     while($account = mysqli_fetch_array($select_box_accounts_exec))
@@ -104,7 +104,7 @@ function get_all_accounts_without_buying_selling($con){
 }
 
 function get_all_accounts_without_buying_selling_main_accounts($con){
-    $select_box_accounts_query = select('accounts').whereNotEqual('account_id' , '0');
+    $select_box_accounts_query = selectND('accounts').andWhereNotEqual('account_id' , '0');
     $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
     $accounts = [['name' => 'الصندوق' , 'code' => '1']];
     while($account = mysqli_fetch_array($select_box_accounts_exec))
