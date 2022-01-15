@@ -60,7 +60,7 @@ include('include/nav.php');
                                 foreach (get_main_accounts($con) as $id => $value) {
                                     echo "<option value='$id'";
                                     if (isset($account['account_id']) && $id == $account['account_id']) echo ' selected ';
-                                    if(isset($_GET['main_account']) && $_GET['main_account'] == $id) echo ' selected';
+                                    if (isset($_GET['main_account']) && $_GET['main_account'] == $id) echo ' selected';
                                     echo ">$value</option>";
                                 }
                                 ?>
@@ -74,13 +74,13 @@ include('include/nav.php');
                         <div class="col-12">
                             <label for="maden" class="form-label" id="lbl_maden"> مدين</label>
                             <div class="input-group col-md-10">
-                                <input type="number" name="maden" class="form-control" id="" value="<?php if (isset($account['maden']) && $account['maden'] > 0) echo $account['maden'] ?>">
+                                <input type="number" name="maden" class="form-control" id="" value="<?php if (isset($account['maden'])) echo $account['maden'] ?>">
                             </div>
                         </div>
                         <div class="col-12">
                             <label for="daen" class="form-label" id="lbl_daen"> دائن</label>
                             <div class="input-group col-md-10">
-                                <input type="number" name="daen" class="form-control" id="" value="<?php if (isset($account['daen']) && $account['daen'] < 0) echo  trim($account['daen'], '-') ?>">
+                                <input type="number" name="daen" class="form-control" id="" value="<?php if (isset($account['daen'])) echo $account['daen'] ?>">
                             </div>
 
                         </div>
@@ -178,14 +178,28 @@ if (isset($_POST['add'])) {
 }
 
 if (isset($_POST['update'])) {
-    $accounts =  updateWhereId('accounts', $_GET['id'], get_array_from_array($_POST, [
-        'name', 'account_id', 'phone', 'state',
-        'city', 'location', 'note', 'code', 'maden', 'daen'
-    ]));
+    if ($_POST['maden'] != '' || $_POST['daen'] != '') {
+        if ($_POST['maden'] == '') $_POST['maden'] = '0';
+        if ($_POST['daen'] == '') $_POST['daen'] = '0';
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['main_account_id'] = getId($con, 'accounts', 'code', $_POST['code']);
+        $_POST['other_account_id'] = $_POST['main_account_id'];
+        $_POST['code_type'] = 'accounts'; // accounts -> رصيد افتتاحي
+        $_POST['date'] = date('Y-m-d');
 
-    $accounts_exec = mysqli_query($con, $accounts);
-    if ($accounts_exec)
-        open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+        $accounts =  updateWhereId('accounts', $_GET['id'], get_array_from_array($_POST, [
+            'name', 'account_id', 'phone', 'state',
+            'city', 'location', 'note', 'code', 'maden', 'daen'
+        ]));
+        $accounts_exec = mysqli_query($con, $accounts);
+        $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
+        ])) . where('main_account_id', $_GET['id']) . andWhere('code_number' , $_POST['code_number']).andWhere('code_type' , 'accounts');
+        $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+
+        if ($accounts_exec)
+            open_window_self('account_card.php?id=' . $_GET['id'] . '&message_update=success');
+    }
 }
 
 ?>
@@ -217,20 +231,20 @@ include('include/footer.php');
         });
     });
     $(document).ready(function() {
-            var account_id = $('#account_id').val();
-            if (account_id != '') {
-                $.ajax({
-                    url: "search.php",
-                    method: "POST",
-                    data: {
-                        account_id: account_id
-                    },
-                    success: function(data) {
-                        // $('#code').fadeIn(data);
-                        $('#code').val(data);
-                        // alert(data);
-                    }
-                });
-            }
-        });
+        var account_id = $('#account_id').val();
+        if (account_id != '' && account_id == '0') {
+            $.ajax({
+                url: "search.php",
+                method: "POST",
+                data: {
+                    account_id: account_id
+                },
+                success: function(data) {
+                    // $('#code').fadeIn(data);
+                    $('#code').val(data);
+                    // alert(data);
+                }
+            });
+        }
+    });
 </script>

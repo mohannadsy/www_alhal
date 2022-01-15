@@ -113,10 +113,16 @@ include('include/nav.php');
                                 $select_account_statements_query = selectND('account_statements') . andWhere('main_account_id', $main_account_id) . "
                                 and date between '" . $_POST['from_date'] . "' and '" . $_POST['to_date'] . "'";
                                 $select_account_statements_exec = mysqli_query($con, $select_account_statements_query);
+                                
                                 $current_currency = 0;
+                                $total_daen = 0;
+                                $total_maden = 0;
+
                                 if (mysqli_num_rows($select_account_statements_exec) > 0)
                                     while ($row = mysqli_fetch_array($select_account_statements_exec)) {
                                         $current_currency +=  ($row['maden'] - $row['daen']);
+                                        $total_daen += $row['daen'];
+                                        $total_maden += $row['maden'];
                                         /**
                                          * make links section
                                          */
@@ -208,9 +214,19 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-end py-3" style=" padding-left:150px; ">
-                <label for="code" class="col-form-label" id="res_number"> المجموع</label>
+                <label for="code1" class="col-form-label"> مجموع مدين</label>
                 <div class="col-md-2">
-                    <input readonly id="code" type="text" id="resault" class="form-control" name="" value="<?= @$current_currency ?>">
+                    <input readonly id="code1" type="text" class="form-control" name="" value="<?= @$total_maden ?>">
+                </div>
+
+                <label for="code2" class="col-form-label" > مجموع دائن</label>
+                <div class="col-md-2">
+                    <input readonly id="code2" type="text" class="form-control" name="" value="<?= @$total_daen ?>">
+                </div>
+
+                <label for="code3" class="col-form-label" > المجموع</label>
+                <div class="col-md-2">
+                    <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
             </div>
             <div class="row justify-content-end py-2">
