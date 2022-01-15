@@ -140,13 +140,13 @@ include('include/nav.php');
                                         }
                                         if ($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
                                             $payment_bond_id = getId($con, 'payment_bonds', 'code', $row['code_number']);
-                                            $href_link = href_id(PAYMENT_BONDS_OPEN, $payment_bond_id);
+                                            $href_link = href_id(PAYMENT_BONDS, $payment_bond_id);
                                             $document_type = 'سند دفع رقم ' . $row['code_number'];;
                                         }
 
                                         if ($row['code_type'] == 'catch_bonds') { // تابع لسند القبض
                                             $catch_bond_id = getId($con, 'catch_bonds', 'code', $row['code_number']);
-                                            $href_link = href_id(CATCH_BONDS_OPEN, $catch_bond_id);
+                                            $href_link = href_id(CATCH_BONDS, $catch_bond_id);
                                             $document_type = 'سند قبض رقم ' . $row['code_number'];;
                                         }
 
@@ -166,20 +166,31 @@ include('include/nav.php');
                                         echo "<td>" . "$current_currency" . "</td>";
                                         if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
                                             $bill_id = 0;
-                                            if($row['code_type'] == 'mid_bonds')
-                                                $bill_id = get_value_from_table_using_column($con , 'mid_bonds' , 'code' , $row['code_number'] , 'bill_id');
+                                            if ($row['code_type'] == 'mid_bonds')
+                                                $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
                                             else
-                                                $bill_id = getId($con , 'bills' , 'code' , $row['code_number']);
-                                            echo "<td class='hidden' style='display:none'>$bill_id</td>";
-                                                echo "<td class='hidden' style='display:none'></td>";
-                                                echo "<td class='hidden' style='display:none'></td>";
-                                                echo "<td class='hidden' style='display:none'></td>";
-                                            for ($i = 0; $i < 4; $i++) {
-                                                echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";                        
-                                                echo "<td class='hidden' style='display:none'>1</td>";
-                                                echo "<td class='hidden' style='display:none'>2</td>";
-                                                echo "<td class='hidden' style='display:none'>3</td>";
-                                                echo "<td class='hidden' style='display:none'>4</td></tr>";
+                                                $bill_id = getId($con, 'bills', 'code', $row['code_number']);
+
+                                            $select_items_using_id_query = "select DISTINCT items.code as item_code,
+                                                bills.code as bill_code,
+                                                unit, date, buyer_id,seller_id,
+                                                name,currency,real_weight,price,total_price,
+                                                com_value,category_id
+                                                 from bill_item, items,bills 
+                                                 where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id'";
+                                            $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+                                            $number_of_items = mysqli_num_rows($select_items_using_id_exec);
+
+                                            echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden' style='display:none'></td>";
+                                            while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
+                                                echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['name'] . "</td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['real_weight'] . "</td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['price'] . "</td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['total_price'] . "</td></tr>";
                                             }
                                         } else {
                                             echo "<td class='hidden' style='display:none'></td>";
@@ -199,7 +210,7 @@ include('include/nav.php');
             <div class="row justify-content-end py-3" style=" padding-left:150px; ">
                 <label for="code" class="col-form-label" id="res_number"> المجموع</label>
                 <div class="col-md-2">
-                    <input readonly id="code" type="text" id="resault" class="form-control" name="" value="<?= @$total_payment ?>">
+                    <input readonly id="code" type="text" id="resault" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
             </div>
             <div class="row justify-content-end py-2">
@@ -226,6 +237,13 @@ include('include/footer.php');
 
 
 <script>
+    var tags = [
+        <?php
+        foreach (get_all_accounts_without_buying_selling_main_accounts($con) as $row)
+            echo print_account_to_tags_autocomplete($row);
+        ?>
+    ];
+
     (function($) {
 
         // Custom autocomplete instance.
@@ -257,15 +275,7 @@ include('include/footer.php');
 
         });
 
-        var tags = [
-            <?php
-            $query =  select('accounts');
-            $query_exec = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_row($query_exec)) {
-                echo "'$row[1] - $row[2]',";
-            }
-            ?>
-        ];
+
 
         // Create autocomplete instances.
         $(function() {

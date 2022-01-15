@@ -15,6 +15,8 @@ include('include/nav.php');
 <a href="accountStatment.php">Account Statment</a><br>
 <a href="report_comission.php">Report Comission</a><br>
 <a href="report_item.php">Report Item</a><br>
+<a href="restore-clauda.php">Restore</a><br>
+
 <?php
 // $arr=getenv();
 // foreach ($arr as $key=>$val)

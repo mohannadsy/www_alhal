@@ -85,6 +85,12 @@ $select_last_previous_Payment_bonds_exec = mysqli_query($con, $select_last_previ
 $last_previous_code = mysqli_fetch_array($select_last_previous_Payment_bonds_exec)['code'];
 
 $current_payment_code = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+if (isset($_GET['id'])) {
+    $current_payment_code = get_value_from_table_using_id($con, 'payment_bonds', 'code', $_GET['id']);
+    $_POST['code'] = $current_payment_code;
+    $_POST['current'] = $current_payment_code;
+}
+
 $next_payment_code = $current_payment_code;
 if (isset($_POST['code']))
     $current_payment_code = $_POST['code'];
