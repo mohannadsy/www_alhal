@@ -11,6 +11,7 @@ if(isset($_POST["create_pdf"])){
 	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
+    //header
 	$pdf->setPrintHeader(true);
 
     // set some language dependent data:
@@ -30,10 +31,19 @@ if(isset($_POST["create_pdf"])){
 
     // Add a page
 	$pdf->AddPage();
-    $num_bill="رقم الفاتورة";
-    $pdf->Cell(45, 0, $num_bill , 1, 1, 'R', 0, '', 1);
-    $date = "تاريخ الفاتورة";
-    $pdf->Cell(45, 0, $date , 1, 1, 'R', 0, '', 1);
+    $num_bill='رقم الفاتورة:';
+    $pdf->MultiCell(50, 6, $num_bill ,0, 'R', 0, 0, '', '', true);
+    $date = 'تاريخ الفاتورة:';
+    $pdf->MultiCell(50, 6, $date ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(8);
+    $seller_name='البائع:';
+    $pdf->MultiCell(50, 6, $seller_name ,0, 'R', 0, 0, '', '', true);
+    $payment_method='طريقة الدفع:';
+    $pdf->MultiCell(50, 6, $payment_method ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(8);
+    $notes='ملاحظات:';
+    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(10);
     // Set some content to print
     $content = <<<EOD
         <style>
@@ -57,11 +67,11 @@ if(isset($_POST["create_pdf"])){
 
             </tbody>
         </table>
-        EOD;
+EOD;
 	$pdf->writeHTML($content);
 	if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 	$pdf->output('pdfReport.pdf', 'I');
     // END OF FILE
-}
+    }
 ?>
