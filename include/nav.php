@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/nav.css">
 
 <html dir="rtl" lang="ar">
-<ul id='nav' class="nav nav-tabs flex-top">
+<ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active " href="ready.php">Home</a>
   </li>
@@ -77,7 +77,7 @@
     <button class="nav-link" type="button" onclick="window.location.reload()">Reload</button>
   </li>
   <li class="nav-item">
-    <button class="nav-link" type="button" onclick="window.location.reload()">Reload</button>
+    <button class="nav-link  fixed-top" type="button" onclick="scrollToTop()">UP</button>
   </li>
   
 </ul>
