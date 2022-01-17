@@ -230,8 +230,10 @@ include('include/nav.php');
                     </a>
                     <input type="checkbox" name="" id="">
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة البائع</a>
-                        <a class="dropdown-item" href="" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a>
+                        
+                        <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
+                        <button type="submit" class="dropdown-item"  name="print_seller">فاتورة بائع</button>
+                        <button type="submit" class="dropdown-item"  name="print_buyer">فاتورة مشتري</button>
                     </div>
 
                 </div>
@@ -247,7 +249,7 @@ include('include/nav.php');
 <?php
 
 
-if (isset($_POST['save'])) {
+if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['print_buyer']) ) {
 
 
     $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
@@ -489,7 +491,15 @@ if (isset($_POST['save'])) {
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
+    if(isset($_POST['print_seller'])){
+        open_window_blank("print.php?code=".$current_bill_code . "&print_type=seller");
+    }
+    if(isset($_POST['print_buyer'])){
+        open_window_blank("print.php?code=".$current_bill_code.'&print_type=buyer');
+    }
+    
     open_window_self(COM_BILL);
+    
 }
 
 ?>
