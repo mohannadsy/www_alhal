@@ -7,6 +7,9 @@ function message_box($message){
 function open_window_self($window){
     echo "<script>window.open('$window' , '_self')</script>";
 }
+function open_window_blank($window){
+    echo "<script>window.open('$window' , '_blank')</script>";
+}
 
 function open_window_self_id($window , $id){
     echo "<script>window.open('$window?id=$id' , '_self')</script>";

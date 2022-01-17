@@ -92,6 +92,7 @@ include('include/nav.php');
                                 <th contenteditable='false'>البيان</th>
                                 <th contenteditable='false'>رصيد الحركة</th>
                                 <th class='hidden' style='display:none' contenteditable='false'>المادة</th>
+                                <th class='hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
                                 <th class='hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
                                 <th class='hidden' style='display:none' contenteditable='false'> الإفرادي</th>
                                 <th class='hidden' style='display:none' contenteditable='false'>الإجمالي</th>
@@ -176,14 +177,15 @@ include('include/nav.php');
                                                 $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
                                             else
                                                 $bill_id = getId($con, 'bills', 'code', $row['code_number']);
-
+                                            $bill_code = $row['code_number'];
                                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                 bills.code as bill_code,
                                                 unit, date, buyer_id,seller_id,
                                                 name,currency,real_weight,price,total_price,
+                                                total_item_price,total_weight,
                                                 com_value,category_id
                                                  from bill_item, items,bills 
-                                                 where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id'";
+                                                 where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id' and bills.code = '$bill_code'";
                                             $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
                                             $number_of_items = mysqli_num_rows($select_items_using_id_exec);
 
@@ -191,14 +193,17 @@ include('include/nav.php');
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden' style='display:none'></td>";
                                             while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                                                 echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['name'] . "</td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['total_weight'] . "</td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['real_weight'] . "</td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['price'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['total_price'] . "</td></tr>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['total_item_price'] . "</td></tr>";
                                             }
                                         } else {
+                                            echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";

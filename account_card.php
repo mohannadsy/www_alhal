@@ -232,7 +232,7 @@ include('include/footer.php');
     });
     $(document).ready(function() {
         var account_id = $('#account_id').val();
-        if (account_id != '' && account_id == '0') {
+        if (account_id != '' && account_id != '0') {
             $.ajax({
                 url: "search.php",
                 method: "POST",

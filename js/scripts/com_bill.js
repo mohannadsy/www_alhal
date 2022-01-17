@@ -1,6 +1,7 @@
 /**
  * deafult item_bill
  */
+var number_of_bills_row = 5;
 
 function count_total_price() {
     var sum = 0;
@@ -102,13 +103,13 @@ function appendRow(row_number = '1') {
         i;
     // insert table cells to the new row
 
-    if (tbl.rows.length < 20 && tbl.rows.length >= 12) {
+    if (tbl.rows.length < 20 && tbl.rows.length >= (number_of_bills_row+2)) {
         for (i = 0; i < tbl.rows[0].cells.length; i++) {
             createCell(row.insertCell(i), i, 'row', item_bill_id[i], item_bill_name[i], tbl.rows.length - 2);
         }
     }
 
-    if (tbl.rows.length < 12)
+    if (tbl.rows.length < (number_of_bills_row +2))
         for (i = 0; i < tbl.rows[0].cells.length; i++) {
             createCell(row.insertCell(i), i, 'row', item_bill_id[i], item_bill_name[i], row_number);
         }
@@ -122,7 +123,7 @@ document.querySelector('#add_row').onclick = appendRow;
 
 function deafultRows() {
     var i = 0;
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < number_of_bills_row; i++) {
         appendRow(i);
     }
 }
