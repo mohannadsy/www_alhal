@@ -11,6 +11,18 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles/accountStatment.css">
     <title>Document</title>
+    <style>
+      .form-check-label {
+        margin-right: 20px;
+      }
+      #lbl_radio{
+          /* background-color: blue; */
+        /* margin-right: 5px; */
+      }
+      #lbl-radio-type{
+          padding-right: 5px;    
+      }
+    </style>
 </head>
 
 <body>
@@ -37,9 +49,8 @@ include('include/nav.php');
                             </select>
                         </div>
                     </div>
-
                 </div>
-                <div class="col-3 ">
+                <div class="col-3">
                     <div class="row ">
                         <label for="from_date ">من تاريخ</label>
                         <div class="col-md-8">
@@ -53,24 +64,75 @@ include('include/nav.php');
                             <input type="date" name="to_date" id="to-date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
                                                                                                                         else echo date('Y-m-d') ?>">
                         </div>
-                    </div>
+                    </div>   
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="row">
-                        <label for="">نوع التقرير:</label>
+                        <label for="" id="lbl-radio-type">نوع التقرير:</label>
 
-                        <div class="col-3 text-right">
+                        <div class="form-check" style="margin-right: 5px;">
                             <input checked type="radio" name="report_type" id="report_type_conclusion" value="conclusion">
-                            <label>مختصر</label>
+                            <label id="lbl_radio" >مختصر</label>
                         </div>
-                        <div class="col-4 text-right">
+                        <div class="form-check ">
                             <input type="radio" name="report_type" id="report_type_details" value="details">
-                            <label>تفصيلي</label>
+                            <label id="lbl_radio" >تفصيلي</label>
                         </div>
                     </div>
-
-
                 </div>
+                <div class="col-3">
+                    <h5 style="margin-left: 10px;">خيارات الإظهار</h5>
+                    <div class="row">
+                    
+                        <div class="col-6">   
+                            <div class="form-check">
+                                <input type="checkbox" value="" id="">
+                                <label  for="">
+                                    المادة 
+                                </label>
+                            </div>
+                            <div >
+                                <input  type="checkbox" value="" id="" >
+                                <label  for="">
+                                    الوزن القائم 
+                                </label>
+                            </div>
+                            <div>
+                                <input  type="checkbox" value="" id="">
+                                <label  for="" >
+                                    الوزن الصافي 
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                        
+                            <div class="form-check">
+                                <input type="checkbox" value="" id="">
+                                <label   for="">
+                                    الإفرادي 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" value="" id="">
+                                <label for="">
+                                    الإجمالي 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" value="" id="">
+                                <label  for="">
+                                    الكمسيون 
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row py-1 justify-content-center" style="margin-right: 30px;">
+                <button type="submit" name="view" id="btn-grp">معاينة</button>
+                <button type="submit" name="" id="btn-grp">طباعة</button>
+                <button type="submit" id="btn-grp">إغلاق</button>
             </div>
 
             <?php
@@ -234,14 +296,14 @@ include('include/nav.php');
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
             </div>
-            <div class="row justify-content-end py-2">
+            <!-- <div class="row justify-content-end py-2">
                 <div class="col-4">
                     <button type="submit" name="view" id="btn-grp">معاينة</button>
                     <button type="submit" name="" id="btn-grp">طباعة</button>
                     <button type="submit" id="btn-grp">إغلاق</button>
 
                 </div>
-            </div>
+            </div> -->
 
 
         </div>

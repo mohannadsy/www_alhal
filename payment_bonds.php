@@ -57,6 +57,11 @@ include('include/nav.php');
             border-radius: 4px;
 
         }
+        iframe{
+            background-color: burlywood;
+            min-width: 900px;
+            min-height: 500px;
+        }
     </style>
 </head>
 
@@ -68,7 +73,7 @@ include('include/nav.php');
             <div class="modal-body">
                 <button onclick="" data-dismiss="modal" class="close">&times;</button>
                 <h4>Account Card</h4>
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -254,7 +259,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                     <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="button" class="" id="btn-grp" name="print" onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
+                    <button type="submit" class="" id="btn-grp" name="print" >
                         طباعة
                     </button>
                     <button class="" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
@@ -323,10 +328,14 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
-    if(isset($_POST['print']))
+    if(isset($_POST['print'])){
+        open_window_blank("print.php?payment_code=" . $current_payment_code );
+    }
     open_window_self('payment_bonds.php');
 }
-
+if(isset($_POST['print'])){
+    open_window_blank("print.php?payment_code=" . $current_payment_code );
+}
 if (isset($_POST['update'])) {
 
     $main_account_code = get_code_from_input($_POST['main_account']);
