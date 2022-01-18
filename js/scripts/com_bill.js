@@ -12,6 +12,10 @@ function count_total_price() {
     var com_ratio = document.getElementById('com_ratio').value,
         com_value = document.getElementById('com_value').value,
         total_price = document.getElementById('total_price').value;
+
+    if(com_ratio == '')
+        com_ratio = 0;
+    
     var percent = (parseInt(com_ratio) / 100) * parseInt(total_price);
     document.getElementById('real_price').value = Math.round(parseInt(total_price) - percent);
     document.getElementById('com_value').value = Math.round(percent);
