@@ -343,7 +343,6 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                         <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
                         <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -685,12 +684,12 @@ if (isset($_POST['update'])) {
         $_POST['daen'] = $_POST['real_price'];
         $_POST['bill_id'] = $current_bill_id_to_update;
         $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id','daen', 'date', 'note'
+            'main_account_id', 'other_account_id', 'daen', 'date', 'note'
         ])) . where('code', $mid_bonds[0]['code']);
         $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
         // كشف حساب صندوق
         $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id','daen', 'note', 'date'
+            'main_account_id', 'other_account_id', 'daen', 'note', 'date'
         ])) . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bonds[0]['code']);
         $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
 
@@ -698,12 +697,12 @@ if (isset($_POST['update'])) {
         $_POST['maden'] = $_POST['real_price'];
         $_POST['note'] = $_POST['seller_note'];
         $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id','maden', 'date', 'note'
+            'main_account_id', 'other_account_id', 'maden', 'date', 'note'
         ])) . where('code', $mid_bonds[1]['code']);
         $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
         // كشف حساب مشتريات
         $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id','maden', 'note', 'date'
+            'main_account_id', 'other_account_id', 'maden', 'note', 'date'
         ])) . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bonds[1]['code']);;
         $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
 
@@ -770,7 +769,7 @@ if (isset($_POST['update'])) {
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'maden', 'date', 'note'
-            ])). where('code', $mid_bonds[2]['code']);;
+            ])) . where('code', $mid_bonds[2]['code']);;
             $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
             // كشف حساب الصندوق
             $_POST['code_number'] = $_POST['code'];
@@ -787,7 +786,7 @@ if (isset($_POST['update'])) {
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'daen', 'date', 'note'
-            ])). where('code', $mid_bonds[3]['code']);
+            ])) . where('code', $mid_bonds[3]['code']);
             $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
             // كشف حساب المبيعات
             $_POST['code_number'] = $_POST['code'];
@@ -816,7 +815,7 @@ if (isset($_POST['update'])) {
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'maden', 'date', 'note'
-            ])). where('code', $mid_bonds[2]['code']);;
+            ])) . where('code', $mid_bonds[2]['code']);;
             $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
             // كشف حساب المشتري
             $_POST['code_number'] = $_POST['code'];
@@ -833,18 +832,18 @@ if (isset($_POST['update'])) {
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $update_mid_bonds_query = update('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'daen', 'date', 'note'
-            ])). where('code', $mid_bonds[3]['code']);;
+            ])) . where('code', $mid_bonds[3]['code']);;
             $update_mid_bonds_exec = mysqli_query($con, $update_mid_bonds_query);
             // كشف حساب المبيعات
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'daen', 'note', 'date'
-            ])). where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bonds[3]['code']);
+            ])) . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bonds[3]['code']);
             $update_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
-    open_window_self_id(COM_BILL , $current_bill_id_to_update);
+    // open_window_self_id(COM_BILL , $current_bill_id_to_update);
 }
 
 ?>

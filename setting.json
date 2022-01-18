@@ -1,0 +1,22 @@
+{
+    "account_statement":{
+        "item":true,
+        "total_weight":true,
+        "real_weight":true,
+        "total_item_price":true,
+        "com_value":true,
+        "com_ratio":true,
+        "price":true
+    },
+    "user_info":{
+        "name" : "",
+        "phone" : ""
+    },
+    "print_info":{
+        "page":"A4",
+        "border":true,
+        "item_code":true,
+        "seller_code":true,
+        "buyer_code":true
+    }
+}
