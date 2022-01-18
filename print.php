@@ -153,4 +153,31 @@ if(isset($_GET['code'])){
 	$pdf->output('SellerBill_'.$bill['code'], 'I');
     // END OF FILE
     }
+
+if(isset($_GET['payment_code'])){
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    
+    $pdf->SetCreator(PDF_CREATOR);
+    //header
+	$pdf->setPrintHeader(true);
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+    // set font
+    $pdf->SetFont('arial', '', 12);
+    // Add a page
+	$pdf->AddPage();
+    if (ob_get_contents()) ob_end_clean();
+    // Close and output PDF document
+	$pdf->output('payment', 'I');
+    // END OF FILE
+} 
+
 ?>
