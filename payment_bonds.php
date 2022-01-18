@@ -274,7 +274,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 </html>
 
 <?php
-if (isset($_POST['add'])) {
+if (isset($_POST['add']) || isset($_POST['print'])) {
 
     $main_account_code = get_code_from_input($_POST['main_account']);
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
@@ -323,7 +323,7 @@ if (isset($_POST['add'])) {
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
-
+    if(isset($_POST['print']))
     open_window_self('payment_bonds.php');
 }
 
