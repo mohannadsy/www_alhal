@@ -13,9 +13,33 @@
     include('helper/links.php');
 ?>
 <link rel="stylesheet" href="css/nav.css">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark">
+<div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarLinks">
+    <ul class="navbar-nav">
+      <li class="nav-item @@home">
+        <a class="nav-link" href="ready.php">Home</a>
+      </li>
+      <li class="nav-item dropdown @@blogs">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ملف</a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item @@blog" href="open_file.php">ملف جديد</a></li>
+            <li><a class="dropdown-item @@blogDetails" href="">استيراد </a></li>
+          </ul>
+      </li>
+
+    </ul>
+    </div>
+</div>
+</nav> -->
+
 
 <html dir="rtl" lang="ar">
-<ul id='nav' class="nav nav-tabs ">
+<ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active " href="ready.php">Home</a>
   </li>
@@ -76,5 +100,9 @@
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.location.reload()">Reload</button>
   </li>
+  <li class="nav-item">
+    <button class="nav-link  fixed-top" type="button" onclick="scrollToTop()">UP</button>
+  </li>
+  
 </ul>
 </html>

@@ -15,6 +15,7 @@ include('include/nav.php');
 <a href="test_raghad_stole.php">Theif</a><br>
 <a href="payment_bonds_open.php">iframe</a><br>
 <a href="test_open_file_pop_up.php"> test opn pop up</a> <br>
+<a href="mynavtest.php">naaaaaav</a>
 <?php
 include('include/footer.php');
 ?>
