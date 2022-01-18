@@ -57,6 +57,11 @@ include('include/nav.php');
             border-radius: 4px;
 
         }
+        iframe{
+            background-color: burlywood;
+            min-width: 900px;
+            min-height: 500px;
+        }
     </style>
 </head>
 
@@ -68,7 +73,7 @@ include('include/nav.php');
             <div class="modal-body">
                 <button onclick="" data-dismiss="modal" class="close">&times;</button>
                 <h4>Account Card</h4>
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
