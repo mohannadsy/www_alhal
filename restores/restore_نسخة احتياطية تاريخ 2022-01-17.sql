@@ -14,12 +14,17 @@ CREATE TABLE `account_statements` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO account_statements VALUES("1","0","100000","1","5","1","payment_bonds","","2022-01-15","0","2022-01-15 10:40:54","2022-01-15 10:40:54");
-INSERT INTO account_statements VALUES("2","100000","0","5","1","1","payment_bonds","","2022-01-15","0","2022-01-15 10:40:54","2022-01-15 10:40:54");
-INSERT INTO account_statements VALUES("3","100000","0","1","5","1","catch_bonds","","2022-01-15","0","2022-01-15 10:41:33","2022-01-15 10:41:33");
-INSERT INTO account_statements VALUES("4","0","100000","5","1","1","catch_bonds","","2022-01-15","0","2022-01-15 10:41:33","2022-01-15 10:41:33");
+INSERT INTO account_statements VALUES("1","5000","0","5","5","40001","accounts","","2022-01-17","0","2022-01-17 09:37:16","2022-01-17 09:37:16");
+INSERT INTO account_statements VALUES("2","0","9000","6","6","40002","accounts","","2022-01-17","0","2022-01-17 09:37:25","2022-01-17 09:37:25");
+INSERT INTO account_statements VALUES("3","0","2000","1","6","1","payment_bonds","ma","2022-01-17","0","2022-01-17 09:38:15","2022-01-17 09:38:15");
+INSERT INTO account_statements VALUES("4","2000","0","6","1","1","payment_bonds","ma","2022-01-17","0","2022-01-17 09:38:15","2022-01-17 09:38:15");
+INSERT INTO account_statements VALUES("5","0","381710","1","2","1","mid_bonds","  ","2022-01-17","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO account_statements VALUES("6","381710","0","2","1","2","mid_bonds","","2022-01-17","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO account_statements VALUES("7","381710","381710","5","1","1","bills","","2022-01-17","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO account_statements VALUES("8","401800","0","6","3","3","mid_bonds","","2022-01-17","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO account_statements VALUES("9","0","401800","3","6","4","mid_bonds","","2022-01-17","0","2022-01-17 09:41:36","2022-01-17 09:41:36");
 
 
 
@@ -41,13 +46,14 @@ CREATE TABLE `accounts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
-INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
-INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","0","","2022-01-13 19:15:36","2022-01-13 19:15:36");
-INSERT INTO accounts VALUES("4","4","jablah accounts","","","","","0","","","","","0","","2022-01-15 10:40:29","2022-01-15 10:40:29");
-INSERT INTO accounts VALUES("5","40001","ahmad","","","","","4","","","","","0","","2022-01-15 10:40:40","2022-01-15 10:40:40");
+INSERT INTO accounts VALUES("1","1","الصندوق","","","","","0","","","","","0","","2022-01-17 09:36:54","2022-01-17 09:36:54");
+INSERT INTO accounts VALUES("2","2","المشتريات","","","","","0","","","","","0","","2022-01-17 09:36:54","2022-01-17 09:36:54");
+INSERT INTO accounts VALUES("3","3","المبيعات","","","","","0","","","","","0","","2022-01-17 09:36:54","2022-01-17 09:36:54");
+INSERT INTO accounts VALUES("4","4","jablah","","","","","0","","","","","0","","2022-01-17 09:37:05","2022-01-17 09:37:05");
+INSERT INTO accounts VALUES("5","40001","obai","5000","","","","4","","","","","0","","2022-01-17 09:37:16","2022-01-17 09:37:16");
+INSERT INTO accounts VALUES("6","40002","mohannd","","9000","","","4","","","","","0","","2022-01-17 09:37:25","2022-01-17 09:37:25");
 
 
 
@@ -64,8 +70,10 @@ CREATE TABLE `bill_item` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO bill_item VALUES("1","1","1","100","98","500","49000"," ","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO bill_item VALUES("2","1","2","600","588","600","352800"," ","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
 
 
 
@@ -89,8 +97,9 @@ CREATE TABLE `bills` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+INSERT INTO bills VALUES("1","1","6","5","agel","cash","","","401800","ليرة سورية","5","20090","381710","","0","2022-01-17","2022-01-17 09:41:34","2022-01-17 09:41:34");
 
 
 
@@ -108,9 +117,8 @@ CREATE TABLE `catch_bonds` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO catch_bonds VALUES("1","1","1","5","100000","2022-01-15","ليرة سورية","","","0","2022-01-15 10:41:33","2022-01-15 10:41:33");
 
 
 
@@ -123,10 +131,9 @@ CREATE TABLE `categories` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO categories VALUES("1","fruits","1"," ","0","2022-01-14 17:52:16","2022-01-14 17:52:16");
-INSERT INTO categories VALUES("2","veg","2"," veg notes","0","2022-01-14 17:52:54","2022-01-14 17:52:54");
+INSERT INTO categories VALUES("1","fruits","1","a ","0","2022-01-17 09:39:59","2022-01-17 09:39:59");
 
 
 
@@ -152,11 +159,10 @@ CREATE TABLE `items` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-INSERT INTO items VALUES("1","apple","","كغ","","","","","apple note","10001","1","","","","","","","0","2022-01-14 18:05:58","2022-01-14 18:05:58");
-INSERT INTO items VALUES("2","olive","","كغ","","","","","olive notes","20001","2","","","","","","","1","2022-01-14 18:06:12","2022-01-14 18:06:12");
-INSERT INTO items VALUES("3","banana","","كغ","","","","","banana notes","10002","1","","","","","","","0","2022-01-14 18:06:35","2022-01-14 18:06:35");
+INSERT INTO items VALUES("1","apple","","كغ","","","","","","10001","1","","","","","","","0","2022-01-17 09:40:09","2022-01-17 09:40:09");
+INSERT INTO items VALUES("2","banana","","كغ","","","","","","10002","1","","","","","","","0","2022-01-17 09:40:19","2022-01-17 09:40:19");
 
 
 
@@ -175,8 +181,12 @@ CREATE TABLE `mid_bonds` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+INSERT INTO mid_bonds VALUES("1","1","1","2","1","381710","0","2022-01-17","","  ","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO mid_bonds VALUES("2","2","2","1","1","0","381710","2022-01-17","","","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO mid_bonds VALUES("3","3","6","3","1","0","401800","2022-01-17","","","0","2022-01-17 09:41:35","2022-01-17 09:41:35");
+INSERT INTO mid_bonds VALUES("4","4","3","6","1","401800","0","2022-01-17","","","0","2022-01-17 09:41:36","2022-01-17 09:41:36");
 
 
 
@@ -196,5 +206,5 @@ CREATE TABLE `payment_bonds` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO payment_bonds VALUES("1","1","1","5","100000","2022-01-15","ليرة سورية","","","0","2022-01-15 10:40:54","2022-01-15 10:40:54");
+INSERT INTO payment_bonds VALUES("1","1","1","6","2000","2022-01-17","ليرة سورية","ma","","0","2022-01-17 09:38:15","2022-01-17 09:38:15");
 

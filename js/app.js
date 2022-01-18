@@ -66,3 +66,7 @@ function set_blur_to_input_ids_to_count_in_id(id , other_id, number_of_rows){
     }
     
 }
+
+function scrollToTop(){
+    window.scroll(0,0);
+}

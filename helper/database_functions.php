@@ -90,7 +90,7 @@ function backup_to_file($con, $database)
 
     if (!empty($sqlScript)) {
         // Save the SQL script to a backup file
-        $backup_file_name = getenv('USERPROFILE') . '/Desktop/نسخة احتياطية تاريخ ' . date('Y-m-d') . '.sql';
+        $backup_file_name = getenv('USERPROFILE') . '/Desktop/نسخة احتياطية تاريخ ' . date('Y-m-d h-i-s') . '.sql';
         $fileHandler = fopen($backup_file_name, 'w+');
         $number_of_lines = fwrite($fileHandler, $sqlScript);
         fclose($fileHandler);
