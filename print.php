@@ -58,7 +58,7 @@ if(isset($_GET['code'])){
     $pdf->setLanguageArray($lg);
 
     // set font
-    $pdf->SetFont('aealarabiya', '', 12);
+    $pdf->SetFont('arial', '', 12);
 
     // print newline
     $pdf->Ln();
@@ -132,18 +132,18 @@ if(isset($_GET['code'])){
         </table>';
 	$pdf->writeHTML($content);
     if($_GET['print_type'] == 'buyer'){
-        $total_price='الإجمالي: ' . $bill['total_price'] .' ل.س ';
+        $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
         $pdf->MultiCell(100, 6, $total_price ,0, 'R', 0, 0, '', '', true);
     }else{
-        $total_price='الإجمالي: ' . $bill['total_price'] .' ل.س ';
+        $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
         $pdf->MultiCell(100, 6, $total_price ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(8);
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'];
         $pdf->MultiCell(25, 6, $com_ratio ,0, 'R', 0, 0, '', '', true);
-        $com_value='قيمته: ' . $bill['com_value'] .' ل.س ';
+        $com_value='قيمته: ' . $bill['com_value'] .' ل. س ';
         $pdf->MultiCell(100, 6, $com_value ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(8);
-        $real_price='الصافي: ' . $bill['real_price'] .' ل.س ';
+        $real_price='الصافي: ' . $bill['real_price'] .' ل. س ';
         $pdf->MultiCell(100, 6, $real_price ,0, 'R', 0, 0, '', '', true);
     }
         
