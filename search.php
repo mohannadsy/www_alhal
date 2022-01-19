@@ -212,6 +212,9 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_POST['text_value']))  . "'";
     }
     $total_comission = '0';
+    $total_bill = '0';
+    $real_bill = '0';
+
     $from_date = $_POST['from_date'];
     $to_date = $_POST['to_date'];
     $select_items_using_id_query = "select DISTINCT items.code as item_code,
@@ -236,15 +239,20 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $category_name . "</td>";
         echo "<td>" . $row['unit'] . "</td>";
-        echo "<td>" . $row['currency'] . "</td>";
+        // echo "<td>" . $row['currency'] . "</td>";
         echo "<td>" . $buyer_name . "</td>";
         echo "<td>" . $seller_name . "</td>";
         $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
         echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
+        echo "<td>".$row['total_item_price']."</td>";
         echo "</tr>";
         $total_comission += $current_com_value;
+        $total_bill += $row['total_item_price'];
     }
-    echo "<input type='hidden' id='total_hidden_comission' value = '" . $total_comission . "'";
+    $real_bill = $total_bill - $total_comission;
+    echo "<input type='hidden' id='total_hidden_comission' value = '" . $total_comission . "'>";
+    echo "<input type='hidden' id='total_hidden_bill' value = '" . $total_bill . "'>";
+    echo "<input type='hidden' id='real_hidden_bill' value = '" . $real_bill . "'>";
 }
 
 

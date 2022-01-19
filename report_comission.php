@@ -9,7 +9,7 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles/report_comission.css">
-    <title>Document</title> 
+    <title>Document</title>
 </head>
 
 
@@ -76,15 +76,18 @@ include('include/nav.php');
                                 <th>اسم المادة </th>
                                 <th> الصنف </th>
                                 <th>الوحدة </th>
-                                <th>العملة </th>
+                                <!-- <th>العملة </th> -->
                                 <th> المشتري </th>
                                 <th>البائع </th>
                                 <th>قيمة الكمسيون </th>
+                                <th>الاجمالي</th>
                             </tr>
                         </thead>
                         <tbody id='show'>
                             <?php
                             $total_comission = '0';
+                            $total_bill = '0';
+                            $real_bill = '0';
                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,total_item_price,
@@ -99,43 +102,46 @@ include('include/nav.php');
                                 $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
                                 $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
                                 $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
-                                $bill_code = get_value_from_table_using_id($con , 'bills' ,'code' , $row['bill_id']);
-                                echo "<tr ondblclick='window.open(\"com_bill.php?code=".$bill_code."\" , \"_self\")'>";
+                                $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
+                                echo "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
                                 echo "<td>" . $category_name . "</td>";
                                 echo "<td>" . $row['unit'] . "</td>";
-                                echo "<td>" . $row['currency'] . "</td>";
+                                // echo "<td>" . $row['currency'] . "</td>";
                                 echo "<td>" . $buyer_name . "</td>";
                                 echo "<td>" . $seller_name . "</td>";
-                                $current_com_value = ($row['com_ratio']/100) * $row['total_item_price'] ;
+                                $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
                                 echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
+                                echo "<td>".$row['total_item_price']."</td>";
                                 echo "</tr>";
                                 $total_comission += $current_com_value;
+                                $total_bill += $row['total_item_price'];
                             }
+                            $real_bill = $total_bill - $total_comission;
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end " id="total_row"> 
-                <div class="px-1" >       
-                    <label for="">إجمالي الفواتير  </label>
-                        <input type="text"  readonly id="" value="">
+            <div class="row justify-content-end " id="total_row">
+                <div class="px-1">
+                    <label for="">إجمالي الفواتير </label>
+                    <input type="text" readonly id="total_bill" value="<?= $total_bill ?>">
                 </div>
-                    
-                    <div  class="px-1">
+
+                <div class="px-1">
                     <label for="">قيمة الكمسيون </label>
                     <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
-                    </div>
-                    
-                    <div >
-                    <label for="" class="px-1">صافي الفواتير  </label>
-                    <input type="text"  readonly id="" value="">
-                    </div>
+                </div>
+
+                <div>
+                    <label for="" class="px-1">صافي الفواتير </label>
+                    <input type="text" readonly id="real_bill" value="<?= $real_bill ?>">
+                </div>
             </div>
-                    <div class="row justify-content-end py-2">
+            <div class="row justify-content-end py-2">
                 <div class="col-2">
                     <button type="submit" name="print">طباعة</button>
                     <button type="submit" name="close">إغلاق</button>
@@ -274,6 +280,16 @@ include('include/footer.php');
                         $('#total_comission').val('0');
                     else
                         $('#total_comission').val(document.getElementById('total_hidden_comission').value);
+
+                    if (document.getElementById('total_hidden_bill') == null)
+                        $('#total_bill').val('0');
+                    else
+                        $('#total_bill').val(document.getElementById('total_hidden_bill').value);
+
+                    if (document.getElementById('real_hidden_bill') == null)
+                        $('#real_bill').val('0');
+                    else
+                        $('#real_bill').val(document.getElementById('real_hidden_bill').value);
                 }
             });
 
