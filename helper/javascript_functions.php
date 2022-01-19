@@ -14,9 +14,15 @@ function open_window_blank($window){
 function open_window_self_id($window , $id){
     echo "<script>window.open('$window?id=$id' , '_self')</script>";
 }
+function open_window_self_code($window , $code){
+    echo "<script>window.open('$window?code=$code' , '_self')</script>";
+}
 
 function href_id($window , $id){
     return "$window?id=$id";
+}
+function href_code($window , $code){
+    return "$window?code=$code";
 }
 
 function open_window_self_after_confirm($message , $path){

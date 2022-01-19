@@ -12,16 +12,18 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/styles/accountStatment.css">
     <title>Document</title>
     <style>
-      .form-check-label {
-        margin-right: 20px;
-      }
-      #lbl_radio{
-          /* background-color: blue; */
-        /* margin-right: 5px; */
-      }
-      #lbl-radio-type{
-          padding-right: 5px;    
-      }
+        .form-check-label {
+            margin-right: 20px;
+        }
+
+        #lbl_radio {
+            /* background-color: blue; */
+            /* margin-right: 5px; */
+        }
+
+        #lbl-radio-type {
+            padding-right: 5px;
+        }
     </style>
 </head>
 
@@ -64,7 +66,7 @@ include('include/nav.php');
                             <input type="date" name="to_date" id="to-date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
                                                                                                                         else echo date('Y-m-d') ?>">
                         </div>
-                    </div>   
+                    </div>
                 </div>
                 <div class="col-3">
                     <div class="row">
@@ -72,56 +74,56 @@ include('include/nav.php');
 
                         <div class="form-check" style="margin-right: 5px;">
                             <input checked type="radio" name="report_type" id="report_type_conclusion" value="conclusion">
-                            <label id="lbl_radio" >مختصر</label>
+                            <label id="lbl_radio">مختصر</label>
                         </div>
                         <div class="form-check ">
                             <input type="radio" name="report_type" id="report_type_details" value="details">
-                            <label id="lbl_radio" >تفصيلي</label>
+                            <label id="lbl_radio">تفصيلي</label>
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" id="show_options" style="display: none;">
                     <h5 style="margin-left: 10px;">خيارات الإظهار</h5>
                     <div class="row">
-                    
-                        <div class="col-6">   
+
+                        <div class="col-6">
                             <div class="form-check">
                                 <input type="checkbox" value="" id="">
-                                <label  for="">
-                                    المادة 
-                                </label>
-                            </div>
-                            <div >
-                                <input  type="checkbox" value="" id="" >
-                                <label  for="">
-                                    الوزن القائم 
+                                <label for="">
+                                    المادة
                                 </label>
                             </div>
                             <div>
-                                <input  type="checkbox" value="" id="">
-                                <label  for="" >
-                                    الوزن الصافي 
+                                <input type="checkbox" value="" id="">
+                                <label for="">
+                                    الوزن القائم
+                                </label>
+                            </div>
+                            <div>
+                                <input type="checkbox" value="" id="">
+                                <label for="">
+                                    الوزن الصافي
                                 </label>
                             </div>
                         </div>
                         <div class="col-6">
-                        
+
                             <div class="form-check">
                                 <input type="checkbox" value="" id="">
-                                <label   for="">
-                                    الإفرادي 
+                                <label for="">
+                                    الإفرادي
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" value="" id="">
                                 <label for="">
-                                    الإجمالي 
+                                    الإجمالي
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" value="" id="">
-                                <label  for="">
-                                    الكمسيون 
+                                <label for="">
+                                    الكمسيون
                                 </label>
                             </div>
                         </div>
@@ -158,6 +160,7 @@ include('include/nav.php');
                                 <th class='hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
                                 <th class='hidden' style='display:none' contenteditable='false'> الإفرادي</th>
                                 <th class='hidden' style='display:none' contenteditable='false'>الإجمالي</th>
+                                <th class='hidden' style='display:none' contenteditable='false'>الكمسيون</th>
 
 
                             </tr>
@@ -176,7 +179,7 @@ include('include/nav.php');
                                 $select_account_statements_query = selectND('account_statements') . andWhere('main_account_id', $main_account_id) . "
                                 and date between '" . $_POST['from_date'] . "' and '" . $_POST['to_date'] . "'";
                                 $select_account_statements_exec = mysqli_query($con, $select_account_statements_query);
-                                
+
                                 $current_currency = 0;
                                 $total_daen = 0;
                                 $total_maden = 0;
@@ -197,15 +200,14 @@ include('include/nav.php');
                                             $document_type = 'رصيد افتتاحي';
                                         }
                                         if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
-                                            $bill_id = getId($con, 'bills', 'code', $row['code_number']);
-                                            $href_link = href_id(COM_BILL_OPEN, $bill_id);
+                                            $href_link = href_code(COM_BILL, $row['code_number']);
                                             $document_type = 'فاتورة رقم ' . $row['code_number'];
                                         }
                                         if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
-                                            $href_link = href_id(COM_BILL_OPEN, $bill_id);
-                                            // $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
-                                            $document_type = 'فاتورة رقم ' . $bill_id;
+                                            $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                            $href_link = href_code(COM_BILL, $bill_id);
+                                            $document_type = 'فاتورة رقم ' . $bill_code;
                                         }
                                         if ($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
                                             $payment_bond_id = getId($con, 'payment_bonds', 'code', $row['code_number']);
@@ -256,15 +258,18 @@ include('include/nav.php');
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden' style='display:none'></td>";
                                             while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                                                 echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['name'] . "</td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['total_weight'] . "</td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['real_weight'] . "</td>";
                                                 echo "<td class='hidden' style='display:none'>" . $item['price'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['total_item_price'] . "</td></tr>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['total_item_price'] . "</td>";
+                                                echo "<td class='hidden' style='display:none'>" . $item['com_value'] . "</td></tr>";
                                             }
                                         } else {
+                                            echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
                                             echo "<td class='hidden' style='display:none'></td>";
@@ -286,12 +291,12 @@ include('include/nav.php');
                     <input readonly id="code1" type="text" class="form-control" name="" value="<?= @$total_maden ?>">
                 </div>
 
-                <label for="code2" class="col-form-label" > مجموع دائن</label>
+                <label for="code2" class="col-form-label"> مجموع دائن</label>
                 <div class="col-md-2">
                     <input readonly id="code2" type="text" class="form-control" name="" value="<?= @$total_daen ?>">
                 </div>
 
-                <label for="code3" class="col-form-label" > المجموع</label>
+                <label for="code3" class="col-form-label"> المجموع</label>
                 <div class="col-md-2">
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
@@ -378,9 +383,14 @@ include('include/footer.php');
 <script>
     $('#report_type_details').click(function() {
         $('.hidden').show();
+        $('#show_options').show();
     })
 
     $('#report_type_conclusion').click(function() {
         $('.hidden').hide();
+        $('#show_options').hide();
+    })
+    $('input[type="checkbox"]').click(function(){
+        
     })
 </script>

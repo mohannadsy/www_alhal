@@ -1,7 +1,6 @@
 <?php
 include('include/nav.php');
 ?>
-
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 
@@ -96,8 +95,15 @@ $select_last_previous_bill_exec = mysqli_query($con, $select_last_previous_bill_
 $last_previous_code = mysqli_fetch_array($select_last_previous_bill_exec)['code'];
 
 $current_bill_code = get_auto_code($con, 'bills', 'code', '', 'parent');
-if (isset($_GET['id'])) {
-    $current_bill_code = get_value_from_table_using_id($con, 'bills', 'code', $_GET['id']);
+if (isset($_GET['code']) &&
+        !isset($_POST['next']) &&
+        !isset($_POST['last_next']) &&
+        !isset($_POST['previous']) &&
+        !isset($_POST['last_previous']) &&
+        !isset($_POST['current']) ) 
+    {
+    // $current_bill_code = get_value_from_table_using_id($con, 'bills', 'code', $_GET['id']);
+    $current_bill_code = $_GET['code'];
     $_POST['code'] = $current_bill_code;
     $_POST['current'] = $current_bill_code;
 }
@@ -154,7 +160,7 @@ if (isset($_POST['last_previous'])) {
     }
     $current_bill_code_for_item_search = $last_previous_code;
 }
-if (isset($_POST['current']) || isset($_POST['update'])) {
+if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_seller']) || isset($_POST['print_buyer'])) {
     $bill_select = selectND('bills') . andWhere('code', $_POST['code']);
     $bill_exec = mysqli_query($con, $bill_select);
     $bill_rows = mysqli_num_rows($bill_exec);
@@ -164,6 +170,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
         }
     else {
         $_POST['code'] = get_auto_code($con, 'bills', 'code', '', 'parent');
+        $current_bill_code_for_item_search = $_POST['code'];
     }
 }
 
@@ -325,7 +332,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <div class="col-5">
                     <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" id="btn-grp">حفظ</button>
                     <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update" id="btn-grp">تعديل</button>
-                    <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
+                    <button type="submit" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')"  <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
                     <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
@@ -334,16 +341,18 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                     </select>
                     <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
 
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         طباعة
                     </a>
                     <input type="checkbox" name="" id="">
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> -->
 
                         <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
-                        <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
-                        <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button>
-                    </div>
+                        <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
+                        <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button> -->
+                        <button type="submit" name="print_seller">طباعة بائع</button>
+                        <button type="submit" name="print_buyer">طباعة مشتري</button>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -361,186 +370,126 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['print_buyer'])) {
 
-    // get seller id from seller code
 
-    $seller_code = get_code_from_input($_POST['seller']);
-    $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
-    $select_seller_id_using_code_exec = mysqli_query($con, $select_seller_id_using_code_query);
-    $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
+    if (empty($bill) && $_POST['seller'] != '') {
+        // get seller id from seller code
 
-    $_POST['seller_id'] = $seller_id;
+        $seller_code = get_code_from_input($_POST['seller']);
+        $select_seller_id_using_code_query = "select id,code from accounts where code = '$seller_code'";
+        $select_seller_id_using_code_exec = mysqli_query($con, $select_seller_id_using_code_query);
+        $seller_id = mysqli_fetch_row($select_seller_id_using_code_exec)[0];
 
-    // get buyer id from buyer code
-    if (trim($_POST['buyer']) != '') {
-        $buyer_code = get_code_from_input($_POST['buyer']);
-        $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
-        $select_buyer_id_using_code_exec = mysqli_query($con, $select_buyer_id_using_code_query);
-        $buyer_id = mysqli_fetch_row($select_buyer_id_using_code_exec)[0];
+        $_POST['seller_id'] = $seller_id;
+
+        // get buyer id from buyer code
+        if (trim($_POST['buyer']) != '') {
+            $buyer_code = get_code_from_input($_POST['buyer']);
+            $select_buyer_id_using_code_query = "select id,code from accounts where code = '$buyer_code'";
+            $select_buyer_id_using_code_exec = mysqli_query($con, $select_buyer_id_using_code_query);
+            $buyer_id = mysqli_fetch_row($select_buyer_id_using_code_exec)[0];
 
 
-        $_POST['buyer_id'] = $buyer_id;
-    } else {
-        $_POST['buyer_id'] = '0';
-        $_POST['buyer_type_pay'] = null;
-        $_POST['buyer_note'] = null;
-    }
-
-    // make bill insertion
-    $insert_bill_query = insert('bills', get_array_from_array($_POST, [
-        'code', 'date', 'seller_id', 'seller_type_pay', 'seller_note',
-        'buyer_id', 'buyer_type_pay', 'buyer_note', 'total_price', 'real_price', 'com_ratio', 'com_value'
-    ]));
-    $insert_bill_exec = mysqli_query($con, $insert_bill_query);
-
-    // insert all items to bill_item table
-    $select_last_bill_id_query = select('bills', 'max(id)');
-    $select_last_bill_id_exec = mysqli_query($con, $select_last_bill_id_query);
-    $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
-    $current_bill_code = $_POST['code'];
-
-    foreach ($_POST['items'] as $key => $item) {
-        if ($item != '') {
-            $item_code = get_code_from_input($_POST['items'][$key]);
-            $select_item_id_from_code_query = "select id,code from items where code = '$item_code'";
-            $select_item_id_from_code_exec = mysqli_query($con, $select_item_id_from_code_query);
-            $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
-            $insert_bill_item_query = insert('bill_item', [
-                'bill_id' => $current_bill_id,
-                'item_id' => $item_id,
-                'total_weight' => $_POST['total_weights'][$key],
-                'real_weight' => $_POST['real_weights'][$key],
-                'price' => $_POST['prices'][$key],
-                'total_item_price' => $_POST['total_item_prices'][$key],
-                'bill_item_note' => $_POST['note'][$key]
-
-            ]);
-            $insert_bill_item_exec = mysqli_query($con, $insert_bill_item_query);
+            $_POST['buyer_id'] = $buyer_id;
+        } else {
+            $_POST['buyer_id'] = '0';
+            $_POST['buyer_type_pay'] = null;
+            $_POST['buyer_note'] = null;
         }
-    }
-    $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
-    // make mid_bonds bonds
-    if ($_POST['seller_type_pay'] == 'cash') {
-        // سند قيد
-        $_POST['main_account_id'] = '1';
-        $_POST['other_account_id'] = '2';
-        $_POST['daen'] = $_POST['real_price'];
-        $_POST['bill_id'] = $current_bill_id;
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
-        ]));
-        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-        // كشف حساب صندوق
-        $_POST['code_number'] = $_POST['code'];
-        $_POST['code_type'] = 'mid_bonds';
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
-        // سند قيد
-        $_POST['main_account_id'] = '2';
-        $_POST['other_account_id'] = '1';
-        $_POST['maden'] = $_POST['real_price'];
-        $_POST['note'] = $_POST['seller_note'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+        // make bill insertion
+        $insert_bill_query = insert('bills', get_array_from_array($_POST, [
+            'code', 'date', 'seller_id', 'seller_type_pay', 'seller_note',
+            'buyer_id', 'buyer_type_pay', 'buyer_note', 'total_price', 'real_price', 'com_ratio', 'com_value'
         ]));
-        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-        // كشف حساب مشتريات
-        $_POST['code_number'] = $_POST['code'];
-        $_POST['code_type'] = 'mid_bonds';
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        $insert_bill_exec = mysqli_query($con, $insert_bill_query);
 
-        // كشف حساب البائع
-        $_POST['code_number'] = $current_bill_id;
-        $_POST['code_type'] = 'bills';
-        $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
-        $_POST['main_account_id'] = $seller_id;
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'daen', 'maden', 'note', 'date', 'code_number', 'code_type',
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-    }
+        // insert all items to bill_item table
+        $select_last_bill_id_query = select('bills', 'max(id)');
+        $select_last_bill_id_exec = mysqli_query($con, $select_last_bill_id_query);
+        $current_bill_id = mysqli_fetch_row($select_last_bill_id_exec)[0];
+        $current_bill_code = $_POST['code'];
 
-    if ($_POST['seller_type_pay'] == 'agel') {
-        // سند قيد
-        $_POST['main_account_id'] = $seller_id;
-        $_POST['other_account_id'] = '2';
-        $_POST['note'] = $_POST['seller_note'];
-        $_POST['daen'] = $_POST['real_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
-        ]));
-        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-        // كشف حساب البائع
-        $_POST['code_number'] = $_POST['code'];
-        $_POST['code_type'] = 'mid_bonds';
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        foreach ($_POST['items'] as $key => $item) {
+            if ($item != '') {
+                $item_code = get_code_from_input($_POST['items'][$key]);
+                $select_item_id_from_code_query = "select id,code from items where code = '$item_code'";
+                $select_item_id_from_code_exec = mysqli_query($con, $select_item_id_from_code_query);
+                $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
+                $insert_bill_item_query = insert('bill_item', [
+                    'bill_id' => $current_bill_id,
+                    'item_id' => $item_id,
+                    'total_weight' => $_POST['total_weights'][$key],
+                    'real_weight' => $_POST['real_weights'][$key],
+                    'price' => $_POST['prices'][$key],
+                    'total_item_price' => $_POST['total_item_prices'][$key],
+                    'bill_item_note' => $_POST['note'][$key]
 
-        // سند قيد
-        $_POST['main_account_id'] = '2';
-        $_POST['other_account_id'] = $seller_id;
-        $_POST['maden'] = $_POST['real_price'];
-        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
-        ]));
-        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-        // كشف حساب مشتريات
-        $_POST['code_number'] = $_POST['code'];
-        $_POST['code_type'] = 'mid_bonds';
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-    }
-
-
-
-    /**
-     * Buyer Section
-     */
-
-
-    if (trim($_POST['buyer']) != '') {
-        if ($_POST['buyer_type_pay'] == 'cash') {
+                ]);
+                $insert_bill_item_exec = mysqli_query($con, $insert_bill_item_query);
+            }
+        }
+        $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
+        // make mid_bonds bonds
+        if ($_POST['seller_type_pay'] == 'cash') {
             // سند قيد
             $_POST['main_account_id'] = '1';
-            $_POST['other_account_id'] = '3';
-            $_POST['note'] = $_POST['buyer_note'];
-            $_POST['maden'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code', 'note'
-            ]));
-            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب الصندوق
-            $_POST['code_number'] = $_POST['code'];
-            $_POST['code_type'] = 'mid_bonds';
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-            // سند قيد
-            $_POST['main_account_id'] = '3';
-            $_POST['other_account_id'] = '1';
-            $_POST['daen'] = $_POST['total_price'];
+            $_POST['other_account_id'] = '2';
+            $_POST['daen'] = $_POST['real_price'];
+            $_POST['bill_id'] = $current_bill_id;
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));
             $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب المبيعات
+            // كشف حساب صندوق
+            $_POST['code_number'] = $_POST['code'];
+            $_POST['code_type'] = 'mid_bonds';
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+            // سند قيد
+            $_POST['main_account_id'] = '2';
+            $_POST['other_account_id'] = '1';
+            $_POST['maden'] = $_POST['real_price'];
+            $_POST['note'] = $_POST['seller_note'];
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+            ]));
+            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+            // كشف حساب مشتريات
+            $_POST['code_number'] = $_POST['code'];
+            $_POST['code_type'] = 'mid_bonds';
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+            // كشف حساب البائع
+            $_POST['code_number'] = $current_bill_id;
+            $_POST['code_type'] = 'bills';
+            $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
+            $_POST['main_account_id'] = $seller_id;
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'daen', 'maden', 'note', 'date', 'code_number', 'code_type',
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        }
+
+        if ($_POST['seller_type_pay'] == 'agel') {
+            // سند قيد
+            $_POST['main_account_id'] = $seller_id;
+            $_POST['other_account_id'] = '2';
+            $_POST['note'] = $_POST['seller_note'];
+            $_POST['daen'] = $_POST['real_price'];
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+            ]));
+            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+            // كشف حساب البائع
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
@@ -548,75 +497,134 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
-            // كشف حساب مشتري
-            $_POST['code_number'] = $current_bill_code;
-            $_POST['main_account_id'] = $buyer_id;
-            $_POST['code_type'] = 'bills';
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type',
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-        }
-
-        if ($_POST['buyer_type_pay'] == 'agel') {
             // سند قيد
-            $_POST['main_account_id'] = $buyer_id;
-            $_POST['note'] = $_POST['buyer_note'];
-            $_POST['other_account_id'] = '3';
-            $_POST['maden'] = $_POST['total_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
-            ]));
-            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب المشتري
-            $_POST['code_number'] = $_POST['code'];
-            $_POST['code_type'] = 'mid_bonds';
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-            // سند قيد
-            $_POST['main_account_id'] = '3';
-            $_POST['other_account_id'] = $buyer_id;
-            $_POST['daen'] = $_POST['total_price'];
+            $_POST['main_account_id'] = '2';
+            $_POST['other_account_id'] = $seller_id;
+            $_POST['maden'] = $_POST['real_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));
             $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب المبيعات
+            // كشف حساب مشتريات
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
-    }
-    if (isset($_POST['print_seller'])) {
-        open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
-    }
-    if (isset($_POST['print_buyer'])) {
-        open_window_blank("print.php?code=" . $current_bill_code . '&print_type=buyer');
-    }
 
+
+
+        /**
+         * Buyer Section
+         */
+
+
+        if (trim($_POST['buyer']) != '') {
+            if ($_POST['buyer_type_pay'] == 'cash') {
+                // سند قيد
+                $_POST['main_account_id'] = '1';
+                $_POST['other_account_id'] = '3';
+                $_POST['note'] = $_POST['buyer_note'];
+                $_POST['maden'] = $_POST['total_price'];
+                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code', 'note'
+                ]));
+                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+                // كشف حساب الصندوق
+                $_POST['code_number'] = $_POST['code'];
+                $_POST['code_type'] = 'mid_bonds';
+                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
+                ]));
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+                // سند قيد
+                $_POST['main_account_id'] = '3';
+                $_POST['other_account_id'] = '1';
+                $_POST['daen'] = $_POST['total_price'];
+                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
+                ]));
+                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+                // كشف حساب المبيعات
+                $_POST['code_number'] = $_POST['code'];
+                $_POST['code_type'] = 'mid_bonds';
+                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
+                ]));
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+                // كشف حساب مشتري
+                $_POST['code_number'] = $current_bill_code;
+                $_POST['main_account_id'] = $buyer_id;
+                $_POST['code_type'] = 'bills';
+                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type',
+                ]));
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+            }
+
+            if ($_POST['buyer_type_pay'] == 'agel') {
+                // سند قيد
+                $_POST['main_account_id'] = $buyer_id;
+                $_POST['note'] = $_POST['buyer_note'];
+                $_POST['other_account_id'] = '3';
+                $_POST['maden'] = $_POST['total_price'];
+                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+                ]));
+                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+                // كشف حساب المشتري
+                $_POST['code_number'] = $_POST['code'];
+                $_POST['code_type'] = 'mid_bonds';
+                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
+                ]));
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+                // سند قيد
+                $_POST['main_account_id'] = '3';
+                $_POST['other_account_id'] = $buyer_id;
+                $_POST['daen'] = $_POST['total_price'];
+                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
+                ]));
+                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+                // كشف حساب المبيعات
+                $_POST['code_number'] = $_POST['code'];
+                $_POST['code_type'] = 'mid_bonds';
+                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                    'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
+                ]));
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+            }
+        }
+    }
+    if (isset($_POST['print_seller']) && $_POST['seller'] != '') {
+        open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
+        open_window_self_code(COM_BILL , $current_bill_code);
+        
+    }
+    if (isset($_POST['print_buyer']) && $_POST['buyer'] != '') {
+        open_window_blank("print.php?code=" . $current_bill_code . '&print_type=buyer');
+        open_window_self_code(COM_BILL , $current_bill_code);
+    }
     open_window_self(COM_BILL);
 }
 
 ?>
 
-
-
 <!-- UPDATE TO BILL -->
 <?php
 
-
 if (isset($_POST['update'])) {
-
-
-    $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
     // get seller id from seller code
 
     $current_bill_id_to_update = get_value_from_table_using_column($con, 'bills', 'code', $_POST['code'], 'id');
@@ -652,21 +660,25 @@ if (isset($_POST['update'])) {
 
     $current_bill_code = $_POST['code'];
 
+    // delete items from item_bill and re insert them
+    $force_delete_bill_items_query = forceDelete('bill_item').where('bill_id', $current_bill_id_to_update);
+    $force_delete_bill_items_exec = mysqli_query($con , $force_delete_bill_items_query);
     foreach ($_POST['items'] as $key => $item) {
         if ($item != '') {
             $item_code = get_code_from_input($_POST['items'][$key]);
             $select_item_id_from_code_query = "select id,code from items where code = '$item_code'";
             $select_item_id_from_code_exec = mysqli_query($con, $select_item_id_from_code_query);
             $item_id = mysqli_fetch_row($select_item_id_from_code_exec)[0];
-            $update_bill_item_query = update('bill_item', [
+            $insert_bill_item_query = insert('bill_item', [
+                'bill_id' => $current_bill_id_to_update,
+                'item_id' => $item_id,
                 'total_weight' => $_POST['total_weights'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
                 'total_item_price' => $_POST['total_item_prices'][$key],
                 'bill_item_note' => $_POST['note'][$key]
-
-            ]) . where('bill_id', $current_bill_id_to_update) . andWhere('item_id', $item_id);
-            $update_bill_item_exec = mysqli_query($con, $update_bill_item_query);
+            ]);
+            $insert_bill_item_exec = mysqli_query($con, $insert_bill_item_query);
         }
     }
 
@@ -841,7 +853,7 @@ if (isset($_POST['update'])) {
             $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'daen', 'note', 'date'
             ])) . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bonds[3]['code']);
-            $update_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+            $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
         }
     }
     // open_window_self_id(COM_BILL , $current_bill_id_to_update);
@@ -852,6 +864,33 @@ if (isset($_POST['update'])) {
 <!-- DELETE BILL -->
 <?php
 if (isset($_POST['delete'])) {
+    // Delete Bill
+    $delete_bill_query = delete('bills').where('code' , $current_bill_code);
+    $delete_bill_exec = mysqli_query($con , $delete_bill_query);
+    
+    // Delete Bill_item
+    $current_bill_id_to_delete = getId($con , 'bills' , 'code' , $current_bill_code);
+    $delete_bill_item_query = delete('bill_item').where('bill_id' , $current_bill_id_to_delete);
+    $delete_bill_item_exec = mysqli_query($con , $delete_bill_item_query);
+
+    // Delete mid_bonds after git codes from it
+    $select_mid_bonds_query = select('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
+    $select_mid_bonds_exec = mysqli_query($con, $select_mid_bonds_query);
+    $mid_bonds = [];
+    while ($mid_bond = mysqli_fetch_array($select_mid_bonds_exec)) {
+        $mid_bonds[] = $mid_bond;
+    }
+    $delete_mid_bonds_query = delete('mid_bonds').where('bill_id' , $current_bill_id_to_delete);    
+    $delete_mid_bonds_exec = mysqli_query($con , $delete_mid_bonds_query);
+
+    // Delete account_statement
+    $delete_account_statement_query = delete('account_statements').where('code_type' , 'bills').andWhere('code_number' , $current_bill_id_to_delete);
+    $delete_account_statement_exec = mysqli_query($con , $delete_account_statement_query);
+    foreach($mid_bonds as $mid_bond){
+        $delete_account_statement_query = delete('account_statements').where('code_type' , 'mid_bonds').andWhere('code_number' , $mid_bond['code']);
+        $delete_account_statement_exec = mysqli_query($con , $delete_account_statement_query);
+    }
+    open_window_self(COM_BILL);
 }
 ?>
 
@@ -930,8 +969,8 @@ include('include/footer.php');
 <!-- Add values to table if next or previous -->
 <?php
 
-$current_bill_id = getId($con, 'bills', 'code', $current_bill_code_for_item_search);
-$select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $current_bill_id . "'
+$current_bill_id_to_search = getId($con, 'bills', 'code', $current_bill_code_for_item_search);
+$select_items_using_id_query = "select DISTINCT * from bill_item, items where bill_id = '" . $current_bill_id_to_search . "'
 and items.id = bill_item.item_id";
 $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
 $items = [];
