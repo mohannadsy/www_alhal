@@ -10,74 +10,49 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
-    <!-- <link rel="stylesheet" href="css/styles/com_bill.css"> -->
+    <link rel="stylesheet" href="css/styles/com_bill.css">
     <style>
-        body {
-            background-color: LightGray;
-            text-align: right;
-            position: relative;
-            font-family: Arial, Helvetica, sans-serif;
+        .modal-dialog{
+            min-width: 1000px;
         }
-
-        .container-fluide {
-            position: absolute;
-            border-style: groove;
-            top: 5%;
-            width: 1200px;
-            /* height: 700px ; */
-            border-radius: 25px;
-            border-style: groove;
-            background-color: #5F9EA0;
-            font-size: 19px;
+        .modal-content{
+            min-height: 600px;
         }
-
-        td input {
-            width: 100%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        table {
-            width: 60%;
-        }
-
-        #btn-grp {
-            border-radius: 5px;
-            margin: 6px;
-            width: 80px;
-        }
-
-        #iframe_item_card {
-            background-color: red;
-        }
+       
     </style>
 </head>
 
 
 
-<button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
+<button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">بطاقة حساب </button>
 <div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="min-width: 1000px">
+    <div class="modal-dialog">
 
-        <div class="modal-content" style="min-height: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">بطاقة حساب</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-                <button onclick="" data-dismiss="modal" class="close">&times;</button>
-                <h4>Account Card</h4>
                 <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
             </div>
         </div>
     </div>
 </div>
 
-<button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">Account Card</button>
+<button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">بطاقة مادة </button>
 <div id="modal_item_card" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="min-width: 1000px">
+    <div class="modal-dialog">
 
-        <div class="modal-content" style="min-height: 600px;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4>بطاقة صنف </h4>
+                <button onclick="" data-dismiss="modal" class="close">&times;</button> 
+            </div>
             <div class="modal-body">
-                <button onclick="" data-dismiss="modal" class="close">&times;</button>
-                <h4>Item Card</h4>
                 <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
             </div>
         </div>
@@ -995,11 +970,10 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        // $('#iframe_account_card').css({'background-color': red})
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
-        // $('#iframe_item_card').height($(window).height());
+
     });
 </script>
 <script>

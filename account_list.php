@@ -36,7 +36,7 @@ include('include/nav.php');
                                 <th scope="col ">الرقم</th>
                                 <th scope="col">الحساب</th>
                                 <th scope="col">له</th>
-                                <th scope="col">علينا</th>
+                                <th scope="col">لنا</th>
                             </tr>
                         </thead>
                         <tbody id="show">
