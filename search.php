@@ -62,17 +62,17 @@ if (isset($_POST["account_search_main"])) {
 if (isset($_POST["account_search_part"])) {
     $output = '';
     $query = "select * from accounts where code like '%" . $_POST['account_search_part'] . "%'
-                                        or name like '%" . $_POST['account_search_part'] . "%' and id <> 1  and id <> 2 and id <> 3 ";
+                                        or name like '%" . $_POST['account_search_part'] . "%'";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['code'] . '</td>
-            <td>' . $row['name'] . '</td>'.
-            '<td>' . $row['maden'] . '</td>'.
-            '<td>' . $row['daen'] . '</td>';
-            
+            <td>' . $row['name'] . '</td>' .
+                '<td>' . $row['maden'] . '</td>' .
+                '<td>' . $row['daen'] . '</td>';
+
             $output .= '</tr>';
         }
     }
@@ -216,7 +216,7 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
     $to_date = $_POST['to_date'];
     $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
-                                                            bills.id as bill_id,
+                                                            bills.id as bill_id,total_item_price,com_ratio,
                                                             unit, date, buyer_id,seller_id,
                                                             name,currency,
                                                             com_value,category_id
@@ -229,7 +229,8 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
         $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
         $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
-        echo "<tr ondblclick='window.open(\"com_bill_open.php?id=" . $row['bill_id'] . "\" , \"_self\")'>";
+        $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
+        echo "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
         echo "<td>" . $row['bill_code'] . "</td>";
         echo "<td>" . $row['date'] . "</td>";
         echo "<td>" . $row['name'] . "</td>";
@@ -238,12 +239,12 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         echo "<td>" . $row['currency'] . "</td>";
         echo "<td>" . $buyer_name . "</td>";
         echo "<td>" . $seller_name . "</td>";
-        echo "<td>" . $row['com_value'] . "</td>";
-        echo "<input type='hidden' id='com_" . $counter_for_com_id++ . "' value = '" . $row['com_value'] . "'";
+        $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
+        echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
         echo "</tr>";
-        $total_comission += $row['com_value'];
+        $total_comission += $current_com_value;
     }
-    echo "<input type='hidden' id='total_hidden_comission' value = '" . $counter_for_com_id . "'";
+    echo "<input type='hidden' id='total_hidden_comission' value = '" . $total_comission . "'";
 }
 
 

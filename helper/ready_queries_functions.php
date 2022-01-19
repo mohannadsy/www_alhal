@@ -111,3 +111,14 @@ function get_all_accounts_without_buying_selling_main_accounts($con){
         array_push($accounts , $account);
     return $accounts;
 }
+function get_all_accounts_without_main_accounts($con){
+    $select_box_accounts_query = selectND('accounts').andWhereNotEqual('account_id' , '0');
+    $select_box_accounts_exec = mysqli_query($con , $select_box_accounts_query);
+    $accounts = [];
+    array_push($accounts , ['name' => 'الصندوق' , 'code' => '1']);
+    array_push($accounts , ['name' => 'المشتريات' , 'code' => '2']);
+    array_push($accounts , ['name' => 'المبيعات' , 'code' => '3']);
+    while($account = mysqli_fetch_array($select_box_accounts_exec))
+        array_push($accounts , $account);
+    return $accounts;
+}

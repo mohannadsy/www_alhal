@@ -95,7 +95,7 @@ include('include/nav.php');
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,
                                                             unit, date, buyer_id,seller_id,
-                                                            category_id,
+                                                            category_id,total_item_price,
                                                             name,currency,
                                                             real_weight,real_price,
                                                             total_weight,total_price,
@@ -112,9 +112,9 @@ include('include/nav.php');
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
                                 echo "<td>" . $row['real_weight'] . "</td>";
-                                echo "<td>" . $row['real_price'] . "</td>";
+                                echo "<td>" . $row['total_item_price'] . "</td>";
                                 $inbox_weight = $row['real_weight'];
-                                $inbox_price = $row['real_price'];
+                                $inbox_price = $row['total_item_price'];
                                 $outbox_price = '0';
                                 $outbox_weight = '0';
                                 if ($row['buyer_id'] == 0)
@@ -126,8 +126,8 @@ include('include/nav.php');
                                 if ($row['buyer_id'] == 0)
                                     echo "<td>" . '0' . "</td>";
                                 else{
-                                    echo "<td>" . $row['real_price'] . "</td>";
-                                    $outbox_price = $row['real_price'];
+                                    echo "<td>" . $row['total_item_price'] . "</td>";
+                                    $outbox_price = $row['total_item_price'];
                                 }
                                 echo "<td>" . ($inbox_weight - $outbox_weight) . "</td>";
                                 echo "<td>" . ($inbox_price - $outbox_price) . "</td>";

@@ -206,7 +206,7 @@ include('include/nav.php');
                                         if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
                                             $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
-                                            $href_link = href_code(COM_BILL, $bill_id);
+                                            $href_link = href_code(COM_BILL, $bill_code);
                                             $document_type = 'فاتورة رقم ' . $bill_code;
                                         }
                                         if ($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
@@ -327,7 +327,7 @@ include('include/footer.php');
 <script>
     var tags = [
         <?php
-        foreach (get_all_accounts_without_buying_selling_main_accounts($con) as $row)
+        foreach (get_all_accounts_without_main_accounts($con) as $row)
             echo print_account_to_tags_autocomplete($row);
         ?>
     ];

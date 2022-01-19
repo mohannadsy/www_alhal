@@ -87,9 +87,9 @@ include('include/nav.php');
                             $total_comission = '0';
                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
-                                                            bills.id as bill_id,
+                                                            bills.id as bill_id,total_item_price,
                                                             unit, date, buyer_id,seller_id,
-                                                            name,currency,
+                                                            name,currency,com_ratio,
                                                             com_value,category_id
                                                              from bill_item, items,bills 
                                                              where items.id = bill_item.item_id and bills.id = bill_item.bill_id";
@@ -99,7 +99,8 @@ include('include/nav.php');
                                 $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
                                 $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
                                 $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
-                                echo "<tr ondblclick='window.open(\"com_bill_open.php?id=".$row['bill_id']."\" , \"_self\")'>";
+                                $bill_code = get_value_from_table_using_id($con , 'bills' ,'code' , $row['bill_id']);
+                                echo "<tr ondblclick='window.open(\"com_bill.php?code=".$bill_code."\" , \"_self\")'>";
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
@@ -108,9 +109,10 @@ include('include/nav.php');
                                 echo "<td>" . $row['currency'] . "</td>";
                                 echo "<td>" . $buyer_name . "</td>";
                                 echo "<td>" . $seller_name . "</td>";
-                                echo "<td id='com_" . $counter_for_com_id++ . "'>" . $row['com_value'] . "</td>";
+                                $current_com_value = ($row['com_ratio']/100) * $row['total_item_price'] ;
+                                echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
                                 echo "</tr>";
-                                $total_comission += $row['com_value'];
+                                $total_comission += $current_com_value;
                             }
                             ?>
                         </tbody>
@@ -271,7 +273,7 @@ include('include/footer.php');
                     if (document.getElementById('total_hidden_comission') == null)
                         $('#total_comission').val('0');
                     else
-                        $('#total_comission').val(count_sum_ids('com', document.getElementById('total_hidden_comission').value));
+                        $('#total_comission').val(document.getElementById('total_hidden_comission').value);
                 }
             });
 
