@@ -19,9 +19,8 @@ function type($x){
     }
 
 }
-
+//طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
-
 if(isset($_GET['code'])){
     $bill = [];
     $seller = [];
@@ -46,7 +45,7 @@ if(isset($_GET['code'])){
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
-	$pdf->setPrintHeader(true);
+	$pdf->setPrintHeader(false);
 
     // set some language dependent data:
     $lg = Array();
@@ -147,19 +146,26 @@ if(isset($_GET['code'])){
         $pdf->MultiCell(100, 6, $real_price ,0, 'R', 0, 0, '', '', true);
     }
         
-    
 	if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 	$pdf->output('SellerBill_'.$bill['code'], 'I');
     // END OF FILE
     }
 
+//طباعة سند دفع
 if(isset($_GET['payment_code'])){
+    $payment_bond = [];
+    $select_payment_bond_query = selectND('payment_bonds').andWhere('code' , $_GET['payment_code']);
+    $select_payment_bond_exec = mysqli_query($con , $select_payment_bond_query);
+    $payment_bond = mysqli_fetch_array($select_payment_bond_exec);
+
+   
+
     $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
-	$pdf->setPrintHeader(true);
+	$pdf->setPrintHeader(false);
 
     // set some language dependent data:
     $lg = Array();
@@ -174,6 +180,71 @@ if(isset($_GET['payment_code'])){
     $pdf->SetFont('arial', '', 12);
     // Add a page
 	$pdf->AddPage();
+    $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
+    $pdf->MultiCell(173, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(7);
+    $date = 'تاريخ السند: ' . $payment_bond['date'];
+    $pdf->MultiCell(190, 6, $date ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(7);
+    $currency = 'العملة: ' . $payment_bond['currency'];
+    $pdf->MultiCell(176, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(7);
+    $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
+    $account = 'الحساب: ' .$main_account;
+    $pdf->MultiCell(50, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(7);
+    $notes='ملاحظات: ' . $payment_bond['main_note'];
+    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(10);
+
+    // Set some content to print
+    $content = '';
+    $content .= '
+        <style>
+            th,td{
+                text-align:center;
+            }
+            .num{ 
+                width : 10%;
+             }
+             .maden , .acc{
+                width : 25%;
+             }
+             .note{
+                 width:40%;
+             }
+        </style>
+        <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
+            <thead>
+                <tr>
+                    <th class="num">رقم</th>
+                    <th class="maden">مدين</th>
+                    <th class="acc">الحساب</th>
+                    <th class="note">ملاحظات</th>
+                </tr>
+            <thead>
+            <tbody>';
+            $select_all_payment_bonds_with_same_code_query = select('payment_bonds').where('code' , $payment_bond['code']);
+            $select_all_payment_bonds_with_same_code_exec = mysqli_query($con , $select_all_payment_bonds_with_same_code_query);
+            $counter = 1;
+            $total_payment = 0;
+            while ($payment_bond_from_code = mysqli_fetch_array($select_all_payment_bonds_with_same_code_exec)){
+                $content.="<tr>";
+                $content.="<td  class='num'>" . $counter++ . "</td>";
+                $content.="<td>" . $payment_bond_from_code['daen'] ."</td>";
+                $content.="<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>";
+                $content.="<td>" . $payment_bond_from_code['note'] . "</td>";
+                $content.="</tr>";
+
+            $total_payment += $payment_bond_from_code['daen'];
+            }
+
+            $content.='  
+            </tbody>
+        </table>';
+	$pdf->writeHTML($content);
+    $res_number='المجموع: ' .$total_payment;
+    $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 	$pdf->output('payment', 'I');
