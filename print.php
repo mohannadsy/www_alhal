@@ -19,6 +19,13 @@ function type($x){
     }
 
 }
+
+//ratio between A4 and A5
+//A4: 8.3*11.7in
+//A5: 5.8*8.3in
+//array($width,$height)
+
+$ratio = '';
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
 if(isset($_GET['code'])){
@@ -41,7 +48,7 @@ if(isset($_GET['code'])){
     
     // if(isset($_POST["create_pdf"])){
 	// create new PDF document
-	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+	$pdf = new TCPDF('P', 'in', 'A4', true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -177,21 +184,26 @@ if(isset($_GET['payment_code'])){
     $pdf->setLanguageArray($lg);
 
     // set font
-    $pdf->SetFont('arial', '', 12);
+    $pdf->SetFont('arial', 'B', 24);
     // Add a page
 	$pdf->AddPage();
+    $tilte='سند دفع';
+    $pdf->MultiCell(100, 6, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', 12);
+    $pdf->Ln(3);
     $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
-    $pdf->MultiCell(173, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(7);
+    $pdf->MultiCell(172, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(8);
     $date = 'تاريخ السند: ' . $payment_bond['date'];
-    $pdf->MultiCell(190, 6, $date ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(7);
-    $currency = 'العملة: ' . $payment_bond['currency'];
-    $pdf->MultiCell(176, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(189, 6, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(7);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
     $account = 'الحساب: ' .$main_account;
-    $pdf->MultiCell(50, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $currency = 'العملة: ' . $payment_bond['currency'];
+    $pdf->MultiCell(95, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    
+    
     $pdf->Ln(7);
     $notes='ملاحظات: ' . $payment_bond['main_note'];
     $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
