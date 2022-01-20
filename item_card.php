@@ -16,7 +16,7 @@ include('include/nav.php');
 
 <body>
     <form id="form" action="" method="post">
-        <div class="container py-5">
+        <div class="container py-5" id="container">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');

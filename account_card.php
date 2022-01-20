@@ -15,7 +15,7 @@ include('include/nav.php');
 
 <body>
     <form action="" method="post">
-        <div class="container">
+        <div class="container" id="container">
 
             <!-- Messages Section -->
             <?php

@@ -12,12 +12,6 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
     <link rel="stylesheet" href="css/styles/com_bill.css">
     <style>
-        .modal-dialog{
-            min-width: 1000px;
-        }
-        .modal-content{
-            min-height: 600px;
-        }
        
     </style>
 </head>
@@ -26,34 +20,38 @@ include('include/nav.php');
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">بطاقة حساب </button>
 <div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered" id="modal_dialog_account">
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">بطاقة حساب</h4>
+        <div class="modal-content" id="modal_content_account">
+            <div class="modal-header"  id="modal_header_account">
+                <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" >&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+            <div class="modal-body" id="modal_body_account">
+                
+                <iframe  id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
+               
             </div>
         </div>
     </div>
 </div>
 
 <button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">بطاقة مادة </button>
-<div id="modal_item_card" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="modal_item_card" class="modal fade" role="dialog" >
+    <div class="modal-dialog modal-dialog-centered" id="modal_dialog_item">
 
-        <div class="modal-content">
+        <div class="modal-content" id="modal_content_item">
 
-            <div class="modal-header">
-                <h4>بطاقة صنف </h4>
-                <button onclick="" data-dismiss="modal" class="close">&times;</button> 
+            <div class="modal-header" id="modal_header_item">
+                <h4 class="modal-title col-11">بطاقة صنف </h4>
+                <button onclick="" data-dismiss="modal" class="close">
+                    <span aria-hidden="true" >&times;</span>
+                </button> 
             </div>
-            <div class="modal-body">
-                <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+            <div class="modal-body" id="modal_body_item">
+                <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -157,22 +155,22 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
     <form action="" method="post">
         <div id="contextmenu" class="container-fluide">
             <div class="row py-4">
-                <div class="col-4">
+                <div class="col-5" >
                     <h2>فاتورة كمسيون</h2>
                 </div>
                 <div class="col-3">
                     <div class="row">
-                        <label for="date" class="col-5">تاريخ الفاتورة</label>
+                        <label for="date" style=" margin-right:45px;">تاريخ الفاتورة</label>
                         <div class="col-7">
                             <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
                                                                             else echo $bill[0]['date'] ?>" class="form-control" style="padding:2px">
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <div class="row">
-                        <label for="" class="col-5">رقم الفاتورة</label>
-                        <div class="col-7">
+                        <label for="" >رقم الفاتورة</label>
+                        <div class="col">
                             <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
                                                                                     (isset($_POST['previous']) && $previous_bill_code == '') ||
                                                                                     (!isset($_POST['code']))
@@ -183,22 +181,24 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                                                                 elseif (isset($_POST['previous'])) echo $previous_bill_code;
                                                                                 elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                                 elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" class="form-control" style="padding:2px">
-                            <button name="last_previous" id="last_previous">
-                                << </button>
-                                    <button name="previous" id="previous">
-                                        < </button>
-                                            <button name="next" id="next"> > </button>
-                                            <button name="last_next" id="last_next"> >> </button>
-                                            <button name="current" id="current" hidden></button>
 
                         </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row justify-content-center " >
+                        <button name="last_previous" id="last_previous"><< </button>
+                        <button name="previous" id="previous"> < </button>
+                        <button name="next" id="next"> > </button>
+                        <button name="last_next" id="last_next"> >> </button>
+                        <button name="current" id="current" hidden></button>
 
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-6" style="">
                     <div class="row">
                         <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
@@ -970,9 +970,11 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
+        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-14%","margin-left":"-17%"});
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
+        $('#iframe_item_card').contents().find('#container').css( {"margin-top":"-8%","margin-left":"-14%"});
 
     });
 </script>
