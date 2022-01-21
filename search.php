@@ -84,7 +84,7 @@ if (isset($_POST["item_search"])) {
     $output = '';
     // $query = selectWithTable('items','categories').andLike('items.name' , $_POST['item_search']);
     // echo $query;
-    $query = "select i.id as item_id,
+    $query = "select DISTINCT i.id as item_id,
               c.id as cat_id,
               i.name as item_name,
               c.name as cat_name,
@@ -98,6 +98,12 @@ if (isset($_POST["item_search"])) {
             <td>' . $row['item_name'] . '</td>
             <td>' . $row['item_code'] . '</td>
             <td>' . $row['cat_name'] . '</td>';
+            $output.="<td>
+                        <button type='button' onclick='window.open(\"item_card.php?id=" . $row['item_id'] . "\" , \"_self\")'>تعديل</button>
+                        <button type='submit' name='delete' 
+                                    onclick='document.getElementById(\"id\").value = \"".$row['item_id']."\";
+                                    return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
+                        </td>";
             $output .= '</tr>';
         }
     }

@@ -42,6 +42,38 @@ function getIds($con, $table, $column, $value)
     return $ids;
 }
 
+function get_current_daen_using_id($con , $id){
+    $select_daen_query = selectND('account_statements').andWhere('main_account_id' , $id);
+    $select_daen_exec = mysqli_query($con , $select_daen_query);
+    $total_daen = '0';
+    while($row = mysqli_fetch_array($select_daen_exec)){
+        $total_daen += $row['daen'];
+    }
+    return $total_daen;
+}
+
+function get_current_maden_using_id($con , $id){
+    $select_maden_query = selectND('account_statements').andWhere('main_account_id' , $id);
+    $select_maden_exec = mysqli_query($con , $select_maden_query);
+    $total_maden = '0';
+    while($row = mysqli_fetch_array($select_maden_exec)){
+        $total_maden += $row['maden'];
+    }
+    return $total_maden;
+}
+
+function get_current_daen_using_code($con , $code){
+    $id = getId($con , 'accounts' , 'code' , $code);
+    return get_current_daen_using_id($con , $id);
+}
+
+function get_current_maden_using_code($con , $code){
+    $id = getId($con , 'accounts' , 'code' , $code);
+    return get_current_maden_using_id($con , $id);
+}
+
+
+
 function get_value_from_table_using_column($con , $table , $column , $value , $column_return){
     $select = select($table).where($column,$value);
     $select_exec = mysqli_query($con , $select);

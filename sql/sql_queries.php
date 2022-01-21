@@ -176,6 +176,9 @@ function whereLike( $column , $value)
 function andLike($column , $value){
   return " and $column   like'%$value%' ";
 }
+function orLike($column , $value){
+  return " or $column   like'%$value%' ";
+}
 
 function whereRlike( $column , $value)
 {
