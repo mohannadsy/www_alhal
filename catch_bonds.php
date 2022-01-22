@@ -89,7 +89,14 @@ $select_last_previous_catch_bonds_exec = mysqli_query($con, $select_last_previou
 $last_previous_code = mysqli_fetch_array($select_last_previous_catch_bonds_exec)['code'];
 
 $current_catch_code = get_auto_code($con, 'catch_bonds', 'code', '', 'parent');
-if (isset($_GET['id'])) {
+if (
+    isset($_GET['id']) &&
+    !isset($_POST['next']) &&
+    !isset($_POST['last_next']) &&
+    !isset($_POST['previous']) &&
+    !isset($_POST['last_previous']) &&
+    !isset($_POST['current'])
+) {
     $current_catch_code = get_value_from_table_using_id($con, 'catch_bonds', 'code', $_GET['id']);
     $_POST['code'] = $current_catch_code;
     $_POST['current'] = $current_catch_code;
@@ -144,7 +151,7 @@ if (isset($_POST['last_previous'])) {
         $catch_bonds[] = $catch_bond;
     }
 }
-if (isset($_POST['current']) || isset($_POST['update'])) {
+if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print'])) {
     $catch_bond_select = selectND('catch_bonds') . andWhere('code', $_POST['code']);
     $catch_bond_exec = mysqli_query($con, $catch_bond_select);
     $catch_bond_rows = mysqli_num_rows($catch_bond_exec);
@@ -261,7 +268,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                     <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="button" class="" id="btn-grp" name="print" onclick="printBonds(['buttons', 'nav','currency_notes', 'account'])">
+                    <button type="button" class="" id="btn-grp" name="print">
                         طباعة
                     </button>
                     <button class="" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
@@ -281,56 +288,61 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 </html>
 
 <?php
-if (isset($_POST['add'])) {
+if (isset($_POST['add']) || isset($_POST['print'])) {
+    if (empty($catch_bonds)) {
+        $main_account_code = get_code_from_input($_POST['main_account']);
+        $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
-    $main_account_code = get_code_from_input($_POST['main_account']);
-    $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
+        foreach ($_POST['account'] as $key => $value) {
+            if ($value != '' && $_POST['maden'][$key] != '') {
+                $other_account_code = get_code_from_input($value);
+                $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
+                $insert_catch_bond_query = insert('catch_bonds', [
+                    'main_account_id' => $main_account_id,
+                    'other_account_id' => $other_account_id,
+                    'maden' => $_POST['maden'][$key],
+                    'note' => $_POST['note'][$key],
+                    'code' => $_POST['code'],
+                    'date' => $_POST['date'],
+                    'currency' => $_POST['currency'],
+                    'main_note' => $_POST['notes']
+                ]);
+                $insert_catch_bond_exec = mysqli_query($con, $insert_catch_bond_query);
+                /**
+                 * make account statements
+                 */
+                // كشف حساب الصندوق
+                $insert_account_statement_query = insert('account_statements', [
+                    'main_account_id' => $main_account_id,
+                    'other_account_id' => $other_account_id,
+                    'maden' => $_POST['maden'][$key],
+                    'note' => $_POST['note'][$key],
+                    'date' => $_POST['date'],
+                    'code_number' => $_POST['code'],
+                    'code_type' => 'catch_bonds'
+                ]);
+                message_box($insert_account_statement_query);
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
-    foreach ($_POST['account'] as $key => $value) {
-        if ($value != '' && $_POST['maden'][$key] != '') {
-            $other_account_code = get_code_from_input($value);
-            $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
-            $insert_catch_bond_query = insert('catch_bonds', [
-                'main_account_id' => $main_account_id,
-                'other_account_id' => $other_account_id,
-                'maden' => $_POST['maden'][$key],
-                'note' => $_POST['note'][$key],
-                'code' => $_POST['code'],
-                'date' => $_POST['date'],
-                'currency' => $_POST['currency'],
-                'main_note' => $_POST['notes']
-            ]);
-            $insert_catch_bond_exec = mysqli_query($con, $insert_catch_bond_query);
-            /**
-             * make account statements
-             */
-            // كشف حساب الصندوق
-            $insert_account_statement_query = insert('account_statements', [
-                'main_account_id' => $main_account_id,
-                'other_account_id' => $other_account_id,
-                'maden' => $_POST['maden'][$key],
-                'note' => $_POST['note'][$key],
-                'date' => $_POST['date'],
-                'code_number' => $_POST['code'],
-                'code_type' => 'catch_bonds'
-            ]);
-            message_box($insert_account_statement_query);
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-            // كشف حساب القابض
-            $insert_account_statement_query = insert('account_statements', [
-                'main_account_id' => $other_account_id,
-                'other_account_id' => $main_account_id,
-                'daen' => $_POST['maden'][$key],
-                'note' => $_POST['note'][$key],
-                'date' => $_POST['date'],
-                'code_number' => $_POST['code'],
-                'code_type' => 'catch_bonds',
-            ]);
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+                // كشف حساب القابض
+                $insert_account_statement_query = insert('account_statements', [
+                    'main_account_id' => $other_account_id,
+                    'other_account_id' => $main_account_id,
+                    'daen' => $_POST['maden'][$key],
+                    'note' => $_POST['note'][$key],
+                    'date' => $_POST['date'],
+                    'code_number' => $_POST['code'],
+                    'code_type' => 'catch_bonds',
+                ]);
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+            }
         }
     }
-
+    if (isset($_POST['print'])) {
+        open_window_blank("print.php?catch_code=" . $current_catch_code);
+        open_window_self_id('catch_bonds.php' , getId($con , 'catch_bonds' , 'code' , $current_catch_code));
+    }
+    clear_local_storage('account_card_code_name');
     open_window_self('catch_bonds.php');
 }
 
@@ -382,8 +394,8 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $delete_paymnet_bond_query = delete('catch_bonds') . where('code', $_POST['code']);
-    $delete_paymnet_bond_exec = mysqli_query($con, $delete_paymnet_bond_query);
+    $delete_catch_bond_query = delete('catch_bonds') . where('code', $_POST['code']);
+    $delete_catch_bond_exec = mysqli_query($con, $delete_catch_bond_query);
     $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds');
     $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
     echo "<script>document.getElementById('next').click()</script>";

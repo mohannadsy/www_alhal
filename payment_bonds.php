@@ -52,12 +52,17 @@ include('include/nav.php');
             margin: 1px;
             width: 80px;
         }
-        #last_previous,#previous,#next,#last_next{
+
+        #last_previous,
+        #previous,
+        #next,
+        #last_next {
             margin: 0px 4px;
             border-radius: 4px;
 
         }
-        iframe{
+
+        iframe {
             background-color: burlywood;
             min-width: 900px;
             min-height: 500px;
@@ -90,13 +95,14 @@ $select_last_previous_Payment_bonds_exec = mysqli_query($con, $select_last_previ
 $last_previous_code = mysqli_fetch_array($select_last_previous_Payment_bonds_exec)['code'];
 
 $current_payment_code = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
-if (isset($_GET['id']) &&
-        !isset($_POST['next']) &&
-        !isset($_POST['last_next']) &&
-        !isset($_POST['previous']) &&
-        !isset($_POST['last_previous']) &&
-        !isset($_POST['current'])
-    ) {
+if (
+    isset($_GET['id']) &&
+    !isset($_POST['next']) &&
+    !isset($_POST['last_next']) &&
+    !isset($_POST['previous']) &&
+    !isset($_POST['last_previous']) &&
+    !isset($_POST['current'])
+) {
     $current_payment_code = get_value_from_table_using_id($con, 'payment_bonds', 'code', $_GET['id']);
     $_POST['code'] = $current_payment_code;
     $_POST['current'] = $current_payment_code;
@@ -150,7 +156,7 @@ if (isset($_POST['last_previous'])) {
         $payment_bonds[] = $payment_bond;
     }
 }
-if (isset($_POST['current']) || isset($_POST['update'])) {
+if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print'])) {
     $payment_bond_select = selectND('payment_bonds') . andWhere('code', $_POST['code']);
     $payment_bond_exec = mysqli_query($con, $payment_bond_select);
     $payment_bond_rows = mysqli_num_rows($payment_bond_exec);
@@ -192,19 +198,21 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                                                                     elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
                         </div>
-                    
+
                     </div>
-                   
+
                 </div>
                 <div class="col-4 text-end">
-                        <div class="row justify-content-end" style="padding-top: 10px;">
-                            <button name="last_previous" id="last_previous"> << </button>
-                            <button name="previous" id="previous"> < </button>
-                            <button name="next" id="next"> > </button>
-                            <button name="last_next" id="last_next"> >> </button>
-                            <button name="current" id="current" hidden></button>
-                        </div>
+                    <div class="row justify-content-end" style="padding-top: 10px;">
+                        <button name="last_previous" id="last_previous">
+                            << </button>
+                                <button name="previous" id="previous">
+                                    < </button>
+                                        <button name="next" id="next"> > </button>
+                                        <button name="last_next" id="last_next"> >> </button>
+                                        <button name="current" id="current" hidden></button>
                     </div>
+                </div>
             </div>
 
             <div class="row py-3" id="inf_row">
@@ -265,13 +273,13 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                     <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="" id="btn-grp" name="print" >
+                    <button type="submit" class="" id="btn-grp" name="print">
                         طباعة
                     </button>
                     <button class="" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         تعديل
                     </button>
-                    
+
                     <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class=" " id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
@@ -286,67 +294,67 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 <?php
 if (isset($_POST['add']) || isset($_POST['print'])) {
+    if (empty($payment_bonds)) {
+        message_box('hello');
+        $main_account_code = get_code_from_input($_POST['main_account']);
+        $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
-    $main_account_code = get_code_from_input($_POST['main_account']);
-    $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
-
-    if($_POST['code'] != $current_payment_code){
-        $_POST['code'] = $current_payment_code;
-    }
+        if ($_POST['code'] != $current_payment_code) {
+            $_POST['code'] = $current_payment_code;
+        }
 
 
-    foreach ($_POST['account'] as $key => $value) {
-        if ($value != '' && $_POST['daen'][$key] != '') {
-            $other_account_code = get_code_from_input($value);
-            $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
-            $insert_payment_bond_query = insert('payment_bonds', [
-                'main_account_id' => $main_account_id,
-                'other_account_id' => $other_account_id,
-                'daen' => $_POST['daen'][$key],
-                'note' => $_POST['note'][$key],
-                'code' => $_POST['code'],
-                'date' => $_POST['date'],
-                'currency' => $_POST['currency'],
-                'main_note' => $_POST['notes']
-            ]);
-            $insert_payment_bond_exec = mysqli_query($con, $insert_payment_bond_query);
-            /**
-             * make account statements
-             */
-            // كشف حساب الصندوق
-            $insert_account_statement_query = insert('account_statements', [
-                'main_account_id' => $main_account_id,
-                'other_account_id' => $other_account_id,
-                'daen' => $_POST['daen'][$key],
-                'note' => $_POST['note'][$key],
-                'date' => $_POST['date'],
-                'code_number' => $_POST['code'],
-                'code_type' => 'payment_bonds'
-            ]);
-            message_box($insert_account_statement_query);
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        foreach ($_POST['account'] as $key => $value) {
+            if ($value != '' && $_POST['daen'][$key] != '') {
+                $other_account_code = get_code_from_input($value);
+                $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
+                $insert_payment_bond_query = insert('payment_bonds', [
+                    'main_account_id' => $main_account_id,
+                    'other_account_id' => $other_account_id,
+                    'daen' => $_POST['daen'][$key],
+                    'note' => $_POST['note'][$key],
+                    'code' => $_POST['code'],
+                    'date' => $_POST['date'],
+                    'currency' => $_POST['currency'],
+                    'main_note' => $_POST['notes']
+                ]);
+                $insert_payment_bond_exec = mysqli_query($con, $insert_payment_bond_query);
+                /**
+                 * make account statements
+                 */
+                // كشف حساب الصندوق
+                $insert_account_statement_query = insert('account_statements', [
+                    'main_account_id' => $main_account_id,
+                    'other_account_id' => $other_account_id,
+                    'daen' => $_POST['daen'][$key],
+                    'note' => $_POST['note'][$key],
+                    'date' => $_POST['date'],
+                    'code_number' => $_POST['code'],
+                    'code_type' => 'payment_bonds'
+                ]);
+                message_box($insert_account_statement_query);
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
-            // كشف حساب القابض
-            $insert_account_statement_query = insert('account_statements', [
-                'main_account_id' => $other_account_id,
-                'other_account_id' => $main_account_id,
-                'maden' => $_POST['daen'][$key],
-                'note' => $_POST['note'][$key],
-                'date' => $_POST['date'],
-                'code_number' => $_POST['code'],
-                'code_type' => 'payment_bonds',
-            ]);
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+                // كشف حساب القابض
+                $insert_account_statement_query = insert('account_statements', [
+                    'main_account_id' => $other_account_id,
+                    'other_account_id' => $main_account_id,
+                    'maden' => $_POST['daen'][$key],
+                    'note' => $_POST['note'][$key],
+                    'date' => $_POST['date'],
+                    'code_number' => $_POST['code'],
+                    'code_type' => 'payment_bonds',
+                ]);
+                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+            }
         }
     }
-    if(isset($_POST['print'])){
-        open_window_blank("print.php?payment_code=" . $current_payment_code );
+    if (isset($_POST['print'])) {
+        open_window_blank("print.php?payment_code=" . $current_payment_code);
+        open_window_self_id('payment_bonds.php' , getId($con , 'payment_bonds' , 'code' , $current_payment_code));    
     }
     clear_local_storage('account_card_code_name');
     open_window_self('payment_bonds.php');
-}
-if(isset($_POST['print'])){
-    open_window_blank("print.php?payment_code=" . $current_payment_code );
 }
 if (isset($_POST['update'])) {
 
@@ -397,8 +405,8 @@ if (isset($_POST['update'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $delete_paymnet_bond_query = delete('payment_bonds') . where('code', $_POST['code']);
-    $delete_paymnet_bond_exec = mysqli_query($con, $delete_paymnet_bond_query);
+    $delete_payment_bond_query = delete('payment_bonds') . where('code', $_POST['code']);
+    $delete_payment_bond_exec = mysqli_query($con, $delete_payment_bond_query);
     $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'payment_bonds');
     $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
     clear_local_storage('account_card_code_name');

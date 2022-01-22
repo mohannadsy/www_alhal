@@ -67,12 +67,14 @@ if (isset($_POST["account_search_part"])) {
     $output = '';
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
+            $current_maden = get_current_maden_using_id($con , $row['id']);
+            $current_daen = get_current_daen_using_id($con ,$row['id']);
             $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['code'] . '</td>
             <td>' . $row['name'] . '</td>' .
-                '<td>' . $row['maden'] . '</td>' .
-                '<td>' . $row['daen'] . '</td>';
-
+                '<td>' . $current_daen . '</td>' .
+                '<td>' . $current_maden . '</td>';
+                $output .= '<td>'. ($current_maden - $current_daen) .'</td>';
             $output .= '</tr>';
         }
     }
@@ -88,7 +90,7 @@ if (isset($_POST["item_search"])) {
               c.id as cat_id,
               i.name as item_name,
               c.name as cat_name,
-              i.code as item_code from items as i , categories as c where c.id = i.category_id " . andLike('i.name', $_POST['item_search']) . " and i.is_deleted <> '1' ";
+              i.code as item_code from items as i , categories as c where c.id = i.category_id and ( i.name like '%".$_POST['item_search']."%' or i.code like '%".$_POST['item_search']."%' or c.name like '%".$_POST['item_search']."%' ) and i.is_deleted <> '1' ";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {
