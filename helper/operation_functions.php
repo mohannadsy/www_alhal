@@ -20,12 +20,12 @@ function generate_code($prefix, $code, $type)
 function get_auto_code($con, $table, $column, $prefix, $type = "child", $parent_col_name = '', $parent_id = '')
 {
     if ($parent_id != '')
-        $select_max_id_query = "select max(id),$parent_col_name from $table where $parent_col_name = '$parent_id'";
+        $select_max_id_query = "select max(id),$parent_col_name from $table where $parent_col_name = '$parent_id' and is_deleted <> '1'";
     // if ($parent_id == '' && $parent_col_name != '')
     //     $select_max_id_query = "select max(id),$parent_col_name from $table where $parent_col_name = '$parent_id'";
 
     else
-        $select_max_id_query = "select max(id) from $table";
+        $select_max_id_query = "select max(id) from $table  where is_deleted <> '1'";
     $select_max_id_exec = mysqli_query($con, $select_max_id_query);
     $max_id = mysqli_fetch_row($select_max_id_exec)[0];
 

@@ -40,6 +40,14 @@ function set_local_storage($key , $value){
         </script>";
 }
 
+function clear_local_storage($key){
+    echo "<script>
+        if(localStorage){
+            localStorage.clear('$key');
+        }
+    </script>";
+}
+
 function close_window(){
     echo "<script>window.close()</script>";
 }

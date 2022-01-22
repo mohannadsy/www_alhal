@@ -90,7 +90,13 @@ $select_last_previous_Payment_bonds_exec = mysqli_query($con, $select_last_previ
 $last_previous_code = mysqli_fetch_array($select_last_previous_Payment_bonds_exec)['code'];
 
 $current_payment_code = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) &&
+        !isset($_POST['next']) &&
+        !isset($_POST['last_next']) &&
+        !isset($_POST['previous']) &&
+        !isset($_POST['last_previous']) &&
+        !isset($_POST['current'])
+    ) {
     $current_payment_code = get_value_from_table_using_id($con, 'payment_bonds', 'code', $_GET['id']);
     $_POST['code'] = $current_payment_code;
     $_POST['current'] = $current_payment_code;
@@ -284,6 +290,11 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
     $main_account_code = get_code_from_input($_POST['main_account']);
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
+    if($_POST['code'] != $current_payment_code){
+        $_POST['code'] = $current_payment_code;
+    }
+
+
     foreach ($_POST['account'] as $key => $value) {
         if ($value != '' && $_POST['daen'][$key] != '') {
             $other_account_code = get_code_from_input($value);
@@ -331,6 +342,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
     if(isset($_POST['print'])){
         open_window_blank("print.php?payment_code=" . $current_payment_code );
     }
+    clear_local_storage('account_card_code_name');
     open_window_self('payment_bonds.php');
 }
 if(isset($_POST['print'])){
@@ -380,6 +392,7 @@ if (isset($_POST['update'])) {
             $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
         }
     }
+    clear_local_storage('account_card_code_name');
     do_script("document.getElementById('current').click()");
 }
 
@@ -388,6 +401,7 @@ if (isset($_POST['delete'])) {
     $delete_paymnet_bond_exec = mysqli_query($con, $delete_paymnet_bond_query);
     $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'payment_bonds');
     $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
+    clear_local_storage('account_card_code_name');
     echo "<script>document.getElementById('next').click()</script>";
 }
 ?>

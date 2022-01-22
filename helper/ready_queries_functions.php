@@ -72,7 +72,11 @@ function get_current_maden_using_code($con , $code){
     return get_current_maden_using_id($con , $id);
 }
 
-
+function get_main_account_id_parent($con , $code){
+    $select_account_id_query = selectND('accounts').andWhere('code' , $code);
+    $select_account_id_exec = mysqli_query($con , $select_account_id_query);
+    return mysqli_fetch_array($select_account_id_exec)['account_id'];
+}
 
 function get_value_from_table_using_column($con , $table , $column , $value , $column_return){
     $select = select($table).where($column,$value);

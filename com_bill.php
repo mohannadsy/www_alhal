@@ -198,7 +198,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             </div>
 
             <div class="row">
-                <div class="col-6" style="">
+                <div class="col-6">
                     <div class="row">
                         <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
@@ -582,6 +582,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
             }
         }
     }
+    clear_local_storage('account_card_code_name');
     if (isset($_POST['print_seller']) && $_POST['seller'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
         open_window_self_code(COM_BILL , $current_bill_code);
@@ -831,6 +832,7 @@ if (isset($_POST['update'])) {
             $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
         }
     }
+    clear_local_storage('account_card_code_name');
     // open_window_self_id(COM_BILL , $current_bill_id_to_update);
 }
 
@@ -865,6 +867,7 @@ if (isset($_POST['delete'])) {
         $delete_account_statement_query = delete('account_statements').where('code_type' , 'mid_bonds').andWhere('code_number' , $mid_bond['code']);
         $delete_account_statement_exec = mysqli_query($con , $delete_account_statement_query);
     }
+    clear_local_storage('account_card_code_name');
     open_window_self(COM_BILL);
 }
 ?>
