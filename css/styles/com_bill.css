@@ -25,7 +25,7 @@ body {
 }
 #modal_content_account{
     min-width: 780;
-    min-height: 610px;
+    min-height: 650px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
@@ -42,8 +42,8 @@ body {
 }
 #modal_body_account{
     position: relative;
-    min-height: 590px;
     min-width: 780;
+    min-height: 630px;
     background-color:rgb(52,92,100);
 }
 h4{  
@@ -51,7 +51,7 @@ h4{
 #iframe_account_card{
     position: absolute;
     width:770px;
-    height:560px;
+    height:600px;
    
 }
 #modal_dialog_item{
@@ -99,13 +99,12 @@ h4{
     to {top:0; opacity:1}
     }
     /* The Close Button */
+ 
     .close {
         color: #aaa;
         float: left;
         font-size: 28px;
         font-weight: bold;
-        margin-left: 30px;
-        margin-top: 30px;
     }
     .close:hover,
     .close:focus {

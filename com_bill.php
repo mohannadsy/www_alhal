@@ -25,7 +25,7 @@ include('include/nav.php');
         <div class="modal-content" id="modal_content_account">
             <div class="modal-header"  id="modal_header_account">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style=" margin-right: 10px;">
                     <span aria-hidden="true" >&times;</span>
                 </button>
             </div>
@@ -973,7 +973,7 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-14%","margin-left":"-17%"});
+        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
