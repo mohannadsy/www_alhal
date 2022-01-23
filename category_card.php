@@ -113,10 +113,26 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
         success_error_delete_message('تم حذف الصنف بنجاح', 'عئرا لم يتم حذف الصنف');
         ?>
 
-        <div class="container">
+        <div class="container" >
 
             <!-- <div class="row justify-content-center"> -->
-            <div id="category_col" class=" col-sm-12  col-md-12 col-lg-12 py-5">
+            <!-- <div id="category_col" class=" col-sm-12  col-md-12 col-lg-12 py-5" style="background-color: brown;"> -->
+                <div class="row py-4">
+                    <div class="col-8" >
+                        <h4>بطاقة صنف</h4>
+
+                    </div>
+                    <div class="col-4">
+
+            
+                        <button name="last_previous" id="last_previous"> << </button>
+                        <button name="previous" id="previous">< </button>
+                        <button name="next" id="next"> > </button>
+                        <button name="last_next" id="last_next"> >> </button>
+                        <button name="current" id="current" hidden></button>
+
+                    </div>
+                </div>
 
                 <div class="form-group row justify-content-center ">
                     <label for="code" class=" col-sm-3 col-md-3 col-form-label text-md-right">رمز الصنف</label>
@@ -130,16 +146,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                         elseif (isset($_POST['last_next'])) echo $last_next_code;
                                         elseif (isset($_POST['previous'])) echo $previous_category_code;
                                         elseif (isset($_POST['last_previous'])) echo $last_previous_code;
-                                        elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>"" type=" text" id="code" class="form-control" name="code">
+                                        elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" type=" text" id="code" class="form-control" name="code">
                     </div>
                 </div>
-                <button name="last_previous" id="last_previous">
-                    << </button>
-                        <button name="previous" id="previous">
-                            < </button>
-                                <button name="next" id="next"> > </button>
-                                <button name="last_next" id="last_next"> >> </button>
-                                <button name="current" id="current" hidden></button>
+                               
                                 <div class="form-group row justify-content-center ">
                                     <label for="name" class="col-sm-3  col-md-3 col-form-label text-md-right">اسم الصنف</label>
                                     <div class="col-md-6">
@@ -155,23 +165,25 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                     </div>
                                 </div>
 
-                                <div id="button_col" class="col-sm-12  col-md-12 text-center py-4 ">
-                                    <button <?php if (notempty($category)) echo 'hidden' ?> type="submit" class="col-3" name="add" id="button_grp">
-                                        إضافة
-                                    </button>
-                                    <button <?php if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
-                                        تعديل
-                                    </button>
-                                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
-                                        حذف
-                                    </button>
-                                    <button type="button" class="col-3" name="close" id="button_grp">
-                                        إغلاق
-                                    </button>
+                                <div class="row justify-content-center">
+                                    <div id="button_col" class="col-sm-12  col-md-10 text-center py-3 ">
+                                        <button <?php //if (notempty($category)) echo 'hidden' ?> type="submit" class="col-3" name="add" id="button_grp">
+                                            إضافة
+                                        </button>
+                                        <button <?php //if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
+                                            تعديل
+                                        </button>
+                                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php //if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
+                                            حذف
+                                        </button>
+                                        <a href="ready.php"><button type="button" class="col-3" name="close" id="button_grp">
+                                            إغلاق
+                                        </button></a>
+                                    </div>
                                 </div>
 
                                 <!-- </div> -->
-            </div>
+            <!-- </div> -->
         </div>
     </form>
 </body>

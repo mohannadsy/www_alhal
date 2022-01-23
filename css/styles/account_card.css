@@ -1,9 +1,9 @@
 
 .container {
-    top:20% ;
+    top: 14% ;
     left:22%;
     width: 700px ;
-    height: 545px ;
+    height: 590px ;
     margin-bottom: 0;
     padding-top: 10px;
     text-align: right;
@@ -23,5 +23,13 @@
 }
 #lbl_maden,#lbl_daen{
     margin-right: 15px;
+
+}
+#last_previous,
+#previous,
+#next,
+#last_next {
+    /* margin: 0px 4px; */
+    border-radius: 4px;
 
 }

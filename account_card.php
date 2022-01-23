@@ -145,10 +145,26 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
             success_error_create_message('تم انشاء الحساب بنجاح', 'عئرا لم يتم انشاء الحساب بنجاح');
             success_error_update_message('تم تعديل الحساب بنجاح', 'عئرا لم يتم تعديل الحساب بنجاح');
             ?>
+            <div class="row py-2">
+                <div class="col-8">
+                <h3 style=" margin-right:16px">بطاقة حساب</h3>
+                </div>
+                
+                <div class="col-4 text-end">
+                    <div style="margin-right: 25px; margin-top:5px;">
+                        <button name="last_previous" id="last_previous"><< </button>
+                        <button name="previous" id="previous">< </button>
+                        <button name="next" id="next"> > </button>
+                        <button name="last_next" id="last_next"> >> </button>
+                        <button name="current" id="current" hidden></button>
+                    </div>
+                </div>
+
+            </div>
             <div class="row">
 
                 <div id="account_col" class="col-md-6">
-                    <h4 class="mb-3 ">معلومات الحساب</h4>
+                    <h5 class=" " style=" margin-right:16px">معلومات الحساب</h5>
                     <div class="row ">
                         <div class="col-12">
                             <label for="code" class="col-form-label" id="lbl_code">رمز الحساب</label>
@@ -159,14 +175,8 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                                                 elseif (isset($_POST['previous'])) echo $previous_account_code;
                                                 elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                 elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
-                                                else echo get_auto_code($con, 'accounts', 'code', '', 'parent'); ?>"" type=" text" id="code" class="form-control" name="code">
-                                <button name="last_previous" id="last_previous">
-                                    << </button>
-                                        <button name="previous" id="previous">
-                                            < </button>
-                                                <button name="next" id="next"> > </button>
-                                                <button name="last_next" id="last_next"> >> </button>
-                                                <button name="current" id="current" hidden></button>
+                                                else echo get_auto_code($con, 'accounts', 'code', '', 'parent'); ?>" type=" text" id="code" class="form-control" name="code">
+                                               
 
                             </div>
                         </div>
@@ -197,7 +207,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
                         </div>
                     </div>
-                    <h4 class="mb-3"> الرصيدالافتتاحي</h4>
+                    <h5 class="" style=" margin-right:16px"> الرصيدالافتتاحي</h5>
                     <div class="row">
                         <div class="col-12">
                             <label for="maden" class="form-label" id="lbl_maden"> مدين</label>
@@ -216,7 +226,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 </div>
 
                 <div id="connect_col" class="col-md-6 ">
-                    <h4 class="mb-3">معلومات التواصل</h4>
+                    <h5 class="">معلومات التواصل</h5>
                     <div class="row">
                         <div class="col-10">
                             <label for="" class="form-label">المحافظة </label>

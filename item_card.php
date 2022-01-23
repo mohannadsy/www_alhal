@@ -138,7 +138,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 <body>
     <form id="form" action="" method="post">
-        <div class="container py-5" id="container">
+        <div class="container" id="container">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
@@ -147,6 +147,25 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
             <!-- <div class="row justify-content-center"> -->
             <!-- <div id="item_col" class="col-sm-10 col-md-12 text-center py-5"> -->
+                <div class="row justify-content-end py-3">
+                    <div class="col-8" >
+                        <h4>
+                            بطاقة مادة
+                        </h4>
+                    </div>
+                    <div class="col-4"   >
+                        <div style="margin-right: 25px;">
+
+                            <button name="last_previous" id="last_previous"><< </button>
+                            <button name="previous" id="previous">< </button>
+                            <button name="next" id="next"> > </button>
+                            <button name="last_next" id="last_next"> >> </button>
+                            <button name="current" id="current" hidden></button>
+                        </div>
+                    </div>
+
+
+                </div>
 
             <div class="form-group row justify-content-center  ">
                 <label for="code" class="col-md-3 col-form-label text-md-right">رمز المادة</label>
@@ -157,13 +176,8 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                                             elseif (isset($_POST['previous'])) echo $previous_item_code;
                                             elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                             elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>"" type=" text" id="code" class="form-control" name="code">
-                    <button name="last_previous" id="last_previous">
-                        << </button>
-                            <button name="previous" id="previous">
-                                < </button>
-                                    <button name="next" id="next"> > </button>
-                                    <button name="last_next" id="last_next"> >> </button>
-                                    <button name="current" id="current" hidden></button>
+
+                                    
 
                 </div>
             </div>
@@ -215,29 +229,32 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
             </div>
 
             <div class="row py-4">
-                <div class="col-md-12 text-center">
-                    <!-- <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a> -->
-                    <a href="item_list.php"><button type="button" id="button-grp1" name="view_items">استعراض المواد</button></a>
+                <div class="col-md-5 text-center" >
+                        <!-- <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a> -->
+                        <a href="item_list.php"><button type="button" id="btn_grp1" name="view_items">استعراض المواد</button></a>
+                        <a <?php //if (empty($item)) echo 'hidden' ?> href="item_card.php"><button type="button" id="btn_grp1" class="" name="item_card">
+                                مادة جديدة
+                            </button></a>
+                </div>
                     <!-- <a  href="#" class=" btn"  data-target="#add_category" data-toggle="modal">إضافة صنف</a> -->
 
 
                     <!-- </div> -->
                     <!-- <div id="button_col" class="col-md-6 text-center" > -->
 
-
+                <div class="col-6" >
                     <button <?php if ((notempty($item))) echo 'hidden' ?> type="submit" name="add" id="button-grp2">
                         إضافة
                     </button>
-                    <button <?php if ((empty($item))) echo 'hidden' ?> type="submit" name="update" id="button-grp2">
+                    <button <?php //if ((empty($item))) echo 'hidden' ?> type="submit" name="update" id="button-grp2">
                         تعديل
                     </button>
-                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (empty($item)) echo 'hidden' ?> type="submit" name="delete" id="button-grp2">
+                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php //if (empty($item)) echo 'hidden' ?> type="submit" name="delete" id="button-grp2">
                         حذف
                     </button>
                     <a href="ready.php"><button type="button" id="button-grp2" name="close"> إغلاق</button></a>
-                    <a <?php if (empty($item)) echo 'hidden' ?> href="item_card.php"><button type="button" id="btn_grp" class="" name="item_card">
-                            مادة جديدة
-                        </button></a>
+
+                   
                 </div>
             </div>
 
