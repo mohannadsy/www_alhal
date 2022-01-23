@@ -315,6 +315,55 @@ if(isset($_GET['catch_code'])){
     $notes='ملاحظات: ' . $catch_bond['main_note'];
     $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(10);
+    $content = '';
+    $content .= '
+        <style>
+            th,td{
+                text-align:center;
+            }
+            .num{ 
+                width : 10%;
+             }
+             .daen , .acc{
+                width : 25%;
+             }
+             .note{
+                 width:40%;
+             }
+        </style>
+        <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
+            <thead>
+                <tr>
+                    <th class="num">رقم</th>
+                    <th class="daen">دائن</th>
+                    <th class="acc">الحساب</th>
+                    <th class="note">ملاحظات</th>
+                </tr>
+            <thead>
+            <tbody>';
+            $select_all_catch_bonds_with_same_code_query = select('catch_bonds').where('code' , $catch_bond['code']);
+            $select_all_catch_bonds_with_same_code_exec = mysqli_query($con , $select_all_catch_bonds_with_same_code_query);
+            $counter = 1;
+            $total_payment = 0;
+            while ($catch_bond_from_code = mysqli_fetch_array($select_all_catch_bonds_with_same_code_exec)){
+                $content.= "<tr>";
+                $content.= "<td class='num'>" . $counter++ . "</td>";
+                $content.= "<td>". $catch_bond_from_code['maden'] ."</td>";
+                $content.= "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>"; 
+                $content.= "<td>" . $catch_bond_from_code['note'] . "</td>";
+                $content.= "</tr>";
+
+                $total_payment += $catch_bond_from_code['maden'];
+
+            }
+
+            $content.='  
+            </tbody>
+        </table>';
+	$pdf->writeHTML($content);
+    $res_number='المجموع: ' .$total_payment;
+    $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
+
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 
