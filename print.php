@@ -27,7 +27,15 @@ function type($x){
 //8.3/5.8=1.43 in
 //11.7/8.3=1.40 in 
 
-$ratio = 1.43;
+$page_type = 'A5';
+$ratio = 1;
+$font_size = 12;
+if($page_type == 'A5'){
+    $ratio = 0.71;
+    $font_size = 8;
+}
+
+    
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
 if(isset($_GET['code'])){
@@ -50,7 +58,7 @@ if(isset($_GET['code'])){
     
     // if(isset($_POST["create_pdf"])){
 	// create new PDF document
-	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+	$pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -66,7 +74,7 @@ if(isset($_GET['code'])){
     $pdf->setLanguageArray($lg);
 
     // set font
-    $pdf->SetFont('arial', '', 12);
+    $pdf->SetFont('arial', '', $font_size);
 
     // print newline
     $pdf->Ln();
@@ -74,26 +82,26 @@ if(isset($_GET['code'])){
     // Add a page
 	$pdf->AddPage();
     $num_bill='رقم الفاتورة: ' . $bill['code'];
-    $pdf->MultiCell(50, 6, $num_bill ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $num_bill ,0, 'R', 0, 0, '', '', true);
     $date = 'تاريخ الفاتورة: ' . $bill['date'];
-    $pdf->MultiCell(50, 6, $date ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $date ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(8);
 
     $name=' البائع: ' . $seller['name'];
     if($_GET['print_type'] == 'buyer')
         $name =' المشتري : ' . $buyer['name'];
-    $pdf->MultiCell(50, 6, $name ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
 
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
     if($_GET['print_type'] == 'buyer')
         $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
-    $pdf->MultiCell(50, 6, $payment_method ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $payment_method ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(8);
 
     $notes='ملاحظات: ' . $bill['seller_note'];
     if($_GET['print_type'] == 'buyer')
         $notes='ملاحظات: ' . $bill['buyer_note'];
-    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(10);
 
     // Set some content to print
@@ -141,18 +149,18 @@ if(isset($_GET['code'])){
 	$pdf->writeHTML($content);
     if($_GET['print_type'] == 'buyer'){
         $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
-        $pdf->MultiCell(100, 6, $total_price ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
     }else{
         $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
-        $pdf->MultiCell(100, 6, $total_price ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(8);
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'];
-        $pdf->MultiCell(25, 6, $com_ratio ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(25 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
         $com_value='قيمته: ' . $bill['com_value'] .' ل. س ';
-        $pdf->MultiCell(100, 6, $com_value ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(8);
         $real_price='الصافي: ' . $bill['real_price'] .' ل. س ';
-        $pdf->MultiCell(100, 6, $real_price ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
     }
         
 	if (ob_get_contents()) ob_end_clean();
