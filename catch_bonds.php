@@ -268,7 +268,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="button" class="" id="btn-grp" name="print">
+                    <button type="submit" class="" id="btn-grp" name="print">
                         طباعة
                     </button>
                     <button class="" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>

@@ -23,9 +23,11 @@ function type($x){
 //ratio between A4 and A5
 //A4: 8.3*11.7in
 //A5: 5.8*8.3in
-//array($width,$height)
+//$pageLayout = array($width,$height);
+//8.3/5.8=1.43 in
+//11.7/8.3=1.40 in 
 
-$ratio = '';
+$ratio = 1.43;
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
 if(isset($_GET['code'])){
@@ -48,7 +50,7 @@ if(isset($_GET['code'])){
     
     // if(isset($_POST["create_pdf"])){
 	// create new PDF document
-	$pdf = new TCPDF('P', 'in', 'A4', true, 'UTF-8', false);
+	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -167,7 +169,10 @@ if(isset($_GET['payment_code'])){
     $payment_bond = mysqli_fetch_array($select_payment_bond_exec);
 
    
-
+    $width = 5.8*1.43;
+	$height = 8.3*1.43;
+	$pageLayout = array($width,$height);
+    
     $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
@@ -259,8 +264,61 @@ if(isset($_GET['payment_code'])){
     $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
+
 	$pdf->output('payment', 'I');
     // END OF FILE
 } 
+//////////////////////////سند قبض
+if(isset($_GET['catch_code'])){
+    $catch_bond = [];
+    $select_catch_bond_query = selectND('catch_bonds').andWhere('code' , $_GET['catch_code']);
+    $select_catch_bond_exec = mysqli_query($con , $select_catch_bond_query);
+    $catch_bond = mysqli_fetch_array($select_catch_bond_exec);
 
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    
+    $pdf->SetCreator(PDF_CREATOR);
+    //header
+	$pdf->setPrintHeader(false);
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+    // set font
+    $pdf->SetFont('arial', 'B', 24);
+    // Add a page
+	$pdf->AddPage();
+    $tilte='سند قبض';
+    $pdf->MultiCell(100, 6, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', 12);
+    $pdf->Ln(3);
+    $receipt_number = 'رقم الإيصال: ' . $catch_bond['code'];
+    $pdf->MultiCell(172, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(8);
+    $date = 'تاريخ السند: '  . $catch_bond['date'];
+    $pdf->MultiCell(189, 6, $date ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(7);
+    $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
+    $account = 'الحساب: ' . $main_account;
+    $pdf->MultiCell(80, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $currency = 'العملة: ' . $catch_bond['currency'];
+    $pdf->MultiCell(95, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    
+    
+    $pdf->Ln(7);
+    $notes='ملاحظات: ' . $catch_bond['main_note'];
+    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(10);
+    if (ob_get_contents()) ob_end_clean();
+    // Close and output PDF document
+
+	$pdf->output('catch', 'I');
+    // END OF FILE
+}
 ?>
