@@ -66,9 +66,6 @@ $columns = ['id' , 'name' , 'phone'];
 <br>
 <a href="about.php"> about </a>
 
-
-
-
 <?php
 include('include/footer.php');
 ?>

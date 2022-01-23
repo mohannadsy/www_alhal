@@ -58,6 +58,7 @@ if (isset($_POST['import_tables_DB'])) {
 include('include/footer.php');
 ?>
 
+
 <script>
     function f1(path) {
         $("body").keydown(function(e) {

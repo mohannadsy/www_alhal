@@ -47,26 +47,41 @@ function addRows(table, numberOfRows, names, ids) {
 /**
  * 2 functions to make to sum to a column in table using id(daen-maden) and put the sum onblur in the total field(other_id)
  */
-function count_sum_ids(id , number_of_rows){
+function count_sum_ids(id, number_of_rows) {
     var count = 0;
-    for(var i = 0 ; i< number_of_rows ; i++){
+    for (var i = 0; i < number_of_rows; i++) {
         var value = document.getElementById(id + "_" + i).value;
-        if(value == ''){
+        if (value == '') {
             value = '0';
         }
-        count+=parseFloat(value);
+        count += parseFloat(value);
     }
     return count;
 }
-function set_blur_to_input_ids_to_count_in_id(id , other_id, number_of_rows){
-    for(var i = 0 ; i< number_of_rows ; i++){
-        document.getElementById(id + "_" + i).addEventListener('blur' , function(){
+
+function set_blur_to_input_ids_to_count_in_id(id, other_id, number_of_rows) {
+    for (var i = 0; i < number_of_rows; i++) {
+        document.getElementById(id + "_" + i).addEventListener('blur', function() {
             document.getElementById(other_id).value = count_sum_ids(id, number_of_rows);
         });
     }
-    
+
 }
 
-function scrollToTop(){
-    window.scroll(0,0);
+function scrollToTop() {
+    window.scroll(0, 0);
+}
+
+
+// Function to make the f1 key a shortcut that takes me to the help page
+
+function f1(path = "help_file.php") {
+    $("body").keydown(function(e) {
+        e.preventDefault();
+        var keyCode = e.keyCode || e.which;
+        console.log(keyCode);
+        if (keyCode == 112) {
+            window.open(path, '_self');
+        }
+    });
 }
