@@ -151,7 +151,11 @@ include('include/nav.php');
 </body>
 
 </html>
-
+<?php
+    if (isset($_POST['print'])) {
+        open_window_blank("print.php?item_report");
+    }
+?>
 
 <?php
 include('include/footer.php');

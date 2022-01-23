@@ -344,7 +344,7 @@ if(isset($_GET['catch_code'])){
             $select_all_catch_bonds_with_same_code_query = select('catch_bonds').where('code' , $catch_bond['code']);
             $select_all_catch_bonds_with_same_code_exec = mysqli_query($con , $select_all_catch_bonds_with_same_code_query);
             $counter = 1;
-            $total_payment = 0;
+            $total_catch = 0;
             while ($catch_bond_from_code = mysqli_fetch_array($select_all_catch_bonds_with_same_code_exec)){
                 $content.= "<tr>";
                 $content.= "<td class='num'>" . $counter++ . "</td>";
@@ -353,15 +353,13 @@ if(isset($_GET['catch_code'])){
                 $content.= "<td>" . $catch_bond_from_code['note'] . "</td>";
                 $content.= "</tr>";
 
-                $total_payment += $catch_bond_from_code['maden'];
-
+                $total_catch += $catch_bond_from_code['maden'];
             }
-
             $content.='  
             </tbody>
         </table>';
 	$pdf->writeHTML($content);
-    $res_number='المجموع: ' .$total_payment;
+    $res_number='المجموع: ' .$total_catch;
     $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
 
     if (ob_get_contents()) ob_end_clean();
@@ -369,5 +367,33 @@ if(isset($_GET['catch_code'])){
 
 	$pdf->output('catch', 'I');
     // END OF FILE
+}
+////////////////////////طباعة حركة مادة
+if(isset($_GET['item_report'])){
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    
+    $pdf->SetCreator(PDF_CREATOR);
+    //header
+	$pdf->setPrintHeader(false);
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+    // set font
+    $pdf->SetFont('arial', '', 12);
+    // Add a page
+	$pdf->AddPage();
+    if (ob_get_contents()) ob_end_clean();
+    // Close and output PDF document
+
+	$pdf->output('item report', 'I');
+    // END OF FILE
+
 }
 ?>
