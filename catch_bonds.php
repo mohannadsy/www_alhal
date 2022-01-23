@@ -10,69 +10,25 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles/catchBonds.css" media="print">
+    <link rel="stylesheet" href="css/styles/catch_bonds.css">
     <style>
-        body {
-            text-align: right;
-            background-color: LightGray;
-            position: relative;
-        }
-
-        .container {
-            position: absolute;
-            background-color: #5F9EA0;
-            border-style: groove;
-            border-radius: 25px;
-            top: 13%;
-            left: 20%;
-            width: 1000px;
-            height: 620px;
-            font-size: 17px;
-            padding: 5px;
-
-        }
-
-        #res_number {
-            column-width: 50px;
-        }
-
-        #res_num {
-            padding-right: 125px;
-
-        }
-
-        h2,
-        #inf_row {
-            padding-right: 20px;
-        }
-
-        #btn-grp {
-            border-radius: 4px;
-            text-align: center;
-            margin: 1px;
-            width: 80px;
-        }
-
-        #last_previous,
-        #previous,
-        #next,
-        #last_next {
-            margin: 0px 4px;
-            border-radius: 4px;
-
-        }
+       
     </style>
 </head>
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
 <div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="min-width: 1000px">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title col-11">بطاقة حساب</h4>
+                <button onclick="" type="button" data-dismiss="modal" class="close" aria-label="Close" style=" margin-right: 10px;">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
 
-        <div class="modal-content" style="min-height: 600px;">
+            </div>
             <div class="modal-body">
-                <button onclick="" data-dismiss="modal" class="close">&times;</button>
-                <h4>Account Card</h4>
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0" style="min-width: 900px;min-height: 500px;"></iframe>
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -502,6 +458,7 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
+        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
     });
 </script>
 <script>
