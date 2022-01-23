@@ -78,7 +78,13 @@ include('include/nav.php');
     
 </body>
 </html>
+<script>
+    
+shortcut.add("F1", function() {
+    alert("Hello");
+});
 
+</script>
 
 
 <?php
