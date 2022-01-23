@@ -28,13 +28,13 @@ function get_accounts($con, $id = '')
 
 function getId($con, $table, $column, $value)
 {
-    $select = select($table, ['id', $column]) . where($column, $value);
+    $select = selectND($table, ['id', $column]) . andWhere($column, $value);
     $select_exec = mysqli_query($con, $select);
     return mysqli_fetch_array($select_exec)['id'];
 }
 function getIds($con, $table, $column, $value)
 {
-    $select = select($table, ['id', $column]) . where($column, $value);
+    $select = selectND($table, ['id', $column]) . andWhere($column, $value);
     $select_exec = mysqli_query($con, $select);
     $ids = [];
     while($id = mysqli_fetch_array($select_exec)['id'])

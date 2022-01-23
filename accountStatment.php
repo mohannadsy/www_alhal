@@ -16,11 +16,6 @@ include('include/nav.php');
             margin-right: 20px;
         }
 
-        #lbl_radio {
-            /* background-color: blue; */
-            /* margin-right: 5px; */
-        }
-
         #lbl-radio-type {
             padding-right: 5px;
         }
@@ -88,19 +83,19 @@ include('include/nav.php');
 
                         <div class="col-6">
                             <div class="form-check">
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="item_hidden" checked>
                                 <label for="">
                                     المادة
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="total_weight_hidden" checked>
                                 <label for="">
                                     الوزن القائم
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="real_weight_hidden" checked>
                                 <label for="">
                                     الوزن الصافي
                                 </label>
@@ -109,19 +104,19 @@ include('include/nav.php');
                         <div class="col-6">
 
                             <div class="form-check">
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="price_hidden" checked>
                                 <label for="">
                                     الإفرادي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="total_item_price_hidden" checked>
                                 <label for="">
                                     الإجمالي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="">
+                                <input type="checkbox" value="" id="com_value_hidden" checked>
                                 <label for="">
                                     الكمسيون
                                 </label>
@@ -155,12 +150,12 @@ include('include/nav.php');
                                 <th contenteditable='false'>الحساب المقابل</th>
                                 <th contenteditable='false'>البيان</th>
                                 <th contenteditable='false'>رصيد الحركة</th>
-                                <th class='hidden' style='display:none' contenteditable='false'>المادة</th>
-                                <th class='hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
-                                <th class='hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
-                                <th class='hidden' style='display:none' contenteditable='false'> الإفرادي</th>
-                                <th class='hidden' style='display:none' contenteditable='false'>الإجمالي</th>
-                                <th class='hidden' style='display:none' contenteditable='false'>الكمسيون</th>
+                                <th class='hidden item_hidden' style='display:none' contenteditable='false'>المادة</th>
+                                <th class='hidden total_weight_hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
+                                <th class='hidden real_weight_hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
+                                <th class='hidden price_hidden' style='display:none' contenteditable='false'> الإفرادي</th>
+                                <th class='hidden total_item_price_hidden' style='display:none' contenteditable='false'>الإجمالي</th>
+                                <th class='hidden com_value_hidden' style='display:none' contenteditable='false'>الكمسيون</th>
 
 
                             </tr>
@@ -205,7 +200,7 @@ include('include/nav.php');
                                         }
                                         if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
-                                            $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                            $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
                                             $href_link = href_code(COM_BILL, $bill_code);
                                             $document_type = 'فاتورة رقم ' . $bill_code;
                                         }
@@ -229,7 +224,7 @@ include('include/nav.php');
                                         echo "<td>" . $document_type . "</td>";
                                         echo "<td>" . $row['maden'] . "</td>";
                                         echo "<td>" . $row['daen'] . "</td>";
-                                        $select_other_account_name_query = select('accounts', ['id', 'name']) . where('id', $row['other_account_id']);
+                                        $select_other_account_name_query = selectND('accounts', ['id', 'name']) . andWhere('id', $row['other_account_id']);
                                         $select_other_account_name_exec = mysqli_query($con, $select_other_account_name_query);
                                         // echo "<td>" . $row['code_number'] . "</td>";
                                         echo "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
@@ -261,12 +256,12 @@ include('include/nav.php');
                                             echo "<td class='hidden' style='display:none'></td>";
                                             while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                                                 echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['name'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['total_weight'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['real_weight'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['price'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['total_item_price'] . "</td>";
-                                                echo "<td class='hidden' style='display:none'>" . $item['com_value'] . "</td></tr>";
+                                                echo "<td class='hidden item_hidden' style='display:none'>" . $item['name'] . "</td>";
+                                                echo "<td class='hidden total_weight_hidden' style='display:none'>" . $item['total_weight'] . "</td>";
+                                                echo "<td class='hidden real_weight_hidden' style='display:none'>" . $item['real_weight'] . "</td>";
+                                                echo "<td class='hidden price_hidden' style='display:none'>" . $item['price'] . "</td>";
+                                                echo "<td class='hidden total_item_price_hidden' style='display:none'>" . $item['total_item_price'] . "</td>";
+                                                echo "<td class='hidden com_value_hidden' style='display:none'>" . $item['com_value'] . "</td></tr>";
                                             }
                                         } else {
                                             echo "<td class='hidden' style='display:none'></td>";
@@ -384,13 +379,64 @@ include('include/footer.php');
     $('#report_type_details').click(function() {
         $('.hidden').show();
         $('#show_options').show();
-    })
+        
+        if (document.getElementById('item_hidden').checked) {
+            $('.item_hidden').show();
+            
+        }else{
+            $('.item_hidden').hide();
+            
+        }
+        
+        if (document.getElementById('total_weight_hidden').checked) {
+            $('.total_weight_hidden').show();
+            
+        }else{
+            $('.total_weight_hidden').hide();
+            
+        }
+
+        if (document.getElementById('real_weight_hidden').checked) {
+            $('.real_weight_hidden').show();
+            
+        }else{
+            $('.real_weight_hidden').hide();
+            
+        }
+
+        if (document.getElementById('total_item_price_hidden').checked) {
+            $('.total_item_price_hidden').show();
+            
+        }else{
+            $('.total_item_price_hidden').hide();
+            
+        }
+
+        if (document.getElementById('price_hidden').checked) {
+            $('.price_hidden').show();
+            
+        }else{
+            $('.price_hidden').hide();
+            
+        }
+
+        if (document.getElementById('com_value_hidden').checked) {
+            $('.com_value_hidden').show();
+            
+        }else{
+            $('.com_value_hidden').hide();
+        }
+    });
 
     $('#report_type_conclusion').click(function() {
         $('.hidden').hide();
         $('#show_options').hide();
-    })
-    $('input[type="checkbox"]').click(function(){
-        
+    });
+
+    // Check Box
+
+
+    $('input[type="checkbox"]').click(function() {
+        $(`.${this.id}`).toggle();
     })
 </script>
