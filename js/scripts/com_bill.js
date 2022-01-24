@@ -81,7 +81,18 @@ function createCell(cell, text, style, id, name, row_number) {
                         // alert(data);
                     }
                 });
+            }else{
+                document.getElementById('units_' + row_number).value = '';
+                document.getElementById('total_weights_' + row_number).value = '0';
+                document.getElementById('real_weights_' + row_number).value = '';
+                document.getElementById('prices_' + row_number).value = '0';
+                document.getElementById('total_item_prices_' + row_number).value = '0';
+                document.getElementById('note_' + row_number).value = '';
+                count_total_price();
             }
+        });
+        div.addEventListener('focus', function() {
+            $(this).val('');
         });
     }
 

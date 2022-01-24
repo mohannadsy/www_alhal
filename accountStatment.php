@@ -248,12 +248,12 @@ include('include/nav.php');
                                             $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
                                             $number_of_items = mysqli_num_rows($select_items_using_id_exec);
 
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden item_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden total_weight_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden real_weight_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden price_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden total_item_price_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden com_value_hidden' style='display:none'></td>";
                                             while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                                                 echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
                                                 echo "<td class='hidden item_hidden' style='display:none'>" . $item['name'] . "</td>";
@@ -264,12 +264,12 @@ include('include/nav.php');
                                                 echo "<td class='hidden com_value_hidden' style='display:none'>" . $item['com_value'] . "</td></tr>";
                                             }
                                         } else {
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
-                                            echo "<td class='hidden' style='display:none'></td>";
+                                            echo "<td class='hidden item_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden total_weight_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden real_weight_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden price_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden total_item_price_hidden' style='display:none'></td>";
+                                            echo "<td class='hidden com_value_hidden' style='display:none'></td>";
                                         }
                                         echo "</tr>";
                                     }
