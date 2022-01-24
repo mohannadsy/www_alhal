@@ -17,7 +17,7 @@ include 'include/nav.php';
             direction: rtl;
         }
 
-        .container {
+        .container-fluid {
             width: 100%;
             height: 100%;
             margin: 5px;
@@ -95,7 +95,7 @@ include 'include/nav.php';
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col-md-8"></div>

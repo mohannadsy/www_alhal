@@ -16,6 +16,7 @@ include('include/nav.php');
 <a href="payment_bonds_open.php">iframe</a><br>
 <a href="test_open_file_pop_up.php"> test opn pop up</a> <br>
 <a href="mynavtest.php">naaaaaav</a>
+<a href="setting.php">الإعدادات </a>
 <?php
 include('include/footer.php');
 ?>
