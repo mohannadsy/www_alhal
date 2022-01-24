@@ -231,12 +231,14 @@ include('include/nav.php');
                                         echo "<td>" . $row['note'] . "</td>";
                                         echo "<td>" . "$current_currency" . "</td>";
                                         if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
-                                            $bill_id = 0;
-                                            if ($row['code_type'] == 'mid_bonds')
+                                            if ($row['code_type'] == 'mid_bonds'){
                                                 $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
-                                            else
+                                                $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                            }
+                                            else{
                                                 $bill_id = getId($con, 'bills', 'code', $row['code_number']);
-                                            $bill_code = $row['code_number'];
+                                                $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                            }
                                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                 bills.code as bill_code,
                                                 unit, date, buyer_id,seller_id,
