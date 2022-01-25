@@ -27,14 +27,13 @@ function type($x){
 //8.3/5.8=1.43 in
 //11.7/8.3=1.40 in 
 
-$page_type = 'A5';
+$page_type = 'A4';
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
     $ratio = 0.71;
     $font_size = 8;
 }
-
     
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
@@ -175,13 +174,8 @@ if(isset($_GET['payment_code'])){
     $select_payment_bond_query = selectND('payment_bonds').andWhere('code' , $_GET['payment_code']);
     $select_payment_bond_exec = mysqli_query($con , $select_payment_bond_query);
     $payment_bond = mysqli_fetch_array($select_payment_bond_exec);
-
-   
-    $width = 5.8*1.43;
-	$height = 8.3*1.43;
-	$pageLayout = array($width,$height);
     
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -201,25 +195,25 @@ if(isset($_GET['payment_code'])){
     // Add a page
 	$pdf->AddPage();
     $tilte='سند دفع';
-    $pdf->MultiCell(100, 6, $tilte ,0, 'R', 0, 0, '', '', true);
-    $pdf->SetFont('arial', '', 12);
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(3);
     $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
-    $pdf->MultiCell(172, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(172 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(8);
     $date = 'تاريخ السند: ' . $payment_bond['date'];
-    $pdf->MultiCell(189, 6, $date ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(189 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(7);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
     $account = 'الحساب: ' .$main_account;
-    $pdf->MultiCell(80, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency = 'العملة: ' . $payment_bond['currency'];
-    $pdf->MultiCell(95, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(95 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
     
     
     $pdf->Ln(7);
     $notes='ملاحظات: ' . $payment_bond['main_note'];
-    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(10);
 
     // Set some content to print
@@ -269,7 +263,7 @@ if(isset($_GET['payment_code'])){
         </table>';
 	$pdf->writeHTML($content);
     $res_number='المجموع: ' .$total_payment;
-    $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 
@@ -283,7 +277,7 @@ if(isset($_GET['catch_code'])){
     $select_catch_bond_exec = mysqli_query($con , $select_catch_bond_query);
     $catch_bond = mysqli_fetch_array($select_catch_bond_exec);
 
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -304,24 +298,24 @@ if(isset($_GET['catch_code'])){
 	$pdf->AddPage();
     $tilte='سند قبض';
     $pdf->MultiCell(100, 6, $tilte ,0, 'R', 0, 0, '', '', true);
-    $pdf->SetFont('arial', '', 12);
+    $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(3);
     $receipt_number = 'رقم الإيصال: ' . $catch_bond['code'];
-    $pdf->MultiCell(172, 6, $receipt_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(172 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(8);
     $date = 'تاريخ السند: '  . $catch_bond['date'];
-    $pdf->MultiCell(189, 6, $date ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(189 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(7);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
     $account = 'الحساب: ' . $main_account;
-    $pdf->MultiCell(80, 6, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency = 'العملة: ' . $catch_bond['currency'];
-    $pdf->MultiCell(95, 6, $currency ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(95 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
     
     
     $pdf->Ln(7);
     $notes='ملاحظات: ' . $catch_bond['main_note'];
-    $pdf->MultiCell(100, 6, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(10);
     $content = '';
     $content .= '
@@ -368,7 +362,7 @@ if(isset($_GET['catch_code'])){
         </table>';
 	$pdf->writeHTML($content);
     $res_number='المجموع: ' .$total_catch;
-    $pdf->MultiCell(180, 6, $res_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
 
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
@@ -378,7 +372,7 @@ if(isset($_GET['catch_code'])){
 }
 ////////////////////////طباعة حركة مادة
 if(isset($_GET['item_report'])){
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
     //header
@@ -394,14 +388,96 @@ if(isset($_GET['item_report'])){
     $pdf->setLanguageArray($lg);
 
     // set font
-    $pdf->SetFont('arial', '', 12);
+    $pdf->SetFont('arial', 'B', 24);
     // Add a page
 	$pdf->AddPage();
+    $tilte='حركة مادة';
+    $pdf->MultiCell(50 *$ratio, 6*$ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(3);
+    $pdf->SetFont('arial', '', $font_size);
+    $date1='من تاريخ: ' .date('Y-m-d');
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $date1 ,0, 'L', 0, 0, '', '', true);
+    $date2 ='إلى تاريخ: '  .date('Y-m-d');
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $date2 ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(11);
+    $content = '';
+    $content .= '
+        <style>
+            th,td{
+                text-align:center;
+            }
+            
+        </style>
+        <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
+            <thead>
+                <tr>
+                    <th colspan="3" rowspan=""></th>
+                    <th colspan="2"> الإدخالات </th>
+                    <th colspan="2">الإخراجات</th>
+                    <th colspan="2">الرصيد</th>
+                </tr>
+                <tr>
+                    <th> التاريخ </th>
+                    <th> الفاتورة </th>
+                    <th>اسم المادة </th>
+                    <th> الكمية </th>
+                    <th> السعر </th>
+                    <th> الكمية </th>
+                    <th> السعر </th>
+                    <th> الكمية </th>
+                    <th> السعر </th>
+                </tr>
+            </thead>
+            <tbody>';
+            $select_items_using_id_query = "select DISTINCT items.code as item_code,
+                                                            bills.code as bill_code,
+                                                            bills.id as bill_id,
+                                                            unit, date, buyer_id,seller_id,
+                                                            category_id,total_item_price,
+                                                            name,currency,
+                                                            real_weight,real_price,
+                                                            total_weight,total_price,
+                                                            com_value,com_ratio
+                                                             from bill_item, items,bills 
+                                                             where items.id = bill_item.item_id and bills.id = bill_item.bill_id";
+            $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+            while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
+                $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
+                // $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
+                // $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
+                $content.= "<tr ondblclick='window.open(\"com_bill_open.php?id=" . $row['bill_id'] . "\" , \"_self\")'>";
+                $content.= "<td>" . $row['date'] . "</td>";
+                $content.= "<td>" . $row['bill_code'] . "</td>";
+                $content.= "<td>" . $row['name'] . "</td>";
+                $content.= "<td>" . $row['real_weight'] . "</td>";
+                $content.= "<td>" . $row['total_item_price'] . "</td>";
+                $inbox_weight = $row['real_weight'];
+                $inbox_price = $row['total_item_price'];
+                $outbox_price = '0';
+                $outbox_weight = '0';
+                if ($row['buyer_id'] == 0)
+                    $content.= "<td>" . '0' . "</td>";
+                else{
+                    $content.= "<td>" . $row['real_weight'] . "</td>";
+                    $outbox_weight = $row['real_weight'];
+                }
+                if ($row['buyer_id'] == 0)
+                    $content.= "<td>" . '0' . "</td>";
+                else{
+                    $content.= "<td>" . $row['total_item_price'] . "</td>";
+                    $outbox_price = $row['total_item_price'];
+                }
+                $content.= "<td>" . ($inbox_weight - $outbox_weight) . "</td>";
+                $content.= "<td>" . ($inbox_price - $outbox_price) . "</td>";
+                $content.= "</tr>";
+            }
+            $content.='  
+            </tbody>
+        </table>';
+	$pdf->writeHTML($content);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
-
 	$pdf->output('item report', 'I');
     // END OF FILE
-
 }
 ?>
