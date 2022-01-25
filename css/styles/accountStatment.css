@@ -1,12 +1,13 @@
 body{
     justify-content:center ;
 }
-.container{
+.container-fluid{
     top:13% ;
-    left:15%;
+    left:4%;
+    width: 94%;
     font-size: 17px;
     padding: 5px;
-
+    
 }
 #btn-grp{
     border-radius: 4px;
