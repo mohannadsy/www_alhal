@@ -19,12 +19,15 @@ include('include/nav.php');
         #lbl-radio-type {
             padding-right: 5px;
         }
+       input{
+           
+       }
     </style>
 </head>
 
 <body>
     <form action="" method="post">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-start px-5 py-2">
                 <h3> كشف حساب </h3>
             </div>
@@ -49,8 +52,8 @@ include('include/nav.php');
                 </div>
                 <div class="col-3">
                     <div class="row ">
-                        <label for="from_date ">من تاريخ</label>
-                        <div class="col-md-8">
+                        <label for="from_date">من تاريخ</label>
+                        <div class="col-md-8" style="margin-right:4px;">
                             <input type="date" name="from_date" id="from-date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
                                                                                                                             else echo date('Y-m-d') ?>">
                         </div>
@@ -126,7 +129,7 @@ include('include/nav.php');
                     </div>
                 </div>
             </div>
-            <div class="row py-1 justify-content-center" style="margin-right: 30px;">
+            <div class="row py-1 justify-content-center" style="margin-right: 30px; margin-bottom:10px;">
                 <button type="submit" name="view" id="btn-grp">معاينة</button>
                 <button type="submit" name="" id="btn-grp">طباعة</button>
                 <button type="submit" id="btn-grp">إغلاق</button>
@@ -134,7 +137,7 @@ include('include/nav.php');
 
             <?php
             if (isset($_POST['view'])) {
-                echo "<h2 class='text-center'> كشف حساب : " . $_POST['account'] . "</h2>";
+                echo "<h3 class='text-center'> كشف حساب : " . $_POST['account'] . "</h3>";
             }
             ?>
             <div class="row justify-content-center py-2">

@@ -3,11 +3,18 @@
 }
 body {
     text-align: right;
-    /* background-color: rgb(52,92,100); */
-    background-color: lightgrey;
+    background-color: rgb(52,92,100);
+    /* background-color: lightgrey; */
     position: relative;
 }
 .container {
+    background-color:rgb(75,129,137);
+    border-style: groove;
+    font-size: 17px;
+    border-radius: 25px;
+    position: absolute;
+}
+.container-fluid{
     background-color:rgb(75,129,137);
     border-style: groove;
     font-size: 17px;
