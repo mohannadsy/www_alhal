@@ -14,7 +14,7 @@ include('include/nav.php');
 
 <body>
     <form action="" method="POST">
-        <div class="container my-5">
+        <div class="container-fluid my-2">
             <div class="row py-4">
 
                 <div class="col-3" id="search_col">
