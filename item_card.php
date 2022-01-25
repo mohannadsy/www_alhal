@@ -60,7 +60,7 @@ for ($i = 0; $i < count($items); $i++) {
     }
 }
 if ($previous_item_code == 1) {
-    $previous_item_code = $items[count($items) - 1]['code'];
+    @$previous_item_code = $items[count($items) - 1]['code'];
 }
 
 $item = [];

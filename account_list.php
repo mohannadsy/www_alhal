@@ -44,7 +44,7 @@ include('include/nav.php');
                         </thead>
                         <tbody id="show">
                             <?php
-                            $select_accounts_query = selectND('accounts');
+                            $select_accounts_query = selectND('accounts') . andWhereLarger('id' , '3');
                             $select_accounts_exec = mysqli_query($con, $select_accounts_query);
                                 while ($row = mysqli_fetch_array($select_accounts_exec)) {
                                     $current_maden = get_current_maden_using_id($con , $row['id']);

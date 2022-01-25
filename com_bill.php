@@ -371,7 +371,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
             $_POST['buyer_type_pay'] = null;
             $_POST['buyer_note'] = null;
         }
-
+        $_POST['code'] = get_auto_code($con, 'bills', 'code', '', 'parent');
         // make bill insertion
         $insert_bill_query = insert('bills', get_array_from_array($_POST, [
             'code', 'date', 'seller_id', 'seller_type_pay', 'seller_note',
