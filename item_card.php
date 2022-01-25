@@ -15,6 +15,23 @@ include('include/nav.php');
 </head>
 
 <?php
+function delete_message(){
+    if(isset($_GET['message_create'])){
+        $_GET['message_create'] = null;
+    }
+    
+    if(isset($_GET['message_update'])){
+        $_GET['message_update'] = null;
+    }
+    
+    if(isset($_GET['message_delete'])){
+        $_GET['message_delete'] = null;
+    }
+}
+?>
+
+
+<?php
 $select_last_next_item_query = selectND('items') . ' order by code desc limit 1 ';
 $select_last_next_item_exec = mysqli_query($con, $select_last_next_item_query);
 $last_next_code = mysqli_fetch_array($select_last_next_item_exec)['code'];
@@ -83,6 +100,7 @@ if (isset($_POST['next'])) {
         $item[] = $item_;
     }
     $current_item_id_to_update_delete = getId($con, 'items', 'code', $next_item_code);
+    delete_message();
 }
 if (isset($_POST['last_next'])) {
     $item_select = selectND('items') . andWhere('code', $last_next_code);
@@ -92,6 +110,7 @@ if (isset($_POST['last_next'])) {
         $item[] = $item_;
     }
     $current_item_id_to_update_delete = getId($con, 'items', 'code', $last_next_code);
+    delete_message();
 }
 if (isset($_POST['previous'])) {
     $item_select = selectND('items') . andWhere('code', $previous_item_code);
@@ -101,6 +120,7 @@ if (isset($_POST['previous'])) {
         $item[] = $item_;
     }
     $current_item_id_to_update_delete = getId($con, 'items', 'code', $previous_item_code);
+    delete_message();
 }
 
 if (isset($_POST['last_previous'])) {
@@ -111,6 +131,7 @@ if (isset($_POST['last_previous'])) {
         $item[] = $item_;
     }
     $current_item_id_to_update_delete = getId($con, 'items', 'code', $last_previous_code);
+    delete_message();
 }
 $prefix = '';
 if (isset($_POST['current']) || isset($_POST['update'])) {
