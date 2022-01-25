@@ -253,12 +253,12 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
             <div class="row py-4">
                 <div class="col-md-5 text-center">
-                    <!-- <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a> -->
+                    <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a>
                     <a href="item_list.php"><button type="button" id="btn_grp1" name="view_items">استعراض المواد</button></a>
-                    <a <?php //if (empty($item)) echo 'hidden' 
+                    <!-- <a <?php // if (empty($item)) echo 'disabled' 
                         ?> href="item_card.php"><button type="button" id="btn_grp1" class="" name="item_card">
                             مادة جديدة
-                        </button></a>
+                        </button></a> -->
                 </div>
                 <!-- <a  href="#" class=" btn"  data-target="#add_category" data-toggle="modal">إضافة صنف</a> -->
 
@@ -267,14 +267,14 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <!-- <div id="button_col" class="col-md-6 text-center" > -->
 
                 <div class="col-6">
-                    <button <?php if ((notempty($item))) echo 'hidden' ?> type="submit" name="add" id="button-grp2">
+                    <button <?php if ((notempty($item))) echo 'disabled' ?> type="submit" name="add" id="button-grp2">
                         إضافة
                     </button>
-                    <button <?php //if ((empty($item))) echo 'hidden' 
+                    <button <?php if ((empty($item))) echo 'disabled' 
                             ?> type="submit" name="update" id="button-grp2">
                         تعديل
                     </button>
-                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php //if (empty($item)) echo 'hidden' 
+                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (empty($item)) echo 'disabled' 
                                                                                             ?> type="submit" name="delete" id="button-grp2">
                         حذف
                     </button>
