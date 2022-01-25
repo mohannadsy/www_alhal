@@ -1,7 +1,8 @@
 
-.container{
-    left: 12%;
-    top:10%;
+.container-fluid{
+    left: 6%;
+    /* top:6%; */
+    width: 90%;
 }
 #search_col{
     padding-right: 50px;
