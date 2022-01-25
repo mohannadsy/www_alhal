@@ -169,7 +169,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                         <div class="col-12">
                             <label for="code" class="col-form-label" id="lbl_code">رمز الحساب</label>
                             <div class="col-md-10 ">
-                                <input value="<?php
+                                <input readonly value="<?php
                                                 if (isset($_POST['next'])) echo $next_account_code;
                                                 elseif (isset($_POST['last_next'])) echo $last_next_code;
                                                 elseif (isset($_POST['previous'])) echo $previous_account_code;

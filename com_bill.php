@@ -1042,10 +1042,10 @@ for ($i = 0; $i < 5; $i++)
     });
 </script>
 <script>
-    document.getElementById('code').onkeyup = function(event) {
-        if (event.keyCode == 13) {
+    document.getElementById('code').onchange = function(event) {
+        // if (event.keyCode == 13) {
             document.getElementById('current').click();
-        }
+        // }
     };
 </script>
 <!-- End chec worng insertion -->

@@ -167,13 +167,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                                 <div class="row justify-content-center">
                                     <div id="button_col" class="col-sm-12  col-md-10 text-center py-3 ">
-                                        <button <?php //if (notempty($category)) echo 'hidden' ?> type="submit" class="col-3" name="add" id="button_grp">
+                                        <button <?php if (notempty($category)) echo 'disabled' ?> type="submit" class="col-3" name="add" id="button_grp">
                                             إضافة
                                         </button>
-                                        <button <?php //if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="update">
+                                        <button <?php if (empty($category)) echo 'disabled' ?> type="submit" id="button_grp" class="col-3" name="update">
                                             تعديل
                                         </button>
-                                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php //if (empty($category)) echo 'hidden' ?> type="submit" id="button_grp" class="col-3" name="delete">
+                                        <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (empty($category)) echo 'disabled' ?> type="submit" id="button_grp" class="col-3" name="delete">
                                             حذف
                                         </button>
                                         <a href="ready.php"><button type="button" class="col-3" name="close" id="button_grp">
@@ -228,9 +228,9 @@ if (isset($_POST['delete'])) {
 include('include/footer.php');
 ?>
 <script>
-    document.getElementById('code').onkeyup = function(event) {
-        if (event.keyCode == 13) {
+    document.getElementById('code').onchange = function(event) {
+        // if (event.keyCode == 13) {
             document.getElementById('current').click();
-        }
+        // }
     };
 </script>
