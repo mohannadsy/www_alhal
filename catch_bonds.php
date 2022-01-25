@@ -249,6 +249,8 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
         $main_account_code = get_code_from_input($_POST['main_account']);
         $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
+        $_POST['code'] = get_auto_code($con, 'catch_bonds', 'code', '', 'parent');
+
         foreach ($_POST['account'] as $key => $value) {
             if ($value != '' && $_POST['maden'][$key] != '') {
                 $other_account_code = get_code_from_input($value);

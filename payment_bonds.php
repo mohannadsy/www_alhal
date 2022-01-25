@@ -12,7 +12,7 @@ include('include/nav.php');
     <title>Document</title>
     <link rel="stylesheet" href="css/styles/payment_bonds.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -23,7 +23,7 @@ include('include/nav.php');
             <div class="modal-header">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button onclick="" type="button" data-dismiss="modal" class="close" aria-label="Close" style=" margin-right: 10px;">
-                    <span aria-hidden="true" >&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
 
             </div>
@@ -245,13 +245,12 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
 <?php
 if (isset($_POST['add']) || isset($_POST['print'])) {
     if (empty($payment_bonds)) {
-        message_box('hello');
         $main_account_code = get_code_from_input($_POST['main_account']);
         $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
-        if ($_POST['code'] != $current_payment_code) {
-            $_POST['code'] = $current_payment_code;
-        }
+        // if ($_POST['code'] != $current_payment_code) {
+        $_POST['code'] = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
+        // }
 
 
         foreach ($_POST['account'] as $key => $value) {
@@ -301,7 +300,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
     }
     if (isset($_POST['print'])) {
         open_window_blank("print.php?payment_code=" . $current_payment_code);
-        open_window_self_id('payment_bonds.php' , getId($con , 'payment_bonds' , 'code' , $current_payment_code));    
+        open_window_self_id('payment_bonds.php', getId($con, 'payment_bonds', 'code', $current_payment_code));
     }
     clear_local_storage('account_card_code_name');
     open_window_self('payment_bonds.php');
@@ -464,7 +463,10 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
+        $('#iframe_account_card').contents().find('#container').css({
+            "margin-top": "-10%",
+            "margin-left": "-17%"
+        });
     });
 </script>
 <script>
