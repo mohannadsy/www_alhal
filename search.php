@@ -61,8 +61,8 @@ if (isset($_POST["account_search_main"])) {
  */
 if (isset($_POST["account_search_part"])) {
     $output = '';
-    $query = "select * from accounts where code like '%" . $_POST['account_search_part'] . "%'
-                                        or name like '%" . $_POST['account_search_part'] . "%'";
+    $query = "select * from accounts where is_deleted <> '1' and id > 3 and (code like '%" . $_POST['account_search_part'] . "%'
+                                        or name like '%" . $_POST['account_search_part'] . "%')";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {

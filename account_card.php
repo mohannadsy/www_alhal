@@ -14,11 +14,11 @@ include('include/nav.php');
 </head>
 
 <?php
-$select_last_next_account_query = selectND('accounts') . ' order by code desc limit 1 ';
+$select_last_next_account_query = selectND('accounts') .  ' order by code desc limit 1 ';
 $select_last_next_account_exec = mysqli_query($con, $select_last_next_account_query);
 $last_next_code = mysqli_fetch_array($select_last_next_account_exec)['code'];
 
-$select_last_previous_account_query = selectND('accounts') . ' limit 1 ';
+$select_last_previous_account_query = selectND('accounts') . andWhereLarger('id' , '3')  . ' limit 1 ';
 $select_last_previous_account_exec = mysqli_query($con, $select_last_previous_account_query);
 $last_previous_code = mysqli_fetch_array($select_last_previous_account_exec)['code'];
 
