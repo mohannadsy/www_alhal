@@ -419,9 +419,22 @@ if(isset($_GET['item_report'])){
     $to ='إلى تاريخ: '  . $to_date;
     $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10);
-    $item='حسب المادة:';
-    $pdf->MultiCell(100*$ratio,6*$ratio,$item,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(11);
+    if($_GET['text_value_from_report_item']==''){
+        $item='';
+    }elseif($_GET['radio_value_from_report_item'] == 'items'){
+        $item='حسب المادة: ' .$_GET['text_value_from_report_item'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value_from_report_item'] == 'accounts'){
+        $item='حسب العميل: ' .$_GET['text_value_from_report_item'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value_from_report_item'] == 'categories'){
+        $item='حسب الصنف: ' .$_GET['text_value_from_report_item'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }
+    
     if($page_type == 'A5'){
         $ff = 6;
     }else{
