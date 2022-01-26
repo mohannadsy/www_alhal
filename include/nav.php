@@ -41,31 +41,34 @@
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active " href="ready.php">Home</a>
+    <a class="nav-link active " href="ready.php">الرئيسية</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >ملف</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item"  href="open_file.php" >فتح ملف</a>
-      <a class="dropdown-item" href="#">ملف جديد</a>
-      <a class="dropdown-item" href="#">استيراد</a>
+    <ul class="dropdown-menu">
+     <li><a class="dropdown-item"  href="open_file.php" >فتح ملف</a></li>
+     <li><a class="dropdown-item" href="#">ملف جديد</a></li>
+     <li><a class="dropdown-item" href="#">استيراد</a></li>
+    </ul>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >حسابات</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item"  href="account_card.php" >بطاقة حساب</a>
-      <a class="dropdown-item" href="accountStatment.php">كشف حساب</a>
-      <a class="dropdown-item" href="account_list.php">قائمة حسابات  </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item"  href="account_card.php" >بطاقة حساب</a><li>
+     <li> <a class="dropdown-item" href="accountStatment.php">كشف حساب</a></li>
+      <li><a class="dropdown-item" href="account_list.php">قائمة حسابات  </a></li>
+    </ul>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >مواد</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item"  href="category_card.php" >بطاقة صنف</a>
-      <a class="dropdown-item" href="item_card.php">بطاقة مادة</a>
-      <a class="dropdown-item" href="item_list.php"> قائمة المواد</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item"  href="category_card.php" >بطاقة صنف</a></li>
+      <li><a class="dropdown-item" href="item_card.php">بطاقة مادة</a></li>
+      <a class="dropdown-item" href="item_list.php"> قائمة المواد</a><li>
+    </ul>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
@@ -77,9 +80,16 @@
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >حركات</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item"  href="report_item.php" > حركة مادة</a>
-      <a class="dropdown-item" href="report_comission.php">حركة كمسيون </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item"  href="report_item.php" > حركة مادة</a></li>
+     <li> <a class="dropdown-item" href="report_comission.php">حركة كمسيون </a></li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="setting.php">الإعدادات</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="help.php">معلومات</a>
   </li>
 
   <li class="nav-item">
@@ -88,12 +98,8 @@
   <li class="nav-item">
     <a class="nav-link" href="test_noor.php">Nour</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="test_sara.php">Sara</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="test_rgd.php">Raghad</a>
-  </li>
+  
+  
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.history.back()">BACK</button>
   </li>

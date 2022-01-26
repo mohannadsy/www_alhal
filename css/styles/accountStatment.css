@@ -1,17 +1,20 @@
-body{
-    justify-content:center ;
-}
+
 .container-fluid{
     top:13% ;
     left:4%;
     width: 94%;
-    font-size: 17px;
-    padding: 5px;
-    
+    padding: 5px;    
 }
 #btn-grp{
     border-radius: 4px;
     text-align: center;
     margin: 1px;
     width: 80px;
+}
+.form-check-label {
+    margin-right: 20px;
+}
+
+#lbl-radio-type {
+    padding-right: 5px;
 }

@@ -16,6 +16,7 @@ include 'include/nav.php';
             box-sizing: border-box;
             direction: rtl;
             color: white;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .container-fluid {
@@ -65,7 +66,8 @@ include 'include/nav.php';
             margin: 1px;
             padding: 10px;
             height: 110%;
-            background-color: #057a8d;
+            /* background-color: #057a8d; */
+            background-color: #325865;
         }
 
         .col-md-4 {
@@ -114,7 +116,7 @@ include 'include/nav.php';
             <div class="col-md-4">
                 <div class="row-md-4">
 
-                    <div class="col-md-6" style="background-color: #057a8d;">
+                    <div class="col-md-6">
 
                         <a href="<?= COM_BILL ?>">
                             <img class="img" src="assets/images/bill.png"/>
@@ -155,7 +157,7 @@ include 'include/nav.php';
 
                 <form action="" method="post">
                     <div class="row-md-4" id="final" style=" margin-bottom:10px;">
-                        <div class="col-md-12" style="background-color: #057a8d;">
+                        <div class="col-md-12" style=" background-color:#325865;">
                             <button name="backup" id="backup" type="submit" style="background-color:rgba(0,0,0,0) ;">
                                 <img class="img" style="width: 55px;height: 50px;padding: 0px;margin: 0px;margin-left: 22px;" src="assets/images/data-backup-512.png" />
                                 <br> <br>

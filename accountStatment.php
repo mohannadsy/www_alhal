@@ -3,7 +3,7 @@ include('include/nav.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -11,18 +11,6 @@ include('include/nav.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles/accountStatment.css">
     <title>Document</title>
-    <style>
-        .form-check-label {
-            margin-right: 20px;
-        }
-
-        #lbl-radio-type {
-            padding-right: 5px;
-        }
-       input{
-           
-       }
-    </style>
 </head>
 
 <body>
