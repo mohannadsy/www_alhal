@@ -79,8 +79,7 @@ div.content {
     <form action="" method="post">
         <div class="sidebar">
         <a class="active"  href="">قاعدة البيانات</a>
-        <a href="#account_statment">معلومات الحساب</a>
-        <a href="">كشف الحساب</a>
+        <a href="#account_statment"> التفضيلات</a>
         <a href="">الطباعة</a>
         </div>
         <div class="content">
