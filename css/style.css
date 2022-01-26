@@ -6,19 +6,37 @@ body {
     text-align: right;
     background-color: rgb(52, 92, 100);
     /* background-color: lightgrey; */
+<<<<<<< HEAD
+=======
+    background-color: #dce2d9;
+    /* background-color: #d9d9d9; */
+>>>>>>> refs/remotes/origin/main
     position: relative;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
+<<<<<<< HEAD
     background-color: rgb(75, 129, 137);
+=======
+    background-color: #0c6170;
+    /* background-color: #013a63; */
+    /* background-color: #057a8d; */
+    /* background-color:rgb(75,129,137); */
+>>>>>>> refs/remotes/origin/main
     border-style: groove;
     font-size: 17px;
     border-radius: 25px;
     position: absolute;
 }
+<<<<<<< HEAD
 
 .container-fluid {
     background-color: rgb(75, 129, 137);
+=======
+.container-fluid{
+    background-color: #0c6170;
+>>>>>>> refs/remotes/origin/main
     border-style: groove;
     font-size: 17px;
     border-radius: 25px;
