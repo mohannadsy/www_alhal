@@ -1,6 +1,11 @@
-ul {
-    background-color: #083e47;
-    /* color: white; */
+nav{
     height: 60px;
     font-size: 20;
+    background-color: #083e47;
+
+}
+.container-fluid{
+    border: none;
+    border-radius: 0px;
+    background-color: #083e47;
 }
