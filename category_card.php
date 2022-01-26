@@ -201,7 +201,6 @@ if (isset($_POST['add'])) {
 if (isset($_POST['update'])) {
     $update_category_query = update('categories', get_array_from_array($_POST, ['name', 'code', 'note'])) . where('code',$current_category_code_to_update_delete);
     $update_category_exec = mysqli_query($con, $update_category_query);
-    message_box($current_category_code_to_update_delete);
     if ($update_category_exec) {
         open_window_self("category_card.php?code=" .$current_category_code_to_update_delete. "&message_update=success");
     }

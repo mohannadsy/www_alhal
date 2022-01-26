@@ -26,5 +26,18 @@ function success_error_delete_message($success , $error){
     success_error_message('message_delete' , 'success' , $success , $error);
 }
 
+function delete_notifications(){
+    if(isset($_GET['message_create'])){
+        $_GET['message_create'] = null;
+    }
+    
+    if(isset($_GET['message_update'])){
+        $_GET['message_update'] = null;
+    }
+    
+    if(isset($_GET['message_delete'])){
+        $_GET['message_delete'] = null;
+    }
+}
 
 ?>

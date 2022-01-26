@@ -308,44 +308,90 @@ if (isset($_POST['update'])) {
 
     $main_account_code = get_code_from_input($_POST['main_account']);
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
-    $catch_bond_ids = getIds($con, 'catch_bonds', 'code', $_POST['code']);
+    // $catch_bond_ids = getIds($con, 'catch_bonds', 'code', $_POST['code']);
+    
+    $delete_catch_bond_query = delete('catch_bonds') . where('code', $_POST['code']);
+    $delete_catch_bond_exec = mysqli_query($con, $delete_catch_bond_query);
+    $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds');
+    $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
+
     foreach ($_POST['account'] as $key => $value) {
         if ($value != '' && $_POST['maden'][$key] != '') {
+            // $other_account_code = get_code_from_input($value);
+            // $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
+            // $update_catch_bond_query = update('catch_bonds', [
+            //     'main_account_id' => $main_account_id,
+            //     'other_account_id' => $other_account_id,
+            //     'maden' => $_POST['maden'][$key],
+            //     'note' => $_POST['note'][$key],
+            //     'date' => $_POST['date'],
+            //     'currency' => $_POST['currency'],
+            //     'main_note' => $_POST['notes']
+            // ]) . where('code', $_POST['code']) . andWhere('id', $catch_bond_ids[$key]);
+            // $update_catch_bond_exec = mysqli_query($con, $update_catch_bond_query);
+            // /**
+            //  * make account statements
+            //  */
+            // // كشف حساب الدافع
+            // $update_account_statement_query = update('account_statements', [
+            //     'main_account_id' => $main_account_id,
+            //     'other_account_id' => $other_account_id,
+            //     'maden' => $_POST['maden'][$key],
+            //     'note' => $_POST['note'][$key],
+            //     'date' => $_POST['date']
+            // ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds') . andWhere('main_account_id', $main_account_id);
+            // message_box($update_account_statement_query);
+            // $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+
+            // // كشف حساب القابض
+            // $update_account_statement_query = update('account_statements', [
+            //     'main_account_id' => $other_account_id,
+            //     'other_account_id' => $main_account_id,
+            //     'daen' => $_POST['maden'][$key],
+            //     'note' => $_POST['note'][$key],
+            //     'date' => $_POST['date'],
+            // ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds') . andWhere('main_account_id', $main_account_id);;
+            // $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
             $other_account_code = get_code_from_input($value);
             $other_account_id = getId($con, 'accounts', 'code', $other_account_code);
-            $update_catch_bond_query = update('catch_bonds', [
+            $insert_catch_bond_query = insert('catch_bonds', [
+                'main_account_id' => $main_account_id,
+                'other_account_id' => $other_account_id,
+                'maden' => $_POST['maden'][$key],
+                'note' => $_POST['note'][$key],
+                'code' => $_POST['code'],
+                'date' => $_POST['date'],
+                'currency' => $_POST['currency'],
+                'main_note' => $_POST['notes']
+            ]);
+            $insert_catch_bond_exec = mysqli_query($con, $insert_catch_bond_query);
+            /**
+             * make account statements
+             */
+            // كشف حساب الصندوق
+            $insert_account_statement_query = insert('account_statements', [
                 'main_account_id' => $main_account_id,
                 'other_account_id' => $other_account_id,
                 'maden' => $_POST['maden'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date'],
-                'currency' => $_POST['currency'],
-                'main_note' => $_POST['notes']
-            ]) . where('code', $_POST['code']) . andWhere('id', $catch_bond_ids[$key]);
-            $update_catch_bond_exec = mysqli_query($con, $update_catch_bond_query);
-            /**
-             * make account statements
-             */
-            // كشف حساب الدافع
-            $update_account_statement_query = update('account_statements', [
-                'main_account_id' => $main_account_id,
-                'other_account_id' => $other_account_id,
-                'maden' => $_POST['maden'][$key],
-                'note' => $_POST['note'][$key],
-                'date' => $_POST['date']
-            ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds') . andWhere('main_account_id', $main_account_id);
-            message_box($update_account_statement_query);
-            $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+                'code_number' => $_POST['code'],
+                'code_type' => 'catch_bonds'
+            ]);
+            message_box($insert_account_statement_query);
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
             // كشف حساب القابض
-            $update_account_statement_query = update('account_statements', [
+            $insert_account_statement_query = insert('account_statements', [
                 'main_account_id' => $other_account_id,
                 'other_account_id' => $main_account_id,
                 'daen' => $_POST['maden'][$key],
                 'note' => $_POST['note'][$key],
                 'date' => $_POST['date'],
-            ]) . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds') . andWhere('main_account_id', $main_account_id);;
-            $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+                'code_number' => $_POST['code'],
+                'code_type' => 'catch_bonds',
+            ]);
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
     }
     do_script("document.getElementById('current').click()");
