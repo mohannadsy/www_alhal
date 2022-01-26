@@ -22,7 +22,7 @@ include('include/nav.php');
 
 <body>
     <div class="container">
-        <form action="" method="">
+        <form action="" method="post">
             <div class="row justify-content-start px-5 py-2">
                 <h3> حركة كمسيون </h3>
             </div>
@@ -161,6 +161,11 @@ include('include/nav.php');
 </html>
 
 
+<?php
+    if (isset($_POST['print'])) {
+        open_window_blank("print.php?comission_report=comission_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value_from_report_item=" . $_POST['radio_search'] . "&text_value_from_report_item=" . $_POST['text_search']);
+    }
+?>
 
 <?php
 include('include/footer.php');

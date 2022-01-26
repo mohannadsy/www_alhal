@@ -69,7 +69,7 @@ include('include/nav.php');
                                 echo "<td>
                                     <button type='button' onclick='window.open(\"item_card.php?id=" . $item['id'] . "\" , \"_self\")'>تعديل</button>
                                     <button type='submit' name='delete' 
-                                                onclick='document.getElementById(\"id\").value = \"".$item['id']."\";
+                                                onclick='document.getElementById(\"id\").value = \"" . $item['id'] . "\";
                                                 return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
                                     </td>";
                                 echo "</tr>";
@@ -85,9 +85,9 @@ include('include/nav.php');
             <div class="row py-3">
                 <div class="col-12 " id="close_col">
                     <a href=""><button type="button" class="btn" id="close_btn" name="close">
-                        إغلاق
+                            إغلاق
 
-                    </button></a>
+                        </button></a>
 
                 </div>
             </div>
@@ -106,10 +106,19 @@ include('include/footer.php');
 <?php
 
 if (isset($_POST['delete'])) {
-    $delete_item_query =deleteWhereId('items', $_POST['id']);
-    $delete_item_exec = mysqli_query($con, $delete_item_query);
-    if ($delete_item_exec) {
-        open_window_self("item_list.php?message_delete=success");
+
+    $select_bill_item_to_check_delete_query = selectND('bill_item') . andWhere('item_id',  $_POST['id']);
+    $select_bill_item_to_check_delete_exec = mysqli_query($con, $select_bill_item_to_check_delete_query);
+    $number_of_bill_item_rows = mysqli_num_rows($select_bill_item_to_check_delete_exec);
+
+    if ($number_of_bill_item_rows > 0) {
+        message_box('لا يمكنك حذف هذه المادة لوجود عمليات عليها !');
+    } else {
+        $delete_item_query = deleteWhereId('items', $_POST['id']);
+        $delete_item_exec = mysqli_query($con, $delete_item_query);
+        if ($delete_item_exec) {
+            open_window_self("item_list.php?message_delete=success");
+        }
     }
 }
 
