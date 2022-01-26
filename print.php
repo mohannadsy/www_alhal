@@ -395,10 +395,15 @@ if(isset($_GET['item_report'])){
     $pdf->MultiCell(50 *$ratio, 6*$ratio, $tilte ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(3);
     $pdf->SetFont('arial', '', $font_size);
-    $from_date='من تاريخ: ' .$_POST['from_date'];
-    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $from_date ,0, 'L', 0, 0, '', '', true);
-    $to_date ='إلى تاريخ: '  .date('Y-m-d');
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to_date ,0, 'L', 0, 0, '', '', true);
+    $from_date = $_GET['from_date'];
+    $to_date = $_GET['to_date'];
+    $from='من تاريخ: ' .$from_date;
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $from ,0, 'L', 0, 0, '', '', true);
+    $to ='إلى تاريخ: '  . $to_date;
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(10);
+    $item='حسب المادة:';
+    $pdf->MultiCell(100*$ratio,6*$ratio,$item,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(11);
     if($page_type == 'A5'){
         $ff = 6;
@@ -412,7 +417,6 @@ if(isset($_GET['item_report'])){
             th,td{
                 text-align:center;
             }
-            
         </style>
         <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
             <thead>
@@ -435,6 +439,7 @@ if(isset($_GET['item_report'])){
                 </tr>
             </thead>
             <tbody>';
+
             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,
