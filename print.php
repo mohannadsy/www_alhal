@@ -395,11 +395,17 @@ if(isset($_GET['item_report'])){
     $pdf->MultiCell(50 *$ratio, 6*$ratio, $tilte ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(3);
     $pdf->SetFont('arial', '', $font_size);
-    $date1='من تاريخ: ' .date('Y-m-d');
-    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $date1 ,0, 'L', 0, 0, '', '', true);
-    $date2 ='إلى تاريخ: '  .date('Y-m-d');
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $date2 ,0, 'L', 0, 0, '', '', true);
+    $from_date='من تاريخ: ' .$_POST['from_date'];
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $from_date ,0, 'L', 0, 0, '', '', true);
+    $to_date ='إلى تاريخ: '  .date('Y-m-d');
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to_date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(11);
+    if($page_type == 'A5'){
+        $ff = 6;
+    }else{
+        $ff = 10;
+    }
+    $pdf->SetFont('arial', '',  $ff);
     $content = '';
     $content .= '
         <style>
