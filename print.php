@@ -3,6 +3,8 @@ require_once('tcpdf/tcpdf.php');
 @include('sql/connection.php');
 include('sql/sql_queries.php');
 include('helper/ready_queries_functions.php');
+include('helper/config_functions.php');
+include('helper/operation_functions.php');
 
 class PDF extends TCPDF{
     public function Header(){
@@ -372,6 +374,21 @@ if(isset($_GET['catch_code'])){
 }
 ////////////////////////طباعة حركة مادة
 if(isset($_GET['item_report'])){
+    // if (isset($_POST['radio_value_from_report_item']) && isset($_POST['text_value_from_report_item'])) {
+        $and_where_condition = '';
+    
+        if ($_GET['radio_value_from_report_item'] == 'items' && $_GET['text_value_from_report_item'] != '') {
+            $and_where_condition = " and items.code = '" . get_code_from_input($_GET['text_value_from_report_item']) . "'";
+        }
+        if ($_GET['radio_value_from_report_item'] == 'accounts' && $_GET['text_value_from_report_item'] != '') {
+            $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value_from_report_item'])) . "'
+                                    or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value_from_report_item'])) . "')";
+        }
+        if ($_GET['radio_value_from_report_item'] == 'categories' && $_GET['text_value_from_report_item'] != '') {
+            $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_GET['text_value_from_report_item']))  . "'";
+        }
+        $from_date = $_GET['from_date'];
+        $to_date = $_GET['to_date'];
     $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
@@ -450,7 +467,8 @@ if(isset($_GET['item_report'])){
                                                             total_weight,total_price,
                                                             com_value,com_ratio
                                                              from bill_item, items,bills 
-                                                             where items.id = bill_item.item_id and bills.id = bill_item.bill_id";
+                                                             where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
+                                                             and date between '$from_date' and '$to_date'";;
             $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
             while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
                 $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
