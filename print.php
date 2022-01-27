@@ -481,7 +481,7 @@ if(isset($_GET['item_report'])){
                                                             com_value,com_ratio
                                                              from bill_item, items,bills 
                                                              where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
-                                                             and date between '$from_date' and '$to_date'";;
+                                                             and date between '$from_date' and '$to_date'";
             $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
             while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
                 $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
@@ -524,6 +524,26 @@ if(isset($_GET['item_report'])){
 }
 //////////////////////////////طباعة حركة كمسيون
 if(isset($_GET['comission_report'])){
+    //if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
+    $and_where_condition = '';
+
+    if ($_POST['radio_value'] == 'items' && $_POST['text_value'] != '') {
+        $and_where_condition = " and items.code = '" . get_code_from_input($_POST['text_value']) . "'";
+    }
+    if ($_POST['radio_value'] == 'accounts' && $_POST['text_value'] != '') {
+        $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "'
+                                or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "')";
+    }
+    if ($_POST['radio_value'] == 'categories' && $_POST['text_value'] != '') {
+        $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_POST['text_value']))  . "'";
+    }
+    $total_comission = '0';
+    $total_bill = '0';
+    $real_bill = '0';
+
+    $from_date = $_POST['from_date'];
+    $to_date = $_POST['to_date'];
+
     $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
     $pdf->SetCreator(PDF_CREATOR);
@@ -548,6 +568,104 @@ if(isset($_GET['comission_report'])){
     $pdf->Ln(3);
     $pdf->SetFont('arial', '', $font_size);
 
+    $from_date = $_GET['from_date'];
+    $to_date = $_GET['to_date'];
+    $from='من تاريخ: ' .$from_date;
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $from ,0, 'L', 0, 0, '', '', true);
+    $to ='إلى تاريخ: '  . $to_date;
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(10);
+    if($_GET['text_value']==''){
+        $item='';
+    }elseif($_GET['radio_value'] == 'items'){
+        $item='حسب المادة: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value'] == 'accounts'){
+        $item='حسب العميل: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value'] == 'categories'){
+        $item='حسب الصنف: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }
+
+    if($page_type == 'A5'){
+        $ff = 6;
+    }else{
+        $ff = 10;
+    }
+
+    $pdf->SetFont('arial', '',  $ff);
+    $content = '';
+    $content .= '
+        <style>
+            th,td{
+                text-align:center;
+            }
+        </style>
+        <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
+            <thead>
+            <tr>
+                <th>رقم الفاتورة </th>
+                <th>تاريخ الفاتورة </th>
+                <th>اسم المادة </th>
+                <th> الصنف </th>
+                <th>الوحدة </th>
+                <th> المشتري </th>
+                <th>البائع </th>
+                <th>قيمة الكمسيون </th>
+                <th>الاجمالي</th>
+            </tr>
+            </thead>
+            <tbody>';
+            $select_items_using_id_query = "select DISTINCT items.code as item_code,
+                                                            bills.code as bill_code,
+                                                            bills.id as bill_id,total_item_price,com_ratio,
+                                                            unit, date, buyer_id,seller_id,
+                                                            name,currency,
+                                                            com_value,category_id
+                                                             from bill_item, items,bills 
+                                                             where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
+                                                             and date between '$from_date' and '$to_date'";
+            $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+            $counter_for_com_id = 0;
+            while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
+                $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
+                $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
+                $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
+                $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
+                $content.= "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
+                $content.= "<td>" . $row['bill_code'] . "</td>";
+                $content.= "<td>" . $row['date'] . "</td>";
+                $content.= "<td>" . $row['name'] . "</td>";
+                $content.= "<td>" . $category_name . "</td>";
+                $content.= "<td>" . $row['unit'] . "</td>";
+                // echo "<td>" . $row['currency'] . "</td>";
+                $content.= "<td>" . $buyer_name . "</td>";
+                $content.= "<td>" . $seller_name . "</td>";
+                $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
+                $content.= "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
+                $content.= "<td>".$row['total_item_price']."</td>";
+                $content.= "</tr>";
+                $total_comission += $current_com_value;
+                $total_bill += $row['total_item_price'];
+            }
+            $real_bill = $total_bill - $total_comission;
+            $content.='  
+            </tbody>
+        </table>';
+	$pdf->writeHTML($content);
+    $pdf->SetFont('arial', '', $font_size);
+    $total_price='إجمالي الفواتير: ' . $total_bill;
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(6);
+    $com_ratio='قيمة الكمسيون: ' . $total_comission;
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(6);
+    $real_price='صافي الفواتير: ' . $real_bill;
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 	$pdf->output('comission report', 'I');

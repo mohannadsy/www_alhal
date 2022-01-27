@@ -4,24 +4,35 @@
 
 body {
     text-align: right;
-    background-color: rgb(52, 92, 100);
+    /* background-color: #74c69d; */
+    background-color: #effbff;
     /* background-color: lightgrey; */
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
 }
 
 .container {
-    background-color: rgb(75, 129, 137);
+    /* background-color: #40916c; */
+    background-color: #00bbf0;
+    /* background-color: rgb(75, 129, 137); */
     border-style: groove;
     font-size: 17px;
-    border-radius: 25px;
+    border-radius: 15px;
     position: absolute;
+    color: #ffffff;
+    border-color: #005792;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .container-fluid {
-    background-color: rgb(75, 129, 137);
+    background-color: #00bbf0;
+    color: #000000;
     border-style: groove;
-    font-size: 17px;
-    border-radius: 25px;
-    position: absolute;
+    font-size: 19px;
+    border-radius: 15px;
+    /* position: absolute; */
+    border-color: #005792;
 }

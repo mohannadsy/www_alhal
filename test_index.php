@@ -16,6 +16,8 @@ include('include/nav.php');
 <a href="report_comission.php">Report Comission</a><br>
 <a href="report_item.php">Report Item</a><br>
 <a href="restore-clauda.php">Restore</a><br>
+<a href=""></a>
+<a href="setting.php">الإعدادات </a>
 
 <?php
 // $arr=getenv();

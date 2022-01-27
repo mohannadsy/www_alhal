@@ -14,7 +14,7 @@ include('include/nav.php');
 
 <body>
     <form action="" method="POST">
-        <div class="container-fluid my-2">
+        <div class="container-fluid ">
             <div class="row py-4">
 
                 <div class="col-3" id="search_col">
@@ -31,7 +31,7 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-10" id="tableFixHead">
                     <table class=" table table-bordered table-hover text-center">
                         <thead class="">
                             <tr>

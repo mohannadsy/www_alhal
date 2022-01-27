@@ -1,31 +1,33 @@
-.container{
-    top:25% ;
-    left:28%;
-    width: 600px ;
-    height: 350px ;
-    margin-bottom: 0; 
+.container {
+    width: 600px;
+    height: 350px;
+    margin-bottom: 0;
 }
-#category_col{
+
+#category_col {
     position: absolute;
     width: 90%;
     height: 90%;
 }
-#button_grp{
+
+#button_grp {
     border-radius: 5px;
     margin: 6px;
     width: 80px;
 }
-#button_col{
+
+#button_col {
     margin-right: 40px;
 }
-h4{
+
+h4 {
     margin-right: 20px;
 }
+
 #last_previous,
 #previous,
 #next,
 #last_next {
     /* margin: 0px 4px; */
     border-radius: 4px;
-
 }

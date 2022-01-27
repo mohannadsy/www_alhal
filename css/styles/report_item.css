@@ -1,20 +1,81 @@
-.container {
-    left: 12%;
-    top:10%;
+/*container style*/
 
+.container-fluid {
+    width: 100%;
+    background-color: inherit;
+    border: none;
 }
 
-#form_input {
+
+/*table style*/
+
+#tableFixHead {
+    overflow-y: auto;
+    height: 480px;
+    direction: ltr;
+}
+
+#tableFixHead thead th {
+    position: sticky;
+    top: 0;
+}
+
+th {
+    background: #eee;
+}
+
+
+/*radio button style*/
+
+#radio_row {
+    margin: 0px 15px;
+}
+
+
+/*saerch input and button style*/
+
+#search_row {
+    margin-right: 25px;
+}
+
+#search_row div {
+    margin: 0px 5px;
+}
+
+#search_row input {
+    width: 135px;
+}
+
+
+/*date style*/
+
+#date_row {
+    margin-right: 20px;
+}
+
+
+/*report result style*/
+
+#total_row input {
+    width: 100px;
+    border: none;
+    background-color: inherit;
+}
+
+#total_row label {
+    font-size: 19px;
+}
+
+#total_row {
+    margin: 0px 70px;
+}
+
+
+/* #form_input {
     text-align: right;
     border-radius: 5px;
 }
 
 #form_btn {
     text-align: right;
-}
-
-#from-date,
-#to-date {
-    border-radius: 5px;
-
-}
+} */
