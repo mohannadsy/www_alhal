@@ -67,7 +67,7 @@ include 'include/nav.php';
             padding: 10px;
             height: 110%;
             /* background-color: #057a8d; */
-            background-color: #325865;
+            /* background-color: #325865; */
         }
 
         .col-md-4 {
@@ -157,7 +157,7 @@ include 'include/nav.php';
 
                 <form action="" method="post">
                     <div class="row-md-4" id="final" style=" margin-bottom:10px;">
-                        <div class="col-md-12" style=" background-color:#325865;">
+                        <div class="col-md-12" >
                             <button name="backup" id="backup" type="submit" style="background-color:rgba(0,0,0,0) ;">
                                 <img class="img" style="width: 55px;height: 50px;padding: 0px;margin: 0px;margin-left: 22px;" src="assets/images/data-backup-512.png" />
                                 <br> <br>
