@@ -91,6 +91,15 @@
       <a class="dropdown-item" href="item_list.php"> قائمة المواد</a><li>
     </ul>
   </li>
+  
+  <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
+    aria-expanded="false" >فواتير</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item"  href="com_bill.php" >فاتورة جديدة</a></li>
+      <li><a class="dropdown-item" href="bills_list.php">قائمة الفواتير</a></li>
+    </ul>
+  </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >سندات</a>

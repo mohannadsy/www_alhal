@@ -1,10 +1,14 @@
 <?php
 
-function update_value_in_config($key , $value){
+function update_value_in_config($key , $value , $in_key = ''){
     $json = json_decode(file_get_contents('config.json') , true);
-    $json[$key] = $value;
+    if($in_key != '')
+        $json[$key][$in_key] = $value;
+    else
+        $json[$key] = $value;
     file_put_contents('config.json' , json_encode($json));
 }
+
 
 function get_value_from_config($key , $in_key = ""){
     $json = json_decode(file_get_contents('config.json') , true);
