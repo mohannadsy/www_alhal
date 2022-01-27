@@ -51,7 +51,8 @@ if (
     !isset($_POST['last_next']) &&
     !isset($_POST['previous']) &&
     !isset($_POST['last_previous']) &&
-    !isset($_POST['current'])
+    !isset($_POST['current'])&&
+    !isset($_POST['print'])
 ) {
     $current_catch_code = get_value_from_table_using_id($con, 'catch_bonds', 'code', $_GET['id']);
     $_POST['code'] = $current_catch_code;

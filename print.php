@@ -527,22 +527,22 @@ if(isset($_GET['comission_report'])){
     //if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
     $and_where_condition = '';
 
-    if ($_POST['radio_value'] == 'items' && $_POST['text_value'] != '') {
-        $and_where_condition = " and items.code = '" . get_code_from_input($_POST['text_value']) . "'";
+    if ($_GET['radio_value'] == 'items' && $_GET['text_value'] != '') {
+        $and_where_condition = " and items.code = '" . get_code_from_input($_GET['text_value']) . "'";
     }
-    if ($_POST['radio_value'] == 'accounts' && $_POST['text_value'] != '') {
-        $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "'
-                                or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "')";
+    if ($_GET['radio_value'] == 'accounts' && $_GET['text_value'] != '') {
+        $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value'])) . "'
+                                or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value'])) . "')";
     }
-    if ($_POST['radio_value'] == 'categories' && $_POST['text_value'] != '') {
-        $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_POST['text_value']))  . "'";
+    if ($_GET['radio_value'] == 'categories' && $_GET['text_value'] != '') {
+        $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_GET['text_value']))  . "'";
     }
     $total_comission = '0';
     $total_bill = '0';
     $real_bill = '0';
 
-    $from_date = $_POST['from_date'];
-    $to_date = $_POST['to_date'];
+    $from_date = $_GET['from_date'];
+    $to_date = $_GET['to_date'];
 
     $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     
