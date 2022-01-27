@@ -1,35 +1,38 @@
-
 .container {
-    top: 14% ;
-    left:22%;
-    width: 700px ;
-    height: 590px ;
+    width: 700px;
+    height: 590px;
     margin-bottom: 0;
     padding-top: 10px;
     text-align: right;
 }
+
 #button_col {
     text-align: center;
     margin-top: 10px;
 }
-#btn-grp{
+
+#btn-grp {
     border-radius: 4px;
     text-align: center;
     /* margin: 3px; */
     width: 80px;
 }
-#lbl_code,#lbl_account,#lbl_main {
-    margin-right: 15px;
-}
-#lbl_maden,#lbl_daen{
-    margin-right: 15px;
 
+#lbl_code,
+#lbl_account,
+#lbl_main {
+    margin-right: 15px;
 }
+
+#lbl_maden,
+#lbl_daen {
+    margin-right: 15px;
+}
+
 #last_previous,
 #previous,
 #next,
 #last_next {
     /* margin: 0px 4px; */
     border-radius: 4px;
-
 }

@@ -1,25 +1,44 @@
-.container{
-  left: 15%;
+.container-fluid {
+    width: 100%;
+    background-color: inherit;
+    border: none;
+}
 
-}
-#categry_col{
+#categry_col {
     text-align: left;
-    padding-left:70px;
+    padding-left: 70px;
 }
-#close_col{
+
+#tableFixHead {
+    overflow-y: auto;
+    height: 600px;
+}
+
+#tableFixHead thead th {
+    position: sticky;
+    top: 0;
+}
+
+th {
+    background: #eee;
+}
+
+#close_col {
     text-align: left;
 }
-#thead_col{
-    text-align: center; 
+
+#thead_col {
+    text-align: center;
 }
-#btn_grp{
+
+#btn_grp {
     /* margin-right: 10px; */
-
 }
-#close_btn{
-    margin-left:95px;
 
+#close_btn {
+    margin-left: 95px;
 }
-#search_col{
+
+#search_col {
     padding-right: 50px;
 }

@@ -1,35 +1,36 @@
-body{
+body {
     box-shadow: 10px 10px 5px grey;
-    
 }
-.container{
-    top:20% ;
-    left:25%;
-    width: 700px ;
-    height: 450px ;
-    margin-bottom: 0;
 
+.container {
+    width: 700px;
+    height: 450px;
+    margin-bottom: 0;
 }
-#btn_grp1,#button-grp2{
+
+#btn_grp1,
+#button-grp2 {
     border-radius: 4px;
     /* text-align: center;  */
     /* margin: 3px; */
 }
 
-#btn_grp1{
+#btn_grp1 {
     /* margin-left: 20px; */
 }
-#button-grp2{
-    width: 70px;   
+
+#button-grp2 {
+    width: 70px;
 }
-h4{
+
+h4 {
     margin-right: 20px;
 }
+
 #last_previous,
 #previous,
 #next,
 #last_next {
     /* margin: 0px 4px; */
     border-radius: 4px;
-
 }

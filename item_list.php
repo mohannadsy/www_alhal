@@ -17,7 +17,7 @@ include('include/nav.php');
 
 <body>
     <form action="" method="POST">
-        <div class="container my-5">
+        <div class="container-fluid ">
             <?php
             success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
@@ -40,8 +40,8 @@ include('include/nav.php');
                         </button></a>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-10">
+            <div class="row justify-content-center" >
+                <div class="col-10" id="tableFixHead">
                     <table class="table table-bordered table-hover">
                         <thead id="thead_col">
                             <tr>

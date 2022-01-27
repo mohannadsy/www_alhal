@@ -575,12 +575,28 @@ if(isset($_GET['comission_report'])){
     $to ='إلى تاريخ: '  . $to_date;
     $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10);
+    if($_GET['text_value']==''){
+        $item='';
+    }elseif($_GET['radio_value'] == 'items'){
+        $item='حسب المادة: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value'] == 'accounts'){
+        $item='حسب العميل: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }elseif($_GET['radio_value'] == 'categories'){
+        $item='حسب الصنف: ' .$_GET['text_value'];
+        $pdf->MultiCell(100*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(11);
+    }
 
     if($page_type == 'A5'){
         $ff = 6;
     }else{
         $ff = 10;
     }
+
     $pdf->SetFont('arial', '',  $ff);
     $content = '';
     $content .= '
@@ -621,34 +637,31 @@ if(isset($_GET['comission_report'])){
                 $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
                 $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
                 $content.= "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
-                 $content.= "<td>" . $row['bill_code'] . "</td>";
-                 $content.= "<td>" . $row['date'] . "</td>";
-                 $content.= "<td>" . $row['name'] . "</td>";
-                 $content.= "<td>" . $category_name . "</td>";
-                 $content.= "<td>" . $row['unit'] . "</td>";
+                $content.= "<td>" . $row['bill_code'] . "</td>";
+                $content.= "<td>" . $row['date'] . "</td>";
+                $content.= "<td>" . $row['name'] . "</td>";
+                $content.= "<td>" . $category_name . "</td>";
+                $content.= "<td>" . $row['unit'] . "</td>";
                 // echo "<td>" . $row['currency'] . "</td>";
-                 $content.= "<td>" . $buyer_name . "</td>";
-                 $content.= "<td>" . $seller_name . "</td>";
+                $content.= "<td>" . $buyer_name . "</td>";
+                $content.= "<td>" . $seller_name . "</td>";
                 $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
-                 $content.= "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
-                 $content.= "<td>".$row['total_item_price']."</td>";
-                 $content.= "</tr>";
+                $content.= "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
+                $content.= "<td>".$row['total_item_price']."</td>";
+                $content.= "</tr>";
                 $total_comission += $current_com_value;
                 $total_bill += $row['total_item_price'];
             }
+            $real_bill = $total_bill - $total_comission;
             $content.='  
             </tbody>
         </table>';
 	$pdf->writeHTML($content);
-    $real_bill = $total_bill - $total_comission;
-    //echo "<input type='hidden' id='total_hidden_comission' value = '" . $total_comission . "'>";
-    //echo "<input type='hidden' id='total_hidden_bill' value = '" . $total_bill . "'>";
-    //echo "<input type='hidden' id='real_hidden_bill' value = '" . $real_bill . "'>";
     $pdf->SetFont('arial', '', $font_size);
-    $total_price='إجمالي الفواتير: ' . $total_comission;
+    $total_price='إجمالي الفواتير: ' . $total_bill;
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(6);
-    $com_ratio='قيمة الكمسيون: ' . $total_bill;
+    $com_ratio='قيمة الكمسيون: ' . $total_comission;
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(6);
     $real_price='صافي الفواتير: ' . $real_bill;

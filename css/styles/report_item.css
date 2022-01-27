@@ -1,7 +1,6 @@
 .container {
     left: 12%;
-    top:10%;
-
+    top: 10%;
 }
 
 #form_input {
@@ -16,5 +15,4 @@
 #from-date,
 #to-date {
     border-radius: 5px;
-
 }
