@@ -74,7 +74,10 @@ if (isset($_GET['code']) &&
         !isset($_POST['previous']) &&
         !isset($_POST['last_previous']) &&
         !isset($_POST['current']) &&
-        !isset($_POST['update'])) 
+        !isset($_POST['update']) &&
+        !isset($_POST['print_seller']) &&
+        !isset($_POST['print_buyer'])
+        ) 
     {
     // $current_bill_code = get_value_from_table_using_id($con, 'bills', 'code', $_GET['id']);
     $current_bill_code = $_GET['code'];
