@@ -1,5 +1,8 @@
 <?php
-    include('include/nav.php');
+    // include('include/nav.php');
+    include('sql/connection.php');
+    include('helper/database_functions.php');
+    include('helper/javascript_functions.php');
 ?>
 <?php
 // function restore_database($con , $sql_file_to_restore){
@@ -22,7 +25,7 @@ if (isset($_POST['upload'])) {
 ?>
 
 <body>
-    <div class="container">
+    <div class="container" id="container">
     <form action = "?" method = "POST" enctype="multipart/form-data">
        <p> <input type="file" name="file"/>  </p>
        <p> <input type="submit" name="upload" value="قم باختيار ملف"/>  </p>

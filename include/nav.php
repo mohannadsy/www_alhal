@@ -51,7 +51,7 @@
             </div>
             <div class="modal-body" id="modal_body_account">
                 
-                <iframe  id="iframe_restore_db" src="restore_db.php" frameborder="0"></iframe>
+                <iframe  id="iframe_restore_db" src="restore_db.php#container" frameborder="0"></iframe>
                
             </div>
         </div>
@@ -138,6 +138,6 @@
 <script>
   $('#iframe_restore_db').load(function() {
         $('#iframe_restore_db').contents().find('#nav').hide();
-        $('#iframe_restore_db').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
+        // $('#iframe_restore_db').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
     });
 </script>

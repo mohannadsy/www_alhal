@@ -63,7 +63,7 @@ include('include/nav.php');
                             <label id="lbl_radio">مختصر</label>
                         </div>
                         <div class="form-check ">
-                            <input type="radio" name="report_type" id="report_type_details" value="details">
+                            <input type="radio" name="report_type" id="report_type_details" value="details" <?php if(get_value_from_config('account_statement' , 'report_type_details') == 'true') echo 'checked' ?>>
                             <label id="lbl_radio">تفصيلي</label>
                         </div>
                     </div>
@@ -74,19 +74,19 @@ include('include/nav.php');
 
                         <div class="col-6">
                             <div class="form-check">
-                                <input type="checkbox" value="" id="item_hidden" checked>
+                                <input type="checkbox" value="" id="item_hidden" <?php if(get_value_from_config('account_statement' , 'item') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     المادة
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="total_weight_hidden" checked>
+                                <input type="checkbox" value="" id="total_weight_hidden"  <?php if(get_value_from_config('account_statement' , 'total_weight') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الوزن القائم
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="real_weight_hidden" checked>
+                                <input type="checkbox" value="" id="real_weight_hidden"  <?php if(get_value_from_config('account_statement' , 'real_weight') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الوزن الصافي
                                 </label>
@@ -95,19 +95,19 @@ include('include/nav.php');
                         <div class="col-6">
 
                             <div class="form-check">
-                                <input type="checkbox" value="" id="price_hidden" checked>
+                                <input type="checkbox" value="" id="price_hidden"  <?php if(get_value_from_config('account_statement' , 'price') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الإفرادي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="total_item_price_hidden" checked>
+                                <input type="checkbox" value="" id="total_item_price_hidden"  <?php if(get_value_from_config('account_statement' , 'total_item_price') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الإجمالي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="com_value_hidden" checked>
+                                <input type="checkbox" value="" id="com_value_hidden"  <?php if(get_value_from_config('account_statement' , 'com_value') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الكمسيون
                                 </label>
@@ -369,6 +369,12 @@ include('include/footer.php');
 
 <!-- Report Type Radio On click -->
 <script>
+
+    $(function(){
+        if($('#report_type_details').is(':checked'))
+            $('#report_type_details').click();
+    });
+
     $('#report_type_details').click(function() {
         $('.hidden').show();
         $('#show_options').show();
@@ -433,3 +439,43 @@ include('include/footer.php');
         $(`.${this.id}`).toggle();
     })
 </script>
+
+
+
+
+<script>
+$('input[type="checkbox"] , input[type="radio"]').on('click',function() {
+            var arr_input_values = [];
+            arr_input_values['report_type_details'] = $('#report_type_details');
+            arr_input_values['item']= $('#item_hidden');
+            arr_input_values['total_weight']= $('#total_weight_hidden');
+            arr_input_values['real_weight']= $('#real_weight_hidden');
+            arr_input_values['total_item_price']= $('#total_item_price_hidden');
+            arr_input_values['price']= $('#price_hidden');
+            arr_input_values['com_value']= $('#com_value_hidden');
+            // var arr_input_values = {"total_weight" :" $('#total_weight')","real_weight" :" $('#real_weight')","total_item_price": "$('#total_item_price')","price": "$('#price')","com_value": "$('#com_value')"};
+            var  arr_input_values_post = {"report_type_details_post":false,"item_post":false,"total_weight_post":false ,"real_weight_post":false ,"total_item_price_post": false ,"price_post":false ,"com_value_post": false};
+            // var arr_input_values_post = [];
+            // arr_input_values_post['item_post']= false;
+            // arr_input_values_post['total_weight_post']= false;
+            // arr_input_values_post['real_weight_post']= false;
+            // arr_input_values_post['total_item_price_post']= false;
+            // arr_input_values_post['price_post']= false;
+            // arr_input_values_post['com_value_post']= false;
+
+            if ( arr_input_values['report_type_details'].is(':checked') ) {arr_input_values_post['report_type_details_post'] = true;}
+            if (arr_input_values['item'].is(':checked') ) { arr_input_values_post['item_post'] = true;}
+            if (arr_input_values['total_weight'].is(':checked') ) { arr_input_values_post['total_weight_post'] = true;}
+            if (arr_input_values['real_weight'].is(':checked') ) {arr_input_values_post['real_weight_post'] = true;} 
+            if (arr_input_values['total_item_price'].is(':checked') ) {arr_input_values_post['total_item_price_post'] = true;}    
+            if (arr_input_values['price'].is(':checked') ) {arr_input_values_post['price_post'] = true;}
+            if ( arr_input_values['com_value'].is(':checked') ) {arr_input_values_post['com_value_post'] = true;}
+
+                $.ajax({
+                    method:"POST",
+                    url: "change_setting.php",
+                    data: {account_statement_setting_array:arr_input_values_post},
+                    success:function (data) { $('#show').html(data)},
+                    error:function () {alert('bye') }});});
+    
+ </script>

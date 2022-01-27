@@ -137,7 +137,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="form-group row justify-content-center ">
                     <label for="code" class=" col-sm-3 col-md-3 col-form-label text-md-right">رمز الصنف</label>
                     <div class="col-md-6">
-                        <input value="<?php if (($next_category_code == '' && isset($_POST['next'])) ||
+                        <input type="number" value="<?php if (($next_category_code == '' && isset($_POST['next'])) ||
                                             (isset($_POST['previous']) && $previous_category_code == '') ||
                                             (!isset($_POST['code']))
                                         )
@@ -146,7 +146,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                         elseif (isset($_POST['last_next'])) echo $last_next_code;
                                         elseif (isset($_POST['previous'])) echo $previous_category_code;
                                         elseif (isset($_POST['last_previous'])) echo $last_previous_code;
-                                        elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" type=" text" id="code" class="form-control" name="code">
+                                        elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" id="code" class="form-control" name="code">
                     </div>
                 </div>
                                
