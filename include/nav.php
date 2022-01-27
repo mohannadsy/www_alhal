@@ -38,6 +38,28 @@
 </nav> -->
 
 
+
+<button hidden id="modal_restore_db_button" class="login-trigger" href="#" data-target="#modal_restore_db" data-toggle="modal">بطاقة حساب </button>
+<div id="modal_restore_db" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" id="modal_dialog_account">
+
+        <div class="modal-content" id="modal_content_account">
+            <div class="modal-header"  id="modal_header_account">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style=" margin-right: 10px;">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_body_account">
+                
+                <iframe  id="iframe_restore_db" src="restore_db.php" frameborder="0"></iframe>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
@@ -49,7 +71,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item"  href="open_file.php" >فتح ملف</a>
       <a class="dropdown-item" href="#">ملف جديد</a>
-      <a class="dropdown-item" href="#">استيراد</a>
+      <a class="dropdown-item" href="#" onclick="document.getElementById('modal_restore_db_button').click()">استيراد</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
@@ -106,3 +128,11 @@
   
 </ul>
 </html>
+
+
+<script>
+  $('#iframe_restore_db').load(function() {
+        $('#iframe_restore_db').contents().find('#nav').hide();
+        $('#iframe_restore_db').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
+    });
+</script>
