@@ -522,4 +522,36 @@ if(isset($_GET['item_report'])){
 	$pdf->output('item report', 'I');
     // END OF FILE
 }
+//////////////////////////////طباعة حركة كمسيون
+if(isset($_GET['comission_report'])){
+    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
+    
+    $pdf->SetCreator(PDF_CREATOR);
+    //header
+	$pdf->setPrintHeader(false);
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+    // set font
+    $pdf->SetFont('arial', 'B', 24);
+    // Add a page
+	$pdf->AddPage();
+    $tilte='حركة كمسيون';
+    $pdf->MultiCell(50 *$ratio, 6*$ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(3);
+    $pdf->SetFont('arial', '', $font_size);
+
+    if (ob_get_contents()) ob_end_clean();
+    // Close and output PDF document
+	$pdf->output('comission report', 'I');
+    // END OF FILE
+
+}
 ?>

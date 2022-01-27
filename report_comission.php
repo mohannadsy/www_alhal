@@ -1,6 +1,13 @@
 <?php
 include('include/nav.php');
 ?>
+
+
+<?php
+    if (isset($_POST['print'])) {
+        @open_window_blank("print.php?comission_report=comission_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value=" . $_POST['radio_search'] . "&text_value=" . $_POST['text_search']);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 
