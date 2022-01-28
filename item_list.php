@@ -23,21 +23,25 @@ include('include/nav.php');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
             success_error_delete_message('تم حذف المادة بنجاح', 'عئرا لم يتم حذف المادة');
             ?>
-            <div class="row py-4">
-
-                <div class="col-3" id="search_col">
-                    <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+            <div class="row justify-content-start px-5 py-3">
+                <h3>قائمة المواد </h3>
+            </div>
+            <div class="row  py-3 ">
+                <div class="col-3" id="search_row" style="background-color:red;">
+                    <div class="row justify-content-end">
+                        <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                        <button id="search" type="button" class=" btn">بحث</button>
+                    </div>
                 </div>
-
-                <button id="search" type="button" class=" btn">بحث</button>
-
-                <div class="col-8 " id="categry_col">
-                    <a href="category_card.php"><button type="button" id="btn_grp" class=" btn " name="new_category">
-                            صنف جديد
-                        </button></a>
-                    <a href="item_card.php"><button type="button" id="btn_grp" class=" btn" name="item_card">
-                            بطاقة مادة
-                        </button></a>
+                <div class="col-8 " id="categry_col" style="background-color:blue;">
+                    <div class="row justify-content-end">
+                        <a href="category_card.php"><button type="button" id="btn_grp" class=" btn " name="new_category">
+                                صنف جديد
+                            </button></a>
+                        <a href="item_card.php"><button type="button" id="btn_grp" class=" btn" name="item_card">
+                                بطاقة مادة
+                            </button></a>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center" >
