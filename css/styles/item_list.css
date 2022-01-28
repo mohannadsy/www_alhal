@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 520px;
+    height: 500px;
     direction: ltr;
 }
 
@@ -20,12 +20,25 @@
     top: 0;
 }
 
+h3 {
+    margin-right: 10%;
+}
+
 th {
     background: #eee;
 }
 
 #close_col {
     text-align: left;
+}
+
+#search_row div {
+    margin: 0px 5px;
+}
+
+#search_row input {
+    width: 135px;
+    margin-right: 30%;
 }
 
 
