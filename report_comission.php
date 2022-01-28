@@ -46,7 +46,7 @@ include('include/nav.php');
 
                     <div class="row justify-content-center" id="search_row">
                         <div >
-                            <input onclick="return this.value=''" type="text" class="form-control" name="text_search" id="text_search">
+                            <input onclick="return this.value=''" type="text" class="text_search form-control" name="text_search" id="text_search">
                         </div>
                         <div >
                             <button class= "btn" type="button" id="search" name="search">بحث</button>
