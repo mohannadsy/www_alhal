@@ -292,7 +292,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             <div class="row justify-content-end px-5">
                 <label>الكمسيون</label>
                 <div class="col-1">
-                    <input onblur="count_total_price()" onfocus="this.value = ''" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'] ?>">
+                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio']; else echo '5'; ?>">
                 </div>
                 <label>قيمته</label>
                 <div class="col-1">

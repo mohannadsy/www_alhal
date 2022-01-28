@@ -4,9 +4,9 @@ include('include/nav.php');
 
 
 <?php
-    if (isset($_POST['print'])) {
-        @open_window_blank("print.php?comission_report=comission_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value=" . $_POST['radio_search'] . "&text_value=" . $_POST['text_search']);
-    }
+    // if (isset($_POST['print'])) {
+    //     @open_window_blank("print.php?comission_report=comission_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value=" . $_POST['radio_search'] . "&text_value=" . $_POST['text_search']);
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -150,7 +150,7 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-end py-2">
                 <div class="col-2">
-                    <button type="submit" name="print">طباعة</button>
+                    <button type="button" name="print" id="print">طباعة</button>
                     <button type="submit" name="close">إغلاق</button>
                 </div>
             </div>
@@ -303,5 +303,19 @@ include('include/footer.php');
             });
 
         });
+    });
+</script>
+
+
+<script>
+    $('#print').click(function(){
+        var from_date = $('#from_date').val(),
+            to_date = $('#to_date').val(),
+            radio_value = $('input[name="radio_search"]:checked').val(),
+            text_value = $('#text_search').val();
+            if(text_value == undefined)
+                text_value = '';
+        window.open(`print.php?comission_report=comission_report&from_date=${from_date}&to_date=${to_date}&radio_value=${radio_value}&text_value=${text_value}` , '_blank');
+
     });
 </script>
