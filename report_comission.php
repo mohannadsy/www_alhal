@@ -21,15 +21,15 @@ include('include/nav.php');
 
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <form action="" method="post">
             <div class="row justify-content-start px-5 py-2">
                 <h3> حركة كمسيون </h3>
             </div>
             <div class="row ">
-                <div class="col-4">
-                    <div class="row  py-2">
-                        <div class="col-md-4 text-center">
+                <div class="col-3">
+                    <div class="row justify-content-end py-2"  id="radio_row">
+                        <div class="col-md-4 text-left" >
                             <input checked type="radio" name="radio_search" id="form1" value="items">
                             <label for="form1" name="">المادة</label>
 
@@ -38,43 +38,43 @@ include('include/nav.php');
                             <input type="radio" name="radio_search" id="form2" value="categories">
                             <label for="form2" name="">الصنف</label>
                         </div>
-                        <div class="col-md-4 text-center">
+                        <div class="col-md-4 text-right" >
                             <input type="radio" name="radio_search" id="form3" value="accounts">
                             <label for="form3" name="">العميل</label>
                         </div>
                     </div>
 
-                    <div class="row justify-content-center py-2">
-                        <div class="col-7">
-                            <input onclick="return this.value=''" type="text" class="text_search" name="text_search" id="text_search">
+                    <div class="row justify-content-center" id="search_row">
+                        <div >
+                            <input onclick="return this.value=''" type="text" class="form-control" name="text_search" id="text_search">
                         </div>
-                        <div class="col-2">
-                            <button type="button" id="search" name="search">بحث</button>
+                        <div >
+                            <button class= "btn" type="button" id="search" name="search">بحث</button>
                         </div>
 
                     </div>
+
 
                 </div>
-                <div class="col-4">
-                    <div class="row justify-content-center py-1">
+                <div class="col-4" id="date_row">
+                    <div class="row justify-content-start py-1">
                         <label for="from_date">من تاريخ</label>
-                        <div class="col-md-7">
-                            <input type="date" name="from_date" id="from_date" value="<?php echo date('Y-m-d'); ?>">
+                        <div class="col-md-5">
+                            <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo date('Y-m-d'); ?>">
                         </div>
-
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-start">
                         <label for="to_date">إلى تاريخ</label>
-                        <div class="col-md-7">
-                            <input type="date" name="to_date" id="to_date" value="<?php echo date('Y-m-d'); ?>">
+                        <div class="col-md-5">
+                            <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="row justify-content-center py-2 ">
-                <div class="col-11">
+            <div class="row justify-content-center py-4 ">
+                <div class="col-11"  id="tableFixHead">
                     <table class=" table table-bordered table-hover text-center ">
                         <thead>
                             <tr>
@@ -132,19 +132,19 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end " id="total_row">
+            <div class="row justify-content-start " id="total_row">
                 <div class="px-1">
-                    <label for="">إجمالي الفواتير </label>
-                    <input type="text" readonly id="total_bill" value="<?= $total_bill ?>">
+                    <label for="">إجمالي الفواتير: </label>
+                    <input  type="text" readonly id="total_bill" value="<?= $total_bill ?>">
                 </div>
 
                 <div class="px-1">
-                    <label for="">قيمة الكمسيون </label>
+                    <label for="">قيمة الكمسيون: </label>
                     <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
                 </div>
 
                 <div>
-                    <label for="" class="px-1">صافي الفواتير </label>
+                    <label for="" class="px-1">صافي الفواتير: </label>
                     <input type="text" readonly id="real_bill" value="<?= $real_bill ?>">
                 </div>
             </div>
@@ -154,6 +154,7 @@ include('include/nav.php');
                     <button type="submit" name="close">إغلاق</button>
                 </div>
             </div>
+
         </form>
     </div>
 </body>

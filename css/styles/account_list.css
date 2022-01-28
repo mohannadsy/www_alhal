@@ -1,21 +1,38 @@
-
-.container-fluid{
-    left: 6%;
-    /* top:6%; */
-    width: 90%;
+.container-fluid {
+    width: 100%;
+    background-color: inherit;
+    border: none;
 }
-#search_col{
+
+#tableFixHead {
+    overflow-y: auto;
+    height: 520px;
+    direction: ltr;
+}
+
+#tableFixHead thead th {
+    position: sticky;
+    top: 0;
+}
+
+th {
+    background: #eee;
+}
+
+#search_col {
     padding-right: 50px;
 }
-#search{
+
+#search {
     text-align: right;
-    justify-content:right;
+    justify-content: right;
 }
-#new_account_col{
+
+#new_account_col {
     text-align: left;
     padding-left: 70px;
 }
-#close-colum{
-    text-align: left;
 
+#close-colum {
+    text-align: left;
 }

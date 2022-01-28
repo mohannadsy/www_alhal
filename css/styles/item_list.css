@@ -11,7 +11,8 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 600px;
+    height: 520px;
+    direction: ltr;
 }
 
 #tableFixHead thead th {
@@ -27,9 +28,11 @@ th {
     text-align: left;
 }
 
-#thead_col {
+
+/* #thead_col,
+td {
     text-align: center;
-}
+} */
 
 #btn_grp {
     /* margin-right: 10px; */
