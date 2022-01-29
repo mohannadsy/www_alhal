@@ -40,8 +40,8 @@ include 'include/nav.php';
         }
 
         img {
-            height: 35%;
-            width: 35%
+            height: 60%;
+            width: 40%
         }
 
         a {
@@ -127,7 +127,7 @@ include 'include/nav.php';
 
                     <div class="col-md-6">
                         <a href="<?= ACCOUNT_STATEMENT ?>">
-                            <img class="img" src="assets/images/financial-icon-png-5746.png" />
+                            <img class="img" src="assets/images/pngwing.com.png" />
                             <p> كشف حساب </p>
                         </a>
 
