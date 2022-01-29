@@ -230,7 +230,7 @@ function restore_database($con , $sql_file_to_restore){
     if ($file_uploaded_extention === 'sql') {
         move_uploaded_file($tmp_name, $file_path_store);
         drop_all_tables($con);
-        import_database_tables($con , $file_name);
+        import_database_tables($con , $file_path_store);
         message_box('تم استعادة قاعدة البيانات بنجاح');
     } else {
         message_box('رجاءا اختار ملف sql');

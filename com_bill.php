@@ -74,7 +74,10 @@ if (isset($_GET['code']) &&
         !isset($_POST['previous']) &&
         !isset($_POST['last_previous']) &&
         !isset($_POST['current']) &&
-        !isset($_POST['update'])) 
+        !isset($_POST['update']) &&
+        !isset($_POST['print_seller']) &&
+        !isset($_POST['print_buyer'])
+        ) 
     {
     // $current_bill_code = get_value_from_table_using_id($con, 'bills', 'code', $_GET['id']);
     $current_bill_code = $_GET['code'];
@@ -155,23 +158,23 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 <body id='body'>
     <form action="" method="post">
         <div id="contextmenu" class="container-fluide">
-            <div class="row py-4">
-                <div class="col-5" >
+            <div class="row py-4 px-5">
+                <div class="col-3" >
                     <h2>فاتورة كمسيون</h2>
                 </div>
-                <div class="col-3">
-                    <div class="row">
-                        <label for="date" style=" margin-right:45px;">تاريخ الفاتورة</label>
-                        <div class="col-7">
+                <div class="col-3" id="bill_date" >
+                    <div class="row justify-content-end">
+                        <label for="date" style=" margin-right:45px;">تاريخ الفاتورة:</label>
+                        
                             <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
                                                                             else echo $bill[0]['date'] ?>" class="form-control" style="padding:2px">
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="row">
-                        <label for="" >رقم الفاتورة</label>
-                        <div class="col">
+                <div class="col-2"  id="bill_num" >
+                    <div class="row justify-content-center">
+                        <label for="" >رقم الفاتورة:</label>
+                        <div class="col-3">
                             <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
                                                                                     (isset($_POST['previous']) && $previous_bill_code == '') ||
                                                                                     (!isset($_POST['code']))
@@ -182,12 +185,11 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                                                                 elseif (isset($_POST['previous'])) echo $previous_bill_code;
                                                                                 elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                                 elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" class="form-control" style="padding:2px">
-
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="row justify-content-center " >
+                <div class="col-4">
+                    <div class="row justify-content-end " >
                         <button name="last_previous" id="last_previous"><< </button>
                         <button name="previous" id="previous"> < </button>
                         <button name="next" id="next"> > </button>
@@ -199,8 +201,8 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             </div>
 
             <div class="row">
-                <div class="col-6">
-                    <div class="row">
+                <div class="col-5 " >
+                    <div class="row justify-content-center">
                         <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
                         <div class="col-4">
@@ -209,7 +211,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <label class="col-2">طريقة الدفع </label>
                         <div class="col-2">
                             <input type="radio" name="seller_type_pay" checked value="cash">
@@ -220,15 +222,15 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                             <label>آجل</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <label class="col-2">ملاحظات</label>
                         <div class="col-4">
                             <textarea name="seller_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="row">
+                <div class="col-6" >
+                    <div class="row  justify-content-end">
                         <label class="col-2">المشتري</label>
                         <div class="col-4">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer" style="padding:2px" value="<?php if (notempty($bill)) if ($bill[0]['buyer_id'] > 0) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['buyer_id'])  ?>">
@@ -236,9 +238,9 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row justify-content-end">
                         <label class="col-2">طريقة الدفع </label>
-                        <div class="coi-2">
+                        <div class="col-2">
                             <input type="radio" name="buyer_type_pay" checked value="cash">
                             <label>نقدي</label>
                         </div>
@@ -247,7 +249,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                             <label>آجل</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-end">
                         <label class="col-2">ملاحظات</label>
                         <div class="col-4">
                             <textarea name="buyer_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
@@ -256,50 +258,62 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
             </div>
             <button hidden type="button" id="add_col">adding column</button>
-            <button type="button" id="add_row">adding Row</button>
-
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <table contenteditable='false' class=" table table-hover table-bordered  text-center" name="table" id="tbl">
-                        <thead class="text-center">
-                            <tr>
-                                <th contenteditable='false'>الرقم</th>
-                                <th contenteditable='false'>المادة</th>
-                                <th contenteditable='false'>الوحدة</th>
-                                <!-- <th contenteditable='false'>عدد العبوات</th> -->
-                                <th contenteditable='false'>وزن قائم</th>
-                                <th contenteditable='false'>وزن الصافي</th>
-                                <th contenteditable='false'> الإفرادي </th>
-                                <th contenteditable='false'>الإجمالي </th>
-                                <th id="notes" contenteditable='false'>ملاحظات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+            
+            <div class="row py-4">
+                <div class="col-1">
+                    <div class="row justify-content-end">
+                        <button type="button" id="add_row">+</button>
+                    </div>
+                       
+                </div>
+                <div class="col-10">
+                    <!-- <div class="row justify-content-center"> -->
+                    <div id="tableFixHead">
+                        <table contenteditable='false' class=" table table-hover table-bordered text-center" name="table" id="tbl">
+                            <thead class="text-center">
+                                <tr>
+                                    <th contenteditable='false'>الرقم</th>
+                                    <th contenteditable='false'>المادة</th>
+                                    <th contenteditable='false'>الوحدة</th>
+                                    <!-- <th contenteditable='false'>عدد العبوات</th> -->
+                                    <th contenteditable='false'>وزن قائم</th>
+                                    <th contenteditable='false'>وزن الصافي</th>
+                                    <th contenteditable='false'> الإفرادي </th>
+                                    <th contenteditable='false'>الإجمالي </th>
+                                    <th id="notes" contenteditable='false'>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
-            <div class="row justify-content-end px-5">
-                <label class="col-1">الإجمالي</label>
-                <div class="col-2">
+
+            
+            
+            <div class="row justify-content-end" id="total" ;>
+                <label >الإجمالي:</label>
+                <div>
                     <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
                                                                                                                                     else echo '0' ?>">
                 </div>
             </div>
-            <div class="row justify-content-end px-5">
-                <label>الكمسيون</label>
-                <div class="col-1">
-                    <input onblur="count_total_price()" onfocus="this.value = ''" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'] ?>">
+            <div class="row justify-content-end"  id="commisson">
+                <label>الكمسيون:</label>
+                <div id="commission_title">
+                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio']; else echo '5'; ?>">
                 </div>
-                <label>قيمته</label>
-                <div class="col-1">
+                <label>قيمته:</label>
+                <div id="commision_value">
                     <input type="text" name="com_value" id="com_value" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_value'];
                                                                                                                                 else echo '0' ?>">
                 </div>
             </div>
-            <div class="row justify-content-end px-5">
-                <label class="col-1">الصافي</label>
-                <div class="col-2">
+            <div class="row justify-content-end"  id="real">
+                <label>الصافي:</label>
+                <div>
                     <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['real_price'];
                                                                                                                                     else echo '0' ?>">
                 </div>

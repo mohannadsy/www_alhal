@@ -17,9 +17,12 @@ include('include/nav.php');
 <body>
     <form action="" method="POST">
         <div class="container-fluid">
-            <div class="row py-4">
+                <div class="row justify-content-start px-5 py-2">
+                    <h3 id="h3"> قائمة الفواتير  </h3>
+                </div>
+            <div class="row py-4"  >
 
-                <div class="col-4">
+                <div class="col-4" id="radio_row">
                     <label for="all_bills">جميع الفواتير</label>
                     <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
 
@@ -37,8 +40,8 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10">
-                    <table class=" text-center table table-bordered table-hover">
+                <div class="col-10"  id="tableFixHead">
+                    <table class="  table table-bordered table-hover text-center">
                         <thead class="text-center bg-primary ">
                             <tr>
                                 <th scope="col">رقم الفاتورة</th>

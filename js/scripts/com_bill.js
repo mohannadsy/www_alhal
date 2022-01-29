@@ -47,8 +47,9 @@ function createCell(cell, text, style, id, name, row_number) {
     }
     if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
         div.setAttribute('value', '0');
+        div.setAttribute('type', 'number');
         div.addEventListener('click', function() {
-            if (div.value == '0')
+            if (div.value == '0' && id != 'total_item_prices')
                 div.value = '';
         });
     }

@@ -4,9 +4,9 @@ include('include/nav.php');
 
 
 <?php
-    if (isset($_POST['print'])) {
-        @open_window_blank("print.php?item_report=item_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value_from_report_item=" . $_POST['radio_search'] . "&text_value_from_report_item=" . $_POST['text_search']);
-    }
+    // if (isset($_POST['print'])) {
+    //     @open_window_blank("print.php?item_report=item_report&from_date=" . $_POST['from_date'] . "&to_date=" . $_POST['to_date'] . "&radio_value_from_report_item=" . $_POST['radio_search'] . "&text_value_from_report_item=" . $_POST['text_search']);
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
@@ -45,7 +45,7 @@ include('include/nav.php');
 
                     <div class="row justify-content-center" id="search_row">
                         <div >
-                            <input class="form-control" type="text" name="text_search" id="text_search">
+                            <input class="text_search form-control" type="text" name="text_search" id="text_search">
                         </div>
                         <div >
                             <button  class= "btn" type="button" name="search" id="search">بحث</button>
@@ -58,7 +58,7 @@ include('include/nav.php');
                     <div class="row justify-content-center py-1 ">
                         <label for="from_date"> من تاريخ</label>
                         <div class="col-md-5">
-                            <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo date('Y-m-d'); ?>">
+                            <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo get_value_from_config('default_date') ?>">
                         </div>
 
                     </div>
@@ -148,7 +148,7 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-end py-2">
                 <div class="col-2">
-                <button type="submit" name="print">طباعة</button>
+                <button type="button" id="print" name="print">طباعة</button>
                 <button type="submit" name="close">إغلاق</button>
                 </div>
 
@@ -284,5 +284,19 @@ include('include/footer.php');
             });
 
         });
+    });
+</script>
+
+
+
+<script>
+    $('#print').click(function(){
+        var from_date = $('#from_date').val(),
+            to_date = $('#to_date').val(),
+            radio_value = $('input[name="radio_search"]:checked').val(),
+            text_value = $('#text_search').val();
+            if(text_value == undefined)
+                text_value = '';
+        window.open(`print.php?item_report=item_report&from_date=${from_date}&to_date=${to_date}&radio_value_from_report_item=${radio_value}&text_value_from_report_item=${text_value}` , '_blank');
     });
 </script>

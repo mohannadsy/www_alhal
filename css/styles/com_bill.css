@@ -1,29 +1,99 @@
-body {
-    background-color: LightGray;
-    text-align: right;
-    position: relative;
-    font-family: Arial, Helvetica, sans-serif;
+.container-fluide {
+    width: 100%;
+    background-color: inherit;
 }
 
-.container-fluide {
-    position: absolute;
-    border-style: groove;
-    top: 6%;
-    left: 9%;
-    width: 1300px;
-    border-radius: 25px;
-    border-style: groove;
-    background-color: #5F9EA0;
-    font-size: 19px;
+
+/*table style*/
+
+#tableFixHead {
+    overflow-y: auto;
+    height: 320px;
+    direction: ltr;
 }
-.modal{
-    position: fixed; /* Stay in place */
-    overflow: auto; /* Enable scroll if needed */
+
+#tableFixHead thead th {
+    position: sticky;
+    top: 0;
 }
-#modal_dialog_account{
-    min-width: 790px;  
+
+th {
+    background: #eee;
 }
-#modal_content_account{
+
+td input {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#bill_date input {
+    width: 145px;
+    border: none;
+}
+
+#bill_num input {
+    background: inherit;
+    border: none;
+}
+
+#add_row {
+    border-radius: 50%;
+    border: solid black 2px;
+    background-color: inherit;
+    font-size: 20px;
+}
+
+#total,
+#real {
+    margin-left: 8%;
+}
+
+#commission_title input {
+    width: 50px;
+    margin: 0 8px;
+    background: none;
+    border: none;
+}
+
+#commisson {
+    margin-left: 3%;
+}
+
+#commision_value input {
+    width: 100px;
+    background: none;
+    border: none;
+    margin-right: 10px;
+}
+
+#total input {
+    margin-right: 10px;
+    width: 120px;
+    background: none;
+    border: none;
+}
+
+#real input {
+    margin-right: 10px;
+    width: 120px;
+    background: none;
+    border: none;
+}
+
+.modal {
+    position: fixed;
+    /* Stay in place */
+    overflow: auto;
+    /* Enable scroll if needed */
+}
+
+#modal_dialog_account {
+    min-width: 790px;
+}
+
+#modal_content_account {
     min-width: 780;
     min-height: 650px;
     border-radius: 25px;
@@ -34,32 +104,34 @@ body {
     animation-name: animatetop;
     animation-duration: 0.4s
 }
-#modal_header_account{ 
+
+#modal_header_account {
     padding: 0 10px;
     /* background-color: rgb(52,92,100);; */
     /* color: white;    */
     display: flex;
 }
-#modal_body_account{
+
+#modal_body_account {
     position: relative;
     min-width: 780;
     min-height: 630px;
-    background-color:rgb(52,92,100);
+    background-color: rgb(52, 92, 100);
 }
-h4{  
-}
-#iframe_account_card{
+
+#iframe_account_card {
     position: absolute;
-    width:770px;
-    height:600px;
-   
+    width: 770px;
+    height: 600px;
 }
-#modal_dialog_item{
+
+#modal_dialog_item {
     /* min-width: 700px;   */
 }
-#modal_content_item{
-    min-width:790px ;
-    min-height:500px ;
+
+#modal_content_item {
+    min-width: 790px;
+    min-height: 500px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
@@ -67,63 +139,74 @@ h4{
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-    
 }
-#modal_header_item{ 
+
+#modal_header_item {
     padding: 0px 10px;
     /* background-color: rgb(52,92,100);; */
     /* color: white;    */
     display: flex;
 }
-#modal_body_item{
+
+#modal_body_item {
     position: relative;
-    min-width:780px ;
-    min-height:500px ;
-    background-color:rgb(52,92,100);
+    min-width: 780px;
+    min-height: 500px;
+    background-color: rgb(52, 92, 100);
 }
+
 #iframe_item_card {
     position: absolute;
-    min-width:770px;
-    min-height:480px;
+    min-width: 770px;
+    min-height: 480px;
 }
 
 
 /* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-    }
 
-    @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
     }
-    /* The Close Button */
- 
-    .close {
-        color: #aaa;
-        float: left;
-        font-size: 28px;
-        font-weight: bold;
+    to {
+        top: 0;
+        opacity: 1
     }
-    .close:hover,
-    .close:focus {
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-    }
-
-
-td input {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
 }
 
-table {
+
+/* table {
     width: 60%;
-}
+} */
 
 #btn-grp {
     border-radius: 5px;
@@ -131,11 +214,14 @@ table {
     width: 80px;
 }
 
-
-#last_previous,#previous,#next,#last_next {
-    margin: 0px 4px;
-    border-radius: 4px;
+#last_previous,
+#previous,
+#next,
+#last_next {
+    /* margin: 0px 4px;
+    border-radius: 4px; */
 }
-h2{
+
+h2 {
     margin: 0 15;
 }

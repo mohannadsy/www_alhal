@@ -51,7 +51,8 @@ if (
     !isset($_POST['last_next']) &&
     !isset($_POST['previous']) &&
     !isset($_POST['last_previous']) &&
-    !isset($_POST['current'])
+    !isset($_POST['current'])&&
+    !isset($_POST['print'])
 ) {
     $current_catch_code = get_value_from_table_using_id($con, 'catch_bonds', 'code', $_GET['id']);
     $_POST['code'] = $current_catch_code;
@@ -310,9 +311,9 @@ if (isset($_POST['update'])) {
     $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
     // $catch_bond_ids = getIds($con, 'catch_bonds', 'code', $_POST['code']);
     
-    $delete_catch_bond_query = delete('catch_bonds') . where('code', $_POST['code']);
+    $delete_catch_bond_query = forceDelete('catch_bonds') . where('code', $_POST['code']);
     $delete_catch_bond_exec = mysqli_query($con, $delete_catch_bond_query);
-    $delete_account_statements_query = delete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds');
+    $delete_account_statements_query = forceDelete('account_statements') . where('code_number', $_POST['code']) . andWhere('code_type', 'catch_bonds');
     $delete_account_statements_exec = mysqli_query($con, $delete_account_statements_query);
 
     foreach ($_POST['account'] as $key => $value) {

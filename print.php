@@ -29,7 +29,7 @@ function type($x){
 //8.3/5.8=1.43 in
 //11.7/8.3=1.40 in 
 
-$page_type = 'A4';
+$page_type = get_value_from_config('printing' , 'page_size');
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -135,7 +135,7 @@ if(isset($_GET['code'])){
                 while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
                     $content.="<tr>";
                     $content.="<td>" . $number++ . "</td>";
-                    $content.="<td>" . $row['code'] . " - " . $row['name'] . "</td>";
+                    $content.="<td>" . $row['name'] . "</td>";
                     $content.="<td>" . $row['unit'] . "</td>";
                     $content.="<td>" . $row['total_weight'] . "</td>";
                     $content.="<td>" . $row['real_weight'] . "</td>";
@@ -527,22 +527,22 @@ if(isset($_GET['comission_report'])){
     //if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
     $and_where_condition = '';
 
-    if ($_POST['radio_value'] == 'items' && $_POST['text_value'] != '') {
-        $and_where_condition = " and items.code = '" . get_code_from_input($_POST['text_value']) . "'";
+    if ($_GET['radio_value'] == 'items' && $_GET['text_value'] != '') {
+        $and_where_condition = " and items.code = '" . get_code_from_input($_GET['text_value']) . "'";
     }
-    if ($_POST['radio_value'] == 'accounts' && $_POST['text_value'] != '') {
-        $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "'
-                                or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_POST['text_value'])) . "')";
+    if ($_GET['radio_value'] == 'accounts' && $_GET['text_value'] != '') {
+        $and_where_condition = " and (seller_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value'])) . "'
+                                or buyer_id = '" . getId($con, 'accounts', 'code', get_code_from_input($_GET['text_value'])) . "')";
     }
-    if ($_POST['radio_value'] == 'categories' && $_POST['text_value'] != '') {
-        $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_POST['text_value']))  . "'";
+    if ($_GET['radio_value'] == 'categories' && $_GET['text_value'] != '') {
+        $and_where_condition = " and category_id = '" . getId($con, 'categories', 'code', get_code_from_input($_GET['text_value']))  . "'";
     }
     $total_comission = '0';
     $total_bill = '0';
     $real_bill = '0';
 
-    $from_date = $_POST['from_date'];
-    $to_date = $_POST['to_date'];
+    $from_date = $_GET['from_date'];
+    $to_date = $_GET['to_date'];
 
     $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
     

@@ -1,13 +1,20 @@
+/*container style*/
+
 .container-fluid {
     width: 100%;
     background-color: inherit;
     border: none;
 }
 
+
+/*buttons style*/
+
 #categry_col {
-    text-align: left;
-    padding-left: 70px;
+    padding-left: 33px;
 }
+
+
+/*table style*/
 
 #tableFixHead {
     overflow-y: auto;
@@ -24,24 +31,25 @@ th {
     background: #eee;
 }
 
-#close_col {
-    text-align: left;
+
+/*header style*/
+
+#header {
+    height: 50px;
+}
+
+h3 {
+    margin-right: 10%;
 }
 
 
-/* #thead_col,
-td {
-    text-align: center;
-} */
+/*search style*/
 
-#btn_grp {
-    /* margin-right: 10px; */
+#search_row button {
+    margin: 0px 10px;
 }
 
-#close_btn {
-    margin-left: 95px;
-}
-
-#search_col {
-    padding-right: 50px;
+#search_row input {
+    width: 140px;
+    /* margin-right: 28%; */
 }
