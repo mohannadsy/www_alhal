@@ -286,7 +286,7 @@ include('include/nav.php');
                     <input readonly id="code2" type="text" class="form-control" name="" value="<?= @$total_daen ?>">
                 </div>
 
-                <label for="code3" class="col-form-label"> المجموع</label>
+                <label for="code3" class="col-form-label"> الرصيد</label>
                 <div class="col-md-2">
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
@@ -490,8 +490,7 @@ $('input[type="checkbox"] , input[type="radio"]').on('click',function() {
             account_name = $('#account_name').val();
             if(account_name == undefined)
                 account_name = '';
-        console.log(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`);
-                // window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
+            window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
 
     });
 </script>
