@@ -29,7 +29,7 @@ function type($x){
 //8.3/5.8=1.43 in
 //11.7/8.3=1.40 in 
 
-$page_type = 'A4';
+$page_type = get_value_from_config('printing' , 'page_size');
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -135,7 +135,7 @@ if(isset($_GET['code'])){
                 while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
                     $content.="<tr>";
                     $content.="<td>" . $number++ . "</td>";
-                    $content.="<td>" . $row['code'] . " - " . $row['name'] . "</td>";
+                    $content.="<td>" . $row['name'] . "</td>";
                     $content.="<td>" . $row['unit'] . "</td>";
                     $content.="<td>" . $row['total_weight'] . "</td>";
                     $content.="<td>" . $row['real_weight'] . "</td>";
