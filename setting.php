@@ -9,94 +9,50 @@ include('include/nav.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <!-- <link rel="stylesheet" href="css/styles/setting.css"> -->
-  <style>
-    body {
-      margin: 0;
-      font-family: "Lato", sans-serif;
-      background-color: teal;
-
-    }
-
-    .sidebar {
-      margin: 0;
-      padding: 0;
-      width: 200px;
-      background-color: #f1f1f1;
-      position: fixed;
-      height: 100%;
-      overflow: auto;
-    }
-
-    .sidebar div {
-      display: block;
-      color: black;
-      padding: 16px;
-      text-decoration: none;
-    }
-
-    .sidebar div.active {
-      background-color: #0033cc;
-      color: white;
-    }
-
-    .sidebar a:hover:not(.active) {
-      background-color: #555;
-      color: white;
-    }
-
-    div.content {
-      margin-right: 200px;
-      padding: 1px 16px;
-      height: 1000px;
-
-    }
-
-    @media screen and (max-width: 700px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-
-      .sidebar a {
-        float: left;
-      }
-
-      div.content {
-        margin-left: 0;
-      }
-    }
-
-    @media screen and (max-width: 400px) {
-      .sidebar a {
-        text-align: center;
-        float: none;
-      }
-    }
-
-    #account_statment {
-      margin-right: 200px;
-      margin-top: 20px;
-    }
-  </style>
-
+  <link rel="stylesheet" href="css/styles/setting.css">
 </head>
 
 <body>
   <form action="" method="post">
     <div class="sidebar">
-      <div class="active" id="database_sidebar"  style="cursor: pointer;">قاعدة البيانات</div>
-      <div  style="cursor: pointer;" id="printing_sidebar">الطباعة</div>
+      <div class="active" id="database_sidebar" hidden>قاعدة البيانات</div>
+      <div class="active" id="printing_sidebar" >الطباعة</div>
     </div>
 
 
     <div class="content">
-      <section id="database_section">
+      <!-- <section id="database_section">
         <div>قاعدة البيانات</div>
-      </section>
-      <section id="printing_section" style="display: none;">
-        <div>الطباعة</div>
+      </section> -->
+      <section id="printing_section">
+        <div>
+          <div class="row" id="page_size">
+            <label>حجم الصفحة</label>
+            <select class="form-control"  name="" id="">
+              <option value="0"> A4 </option>
+              <option value="1"> A5 </option>
+            </select>
+          </div>
+          <div>
+            <label class="container">رمز المادة
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>
+            <label class="container">رمز البائع
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        
+          <div>
+            <label class="container">رمز المشتري
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
       </section>
     </div>
   </form>

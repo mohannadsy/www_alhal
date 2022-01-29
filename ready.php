@@ -40,8 +40,8 @@ include 'include/nav.php';
         }
 
         img {
-            height: 35%;
-            width: 35%
+            height: 60%;
+            width: 40%
         }
 
         a {
