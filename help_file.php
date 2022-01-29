@@ -53,23 +53,25 @@ include('include/nav.php');
                             
                 </div>
                 <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#accounts"> حسابات </a>
-                        
+                    <a class="bd-toc-link" href="help_file.php#accounts"> حسابات </a>  
                 </div>
                 <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#items"> مواد </a>
-                       
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#bonds"> سندات </a>
-                        
+                    <a class="bd-toc-link" href="help_file.php#items"> مواد </a> 
                 </div>
                 <div class="bd-toc-item ">
                     <a class="bd-toc-link" href="help_file.php#category"> الأصناف </a>
                 </div>
-                
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href="help_file.php#bills"> فواتير </a> 
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href="help_file.php#bonds"> سندات </a>    
+                </div>
                 <div class="bd-toc-item ">
                     <a class="bd-toc-link" href="help_file.php#movment"> حركات    </a>
+                </div>
+                <div class="bd-toc-item ">
+                    <a class="bd-toc-link" href="help_file.php#setting"> الإعدادات    </a>
                 </div>
             </nav>
         </div>
@@ -148,6 +150,7 @@ include('include/nav.php');
                     </table>
                 </p>
             </div>
+
             <div class="accounts" id="accounts">
                     <h3 class="bd-title" id="content"> حسابات </h3>
                     <p class="bd-lead">
@@ -464,8 +467,8 @@ include('include/nav.php');
                         </dd>
                     </dl>
                    
-                <p>
-                    <h6 class="c">  محتويات نافذة بطاقة صنف: </h6>
+                <p class ="category" >
+                    <h6 class="c" >  محتويات نافذة بطاقة صنف: </h6>
                     <B class="c"> الحقول :</B>
                     
                         <table>
@@ -483,7 +486,7 @@ include('include/nav.php');
                             <tr>
                                 <th style= "width:18%">  ملاحظات </td>
                                 <td style="height:30px">
-                    دون في هذه الخانة ملاحظات حول الصنف الذي تم إدخاله    
+                                    دون في هذه الخانة ملاحظات حول الصنف الذي تم إدخاله    
                                  </td>
                             </tr>                            
                         </table>
@@ -620,6 +623,10 @@ include('include/nav.php');
                   </table>
                    
                 </p>
+
+            </div>
+
+            <div class="bills" id="bills">
 
             </div>
 
@@ -845,6 +852,7 @@ include('include/nav.php');
                     </table>
                 </p>
             </div>
+
             <div class="movment" id="movment">
                     <h3 class="bd-title" id="content"> حركات </h3>
                     <p class="bd-lead">
@@ -970,6 +978,10 @@ include('include/nav.php');
                
 
             </div>
+
+            <div class="setting" id="setting">
+            </div>
+            
         </main>
     
         
