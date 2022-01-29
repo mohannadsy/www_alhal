@@ -90,18 +90,16 @@ td input {
 }
 
 #modal_dialog_account {
-    min-width: 790px;
+    min-width: fit-content;
+    min-height: fit-content;
 }
 
 #modal_content_account {
-    min-width: 780;
+    min-width: 770;
     min-height: 650px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
     animation-duration: 0.4s
 }
 
@@ -114,30 +112,27 @@ td input {
 
 #modal_body_account {
     position: relative;
-    min-width: 780;
+    min-width: 770;
     min-height: 630px;
-    background-color: rgb(52, 92, 100);
 }
 
 #iframe_account_card {
-    position: absolute;
+    /* position: absolute; */
     width: 770px;
     height: 600px;
 }
 
 #modal_dialog_item {
-    /* min-width: 700px;   */
+   min-width: fit-content;
+   min-height: fit-content;
 }
 
 #modal_content_item {
-    min-width: 790px;
+    min-width: 795px;
     min-height: 500px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
     animation-duration: 0.4s;
 }
 
@@ -150,15 +145,17 @@ td input {
 
 #modal_body_item {
     position: relative;
-    min-width: 780px;
+    min-width: 770px;
     min-height: 500px;
-    background-color: rgb(52, 92, 100);
+    background-color: inherit;
+    border-radius: inherit;
 }
 
 #iframe_item_card {
     position: absolute;
     min-width: 770px;
     min-height: 480px;
+    border-radius: inherit;
 }
 
 

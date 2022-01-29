@@ -1008,11 +1008,11 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
+        $('#iframe_account_card').contents().find('#container');
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
-        $('#iframe_item_card').contents().find('#container').css( {"margin-top":"-8%","margin-left":"-14%"});
+        $('#iframe_item_card').contents().find('#container');
 
     });
 </script>
