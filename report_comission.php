@@ -60,7 +60,7 @@ include('include/nav.php');
                     <div class="row justify-content-start py-1">
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-5">
-                            <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo date('Y-m-d'); ?>">
+                            <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo get_value_from_config('default_date'); ?>">
                         </div>
                     </div>
                     <div class="row justify-content-start">

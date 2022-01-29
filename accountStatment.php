@@ -43,7 +43,7 @@ include('include/nav.php');
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-8" style="margin-right:4px;">
                             <input type="date" name="from_date" id="from-date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
-                                                                                                                            else echo date('Y-m-d') ?>">
+                                                                                                                            else echo get_value_from_config('default_date'); ?>">
                         </div>
                     </div>
                     <div class="row py-2">

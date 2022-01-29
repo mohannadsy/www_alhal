@@ -48,7 +48,7 @@ include 'include/nav.php';
             color: #007bff;
             text-decoration: none;
             -webkit-text-decoration-skip: objects;
-            
+
         }
 
         p {
@@ -98,9 +98,11 @@ include 'include/nav.php';
         s #final {
             justify-content: center;
         }
-        img{
+
+        img {
             margin-bottom: 25px;
         }
+
         /* .col-md-4{
             background-color: #d4d8dc;
         } */
@@ -119,16 +121,20 @@ include 'include/nav.php';
                     <div class="col-md-6">
 
                         <a href="<?= COM_BILL ?>">
-                            <img class="img" src="assets/images/bill.png"/>
-                            <p> الفاتورة</p>
+                            <div>
+                                <img class="img" src="assets/images/bill.png" />
+                                <p> الفاتورة</p>
+                            </div>
                         </a>
                     </div>
 
 
                     <div class="col-md-6">
                         <a href="<?= ACCOUNT_STATEMENT ?>">
-                            <img class="img" src="assets/images/financial-icon-png-5746.png" />
-                            <p> كشف حساب </p>
+                            <div>
+                                <img class="img" src="assets/images/financial-icon-png-5746.png" />
+                                <p> كشف حساب </p>
+                            </div>
                         </a>
 
                     </div>
@@ -139,44 +145,49 @@ include 'include/nav.php';
                 <div class="row-md-4">
                     <div class="col-md-6">
                         <a href="<?= CATCH_BONDS ?>">
-                            <img class="img" src="assets/images/purchase-order-512.png" />
-                            <p> سند قبض </p>
+                            <div>
+                                <img class="img" src="assets/images/purchase-order-512.png" />
+                                <p> سند قبض </p>
+                                </div>
                         </a>
-                    </div>
-
-                    <div class="col-md-6">
-                        <a href="<?= PAYMENT_BONDS ?>">
-                            <img class="img" src="assets/images/check-512.png" />
-                            <p> سند دفع </p>
-                        </a>
-                    </div>
-
-
-
+                    
                 </div>
 
-                <form action="" method="post">
-                    <div class="row-md-4" id="final" style=" margin-bottom:10px;">
-                        <div class="col-md-12" >
-                            <button name="backup" id="backup" type="submit" style="background-color:rgba(0,0,0,0) ;">
-                                <img class="img" style="width: 55px;height: 50px;padding: 0px;margin: 0px;margin-left: 22px;" src="assets/images/data-backup-512.png" />
-                                <br> <br>
-                                <p style="justify-content: center; margin-bottom: 2px ;"> النسخ الاحتياطي </p>
-                            </button>
+                <div class="col-md-6">
+                    <a href="<?= PAYMENT_BONDS ?>">
+                        <div>
+                            <img class="img" src="assets/images/check-512.png" />
+                            <p> سند دفع </p>
                         </div>
-                    </div>
-                </form>
+                    </a>
+                </div>
+
+
+
             </div>
-            <?php
-            if (isset($_POST['backup'])) {
-                backup_to_file($con, get_value_from_config('database'));
-            }
-            ?>
 
-
-
-
+            <form action="" method="post">
+                <div class="row-md-4" id="final" style=" margin-bottom:10px;">
+                    <div class="col-md-12">
+                        <button name="backup" id="backup" type="submit" style="background-color:rgba(0,0,0,0) ;border:0px solid white ; cursor: pointer;">
+                            <img class="img" style="width: 55px;height: 50px;padding: 0px;margin: 0px;margin-left: 22px;" src="assets/images/data-backup-512.png" />
+                            <br> <br>
+                            <p style="justify-content: center; margin-bottom: 2px ;"> النسخ الاحتياطي </p>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
+        <?php
+        if (isset($_POST['backup'])) {
+            backup_to_file($con, get_value_from_config('database'));
+        }
+        ?>
+
+
+
+
+    </div>
 
     </div>
 
