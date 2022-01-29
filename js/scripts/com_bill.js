@@ -57,6 +57,7 @@ function createCell(cell, text, style, id, name, row_number) {
     if (text == '3') { // action to real weight => 2% of total weight
         div.addEventListener('blur', function() {
             document.getElementById('real_weights_' + row_number).value = Math.round(div.value * 0.98);
+            document.getElementById('total_item_prices_' + row_number).value = Math.round(document.getElementById('prices_' + row_number).value * document.getElementById('real_weights_' + row_number).value);
             count_total_price();
         });
     }

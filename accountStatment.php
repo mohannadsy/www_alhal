@@ -233,7 +233,7 @@ include('include/nav.php');
                                                 $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
                                             }
                                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
-                                                bills.code as bill_code,
+                                                bills.code as bill_code,com_ratio,
                                                 unit, date, buyer_id,seller_id,
                                                 name,currency,real_weight,price,total_price,
                                                 total_item_price,total_weight,
@@ -250,13 +250,14 @@ include('include/nav.php');
                                             echo "<td class='hidden total_item_price_hidden' style='display:none'></td>";
                                             echo "<td class='hidden com_value_hidden' style='display:none'></td>";
                                             while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
+                                                $current_com_value = ($item['com_ratio'] / 100) * $item['total_item_price'];
                                                 echo "<tr><td colspan='7' class='hidden' style='display:none'></td>";
                                                 echo "<td class='hidden item_hidden' style='display:none'>" . $item['name'] . "</td>";
                                                 echo "<td class='hidden total_weight_hidden' style='display:none'>" . $item['total_weight'] . "</td>";
                                                 echo "<td class='hidden real_weight_hidden' style='display:none'>" . $item['real_weight'] . "</td>";
                                                 echo "<td class='hidden price_hidden' style='display:none'>" . $item['price'] . "</td>";
                                                 echo "<td class='hidden total_item_price_hidden' style='display:none'>" . $item['total_item_price'] . "</td>";
-                                                echo "<td class='hidden com_value_hidden' style='display:none'>" . $item['com_value'] . "</td></tr>";
+                                                echo "<td class='hidden com_value_hidden' style='display:none'>" . $current_com_value . "</td></tr>";
                                             }
                                         } else {
                                             echo "<td class='hidden item_hidden' style='display:none'></td>";

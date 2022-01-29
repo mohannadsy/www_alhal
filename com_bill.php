@@ -999,7 +999,13 @@ $items = [];
 while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
     $items[] = $item;
 }
-for ($i = 0; $i < 5; $i++)
+
+for($i = 5 ; $i < count($items) ; $i++){
+    echo "<script>$('#add_row').click()</script>";
+}
+
+
+for ($i = 0; $i < count($items); $i++)
     if (isset($items[$i]))
         echo "<script>
         document.getElementById('items_' + $i).value = '" . @get_name_and_code_from_table_using_id($con, 'items', $items[$i]['item_id']) . "';
@@ -1072,3 +1078,17 @@ for ($i = 0; $i < 5; $i++)
     };
 </script>
 <!-- End chec worng insertion -->
+
+
+
+<!-- add auto complete to new added rows -->
+<script>
+    $('#add_row').click(function(){
+        $(`#items_${(document.getElementById('tbl').rows.length - 2)}`).blur(function() {
+                check_item_to_insert(tags_items, this.value, this.id, 'modal_item_card_button');
+            });
+        $(`#items_${(document.getElementById('tbl').rows.length - 2)}`).autocomplete({
+            source: tags_items
+        });
+    });
+</script>
