@@ -174,7 +174,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="col-2"  id="bill_num" >
                     <div class="row justify-content-center">
                         <label for="" >رقم الفاتورة:</label>
-                        <div class="col-3">
+                        <div class="col-4">
                             <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
                                                                                     (isset($_POST['previous']) && $previous_bill_code == '') ||
                                                                                     (!isset($_POST['code']))
