@@ -490,7 +490,7 @@ $('input[type="checkbox"] , input[type="radio"]').on('click',function() {
             account_name = $('#account_name').val();
             if(account_name == undefined)
                 account_name = '';
-        console.log(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`);
+        console.log(`print.php?account_statement=account_statement&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`);
                 // window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
 
     });
