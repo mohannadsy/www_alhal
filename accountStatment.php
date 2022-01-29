@@ -13,6 +13,8 @@ include('include/nav.php');
     <title>Document</title>
 </head>
 
+
+
 <body>
     <form action="" method="post">
         <div class="container-fluid">
@@ -42,14 +44,14 @@ include('include/nav.php');
                     <div class="row ">
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-8" style="margin-right:4px;">
-                            <input type="date" name="from_date" id="from-date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
+                            <input type="date" name="from_date" id="from_date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
                                                                                                                             else echo get_value_from_config('default_date'); ?>">
                         </div>
                     </div>
                     <div class="row py-2">
                         <label for="to_date">إلى تاريخ</label>
                         <div class="col-md-8">
-                            <input type="date" name="to_date" id="to-date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
+                            <input type="date" name="to_date" id="to_date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
                                                                                                                         else echo date('Y-m-d') ?>">
                         </div>
                     </div>
@@ -119,7 +121,7 @@ include('include/nav.php');
             </div>
             <div class="row py-1 justify-content-center" style="margin-right: 30px; margin-bottom:10px;">
                 <button type="submit" name="view" id="btn-grp">معاينة</button>
-                <button type="submit" name="" id="btn-grp">طباعة</button>
+                <button type="button" name="" id="print">طباعة</button>
                 <button type="submit" id="btn-grp">إغلاق</button>
             </div>
 
@@ -479,3 +481,17 @@ $('input[type="checkbox"] , input[type="radio"]').on('click',function() {
                     error:function () {alert('bye') }});});
     
  </script>
+
+ 
+<script>
+    $('#print').click(function(){
+        var from_date = $('#from_date').val(),
+            to_date = $('#to_date').val(),
+            account_name = $('#account_name').val();
+            if(account_name == undefined)
+                account_name = '';
+        console.log(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`);
+                // window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
+
+    });
+</script>
