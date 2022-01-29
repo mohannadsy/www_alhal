@@ -12,7 +12,7 @@ include('include/nav.php');
     <link rel="stylesheet" href="css/styles/print_com_bill.css" media="print">
     <link rel="stylesheet" href="css/styles/com_bill.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -23,23 +23,23 @@ include('include/nav.php');
     <div class="modal-dialog modal-dialog-centered" id="modal_dialog_account">
 
         <div class="modal-content" id="modal_content_account">
-            <div class="modal-header"  id="modal_header_account">
+            <div class="modal-header" id="modal_header_account">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style=" margin-right: 10px;">
-                    <span aria-hidden="true" >&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="modal_body_account">
-                
-                <iframe  id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
-               
+
+                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
+
             </div>
         </div>
     </div>
 </div>
 
 <button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">بطاقة مادة </button>
-<div id="modal_item_card" class="modal fade" role="dialog" >
+<div id="modal_item_card" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered" id="modal_dialog_item">
 
         <div class="modal-content" id="modal_content_item">
@@ -47,8 +47,8 @@ include('include/nav.php');
             <div class="modal-header" id="modal_header_item">
                 <h4 class="modal-title col-11">بطاقة صنف </h4>
                 <button onclick="" data-dismiss="modal" class="close">
-                    <span aria-hidden="true" >&times;</span>
-                </button> 
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body" id="modal_body_item">
                 <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0"></iframe>
@@ -68,17 +68,17 @@ $select_last_previous_bill_exec = mysqli_query($con, $select_last_previous_bill_
 $last_previous_code = mysqli_fetch_array($select_last_previous_bill_exec)['code'];
 
 $current_bill_code = get_auto_code($con, 'bills', 'code', '', 'parent');
-if (isset($_GET['code']) &&
-        !isset($_POST['next']) &&
-        !isset($_POST['last_next']) &&
-        !isset($_POST['previous']) &&
-        !isset($_POST['last_previous']) &&
-        !isset($_POST['current']) &&
-        !isset($_POST['update']) &&
-        !isset($_POST['print_seller']) &&
-        !isset($_POST['print_buyer'])
-        ) 
-    {
+if (
+    isset($_GET['code']) &&
+    !isset($_POST['next']) &&
+    !isset($_POST['last_next']) &&
+    !isset($_POST['previous']) &&
+    !isset($_POST['last_previous']) &&
+    !isset($_POST['current']) &&
+    !isset($_POST['update']) &&
+    !isset($_POST['print_seller']) &&
+    !isset($_POST['print_buyer'])
+) {
     // $current_bill_code = get_value_from_table_using_id($con, 'bills', 'code', $_GET['id']);
     $current_bill_code = $_GET['code'];
     $_POST['code'] = $current_bill_code;
@@ -159,21 +159,21 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
     <form action="" method="post">
         <div id="contextmenu" class="container-fluide">
             <div class="row py-4 px-5">
-                <div class="col-3" >
+                <div class="col-3">
                     <h2>فاتورة كمسيون</h2>
                 </div>
-                <div class="col-3" id="bill_date" >
+                <div class="col-3" id="bill_date">
                     <div class="row justify-content-end">
                         <label for="date" style=" margin-right:45px;">تاريخ الفاتورة:</label>
-                        
-                            <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
-                                                                            else echo $bill[0]['date'] ?>" class="form-control" style="padding:2px">
-                        
+
+                        <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
+                                                                        else echo $bill[0]['date'] ?>" class="form-control" style="padding:2px">
+
                     </div>
                 </div>
-                <div class="col-2"  id="bill_num" >
+                <div class="col-2" id="bill_num">
                     <div class="row justify-content-center">
-                        <label for="" >رقم الفاتورة:</label>
+                        <label for="">رقم الفاتورة:</label>
                         <div class="col-4">
                             <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
                                                                                     (isset($_POST['previous']) && $previous_bill_code == '') ||
@@ -189,19 +189,21 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="row justify-content-end " >
-                        <button name="last_previous" id="last_previous"><< </button>
-                        <button name="previous" id="previous"> < </button>
-                        <button name="next" id="next"> > </button>
-                        <button name="last_next" id="last_next"> >> </button>
-                        <button name="current" id="current" hidden></button>
+                    <div class="row justify-content-end ">
+                        <button name="last_previous" id="last_previous">
+                            << </button>
+                                <button name="previous" id="previous">
+                                    < </button>
+                                        <button name="next" id="next"> > </button>
+                                        <button name="last_next" id="last_next"> >> </button>
+                                        <button name="current" id="current" hidden></button>
 
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-5 " >
+                <div class="col-5 ">
                     <div class="row justify-content-center">
                         <label class="col-2">البائع</label>
                         <!-- <div class="ui-widget"> -->
@@ -229,7 +231,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         </div>
                     </div>
                 </div>
-                <div class="col-6" >
+                <div class="col-6">
                     <div class="row  justify-content-end">
                         <label class="col-2">المشتري</label>
                         <div class="col-4">
@@ -258,13 +260,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
             </div>
             <button hidden type="button" id="add_col">adding column</button>
-            
+
             <div class="row py-4">
                 <div class="col-1">
                     <div class="row justify-content-end">
                         <button type="button" id="add_row">+</button>
                     </div>
-                       
+
                 </div>
                 <div class="col-10">
                     <!-- <div class="row justify-content-center"> -->
@@ -291,19 +293,20 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
             </div>
 
-            
-            
+
+
             <div class="row justify-content-end" id="total" ;>
-                <label >الإجمالي:</label>
+                <label>الإجمالي:</label>
                 <div>
                     <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
                                                                                                                                     else echo '0' ?>">
                 </div>
             </div>
-            <div class="row justify-content-end"  id="commisson">
+            <div class="row justify-content-end" id="commisson">
                 <label>الكمسيون:</label>
                 <div id="commission_title">
-                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio']; else echo '5'; ?>">
+                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'];
+                                                                                                                                                        else echo '5'; ?>">
                 </div>
                 <label>قيمته:</label>
                 <div id="commision_value">
@@ -311,7 +314,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                                                                                                                 else echo '0' ?>">
                 </div>
             </div>
-            <div class="row justify-content-end"  id="real">
+            <div class="row justify-content-end" id="real">
                 <label>الصافي:</label>
                 <div>
                     <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['real_price'];
@@ -322,7 +325,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="col-5">
                     <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" id="btn-grp">حفظ</button>
                     <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update" id="btn-grp">تعديل</button>
-                    <button type="submit" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')"  <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
+                    <button type="submit" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
                     <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
@@ -337,11 +340,11 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <input type="checkbox" name="" id="">
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> -->
 
-                        <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
-                        <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
+                    <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
+                    <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
                         <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button> -->
-                        <button type="submit" name="print_seller">طباعة بائع</button>
-                        <button type="submit" name="print_buyer">طباعة مشتري</button>
+                    <button type="submit" name="print_seller">طباعة بائع</button>
+                    <button type="submit" name="print_buyer">طباعة مشتري</button>
                     <!-- </div> -->
                 </div>
             </div>
@@ -475,6 +478,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
             $_POST['main_account_id'] = $seller_id;
             $_POST['other_account_id'] = '2';
             $_POST['note'] = $_POST['seller_note'];
+            $_POST['bill_id'] = $current_bill_id;
             $_POST['daen'] = $_POST['real_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
@@ -519,6 +523,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
                 // سند قيد
                 $_POST['main_account_id'] = '1';
                 $_POST['other_account_id'] = '3';
+                $_POST['bill_id'] = $current_bill_id;
                 $_POST['note'] = $_POST['buyer_note'];
                 $_POST['maden'] = $_POST['total_price'];
                 $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
@@ -566,6 +571,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
                 $_POST['main_account_id'] = $buyer_id;
                 $_POST['note'] = $_POST['buyer_note'];
                 $_POST['other_account_id'] = '3';
+                $_POST['bill_id'] = $current_bill_id;
                 $_POST['maden'] = $_POST['total_price'];
                 $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
                 $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
@@ -602,12 +608,11 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
     clear_local_storage('account_card_code_name');
     if (isset($_POST['print_seller']) && $_POST['seller'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
-        open_window_self_code(COM_BILL , $current_bill_code);
-        
+        open_window_self_code(COM_BILL, $current_bill_code);
     }
     if (isset($_POST['print_buyer']) && $_POST['buyer'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . '&print_type=buyer');
-        open_window_self_code(COM_BILL , $current_bill_code);
+        open_window_self_code(COM_BILL, $current_bill_code);
     }
     open_window_self(COM_BILL);
 }
@@ -654,8 +659,8 @@ if (isset($_POST['update'])) {
     $current_bill_code = $_POST['code'];
 
     // delete items from item_bill and re insert them
-    $force_delete_bill_items_query = forceDelete('bill_item').where('bill_id', $current_bill_id_to_update);
-    $force_delete_bill_items_exec = mysqli_query($con , $force_delete_bill_items_query);
+    $force_delete_bill_items_query = forceDelete('bill_item') . where('bill_id', $current_bill_id_to_update);
+    $force_delete_bill_items_exec = mysqli_query($con, $force_delete_bill_items_query);
     foreach ($_POST['items'] as $key => $item) {
         if ($item != '') {
             $item_code = get_code_from_input($_POST['items'][$key]);
@@ -678,79 +683,143 @@ if (isset($_POST['update'])) {
     $select_mid_bonds_query = select('mid_bonds') . where('bill_id', $current_bill_id_to_update);
     $select_mid_bonds_exec = mysqli_query($con, $select_mid_bonds_query);
     while ($mid_bond = mysqli_fetch_array($select_mid_bonds_exec)) {
-        $force_delete_account_statements_query = forceDelete('account_statements').where('code_type' , 'mid_bonds').andWhere('code_number' , $mid_bond['code']);
-        $force_delete_account_statements_exec = mysqli_query($con , $force_delete_account_statements_query);
-        $force_delete_mid_bonds_query = forceDelete('mid_bonds').where('id' , $mid_bond['id']);
-        $force_delete_mid_bonds_exec = mysqli_query($con , $force_delete_mid_bonds_query);
+        $force_delete_account_statements_query = forceDelete('account_statements') . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bond['code']);
+        $force_delete_account_statements_exec = mysqli_query($con, $force_delete_account_statements_query);
+        $force_delete_mid_bonds_query = forceDelete('mid_bonds') . where('id', $mid_bond['id']);
+        $force_delete_mid_bonds_exec = mysqli_query($con, $force_delete_mid_bonds_query);
     }
-    
-    $force_delete_account_statements_query = forceDelete('account_statements').where('code_type' , 'bills').andWhere('code_number' , get_code_from_table_using_id($con , 'bills' , $current_bill_id_to_update));
-    $force_delete_account_statements_exec = mysqli_query($con , $force_delete_account_statements_query);
-    
+
+    $force_delete_account_statements_query = forceDelete('account_statements') . where('code_type', 'bills') . andWhere('code_number', get_code_from_table_using_id($con, 'bills', $current_bill_id_to_update));
+    $force_delete_account_statements_exec = mysqli_query($con, $force_delete_account_statements_query);
+
     $_POST['note'] = $_POST['seller_note'] . "  " . $_POST['buyer_note'];
-        // make mid_bonds bonds
-        if ($_POST['seller_type_pay'] == 'cash') {
+    // make mid_bonds bonds
+    if ($_POST['seller_type_pay'] == 'cash') {
+        // سند قيد
+        $_POST['main_account_id'] = '1';
+        $_POST['other_account_id'] = '2';
+        $_POST['daen'] = $_POST['real_price'];
+        $_POST['bill_id'] = $current_bill_id_to_update;
+        $_POST['note'] = $_POST['seller_note'];
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
+        ]));
+        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+        // كشف حساب صندوق
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+        // سند قيد
+        $_POST['main_account_id'] = '2';
+        $_POST['other_account_id'] = '1';
+        $_POST['maden'] = $_POST['real_price'];
+        $_POST['note'] = $_POST['seller_note'];
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+        ]));
+        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+        // كشف حساب مشتريات
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+        // كشف حساب البائع
+        $_POST['code_number'] = $current_bill_id_to_update;
+        $_POST['code_type'] = 'bills';
+        $_POST['note'] = $_POST['seller_note'];
+        $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
+        $_POST['main_account_id'] = $seller_id;
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'daen', 'maden', 'note', 'date', 'code_number', 'code_type',
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+    }
+
+    if ($_POST['seller_type_pay'] == 'agel') {
+        // سند قيد
+        $_POST['main_account_id'] = $seller_id;
+        $_POST['other_account_id'] = '2';
+        $_POST['bill_id'] = $current_bill_id_to_update;
+        $_POST['note'] = $_POST['seller_note'];
+        $_POST['daen'] = $_POST['real_price'];
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+        ]));
+        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+        // كشف حساب البائع
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+        // سند قيد
+        $_POST['main_account_id'] = '2';
+        $_POST['other_account_id'] = $seller_id;
+        $_POST['maden'] = $_POST['real_price'];
+        $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+        $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
+        ]));
+        $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+        // كشف حساب مشتريات
+        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_type'] = 'mid_bonds';
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+    }
+
+
+
+    /**
+     * Buyer Section
+     */
+
+
+    if (trim($_POST['buyer']) != '') {
+        if ($_POST['buyer_type_pay'] == 'cash') {
             // سند قيد
             $_POST['main_account_id'] = '1';
-            $_POST['other_account_id'] = '2';
-            $_POST['daen'] = $_POST['real_price'];
             $_POST['bill_id'] = $current_bill_id_to_update;
-            $_POST['note'] = $_POST['seller_note'];
+            $_POST['other_account_id'] = '3';
+            $_POST['note'] = $_POST['buyer_note'];
+            $_POST['maden'] = $_POST['total_price'];
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code', 'note'
+            ]));
+            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+            // كشف حساب الصندوق
+            $_POST['code_number'] = $_POST['code'];
+            $_POST['code_type'] = 'mid_bonds';
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+            // سند قيد
+            $_POST['main_account_id'] = '3';
+            $_POST['other_account_id'] = '1';
+            $_POST['daen'] = $_POST['total_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));
             $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب صندوق
-            $_POST['code_number'] = $_POST['code'];
-            $_POST['code_type'] = 'mid_bonds';
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-            // سند قيد
-            $_POST['main_account_id'] = '2';
-            $_POST['other_account_id'] = '1';
-            $_POST['maden'] = $_POST['real_price'];
-            $_POST['note'] = $_POST['seller_note'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
-            ]));
-            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب مشتريات
-            $_POST['code_number'] = $_POST['code'];
-            $_POST['code_type'] = 'mid_bonds';
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-            // كشف حساب البائع
-            $_POST['code_number'] = $current_bill_id_to_update;
-            $_POST['code_type'] = 'bills';
-            $_POST['note'] = $_POST['seller_note'];
-            $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
-            $_POST['main_account_id'] = $seller_id;
-            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'daen', 'maden', 'note', 'date', 'code_number', 'code_type',
-            ]));
-            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-        }
-
-        if ($_POST['seller_type_pay'] == 'agel') {
-            // سند قيد
-            $_POST['main_account_id'] = $seller_id;
-            $_POST['other_account_id'] = '2';
-            $_POST['note'] = $_POST['seller_note'];
-            $_POST['daen'] = $_POST['real_price'];
-            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
-            ]));
-            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب البائع
+            // كشف حساب المبيعات
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
@@ -758,117 +827,57 @@ if (isset($_POST['update'])) {
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
+            // كشف حساب مشتري
+            $_POST['code_number'] = $current_bill_code;
+            $_POST['main_account_id'] = $buyer_id;
+            $_POST['code_type'] = 'bills';
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type',
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        }
+
+        if ($_POST['buyer_type_pay'] == 'agel') {
             // سند قيد
-            $_POST['main_account_id'] = '2';
-            $_POST['other_account_id'] = $seller_id;
-            $_POST['maden'] = $_POST['real_price'];
+            $_POST['main_account_id'] = $buyer_id;
+            $_POST['note'] = $_POST['buyer_note'];
+            $_POST['other_account_id'] = '3';
+
+            $_POST['bill_id'] = $current_bill_id_to_update;
+            $_POST['maden'] = $_POST['total_price'];
+            $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
+            $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
+            ]));
+            $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
+            // كشف حساب المشتري
+            $_POST['code_number'] = $_POST['code'];
+            $_POST['code_type'] = 'mid_bonds';
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+
+            // سند قيد
+            $_POST['main_account_id'] = '3';
+            $_POST['other_account_id'] = $buyer_id;
+            $_POST['daen'] = $_POST['total_price'];
             $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
             $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
                 'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
             ]));
             $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-            // كشف حساب مشتريات
+            // كشف حساب المبيعات
             $_POST['code_number'] = $_POST['code'];
             $_POST['code_type'] = 'mid_bonds';
             $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
+                'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
             ]));
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
         }
-
-
-
-        /**
-         * Buyer Section
-         */
-
-
-        if (trim($_POST['buyer']) != '') {
-            if ($_POST['buyer_type_pay'] == 'cash') {
-                // سند قيد
-                $_POST['main_account_id'] = '1';
-                $_POST['other_account_id'] = '3';
-                $_POST['note'] = $_POST['buyer_note'];
-                $_POST['maden'] = $_POST['total_price'];
-                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'code', 'note'
-                ]));
-                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-                // كشف حساب الصندوق
-                $_POST['code_number'] = $_POST['code'];
-                $_POST['code_type'] = 'mid_bonds';
-                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
-                ]));
-                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-                // سند قيد
-                $_POST['main_account_id'] = '3';
-                $_POST['other_account_id'] = '1';
-                $_POST['daen'] = $_POST['total_price'];
-                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
-                ]));
-                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-                // كشف حساب المبيعات
-                $_POST['code_number'] = $_POST['code'];
-                $_POST['code_type'] = 'mid_bonds';
-                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type',
-                ]));
-                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-                // كشف حساب مشتري
-                $_POST['code_number'] = $current_bill_code;
-                $_POST['main_account_id'] = $buyer_id;
-                $_POST['code_type'] = 'bills';
-                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type',
-                ]));
-                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-            }
-
-            if ($_POST['buyer_type_pay'] == 'agel') {
-                // سند قيد
-                $_POST['main_account_id'] = $buyer_id;
-                $_POST['note'] = $_POST['buyer_note'];
-                $_POST['other_account_id'] = '3';
-                $_POST['maden'] = $_POST['total_price'];
-                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'bill_id', 'maden', 'date', 'note', 'code'
-                ]));
-                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-                // كشف حساب المشتري
-                $_POST['code_number'] = $_POST['code'];
-                $_POST['code_type'] = 'mid_bonds';
-                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type',
-                ]));
-                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-
-                // سند قيد
-                $_POST['main_account_id'] = '3';
-                $_POST['other_account_id'] = $buyer_id;
-                $_POST['daen'] = $_POST['total_price'];
-                $_POST['code'] = get_auto_code($con, 'mid_bonds', 'code', '', 'parent');
-                $insert_mid_bonds_query = insert('mid_bonds', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'bill_id', 'daen', 'date', 'note', 'code'
-                ]));
-                $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
-                // كشف حساب المبيعات
-                $_POST['code_number'] = $_POST['code'];
-                $_POST['code_type'] = 'mid_bonds';
-                $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-                    'main_account_id', 'other_account_id', 'daen', 'note', 'date', 'code_number', 'code_type'
-                ]));
-                $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-            }
-        }
+    }
     clear_local_storage('account_card_code_name');
-    open_window_self_code(COM_BILL , $current_bill_code);
+    open_window_self_code(COM_BILL, $current_bill_code);
 }
 
 ?>
@@ -877,13 +886,13 @@ if (isset($_POST['update'])) {
 <?php
 if (isset($_POST['delete'])) {
     // Delete Bill
-    $delete_bill_query = delete('bills').where('code' , $current_bill_code);
-    $delete_bill_exec = mysqli_query($con , $delete_bill_query);
-    
+    $delete_bill_query = delete('bills') . where('code', $current_bill_code);
+    $delete_bill_exec = mysqli_query($con, $delete_bill_query);
+
     // Delete Bill_item
-    $current_bill_id_to_delete = getId($con , 'bills' , 'code' , $current_bill_code);
-    $delete_bill_item_query = delete('bill_item').where('bill_id' , $current_bill_id_to_delete);
-    $delete_bill_item_exec = mysqli_query($con , $delete_bill_item_query);
+    $current_bill_id_to_delete = getId($con, 'bills', 'code', $current_bill_code);
+    $delete_bill_item_query = delete('bill_item') . where('bill_id', $current_bill_id_to_delete);
+    $delete_bill_item_exec = mysqli_query($con, $delete_bill_item_query);
 
     // Delete mid_bonds after git codes from it
     $select_mid_bonds_query = select('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
@@ -892,15 +901,15 @@ if (isset($_POST['delete'])) {
     while ($mid_bond = mysqli_fetch_array($select_mid_bonds_exec)) {
         $mid_bonds[] = $mid_bond;
     }
-    $delete_mid_bonds_query = delete('mid_bonds').where('bill_id' , $current_bill_id_to_delete);    
-    $delete_mid_bonds_exec = mysqli_query($con , $delete_mid_bonds_query);
+    $delete_mid_bonds_query = delete('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
+    $delete_mid_bonds_exec = mysqli_query($con, $delete_mid_bonds_query);
 
     // Delete account_statement
-    $delete_account_statement_query = delete('account_statements').where('code_type' , 'bills').andWhere('code_number' , $current_bill_id_to_delete);
-    $delete_account_statement_exec = mysqli_query($con , $delete_account_statement_query);
-    foreach($mid_bonds as $mid_bond){
-        $delete_account_statement_query = delete('account_statements').where('code_type' , 'mid_bonds').andWhere('code_number' , $mid_bond['code']);
-        $delete_account_statement_exec = mysqli_query($con , $delete_account_statement_query);
+    $delete_account_statement_query = delete('account_statements') . where('code_type', 'bills') . andWhere('code_number', $current_bill_id_to_delete);
+    $delete_account_statement_exec = mysqli_query($con, $delete_account_statement_query);
+    foreach ($mid_bonds as $mid_bond) {
+        $delete_account_statement_query = delete('account_statements') . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bond['code']);
+        $delete_account_statement_exec = mysqli_query($con, $delete_account_statement_query);
     }
     clear_local_storage('account_card_code_name');
     open_window_self(COM_BILL);
@@ -1008,11 +1017,17 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css( {"margin-top":"-10%","margin-left":"-17%"});
+        $('#iframe_account_card').contents().find('#container').css({
+            "margin-top": "-10%",
+            "margin-left": "-17%"
+        });
     });
     $('#iframe_item_card').load(function() {
         $('#iframe_item_card').contents().find('#nav').hide();
-        $('#iframe_item_card').contents().find('#container').css( {"margin-top":"-8%","margin-left":"-14%"});
+        $('#iframe_item_card').contents().find('#container').css({
+            "margin-top": "-8%",
+            "margin-left": "-14%"
+        });
 
     });
 </script>
@@ -1058,7 +1073,7 @@ for ($i = 0; $i < 5; $i++)
 <script>
     document.getElementById('code').onchange = function(event) {
         // if (event.keyCode == 13) {
-            document.getElementById('current').click();
+        document.getElementById('current').click();
         // }
     };
 </script>
