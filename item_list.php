@@ -23,11 +23,11 @@ include('include/nav.php');
             success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
             success_error_delete_message('تم حذف المادة بنجاح', 'عئرا لم يتم حذف المادة');
             ?>
-            <div class="row justify-content-start px-5 py-3" id="header">
+            <div class="row mx-5 py-3" id="header">
                 <h3>قائمة المواد </h3>
             </div>
-            <div class="row  py-3 ">
-                <div class="col-3" id="search_row">
+            <div class="row py-3">
+                <div class="col-3" id="search_col">
                     <div class="row justify-content-end">
                         <input id="search_text" type="search" class="form-control" placeholder="ادخل اسم المادة" aria-label="Search" aria-describedby="search-addon" />
                         <button id="search" type="button" class=" btn" >بحث</button>

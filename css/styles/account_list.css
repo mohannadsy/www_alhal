@@ -1,9 +1,11 @@
+/* container style */
 .container-fluid {
     width: 100%;
     background-color: inherit;
     border: none;
 }
 
+/* table style */
 #tableFixHead {
     overflow-y: auto;
     height: 520px;
@@ -19,20 +21,26 @@ th {
     background: #eee;
 }
 
-#search_col {
-    padding-right: 50px;
+/*عمود البحث*/
+#search_col input {
+    width: 170px;
 }
-
-#search {
-    text-align: right;
-    justify-content: right;
+#search_col button {
+    margin: 0px 10px;
 }
-
+/* زر حساب جديد */
 #new_account_col {
     text-align: left;
-    padding-left: 70px;
+    padding-left: 15px;
+}
+/* العنوان */
+#header {
+    height: 50px;
+}
+h3{
+    font-weight: bold;
+    
 }
 
-#close-colum {
-    text-align: left;
-}
+
+
