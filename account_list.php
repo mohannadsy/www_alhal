@@ -15,14 +15,18 @@ include('include/nav.php');
 <body>
     <form action="" method="POST">
         <div class="container-fluid ">
-            <div class="row py-4">
+            <div class="row mx-5 py-3" id="header">
+                <h3>قائمة الحسابات</h3>
+            </div>
 
+            <div class="row py-3">
                 <div class="col-3" id="search_col">
-                    <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                    <div class="row justify-content-end">
+                        <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
+                        <button id="search" type="button" class=" btn">بحث</button>
+                    </div>
                 </div>
-                <!-- <div class="col-2" > -->
-                <button id="search" type="button" class=" btn">بحث</button>
-                <!-- </div> -->
+            
 
                 <div class="col-8" id="new_account_col">
                     <a href="<?= ACCOUNT_CARD ?>"><button type="button" class=" btn" name="new_account">
@@ -64,7 +68,7 @@ include('include/nav.php');
                 </div>
 
             </div>
-            <div class="row py-3">
+            <!-- <div class="row py-3">
                 <div class="col-11" id="close-colum">
                     <a href="ready.php"> <button type="button" class="btn " name="close">
                             إغلاق
@@ -72,7 +76,7 @@ include('include/nav.php');
                         </button></a>
 
                 </div>
-            </div>
+            </div> -->
         </div>
     </form>
     <div id="show"></div>

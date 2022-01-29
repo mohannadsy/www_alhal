@@ -6,7 +6,14 @@
     border: none;
 }
 
-#h3 {
+
+/*  header style(العنوان) */
+
+#header {
+    height: 50px;
+}
+
+h3 {
     font-weight: bold;
 }
 
@@ -14,19 +21,14 @@
 /*radio button style*/
 
 #radio_row {
-    margin: 0px 15px;
-    font-weight: lighter;
-    font-size: 20px;
-    text-align: center;
+    margin: 0px 20px;
+    font-size: 19px;
+    font-weight: normal;
 }
 
-
-/*close button style*/
-
-#close {
-    font-size: 18px;
-    text-align: center;
-    color: #050102;
+#radio_row div {
+    margin: 0px 10px;
+    font-weight: normal;
 }
 
 
@@ -44,7 +46,7 @@
 }
 
 th {
-    background: #B0C4DE;
+    background: #ccc;
     text-align: center;
     color: #050102;
     font-size: 18px;

@@ -22,7 +22,9 @@ include('include/nav.php');
 
     <div class="content">
       <!-- <section id="database_section">
-        <div>قاعدة البيانات</div>
+        <div>قاعدة البيانات  سالب مدين/لنا
+          دائن / علينا
+        </div>
       </section> -->
       <section id="printing_section">
         <div>

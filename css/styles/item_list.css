@@ -1,5 +1,4 @@
 /*container style*/
-
 .container-fluid {
     width: 100%;
     background-color: inherit;
@@ -8,14 +7,12 @@
 
 
 /*buttons style*/
-
 #categry_col {
     padding-left: 33px;
 }
 
 
 /*table style*/
-
 #tableFixHead {
     overflow-y: auto;
     height: 520px;
@@ -39,17 +36,16 @@ th {
 }
 
 h3 {
-    margin-right: 10%;
+    margin-right: 1%;
+    font-weight: bold;
 }
 
 
 /*search style*/
-
-#search_row button {
+#search_col button {
     margin: 0px 10px;
 }
 
-#search_row input {
-    width: 140px;
-    /* margin-right: 28%; */
+#search_col input {
+    width: 170px;
 }

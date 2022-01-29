@@ -17,27 +17,29 @@ include('include/nav.php');
 <body>
     <form action="" method="POST">
         <div class="container-fluid">
-                <div class="row justify-content-start px-5 py-2">
-                    <h3 id="h3"> قائمة الفواتير  </h3>
+                <div class="row justify-content-start px-5 py-3" id="header">
+                    <h3 > قائمة الفواتير  </h3>
                 </div>
-            <div class="row py-4"  >
-
-                <div class="col-4" id="radio_row">
-                    <label for="all_bills">جميع الفواتير</label>
+            <div class="row py-4"   id="radio_row">
+                <div>
                     <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
-
-                    <label for="not_sell_bills">الفواتير الغير مباعة</label>
+                    <label for="all_bills">جميع الفواتير</label>
+                </div>
+                
+                <div>
                     <input name="search_bill" value="not_sell_bills" id="not_sell_bills" type="radio" />
-                    
-                    <label for="sell_bills">الفواتير المباعة</label>
+                    <label for="not_sell_bills">الفواتير الغير مباعة</label>
+                </div>
+                
+                <div>
                     <input name="search_bill" value="sell_bills" id="sell_bills"  type="radio" />
-                    
-                    <!-- <button id="search" type="button" class="btn btn-primary">بحث</button> -->
-
+                    <label for="sell_bills">الفواتير المباعة</label>
                 </div>
-                <div class="col-6">
-
-                </div>
+               
+                
+                <!-- <button id="search" type="button" class="btn btn-primary">بحث</button> -->
+        
+                
             </div>
             <div class="row justify-content-center">
                 <div class="col-10"  id="tableFixHead">
@@ -47,7 +49,7 @@ include('include/nav.php');
                                 <th scope="col">رقم الفاتورة</th>
                                 <th scope="col">البائع</th>
                                 <th scope="col">الصافي</th>
-                                <th scope="col">الشاري</th>
+                                <th scope="col">المشتري</th>
                                 <th scope="col">الاجمالي</th>
                                 <th scope="col">الحالة</th>
                             </tr>
@@ -93,13 +95,7 @@ include('include/nav.php');
 
             </div>
             <div class="row py-3">
-                <div class="col-11 offset-8 ">
-                    <button type="button" class="btn btn-primary" name="close">
-                        إغلاق
-
-                    </button>
-
-                </div>
+                
             </div>
         </div>
     </form>
