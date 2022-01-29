@@ -21,8 +21,8 @@ include('include/nav.php');
             <div class="row justify-content-start px-5 py-2">
                 <h3> كشف حساب </h3>
             </div>
-            <div class="row">
-                <div class="col-3 ">
+            <div class="row" style="background-color:red;">
+                <div class="col-3 " style="background-color:blue;">
                     <div class="row ">
                         <label for="" class=" col-md-3 form-label"> الحساب</label>
                         <div class="col-md-8  has-validation">
@@ -40,7 +40,7 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" style="background-color:green;">
                     <div class="row ">
                         <label for="from_date">من تاريخ</label>
                         <div class="col-md-8" style="margin-right:4px;">
@@ -56,7 +56,7 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" style="background-color:pink;">
                     <div class="row">
                         <label for="" id="lbl-radio-type">نوع التقرير:</label>
 
@@ -70,7 +70,7 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
-                <div class="col-3" id="show_options" style="display: none;">
+                <div class="col-3" id="show_options" style="display: none; background-color:brown;">
                     <h5 style="margin-left: 10px;">خيارات الإظهار</h5>
                     <div class="row">
 
@@ -122,7 +122,6 @@ include('include/nav.php');
             <div class="row py-1 justify-content-center" style="margin-right: 30px; margin-bottom:10px;">
                 <button type="submit" name="view" id="btn-grp">معاينة</button>
                 <button type="button" name="" id="print">طباعة</button>
-                <button type="submit" id="btn-grp">إغلاق</button>
             </div>
 
             <?php
@@ -133,7 +132,7 @@ include('include/nav.php');
             <div class="row justify-content-center py-2">
                 <div class="col-11">
 
-                    <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tbl2">
+                    <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tableFixHead">
                         <thead class="text-center">
                             <tr>
                                 <th contenteditable='false'>التاريخ</th>
@@ -286,7 +285,7 @@ include('include/nav.php');
                     <input readonly id="code2" type="text" class="form-control" name="" value="<?= @$total_daen ?>">
                 </div>
 
-                <label for="code3" class="col-form-label"> المجموع</label>
+                <label for="code3" class="col-form-label"> الرصيد</label>
                 <div class="col-md-2">
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
@@ -490,8 +489,7 @@ $('input[type="checkbox"] , input[type="radio"]').on('click',function() {
             account_name = $('#account_name').val();
             if(account_name == undefined)
                 account_name = '';
-        console.log(`print.php?account_statement=account_statement&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`);
-                // window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
+            window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
 
     });
 </script>

@@ -672,4 +672,204 @@ if(isset($_GET['comission_report'])){
     // END OF FILE
 
 }
+
+if(isset($_GET['account_statement'])){
+    
+    $report_type_details = false;
+    if(get_value_from_config('account_statement' , 'report_type_details') == "true"){
+        $report_type_details = true;
+    }
+
+    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
+    
+    $pdf->SetCreator(PDF_CREATOR);
+    //header
+	$pdf->setPrintHeader(false);
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl'; 
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
+
+    // set font
+    $pdf->SetFont('arial', 'B', 24);
+    // Add a page
+	$pdf->AddPage();
+    $tilte='كشف حساب';
+    $pdf->MultiCell(50 *$ratio, 6*$ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(3);
+    $pdf->SetFont('arial', '', $font_size);
+    $from='من تاريخ: ' . $_GET['from_date'];
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $from ,0, 'L', 0, 0, '', '', true);
+    $to ='إلى تاريخ: ' . $_GET['to_date'];
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(10);
+    $account='الحساب: ' .$_GET['account_name'];
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
+    $currency='العملة: ' .'ليرة سورية';
+    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(11);
+    if($page_type == 'A5'){
+        $ff = 6;
+    }else{
+        $ff = 10;
+    }
+
+    $pdf->SetFont('arial', '',  $ff);
+    $content = '';
+    $content .= '
+        <style>
+            th,td{
+                text-align:center;
+            }
+        </style>
+        <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
+            <thead>
+            <tr>
+                <th>التاريخ </th>
+                <th>المستند </th>
+                <th>مدين </th>
+                <th> دائن </th>
+                <th>الحساب المقابل </th>
+                <th> البيان </th>
+                <th>رصيد الحركة </th>';
+                if($report_type_details)
+               $content.=" <th  style='display:none' contenteditable='false'>المادة</th>
+                <th  style='display:none' contenteditable='false'> الوزن القائم</th>
+                <th style='display:none' contenteditable='false'> الوزن الصافي</th>
+                <th  style='display:none' contenteditable='false'> الإفرادي</th>
+                <th  style='display:none' contenteditable='false'>الإجمالي</th>
+                <th  style='display:none' contenteditable='false'>الكمسيون</th>";
+            $content.="</tr>
+            </thead>
+            <tbody>";
+            $main_account_code = get_code_from_input($_GET['account_name']);
+            $select_main_accounta_id_using_code_query = "select id,code from accounts where code = '$main_account_code'";
+            $select_main_accounta_id_using_code_exec = mysqli_query($con, $select_main_accounta_id_using_code_query);
+            $main_account_id = 0;
+            if (mysqli_num_rows($select_main_accounta_id_using_code_exec) > 0)
+                $main_account_id = mysqli_fetch_row($select_main_accounta_id_using_code_exec)[0];
+
+            $select_account_statements_query = selectND('account_statements') . andWhere('main_account_id', $main_account_id) . "
+            and date between '" . $_GET['from_date'] . "' and '" . $_GET['to_date'] . "'";
+            $select_account_statements_exec = mysqli_query($con, $select_account_statements_query);
+
+            $current_currency = 0;
+            $total_daen = 0;
+            $total_maden = 0;
+
+            if (mysqli_num_rows($select_account_statements_exec) > 0)
+                while ($row = mysqli_fetch_array($select_account_statements_exec)) {
+                    $current_currency +=  ($row['maden'] - $row['daen']);
+                    $total_daen += $row['daen'];
+                    $total_maden += $row['maden'];
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////
+                    /**
+                                         * make links section
+                                         */
+                                        $href_link = 'accountStatment.php';
+                                        $document_type = '';
+                                        if ($row['code_type'] == 'accounts') { // accounts -> رصيد افتتاحي
+                                            $account_id = getId($con, 'accounts', 'code', $row['code_number']);
+                                            
+                                            $document_type = 'رصيد افتتاحي';
+                                        }
+                                        if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
+                                          
+                                            $document_type = 'فاتورة رقم ' . $row['code_number'];
+                                        }
+                                        if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
+                                            $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
+                                            $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
+                                            $document_type = 'فاتورة رقم ' . $bill_code;
+                                        }
+                                        if ($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
+                                            $payment_bond_id = getId($con, 'payment_bonds', 'code', $row['code_number']);
+                                            $document_type = 'سند دفع رقم ' . $row['code_number'];;
+                                        }
+
+                                        if ($row['code_type'] == 'catch_bonds') { // تابع لسند القبض
+                                            $catch_bond_id = getId($con, 'catch_bonds', 'code', $row['code_number']);
+                                            $document_type = 'سند قبض رقم ' . $row['code_number'];;
+                                        }
+                    $content.= "<tr>";
+                    $content.= "<td>" . $row['date'] . "</td>";
+                    $content.= "<td>" . $document_type . "</td>";
+                    $content.= "<td>" . $row['maden'] . "</td>";
+                    $content.= "<td>" . $row['daen'] . "</td>";
+                    $select_other_account_name_query = selectND('accounts', ['id', 'name']) . andWhere('id', $row['other_account_id']);
+                    $select_other_account_name_exec = mysqli_query($con, $select_other_account_name_query);
+                    // echo "<td>" . $row['code_number'] . "</td>";
+                    $content.= "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
+                    $content.= "<td>" . $row['note'] . "</td>";
+                    $content.= "<td>" . "$current_currency" . "</td>";
+                    // if($report_type_details)
+                    if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
+                        if ($row['code_type'] == 'mid_bonds'){
+                            $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
+                            $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                        }
+                        else{
+                            $bill_id = getId($con, 'bills', 'code', $row['code_number']);
+                            $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                        }
+                        $select_items_using_id_query = "select DISTINCT items.code as item_code,
+                            bills.code as bill_code,
+                            unit, date, buyer_id,seller_id,
+                            name,currency,real_weight,price,total_price,
+                            total_item_price,total_weight,
+                            com_value,category_id
+                             from bill_item, items,bills 
+                             where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id' and bills.code = '$bill_code'";
+                        $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
+                        $number_of_items = mysqli_num_rows($select_items_using_id_exec);
+
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td></tr>";
+                        while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
+                            $content.= "<tr><td colspan='7' ></td>";
+                            $content.= "<td  >" . $item['name'] . "</td>";
+                            $content.= "<td  >" . $item['total_weight'] . "</td>";
+                            $content.= "<td >" . $item['real_weight'] . "</td>";
+                            $content.= "<td  >" . $item['price'] . "</td>";
+                            $content.= "<td  >" . $item['total_item_price'] . "</td>";
+                            $content.= "<td class='hidden com_value_hidden' >" . $item['com_value'] . "</td></tr>";
+                        }
+                    } else {
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td ></td>";
+                        $content.= "<td class='hidden com_value_hidden' ></td></tr>";
+                    }
+                    // $content.= "</tr>";
+                }
+            $content.='  
+            </tbody>
+        </table>';
+     $pdf->writeHTML($content);
+     $pdf->SetFont('arial', '', $font_size);
+     $maden='مجموع مدين: ' . $total_maden;
+     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $maden ,0, 'R', 0, 0, '', '', true);
+     $pdf->Ln(6);
+     $daen='مجموع دائن: ' . $total_daen;
+     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $daen ,0, 'R', 0, 0, '', '', true);
+     $pdf->Ln(6);
+     $total='الرصيد: ' . $current_currency;
+     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total ,0, 'R', 0, 0, '', '', true);
+    if (ob_get_contents()) ob_end_clean();
+    // Close and output PDF document
+	$pdf->output('account statment', 'I');
+    // END OF FILE
+
+}
 ?>

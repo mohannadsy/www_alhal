@@ -1,16 +1,36 @@
+/*container style*/
 
-.container-fluid{
-    top:13% ;
-    left:4%;
-    width: 94%;
-    padding: 5px;    
+.container-fluid {
+    width: 100%;
+    background-color: inherit;
+    border: none;
 }
-#btn-grp{
+
+
+/*table style*/
+
+#tableFixHead {
+    overflow-y: auto;
+    height: 300px;
+    direction: ltr;
+}
+
+#tableFixHead thead th {
+    position: sticky;
+    top: 0;
+}
+
+th {
+    background: #eee;
+}
+
+#btn-grp {
     border-radius: 4px;
     text-align: center;
     margin: 1px;
     width: 80px;
 }
+
 .form-check-label {
     margin-right: 20px;
 }
