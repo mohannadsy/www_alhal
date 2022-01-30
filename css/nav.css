@@ -1,8 +1,16 @@
 ul {
     background-color: #083e47;
-    height: 70px;
+    /* height: 70px; */
 }
 
 a {
     color: white;
+}
+
+ul li:hover {
+    background: #000000;
+}
+
+a:hover {
+    background-color: #000000;
 }
