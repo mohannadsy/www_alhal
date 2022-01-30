@@ -67,14 +67,25 @@ if (isset($_POST["account_search_part"])) {
     $output = '';
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
-            $current_maden = get_current_maden_using_id($con , $row['id']);
-            $current_daen = get_current_daen_using_id($con ,$row['id']);
+            $current_maden = get_current_maden_using_id($con, $row['id']);
+            $current_daen = get_current_daen_using_id($con, $row['id']);
             $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['code'] . '</td>
-            <td>' . $row['name'] . '</td>' .
-                '<td>' . $current_daen . '</td>' .
-                '<td>' . $current_maden . '</td>';
-                $output .= '<td>'. ($current_maden - $current_daen) .'</td>';
+                <td>' . $row['name'] . '</td>';
+                if ($row['account_id'] != 0) {
+                    $current_maden = get_current_maden_using_id($con, $row['id']);
+                    $current_daen = get_current_daen_using_id($con, $row['id']);
+                    $output.= '<td>' . $current_daen . '</td>';
+                    $output.= '<td>' . $current_maden . '</td>';
+                }else{
+                    $current_maden = get_current_maden_for_main_account_using_id($con, $row['id']);
+                    $current_daen = get_current_daen_for_main_account_using_id($con, $row['id']);
+                    $output.= '<td>' . $current_daen . '</td>';
+                    $output.= '<td>' . $current_maden . '</td>';
+                }
+
+            
+                $output .= '<td>' . ($current_maden - $current_daen) . '</td>';
             $output .= '</tr>';
         }
     }
@@ -90,7 +101,7 @@ if (isset($_POST["item_search"])) {
               c.id as cat_id,
               i.name as item_name,
               c.name as cat_name,
-              i.code as item_code from items as i , categories as c where c.id = i.category_id and ( i.name like '%".$_POST['item_search']."%' or i.code like '%".$_POST['item_search']."%' or c.name like '%".$_POST['item_search']."%' ) and i.is_deleted <> '1' ";
+              i.code as item_code from items as i , categories as c where c.id = i.category_id and ( i.name like '%" . $_POST['item_search'] . "%' or i.code like '%" . $_POST['item_search'] . "%' or c.name like '%" . $_POST['item_search'] . "%' ) and i.is_deleted <> '1' ";
     $result = mysqli_query($con, $query);
     $output = '';
     if (mysqli_num_rows($result) > 0) {
@@ -100,10 +111,10 @@ if (isset($_POST["item_search"])) {
             <td>' . $row['item_name'] . '</td>
             <td>' . $row['item_code'] . '</td>
             <td>' . $row['cat_name'] . '</td>';
-            $output.="<td>
+            $output .= "<td>
                         <button type='button' onclick='window.open(\"item_card.php?id=" . $row['item_id'] . "\" , \"_self\")'>تعديل</button>
                         <button type='submit' name='delete' 
-                                    onclick='document.getElementById(\"id\").value = \"".$row['item_id']."\";
+                                    onclick='document.getElementById(\"id\").value = \"" . $row['item_id'] . "\";
                                     return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
                         </td>";
             $output .= '</tr>';
@@ -252,7 +263,7 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         echo "<td>" . $seller_name . "</td>";
         $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
         echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
-        echo "<td>".$row['total_item_price']."</td>";
+        echo "<td>" . $row['total_item_price'] . "</td>";
         echo "</tr>";
         $total_comission += $current_com_value;
         $total_bill += $row['total_item_price'];

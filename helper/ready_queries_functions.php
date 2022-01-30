@@ -62,6 +62,25 @@ function get_current_maden_using_id($con , $id){
     return $total_maden;
 }
 
+function get_current_maden_for_main_account_using_id($con , $account_id){
+    $accounts = get_all_accounts_for_main_account($con , $account_id);
+    $total_maden = 0;
+    foreach($accounts as $account){
+        $total_maden+=get_current_maden_using_id($con , $account['id']);
+    }
+    return $total_maden;
+}
+
+function get_current_daen_for_main_account_using_id($con , $account_id){
+    $accounts = get_all_accounts_for_main_account($con , $account_id);
+    $total_daen = 0;
+    foreach($accounts as $account){
+        $total_daen+=get_current_daen_using_id($con , $account['id']);
+    }
+    return $total_daen;
+}
+
+
 function get_current_daen_using_code($con , $code){
     $id = getId($con , 'accounts' , 'code' , $code);
     return get_current_daen_using_id($con , $id);
@@ -76,6 +95,16 @@ function get_main_account_id_parent($con , $code){
     $select_account_id_query = selectND('accounts').andWhere('code' , $code);
     $select_account_id_exec = mysqli_query($con , $select_account_id_query);
     return mysqli_fetch_array($select_account_id_exec)['account_id'];
+}
+
+
+function get_all_accounts_for_main_account($con , $account_id){
+    $select_accounts_query = selectND('accounts').andWhere('account_id' , $account_id);
+    $select_accounts_exec = mysqli_query($con , $select_accounts_query);
+    $accounts = [];
+    while($account = mysqli_fetch_array($select_accounts_exec))
+        array_push($accounts , $account);
+    return $accounts;
 }
 
 function get_value_from_table_using_column($con , $table , $column , $value , $column_return){
