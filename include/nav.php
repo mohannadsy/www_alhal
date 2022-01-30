@@ -62,9 +62,9 @@
 
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
-  <!-- <li class="nav-item">
-    <a class="nav-link active " href="index.php"></a>
-  </li> -->
+  <li class="nav-item">
+    <a class="nav-link active " href="index.php">الرئيسية</a>
+  </li>
   <li class="nav-item dropdown">
     <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >ملف</a>
@@ -80,6 +80,7 @@
       <li><a class="dropdown-item"  href="account_card.php" >بطاقة حساب</a><li>
      <li> <a class="dropdown-item" href="accountStatment.php">كشف حساب</a></li>
       <li><a class="dropdown-item" href="account_list.php">قائمة حسابات  </a></li>
+      <li><a class="dropdown-item" href="report_comission.php">تقرير حركة كمسيون  </a></li>
     </ul>
   </li>
   <li class="nav-item dropdown">
@@ -89,6 +90,7 @@
       <li><a class="dropdown-item"  href="category_card.php" >بطاقة صنف</a></li>
       <li><a class="dropdown-item" href="item_card.php">بطاقة مادة</a></li>
       <a class="dropdown-item" href="item_list.php"> قائمة المواد</a><li>
+      <li><a class="dropdown-item"  href="report_item.php" > تقرير حركة مادة</a></li>
     </ul>
   </li>
   
@@ -107,14 +109,6 @@
       <a class="dropdown-item"  href="payment_bonds.php" >سند دفع</a>
       <a class="dropdown-item" href="catch_bonds.php">سند قبض</a>
   </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
-    aria-expanded="false" >حركات</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item"  href="report_item.php" > حركة مادة</a></li>
-     <li> <a class="dropdown-item" href="report_comission.php">حركة كمسيون </a></li>
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="setting.php">الإعدادات</a>
   </li>
@@ -128,7 +122,6 @@
   <li class="nav-item">
     <a class="nav-link" href="test_noor.php">Nour</a>
   </li>
-  
   
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.history.back()">BACK</button>
