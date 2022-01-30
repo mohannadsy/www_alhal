@@ -62,9 +62,9 @@
 
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active " href="ready.php">الرئيسية</a>
-  </li>
+  <!-- <li class="nav-item">
+    <a class="nav-link active " href="index.php"></a>
+  </li> -->
   <li class="nav-item dropdown">
     <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >ملف</a>

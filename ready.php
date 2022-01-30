@@ -21,9 +21,8 @@ include 'include/nav.php';
 
         .container-fluid {
             width: 100%;
-            height: 100%;
-            margin: 5px;
-            padding: 5px;
+            /* margin: 5px;
+            padding: 5px; */
 
             display: inline-flex;
             border: 0px;
