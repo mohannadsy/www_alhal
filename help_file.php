@@ -54,43 +54,42 @@ include('include/nav.php');
                 </div>
             </nav>
         </div> -->
-        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+        <!-- <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main"> -->
             <section id="file_section">
-                <div class="file" id="file">
-                        <h3 class="bd-title" id="content"> ملف </h3>
-                        <p class="bd-lead">
-                        تتضمن هذه النافذة معلومات عن الملف المنشأ وتاريخ إنشائه وعن قاعدة البيانات ومعلومات عن 
-                        النسخ الاحتياطي والاستيراد 
-                        يمكن طلب هذه النافذة من القائمة--> ملف
+                <div class="" id="">
+                    <h3 class="bd-title" id="content"> ملف </h3>
+                    <p class="bd-lead">
+                    تتضمن هذه النافذة معلومات عن الملف المنشأ وتاريخ إنشائه وعن قاعدة البيانات ومعلومات عن 
+                    النسخ الاحتياطي والاستيراد 
+                    يمكن طلب هذه النافذة من القائمة--> ملف
                     </p>
                     <dl>
-                            <dt> فتح ملف</dt>
+                        <dt> فتح ملف</dt>
                             <dd>
-                                يمكننا إنشاء ملف جديد أو فتح ملف موجود سابقاً والتعامل معه
-                        </dd>
-                            <dt>الاستيراد  </dt>
+                                    يمكننا إنشاء ملف جديد أو فتح ملف موجود سابقاً والتعامل معه
+                            </dd>
+                        <dt>الاستيراد  </dt>
                             <dd>
                             تستخدم هذه النافذة من أجل استيراد الفواتير ,السندات ,المواد والأوراق المالية
                             إلى غيرها ضمن فروع الشركة لمعرفة الحركات التي تمت في هذه الفروع والعكس
                                     نستطيع طلب (استيراد من ملف) من القائمة-->ملف -->استيراد
                             </dd>
-                            <dt>النسخ الاحتياطي  </dt>
+                        <dt>النسخ الاحتياطي  </dt>
                             <dd>
                             من الضروري دوماً عمل نسخ احتياطية عن ملفاتك خوفاً من حدوث أخطاء أو من ضياع المعطيات نتيجة انقطاع مفاجئ في التيار الكهربائي
                             أو من حدوث عطل ما نتيجة فيروس أو حذف الملفاتٍ من قبل أحد مستخدمي الحاسب عن طريق الخطأ
                             حيث يوفر البرنامج طريقة لتخزين النسخ الاحتياطية على سطح المكتب 
                                 <p>
-                                نستطيع طلب (النسخ الاحتياطي) من القائمة --> ملف -->النسخ الاحتياطي
+                                    نستطيع طلب (النسخ الاحتياطي) من القائمة --> ملف -->النسخ الاحتياطي
                                 </p>
                             </dd>
-                        </dl>
-                        <p>
+                    </dl>
+                    <p>
                         <h6 class="c">   محتويات نافذة فتح ملف : </h6>
                         <B class="c"> الحقول :</B>
-                        
                             <table>
                                 <tr>
-                                    <th style= "width:27%">  اسم قاعدة البيانات </td>
+                                    <th style= "width:27%">  اسم قاعدة البيانات </th>
                                     <td style="height:30px">
                                     يرجى إدخال اسم قاعدة البيانات التي تريدالتعامل معها               
                                     </td>
@@ -98,7 +97,6 @@ include('include/nav.php');
                             </table>
 
                         <B class="c"> الأزرار :</B>
-
                         <table>
                             <tr>
                                 <th style= "width:10%">
@@ -131,7 +129,7 @@ include('include/nav.php');
                 </div>
             </section>
             <section id="account_section">
-                <div class="accounts" id="accounts">
+                <div class="" id="">
                         <h3 class="bd-title" id="content"> حسابات </h3>
                         <p class="bd-lead">
                         يمكن طلب نافذة بطاقة الحساب لتعريف حسابات جديدة أو استعراض معلومات ل حسابات معرفة 
@@ -427,7 +425,7 @@ include('include/nav.php');
                 </div>
             </section>
             <section id="item_section">
-                <div class="items"  id="items">
+                <div class=""  id="">
                     <h3 class="bd-title" id="content"> مواد </h3>
                     <p class="bd-lead">
                     يمكن طلب نافذة مواد  لتعريف مواد و أصناف جديدة  
@@ -609,12 +607,12 @@ include('include/nav.php');
                 </div>
             </section>
             <section id="bills_section">
-            <div class="bills" id="bills">
+            <div class="" id="">
 
             </div>
             </section>
             <section id="bonds_section"></section>
-            <div class="bonds" id="bonds">
+            <div class="" id="">
                 <h3 class="bd-title" id="content"> سندات </h3>
                 <p class="bd-lead">
                     تستخدم السندات المتوفرة ضمن البرنامج لتدوين العمليات اليومية المختلفة 
@@ -836,7 +834,7 @@ include('include/nav.php');
                     </table>
                 </p>
             </div>
-            <section id="">
+            <!-- <section id="">
             <div class="movment" id="movment">
                     <h3 class="bd-title" id="content"> حركات </h3>
                     <p class="bd-lead">
@@ -961,14 +959,14 @@ include('include/nav.php');
                     </dl>
                
 
-            </div>
-            </section>
+            <!-- </div>
+            </section>  -->
             <section id="setting_section">
-            <div class="setting" id="setting">
+            <div class="" id="">
             </div>
             </section>
             
-        </main>
+        <!-- </main> -->
     </div>
 </div>
 
@@ -984,8 +982,18 @@ include('include/footer.php');
     $('#file_section').show();
     $('#file_sidebar').prop('class' , 'active');
     
-    $('#file_section').hide();
-    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
   });
 
   
@@ -993,47 +1001,110 @@ include('include/footer.php');
     $('#account_section').show();
     $('#account_sidebar').prop('class' , 'active');
 
-    $('#account_section').hide();
-    $('#account_sidebar').removeClass('active');
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
+
   });
   
   $('#item_sidebar').click(function(){
     $('#item_section').show();
     $('#item_sidebar').prop('class' , 'active');
 
-    $('#item_section').hide();
-    $('#item_sidebar').removeClass('active');
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
   });
   
   $('#category_sidebar').click(function(){
     $('#category_section').show();
     $('#category_sidebar').prop('class' , 'active');
 
-    $('#category_section').hide();
-    $('#category_sidebar').removeClass('active');
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
   });
   
   $('#bills_sidebar').click(function(){
     $('#bills_section').show();
     $('#bills_sidebar').prop('class' , 'active');
 
-    $('#bills_section').hide();
-    $('#bills_sidebar').removeClass('active');
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
   });
   
   $('#bonds_sidebar').click(function(){
     $('#bonds_section').show();
     $('#bonds_sidebar').prop('class' , 'active');
 
-    $('#bonds_section').hide();
-    $('#bonds_sidebar').removeClass('active');
+    
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
   });
   
   $('#setting_sidebar').click(function(){
     $('#setting_section').show();
     $('#setting_sidebar').prop('class' , 'active');
 
-    $('#setting_section').hide();
-    $('#setting_sidebar').removeClass('active');
+    $('#file_section').hide();
+    $('#file_sidebar').removeClass('active');
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+   
   });
 </script>
