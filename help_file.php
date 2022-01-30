@@ -85,18 +85,19 @@ include('include/nav.php');
                             </dd>
                     </dl>
                     <p>
-                        <h6 class="c">   محتويات نافذة فتح ملف : </h6>
-                        <B class="c"> الحقول :</B>
-                            <table>
-                                <tr>
-                                    <th style= "width:27%">  اسم قاعدة البيانات </th>
-                                    <td style="height:30px">
-                                    يرجى إدخال اسم قاعدة البيانات التي تريدالتعامل معها               
-                                    </td>
-                                </tr>                                                    
-                            </table>
+                    <h6 class="c">   محتويات نافذة فتح ملف : </h6>
+                    <B class="c"> الحقول :</B>
+                        <table>
+                            <tr>
+                                <th style= "width:27%">  اسم قاعدة البيانات </th>
+                                <td style="height:30px">
+                                يرجى إدخال اسم قاعدة البيانات التي تريدالتعامل معها               
+                                </td>
+                            </tr>                                                    
+                        </table>
 
-                        <B class="c"> الأزرار :</B>
+                    <B class="c"> الأزرار :</B>
+
                         <table>
                             <tr>
                                 <th style= "width:10%">
@@ -611,7 +612,7 @@ include('include/nav.php');
 
             </div>
             </section>
-            <section id="bonds_section"></section>
+            <section id="bonds_section">
             <div class="" id="">
                 <h3 class="bd-title" id="content"> سندات </h3>
                 <p class="bd-lead">
@@ -834,7 +835,8 @@ include('include/nav.php');
                     </table>
                 </p>
             </div>
-            <!-- <section id="">
+            </section>
+            <section id=" movment_section">
             <div class="movment" id="movment">
                     <h3 class="bd-title" id="content"> حركات </h3>
                     <p class="bd-lead">
@@ -959,8 +961,8 @@ include('include/nav.php');
                     </dl>
                
 
-            <!-- </div>
-            </section>  -->
+            </div>
+            </section> 
             <section id="setting_section">
             <div class="" id="">
             </div>
@@ -994,6 +996,7 @@ include('include/footer.php');
     $('#bonds_sidebar').removeClass('active');
     $('#setting_section').hide();
     $('#setting_sidebar').removeClass('active');
+    
   });
 
   
