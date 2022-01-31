@@ -9,8 +9,6 @@ include('include/nav.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles/bills_list.css">
 </head>
 
@@ -23,7 +21,7 @@ include('include/nav.php');
             <div class="row py-4"   id="radio_row">
                 <div>
                     <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
-                    <label for="all_bills">جميع الفواتير</label>
+                    <label for="all_bills" style="cursor: pointer;">جميع الفواتير</label>
                 </div>
                 
                 <div>
@@ -52,6 +50,7 @@ include('include/nav.php');
                                 <th scope="col">المشتري</th>
                                 <th scope="col">الاجمالي</th>
                                 <th scope="col">الحالة</th>
+                                <th scope="col" >عمليات</th>
                             </tr>
                         </thead>
                         <tbody id="show">
@@ -77,11 +76,11 @@ include('include/nav.php');
                                 }
                                 echo "<td>" . $row['total_price'] . "</td>";
                                 if ($row['buyer_id'] != '0') {
-                                    echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
+                                    echo "<td class=' bg-success text-white'>" . "مباعة" . "</td><td>
                                         <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
                                         </td>";
                                 } else {
-                                    echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
+                                    echo "<td class='text-white bg-primary' style='background-color:'>" . "غير مباعة" . "</td><td>
                                         <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
                                         </td>";
                                 }

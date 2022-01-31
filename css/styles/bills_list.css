@@ -42,7 +42,11 @@ h3 {
 
 #tableFixHead thead th {
     position: sticky;
-    top: 0;
+    top: -1;
+    
+}
+thead{
+border: none;
 }
 
 th {
@@ -51,4 +55,5 @@ th {
     color: #050102;
     font-size: 18px;
     font-weight: normal;
+    
 }
