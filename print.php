@@ -28,14 +28,24 @@ function type($x){
 //$pageLayout = array($width,$height);
 //8.3/5.8=1.43 in
 //11.7/8.3=1.40 in 
+//4.1 x 5.8 A6
+//4.1/8.3=0.50
+//5.8/11.7=0.50
 
-$page_type = get_value_from_config('printing' , 'page_size');
+
+//$page_type = get_value_from_config('printing' , 'page_size');
+$page_type ='A6';
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
     $ratio = 0.71;
     $font_size = 8;
 }
+if($page_type == 'A6'){
+    $ratio = 0.50;
+    $font_size = 8;
+}
+
     
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer

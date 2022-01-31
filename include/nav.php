@@ -79,7 +79,7 @@
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li><a class="dropdown-item"  href="account_card.php" >بطاقة حساب</a><li>
      <li> <a class="dropdown-item" href="accountStatment.php">كشف حساب</a></li>
-      <li><a class="dropdown-item" href="account_list.php">قائمة حسابات  </a></li>
+      <li><a class="dropdown-item" href="account_list.php">قائمة الحسابات  </a></li>
       <li><a class="dropdown-item" href="report_comission.php">تقرير حركة كمسيون  </a></li>
     </ul>
   </li>
@@ -120,17 +120,14 @@
     <a class="nav-link" href="setting.php">الإعدادات</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="help.php">معلومات</a>
+    <a class="nav-link" href="help_file.php">معلومات</a>
   </li>
-
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="test_noor.php">Nour</a>
   </li>
-  
-  
   <li class="nav-item">
     <button class="nav-link" type="button" onclick="window.history.back()">BACK</button>
   </li>
@@ -143,6 +140,59 @@
   
 </ul>
 </html>
+
+
+<!-- <html dir="rtl" lang="ar">
+<nav class="menu">
+  <ul>
+    <li class="menu-item"><a href="index.php">الصفحة الرئيسية</a></li>
+    <li class="menu-item">
+      <a href="#0">ملف</a>
+      <ul class="sub-menu">
+        <li class="menu-item"><a href="open_file.php">فتح ملف</a></li>
+        <li class="menu-item"><a href="#">ملف جديد</a></li>
+        <li class="menu-item"><a href="#" onclick="document.getElementById('modal_restore_db_button').click()">استيراد</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a href="#0">حسابات</a>
+      <ul class="sub-menu">
+        <li class="menu-item"><a href="account_card.php" >بطاقة حساب</a></li>
+        <li class="menu-item"><a href="accountStatment.php">كشف حساب</a></li>
+        <li class="menu-item"><a href="account_list.php">قائمة الحسابات</a></li>
+        <li class="menu-item"><a href="report_comission.php">تقرير حركة كمسيون</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a href="#0">مواد</a>
+      <ul class="sub-menu">
+        <li class="menu-item"><a href="category_card.php" >بطاقة صنف</a></li>
+        <li class="menu-item"><a href="item_card.php">بطاقة مادة</a></li>
+        <li class="menu-item"><a href="item_list.php"> قائمة المواد</a></li>
+        <li class="menu-item"><a href="report_item.php" > تقرير حركة مادة</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a href="#0">فواتير</a>
+      <ul class="sub-menu">
+        <li class="menu-item"><a href="com_bill.php" >فاتورة جديدة</a></li>
+        <li class="menu-item"><a href="bills_list.php">قائمة الفواتير</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a href="#0">سندات</a>
+      <ul class="sub-menu">
+        <li class="menu-item"><a href="payment_bonds.php" >سند دفع</a></li>
+        <li class="menu-item"><a href="catch_bonds.php">سند قبض</a></li>
+      </ul>
+    </li>
+    <li class="menu-item"><a href="setting.php">الإعدادات</a></li>
+    <li class="menu-item"><a href="help_file.php">معلومات</a></li>
+    <li class="menu-item"><a href="about.php">حول البرنامج</a></li>
+  </ul>
+</nav>
+</html> -->
+
 
 
 <script>
