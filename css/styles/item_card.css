@@ -10,14 +10,10 @@ body {
 
 #btn_grp1,
 #button-grp2 {
-    border-radius: 4px;
-    /* text-align: center;  */
-    /* margin: 3px; */
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
+
 }
 
-#btn_grp1 {
-    /* margin-left: 20px; */
-}
 
 #button-grp2 {
     width: 70px;

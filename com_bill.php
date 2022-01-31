@@ -323,9 +323,9 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             </div>
             <div id='buttons' class="row justify-content-center">
                 <div class="col-5">
-                    <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" id="btn-grp">حفظ</button>
-                    <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update" id="btn-grp">تعديل</button>
-                    <button type="submit" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
+                    <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" class="btn btn-secondary" id="btn-grp">حفظ</button>
+                    <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update"class="btn btn-secondary" id="btn-grp">تعديل</button>
+                    <button type="submit" class="btn btn-secondary" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
                     <!-- <select name="print_option" id="">
                         <optgroup>
                             <option value="">بائع</option>
@@ -343,8 +343,8 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
                     <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
                         <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button> -->
-                    <button type="submit" name="print_seller">طباعة بائع</button>
-                    <button type="submit" name="print_buyer">طباعة مشتري</button>
+                    <button type="submit" name="print_seller"class="btn btn-secondary">طباعة بائع</button>
+                    <button type="submit" name="print_buyer" class=" btn btn-secondary">طباعة مشتري</button>
                     <!-- </div> -->
                 </div>
             </div>

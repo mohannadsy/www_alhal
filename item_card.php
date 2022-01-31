@@ -237,8 +237,8 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
             <div class="row py-4">
                 <div class="col-md-5 text-center">
-                    <a  href="category_card.php" > <button type="button" id="button-grp1"  name="">إضافة صنف</button></a>
-                    <a href="item_list.php"><button type="button" id="btn_grp1" name="view_items">استعراض المواد</button></a>
+                    <a  href="category_card.php" > <button type="button" class="btn btn-light" id="btn_grp1"  name="">إضافة صنف</button></a>
+                    <a href="item_list.php"><button type="button" class="btn btn-light" id="btn_grp1" name="view_items">استعراض المواد</button></a>
                     <!-- <a <?php // if (empty($item)) echo 'disabled' 
                         ?> href="item_card.php"><button type="button" id="btn_grp1" class="" name="item_card">
                             مادة جديدة
@@ -251,18 +251,18 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <!-- <div id="button_col" class="col-md-6 text-center" > -->
 
                 <div class="col-6">
-                    <button <?php if ((notempty($item))) echo 'disabled' ?> type="submit" name="add" id="button-grp2">
+                    <button <?php if ((notempty($item))) echo 'disabled' ?> type="submit" class="btn btn-light" name="add" id="button-grp2">
                         إضافة
                     </button>
                     <button <?php if ((empty($item))) echo 'disabled' 
-                            ?> type="submit" name="update" id="button-grp2">
+                            ?> type="submit" name="update" class="btn btn-light" id="button-grp2">
                         تعديل
                     </button>
                     <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (empty($item)) echo 'disabled' 
-                                                                                            ?> type="submit" name="delete" id="button-grp2">
+                                                                                            ?> type="submit" class="btn btn-light"  name="delete" id="button-grp2">
                         حذف
                     </button>
-                    <a href="ready.php"><button type="button" id="button-grp2" name="close"> إغلاق</button></a>
+                    <a href="ready.php"><button type="button" class="btn btn-light" id="button-grp2" name="close"> إغلاق</button></a>
 
 
                 </div>

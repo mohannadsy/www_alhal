@@ -160,14 +160,12 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 </div>
 
                 <div class="col-4 text-end">
-                    <div style="margin-right: 25px; margin-top:5px;">
-                        <button name="last_previous" id="last_previous">
-                            << </button>
-                                <button name="previous" id="previous">
-                                    < </button>
-                                        <button name="next" id="next"> > </button>
-                                        <button name="last_next" id="last_next"> >> </button>
-                                        <button name="current" id="current" hidden></button>
+                    <div style="margin-right: 60px; margin-top:5px;">
+                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
+                        <button name="previous" id="previous"><span>&#8249;</span> </button>
+                        <button name="next" id="next"> <span>&#8250;</span> </button>
+                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                        <button name="current" id="current" hidden></button>
                     </div>
                 </div>
 
@@ -276,16 +274,16 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 
 
-            <div class="row py-4">
-                <div class="col-md-12" id="button_col">
+            <div class="row justify-content-center py-3">
+                <div class="col-md-6" id="button_col">
 
-                    <button type="submit" id="btn-grp" class="" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
+                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
 
-                    <button type="submit" id="btn-grp" class="" <?php if (empty($account)) echo "disabled" ?> name="update">تعديل</button>
+                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account)) echo "disabled" ?> name="update">تعديل</button>
 
-                    <button type="submit" id="btn-grp" class="" <?php if (empty($account) || $account[0]['code'] == '1' || $account[0]['code'] == '2' || $account[0]['code'] == '3') echo "disabled" ?> name="delete" onclick="return confirm('هل تريد بالتأكيد حذف هذا الحساب !')">حذف</button>
+                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account) || $account[0]['code'] == '1' || $account[0]['code'] == '2' || $account[0]['code'] == '3') echo "disabled" ?> name="delete" onclick="return confirm('هل تريد بالتأكيد حذف هذا الحساب !')">حذف</button>
 
-                    <a href="ready.php"><button type="button" id="btn-grp" class="" name="close">إغلاق</button></a>
+                    <a href="ready.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
                 </div>
             </div>
 

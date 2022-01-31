@@ -12,10 +12,12 @@
 }
 
 #btn-grp {
-    border-radius: 4px;
+    /* border-radius: 4px;
     text-align: center;
-    /* margin: 3px; */
-    width: 80px;
+    width: 80px; */
+    margin: 0px 2px;
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
+    width: 70px;
 }
 
 #lbl_code,
@@ -35,4 +37,16 @@
 #last_next {
     /* margin: 0px 4px; */
     border-radius: 4px;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+   
+}
+span {
+  content: "\00BB";
+  content: "\00AB";
+  content: "\203A";
+  content: "\2039";
+}
+span{
+    font-size: 23px;
+    width: 25px;
 }
