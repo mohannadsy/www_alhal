@@ -16,7 +16,7 @@
 function convert_number_to_arabic_text($num){
   require 'vendor/autoload.php';
   $obj = new \ArPHP\I18N\Arabic();
-  echo $obj->int2str($num).' ليرة سورية فقط' ;
+  echo $obj->int2str($num).' ليرة سورية فقط لا غير' ;
 }
     ?>
 
