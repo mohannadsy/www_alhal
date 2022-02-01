@@ -35,7 +35,7 @@ include('include/nav.php');
                             echo "<tr>
                                     <td 
                                         id = '".$row[0]."' 
-                                        onclick='get_selected_database(\"".$row[0]."\")'>" . $row[0] . "  
+                                        onclick='get_selected_database(\"".$row[0]."\")'>" . str_replace('souq_' , '' , $row[0])  . "  
                                     </td>
                                 </tr>";
                         }

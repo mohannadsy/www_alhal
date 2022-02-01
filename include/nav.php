@@ -12,6 +12,11 @@
     include('helper/html_functions.php');
     include('helper/links.php');
 ?>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
+
 <link rel="stylesheet" href="css/nav.css">
 <!-- <nav class="navbar navbar-expand-lg navbar-dark">
 <div class="container">

@@ -188,9 +188,7 @@ include('include/nav.php');
 
                                 if (mysqli_num_rows($select_account_statements_exec) > 0)
                                     while ($row = mysqli_fetch_array($select_account_statements_exec)) {
-                                        $current_currency +=  ($row['maden'] - $row['daen']);
-                                        $total_daen += $row['daen'];
-                                        $total_maden += $row['maden'];
+
                                         /**
                                          * make links section
                                          */
@@ -202,32 +200,52 @@ include('include/nav.php');
                                             $document_type = 'رصيد افتتاحي';
                                         }
                                         if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
-                                            $href_link = href_code(COM_BILL, $row['code_number']);
-                                            $document_type = 'فاتورة رقم ' . $row['code_number'];
+                                            // input output
+                                            $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $row['code_number'])));
+
                                             if ($_POST['report_account_type'] == 'input') {
-                                                if ($row['other_account_id'] == 3)
-                                                    continue;
-                                                if ($row['main_account_id'] == 3)
-                                                    continue;
-                                            }
-                                            if ($_POST['report_account_type'] == 'output') {
-                                                if ($row['other_account_id'] == 2  || $row['other_account_id'] == 1)
-                                                    continue;
-                                            }
-                                        }
-                                        if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
-                                            if ($_POST['report_account_type'] == 'input') {
-                                                if ($row['other_account_id'] == 3)
+                                                if ($row['main_account_id'] == $bill_row['buyer_id'])
                                                     continue;
 
-                                                if ($row['main_account_id'] == 3)
+                                                if ($row['main_account_id'] == 3 || $row['other_account_id'] == 2)
                                                     continue;
                                             }
                                             if ($_POST['report_account_type'] == 'output') {
-                                                if ($row['other_account_id'] == 2  || $row['other_account_id'] == 1)
+                                                if ($row['main_account_id'] == $bill_row['seller_id'])
+                                                    continue;
+                                                if ($row['main_account_id'] == 2)
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 1 && $row['other_account_id'] == 3)
                                                     continue;
                                             }
+                                            $href_link = href_code(COM_BILL, $row['code_number']);
+                                            $document_type = 'فاتورة رقم ' . $row['code_number'];
+                                        }
+                                        if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
+
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
+
+                                            $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $bill_id)));
+
+                                            if ($_POST['report_account_type'] == 'input') {
+                                                if ($row['main_account_id'] == $bill_row['buyer_id'])
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 3 || $row['other_account_id'] == 2)
+                                                    continue;
+                                            }
+                                            if ($_POST['report_account_type'] == 'output') {
+                                                if ($row['main_account_id'] == $bill_row['seller_id'])
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 2)
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 1 && $row['other_account_id'] == 3)
+                                                    continue;
+                                            }
+
                                             $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
                                             $href_link = href_code(COM_BILL, $bill_code);
                                             $document_type = 'فاتورة رقم ' . $bill_code;
@@ -245,7 +263,9 @@ include('include/nav.php');
                                         }
 
                                         ///////////// End make links section //////////
-
+                                        $current_currency +=  ($row['maden'] - $row['daen']);
+                                        $total_daen += $row['daen'];
+                                        $total_maden += $row['maden'];
 
                                         echo "<tr ondblclick='window.open(\"$href_link\" , \"_self\")'>";
                                         echo "<td>" . $row['date'] . "</td>";
