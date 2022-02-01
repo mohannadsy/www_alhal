@@ -32,9 +32,15 @@ function type($x){
 //4.1/8.3=0.50
 //5.8/11.7=0.50
 
+$title='أبناء المرحوم صالح درويش';
+$location='جبلة-رأس العين س -ت 40592';
+$name1 = 'طلال ';
+$name2= 'جلال ';
+$phone1='0988828388';
+$phone2='0944571145';
 
 //$page_type = get_value_from_config('printing' , 'page_size');
-$page_type ='A6';
+$page_type ='A4';
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -43,7 +49,7 @@ if($page_type == 'A5'){
 }
 if($page_type == 'A6'){
     $ratio = 0.50;
-    $font_size = 8;
+    $font_size = 6;
 }
 
     
@@ -88,32 +94,54 @@ if(isset($_GET['code'])){
     $pdf->SetFont('arial', '', $font_size);
 
     // print newline
-    $pdf->Ln();
+    //$pdf->Ln();
 
     // Add a page
 	$pdf->AddPage();
+    $pdf->SetFont('aealarabiya', '', 14);
+    $html='
+    <style>
+        
+    </style>
+    <h2>'.$title.'</h2>';
+    $pdf->writeHTML($html, true, false, true, false, '');
+    //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->Cell(0, 0, $location, 0, 1, 'R', 0, '', 0);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $num_bill ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(5);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', $font_size);
     $date = 'تاريخ الفاتورة: ' . $bill['date'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $date ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(8);
-
+    $pdf->MultiCell(140 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    $pdf->SetFont('arial', '', $font_size);
+    
+   
+    $pdf->Ln(7);
+    
     $name=' البائع: ' . $seller['name'];
     if($_GET['print_type'] == 'buyer')
         $name =' المشتري : ' . $buyer['name'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'L', 0, 0, '', '', true);
 
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
     if($_GET['print_type'] == 'buyer')
         $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $payment_method ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(8);
+    $pdf->MultiCell(105 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+    $pdf->Ln(6);
 
     $notes='ملاحظات: ' . $bill['seller_note'];
     if($_GET['print_type'] == 'buyer')
         $notes='ملاحظات: ' . $bill['buyer_note'];
-    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(10);
+    $pdf->Cell(0, 0, $notes, 0, 1, 'R', 0, '', 0);
+    //$pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(4);
 
     // Set some content to print
     $content = '';
@@ -164,12 +192,12 @@ if(isset($_GET['code'])){
     }else{
         $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
-        $pdf->Ln(8);
+        $pdf->Ln(6);
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'];
-        $pdf->MultiCell(25 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
+        $pdf->MultiCell(35 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
         $com_value='قيمته: ' . $bill['com_value'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
-        $pdf->Ln(8);
+        $pdf->Ln(6);
         $real_price='الصافي: ' . $bill['real_price'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
     }
