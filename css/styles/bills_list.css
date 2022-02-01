@@ -57,3 +57,30 @@ th {
     font-weight: normal;
     
 }
+.sold{
+    background-color: #002E60;
+    width: 75px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 3px;
+    text-align: center;
+}
+.not_sold{
+    background-color:#207CDF ;
+    width: 75px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 3px;
+    text-align: center;
+
+}
+.btn{
+    -moz-box-shadow: inset 0 0 10px rgb(39, 34, 34);
+    -webkit-box-shadow: inset 0 0 10px rgb(39, 34, 34);
+    box-shadow: inset 0 0 10px rgb(39, 34, 34);
+    width: 100px;
+
+}
+.radio_lbl{
+    cursor: pointer;
+}

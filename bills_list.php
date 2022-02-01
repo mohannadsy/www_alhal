@@ -21,17 +21,17 @@ include('include/nav.php');
             <div class="row py-4"   id="radio_row">
                 <div>
                     <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
-                    <label for="all_bills" style="cursor: pointer;">جميع الفواتير</label>
+                    <label class="radio_lbl" for="all_bills">جميع الفواتير</label>
                 </div>
                 
                 <div>
                     <input name="search_bill" value="not_sell_bills" id="not_sell_bills" type="radio" />
-                    <label for="not_sell_bills">الفواتير الغير مباعة</label>
+                    <label class="radio_lbl" for="not_sell_bills">الفواتير الغير مباعة</label>
                 </div>
                 
                 <div>
                     <input name="search_bill" value="sell_bills" id="sell_bills"  type="radio" />
-                    <label for="sell_bills">الفواتير المباعة</label>
+                    <label class="radio_lbl" for="sell_bills">الفواتير المباعة</label>
                 </div>
                
                 
@@ -76,11 +76,11 @@ include('include/nav.php');
                                 }
                                 echo "<td>" . $row['total_price'] . "</td>";
                                 if ($row['buyer_id'] != '0') {
-                                    echo "<td class=' bg-success text-white'>" . "مباعة" . "</td><td>
+                                    echo "<td class=' text-white'><center> <div class='sold'> " . "مباعة" . "</div></center></td><td>
                                         <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
                                         </td>";
                                 } else {
-                                    echo "<td class='text-white bg-primary' style='background-color:'>" . "غير مباعة" . "</td><td>
+                                    echo "<td class='text-white' ><center> <div class='not_sold'>" . "غير مباعة" . "</div></center></td><td>
                                         <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
                                         </td>";
                                 }
