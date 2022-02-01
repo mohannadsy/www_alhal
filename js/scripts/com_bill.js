@@ -45,8 +45,13 @@ function createCell(cell, text, style, id, name, row_number) {
     if (id == 'numbers') {
         div.setAttribute('value', row_number + 1);
         // cell.style = 'width:10px';
-        div.style = 'width:10px;border:none;padding-top:5px';
+        cell.style = 'width:10px;border:none;padding:0';
     }
+    
+    if (id == 'units') {
+        cell.style = 'width:10px;border:none;padding:0';
+    }
+    
     if (id == 'discounts') {
         div.setAttribute('type', 'number');
         div.setAttribute('value', 2);
