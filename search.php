@@ -69,6 +69,9 @@ if (isset($_POST["account_search_part"])) {
         while ($row = mysqli_fetch_array($result)) {
             $current_maden = get_current_maden_using_id($con, $row['id']);
             $current_daen = get_current_daen_using_id($con, $row['id']);
+            if($row['account_id'] == 0)
+            $output .= '<tr class="alert-success" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
+            else
             $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['code'] . '</td>
                 <td>' . $row['name'] . '</td>';

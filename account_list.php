@@ -28,9 +28,9 @@ include('include/nav.php');
                 </div>
 
                 <div class="col-8" id="new_account_col">
-                        <button type="button" class=" btn" name="" >
-                             طباعة
-                        </button>
+                    <button type="button" class=" btn" name="">
+                        طباعة
+                    </button>
                     <a href="<?= ACCOUNT_CARD ?>"><button type="button" class=" btn" name="new_account">
                             حساب جديد
                         </button></a>
@@ -50,26 +50,37 @@ include('include/nav.php');
                         </thead>
                         <tbody id="show">
                             <?php
-                            $select_accounts_query = selectND('accounts') . andWhereLarger('id', '3');
+                            $select_accounts_query = selectND('accounts') . andWhereLarger('id', '3') . andWhere('account_id', 0);
                             $select_accounts_exec = mysqli_query($con, $select_accounts_query);
                             while ($row = mysqli_fetch_array($select_accounts_exec)) {
-                                echo '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
+                                echo '<tr class="alert-success" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
                                 echo '<td>' . $row['code'] . '</td>';
                                 echo '<td>' . $row['name'] . '</td>';
-                                if ($row['account_id'] != 0) {
-                                    $current_maden = get_current_maden_using_id($con, $row['id']);
-                                    $current_daen = get_current_daen_using_id($con, $row['id']);
-                                    echo '<td>' . $current_daen . '</td>';
-                                    echo '<td>' . $current_maden . '</td>';
-                                }else{
-                                    $current_maden = get_current_maden_for_main_account_using_id($con, $row['id']);
-                                    $current_daen = get_current_daen_for_main_account_using_id($con, $row['id']);
-                                    echo '<td>' . $current_daen . '</td>';
-                                    echo '<td>' . $current_maden . '</td>';
-                                }
-                                
+
+                                $current_maden = get_current_maden_for_main_account_using_id($con, $row['id']);
+                                $current_daen = get_current_daen_for_main_account_using_id($con, $row['id']);
+                                echo '<td>' . $current_daen . '</td>';
+                                echo '<td>' . $current_maden . '</td>';
+
                                 echo '<td>' . ($current_maden - $current_daen) . '</td>';
                                 echo '</tr>';
+                                $select_accounts_child_query = selectND('accounts'). andWhereLarger('id', '3') . andWhere('account_id', $row['id']);
+                                $select_accounts_child_exec = mysqli_query($con, $select_accounts_child_query);
+                                while ($row_child = mysqli_fetch_array($select_accounts_child_exec)) {
+
+                                    echo '<tr ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
+                                    echo '<td>' . $row_child['code'] . '</td>';
+                                    echo '<td>' . $row_child['name'] . '</td>';
+
+                                    $current_maden = get_current_maden_using_id($con, $row_child['id']);
+                                    $current_daen = get_current_daen_using_id($con, $row_child['id']);
+                                    echo '<td>' . $current_daen . '</td>';
+                                    echo '<td>' . $current_maden . '</td>';
+
+
+                                    echo '<td>' . ($current_maden - $current_daen) . '</td>';
+                                    echo '</tr>';
+                                }
                             }
                             ?>
                         </tbody>
