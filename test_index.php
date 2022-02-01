@@ -52,7 +52,7 @@ if(isset($_POST['drop_tables_DB'])){
     drop_all_tables($con);
 }
 if(isset($_POST['import_tables_DB'])){
-    import_database_tables($con, get_value_from_config('sql_path'));
+    import_database_tables($con, get_value_from_config('sql_path_basic_data'));
 }
 ?>
 

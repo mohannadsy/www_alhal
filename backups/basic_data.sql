@@ -68,6 +68,7 @@ CREATE TABLE `bill_item` (
   `bill_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `total_weight` varchar(250) DEFAULT NULL,
+  `discount` int(11) NOT NULL,
   `real_weight` varchar(250) DEFAULT NULL,
   `price` varchar(250) DEFAULT NULL,
   `total_item_price` varchar(250) DEFAULT NULL,

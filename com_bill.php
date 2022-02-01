@@ -282,12 +282,12 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                     <th contenteditable='false'>الوحدة</th>
                                     <!-- <th contenteditable='false'>عدد العبوات</th> -->
                                     <th contenteditable='false'>وزن قائم</th>
-                                    
+                                    <th class="discount" style="display: none;" contenteditable='false'>الخصم</th>
                                     <th contenteditable='false'>وزن الصافي</th>
                                     <th contenteditable='false'> الإفرادي </th>
                                     <th contenteditable='false'>الإجمالي </th>
                                     <th id="notes" contenteditable='false'>ملاحظات</th>
-                                    <th class="discount" style="display: none;" contenteditable='false'>نسبة التحويل</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -1018,11 +1018,11 @@ for ($i = 0; $i < count($items); $i++)
         document.getElementById('items_' + $i).value = '" . @get_name_and_code_from_table_using_id($con, 'items', $items[$i]['item_id']) . "';
         document.getElementById('units_' + $i).value = '" . @$items[$i]['unit'] . "';
         document.getElementById('total_weights_' + $i).value = '" . @$items[$i]['total_weight'] . "';
+        document.getElementById('discounts_' + $i).value = '" . @$items[$i]['discount'] . "';
         document.getElementById('real_weights_' + $i).value = '" . @$items[$i]['real_weight'] . "';
         document.getElementById('prices_' + $i).value = '" . @$items[$i]['price'] . "';
         document.getElementById('total_item_prices_' + $i).value = '" . @$items[$i]['total_item_price'] . "';
         document.getElementById('note_' + $i).value = '" . @$items[$i]['bill_item_note'] . "';
-        document.getElementById('discounts_' + $i).value = '" . @$items[$i]['discount'] . "';
 </script>"
 ?>
 
