@@ -6,6 +6,8 @@ include('helper/ready_queries_functions.php');
 include('helper/config_functions.php');
 include('helper/operation_functions.php');
 
+require 'vendor/autoload.php';
+
 class PDF extends TCPDF{
     public function Header(){
     }
@@ -21,7 +23,10 @@ function type($x){
     }
 
 }
-
+function convert_number_to_arabic_text($num){
+    $obj = new \ArPHP\I18N\Arabic();
+    return $obj->int2str($num).' ليرة سورية فقط لا غير' ;
+  }
 //ratio between A4 and A5
 //A4: 8.3*11.7in
 //A5: 5.8*8.3in
@@ -52,7 +57,6 @@ if($page_type == 'A6'){
     $font_size = 6;
 }
 
-    
 //طباعة فاتورة بائع وفاتورة مشتري
 // $_GET['print_type'] => seller || buyer
 if(isset($_GET['code'])){
@@ -99,11 +103,29 @@ if(isset($_GET['code'])){
     // Add a page
 	$pdf->AddPage();
     $pdf->SetFont('aealarabiya', '', 14);
-    $html='
+
+    if($page_type == 'A4'){
+        $html='
     <style>
         
     </style>
     <h2>'.$title.'</h2>';
+    }
+    if($page_type == 'A5'){
+        $html='
+    <style>
+        
+    </style>
+    <h4>'.$title.'</h4>';
+    }
+    if($page_type == 'A6'){
+        $html='
+    <style>
+        
+    </style>
+    <h6>'.$title.'</h6>';
+    }
+
     $pdf->writeHTML($html, true, false, true, false, '');
     //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
     $pdf->SetFont('aealarabiya', '', $font_size);
@@ -113,7 +135,7 @@ if(isset($_GET['code'])){
     $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
     $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5);
+    $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
     $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
@@ -123,7 +145,7 @@ if(isset($_GET['code'])){
     $pdf->SetFont('arial', '', $font_size);
     
    
-    $pdf->Ln(7);
+    $pdf->Ln(7*$ratio);
     
     $name=' البائع: ' . $seller['name'];
     if($_GET['print_type'] == 'buyer')
@@ -134,14 +156,14 @@ if(isset($_GET['code'])){
     if($_GET['print_type'] == 'buyer')
         $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
     $pdf->MultiCell(105 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
-    $pdf->Ln(6);
+    $pdf->Ln(6*$ratio);
 
     $notes='ملاحظات: ' . $bill['seller_note'];
     if($_GET['print_type'] == 'buyer')
         $notes='ملاحظات: ' . $bill['buyer_note'];
     $pdf->Cell(0, 0, $notes, 0, 1, 'R', 0, '', 0);
     //$pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(4);
+    $pdf->Ln(4*$ratio);
 
     // Set some content to print
     $content = '';
@@ -187,17 +209,20 @@ if(isset($_GET['code'])){
         </table>';
 	$pdf->writeHTML($content);
     if($_GET['print_type'] == 'buyer'){
-        $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
-        $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+        $fun = convert_number_to_arabic_text($bill['total_price']);
+        $total_price='الإجمالي: ' . $bill['total_price'] . $fun;
+       
+        
+        $pdf->MultiCell(100 * $ratio, 6 * $ratio,$total_price  ,0, 'R', 0, 0, '', '', true);
     }else{
         $total_price='الإجمالي: ' . $bill['total_price'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
-        $pdf->Ln(6);
+        $pdf->Ln(6*$ratio);
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'];
         $pdf->MultiCell(35 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
         $com_value='قيمته: ' . $bill['com_value'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
-        $pdf->Ln(6);
+        $pdf->Ln(6*$ratio);
         $real_price='الصافي: ' . $bill['real_price'] .' ل. س ';
         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
     }
@@ -231,19 +256,48 @@ if(isset($_GET['payment_code'])){
     $pdf->setLanguageArray($lg);
 
     // set font
-    $pdf->SetFont('arial', 'B', 24);
+    //$pdf->SetFont('arial', 'B', 24);
     // Add a page
 	$pdf->AddPage();
+    $pdf->SetFont('aealarabiya', '', 14);
+
+    if($page_type == 'A4'){
+        $html='
+    <style>
+        
+    </style>
+    <h2>'.$title.'</h2>';
+    }
+    if($page_type == 'A5'){
+        $html='
+    <style>
+        
+    </style>
+    <h4>'.$title.'</h4>';
+    }
+    if($page_type == 'A6'){
+        $html='
+    <style>
+        
+    </style>
+    <h6>'.$title.'</h6>';
+    }
+
+    $pdf->writeHTML($html, true, false, true, false, '');
+    //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->Cell(0, 0, $location, 0, 1, 'R', 0, '', 0);
+
     $tilte='سند دفع';
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
-    $pdf->Ln(3);
+    $pdf->Ln(3*$ratio);
     $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
     $pdf->MultiCell(172 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(8);
+    $pdf->Ln(6*$ratio);
     $date = 'تاريخ السند: ' . $payment_bond['date'];
     $pdf->MultiCell(189 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(7);
+    $pdf->Ln(6*$ratio);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
     $account = 'الحساب: ' .$main_account;
     $pdf->MultiCell(80 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
@@ -251,10 +305,10 @@ if(isset($_GET['payment_code'])){
     $pdf->MultiCell(95 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
     
     
-    $pdf->Ln(7);
+    $pdf->Ln(6*$ratio);
     $notes='ملاحظات: ' . $payment_bond['main_note'];
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(10);
+    $pdf->Ln(6*$ratio);
 
     // Set some content to print
     $content = '';
