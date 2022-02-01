@@ -31,16 +31,25 @@ h2,
 #btn-grp {
     border-radius: 4px;
     text-align: center;
-    margin: 1px;
-    width: 80px;
+    margin: 1px 3px;
+    width: 60px;
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
+    cursor: pointer;
 }
 
 #last_previous,
 #previous,
 #next,
 #last_next {
-    margin: 0px 4px;
     border-radius: 4px;
+    margin: 0px 2px;
+    padding-right: 6px;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+}
+span{
+    font-size: 23px;
+    width: 25px;
+   
 }
 
 .modal {
@@ -89,5 +98,14 @@ h4 {}
 }
 
 #code {
-    margin-right: 5px;
+    margin-right: 20px;
+    width: 70px;
+    margin-right:5px;
+}
+
+
+#lbl_code{
+    padding-right: 25px;
+    margin-left: 4px;
+
 }

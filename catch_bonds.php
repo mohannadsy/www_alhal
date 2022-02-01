@@ -134,10 +134,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <h2> سند قبض</h2>
                 </div>
                 <div class="col-3 " id="receipt_number">
-                    <div class="row" style=" padding-top: 10px;padding-right: 30px; ">
-                        <label name=" "> رقم الإيصال</label>
+                    <div class="row" style=" padding-top: 10px; ">
+                        <label id="lbl_code"> رقم الإيصال</label>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6" style="background-color: green;"> -->
                             <input type="number" id="code" value="<?php if (($next_catch_code == '' && isset($_POST['next'])) ||
                                                                         (isset($_POST['previous']) && $previous_catch_code == '') ||
                                                                         (!isset($_POST['code']))
@@ -149,35 +149,33 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                                                                     elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                     elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
-                        </div>
+                        <!-- </div> -->
 
                     </div>
 
                 </div>
-                <div class="col-4 text-end">
-                    <div class="row justify-content-end" style="padding-top: 10px;">
-                        <button name="last_previous" id="last_previous">
-                            << </button>
-                                <button name="previous" id="previous">
-                                    < </button>
-                                        <button name="next" id="next"> > </button>
-                                        <button name="last_next" id="last_next"> >> </button>
-                                        <button name="current" id="current" hidden></button>
+                <div class="col-5">
+                    <div class="row justify-content-end" style="padding-top: 10px;margin-left:25;">
+                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
+                        <button name="previous" id="previous"><span>&#8249;</span> </button>
+                        <button name="next" id="next"> <span>&#8250;</span> </button>
+                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                        <button name="current" id="current" hidden></button>
                     </div>
                 </div>
             </div>
 
-            <div class="row py-3" id="inf_row">
+            <div class="row py-4" id="inf_row" >
                 <div id="account" class="col-sm-6 col-md-4">
                     <div class="form-group row">
-                        <label class="col-sm-6 col-md-3 col-form-label"> الحساب</label>
+                        <label class="col-sm-6 col-md-2 col-form-label"> الحساب</label>
                         <div class="col-md-9">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?php if (empty($catch_bonds)) echo get_box_account($con);
                                                                                                                                                                                                                                                     else echo get_name_and_code_from_table_using_id($con, 'accounts', $catch_bonds[0]['main_account_id']); ?>">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-6 col-md-3 col-form-label ">التاريخ </label>
+                        <label class="col-sm-6 col-md-2 col-form-label ">التاريخ </label>
                         <div class="col-md-9">
                             <input type="date" class="form-control" name="date" id="date" min="" max="" value="<?php if (empty($catch_bonds)) echo date('Y-m-d');
                                                                                                                 else echo $catch_bonds[0]['date'] ?>">
@@ -186,13 +184,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 </div>
                 <div id="currency_notes" class="col-sm-10 col-md-5">
                     <div class="form-group row">
-                        <label class=" col-sm-6 col-md-3 col-form-label text-md-right">العملة </label>
+                        <label class=" col-sm-6 col-md-2 col-form-label text-md-right">العملة </label>
                         <div class="col-md-8">
                             <input name="currency" id="currency" class="form-control" value="ليرة سورية" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="note" class="col-sm-6 col-md-3 col-form-label text-md-right"> ملاحظات</label>
+                        <label for="note" class="col-sm-6 col-md-2 col-form-label text-md-right"> ملاحظات</label>
                         <div class="col-md-8">
                             <textarea rows="2" type="text" id="" class="form-control" name="notes"><?php if (empty($catch_bonds)) echo '';
                                                                                                     else echo $catch_bonds[0]['main_note']; ?></textarea>
@@ -220,22 +218,22 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <input id="total" type="text" id="resault" class="form-control" name="total">
                 </div>
             </div>
-            <div class="row justify-content-end  py-3 px-5">
-                <div class="col-md-5" id='buttons'>
-                    <button type="submit" class="" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
+            <div class="row justify-content-end  py-4 px-5 mx-4">
+                <!-- <div class="col-md-5" id="buttons"> -->
+                    <button type="submit" class="form-control" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="" id="btn-grp" name="print">
+                    <button type="submit" class="form-control" id="btn-grp" name="print">
                         طباعة
                     </button>
-                    <button class="" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
+                    <button class="form-control" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
                         تعديل
                     </button>
 
-                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class=" " id="btn-grp" name="delete" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="form-control " id="btn-grp" name="delete" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </form>

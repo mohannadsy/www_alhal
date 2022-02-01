@@ -152,22 +152,20 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
             <!-- <div class="row justify-content-center"> -->
             <!-- <div id="item_col" class="col-sm-10 col-md-12 text-center py-5"> -->
-            <div class="row justify-content-end py-3">
+            <div class="row py-3">
                 <div class="col-8">
                     <h4>
                         بطاقة مادة
                     </h4>
                 </div>
                 <div class="col-4">
-                    <div style="margin-right: 25px;">
+                    <div class="row justify-content-end" style="margin-left: 15px;">
 
-                        <button name="last_previous" id="last_previous">
-                            << </button>
-                                <button name="previous" id="previous">
-                                    < </button>
-                                        <button name="next" id="next"> > </button>
-                                        <button name="last_next" id="last_next"> >> </button>
-                                        <button name="current" id="current" hidden></button>
+                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8249;</span> </button>
+                        <button name="next" id="next"> <span>&#8250;</span> </button>
+                        <button name="last_next" id="last_next"><span>&#187;</span> </button>
+                        <button name="current" id="current" hidden></button>
                     </div>
                 </div>
 
