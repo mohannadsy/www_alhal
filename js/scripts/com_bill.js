@@ -23,8 +23,8 @@ function count_total_price() {
 
 
 
-var item_bill_name = ['numbers[]', 'items[]', 'units[]', 'total_weights[]', 'real_weights[]', 'prices[]', 'total_item_prices[]', 'note[]'];
-var item_bill_id = ['numbers', 'items', 'units', 'total_weights', 'real_weights', 'prices', 'total_item_prices', 'note'];
+var item_bill_name = ['numbers[]', 'items[]', 'units[]', 'total_weights[]', 'real_weights[]', 'prices[]', 'total_item_prices[]', 'note[]' ,'discounts[]'];
+var item_bill_id = ['numbers', 'items', 'units', 'total_weights' ,  'real_weights', 'prices', 'total_item_prices', 'note', 'discounts'];
 
 function createCell(cell, text, style, id, name, row_number) {
     var div = document.createElement('input'), // create DIV element
@@ -45,6 +45,14 @@ function createCell(cell, text, style, id, name, row_number) {
     if (id == 'numbers') {
         div.setAttribute('value', row_number + 1);
     }
+    if( id == 'discounts'){
+        div.setAttribute('type' , 'number');
+        div.setAttribute('value' , 2);
+        div.setAttribute('min' , 0);
+        div.setAttribute('class' , 'discount');
+        div.style = 'display:none';
+    }
+    
     if (id == 'total_item_prices' || id == 'total_weights' || id == 'prices') {
         div.setAttribute('value', '0');
         div.setAttribute('type', 'number');
@@ -56,11 +64,19 @@ function createCell(cell, text, style, id, name, row_number) {
 
     if (text == '3') { // action to real weight => 2% of total weight
         div.addEventListener('blur', function() {
-            document.getElementById('real_weights_' + row_number).value = Math.round(div.value * 0.98);
+            document.getElementById('real_weights_' + row_number).value = Math.round(div.value - (div.value * document.getElementById('discounts_' + row_number).value /100));
             document.getElementById('total_item_prices_' + row_number).value = Math.round(document.getElementById('prices_' + row_number).value * document.getElementById('real_weights_' + row_number).value);
             count_total_price();
         });
     }
+    if (text == '8') { // action to discounts => real weight => 2% of total weight
+        div.addEventListener('blur', function() {
+            document.getElementById('real_weights_' + row_number).value = Math.round(document.getElementById('total_weights_' + row_number).value - (document.getElementById('total_weights_' + row_number).value * div.value /100));
+            document.getElementById('total_item_prices_' + row_number).value = Math.round(document.getElementById('prices_' + row_number).value * document.getElementById('real_weights_' + row_number).value);
+            count_total_price();
+        });
+    }
+
 
     if (text == '5') { // action to total prices (prices * real_weight)
         div.addEventListener('blur', function() {

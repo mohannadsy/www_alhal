@@ -29,10 +29,10 @@ if (isset($_POST['upload'])) {
     <form action = "?" method = "POST" enctype="multipart/form-data">
         
        <p>
-       <button style="width: 110px;border-radius: 4px; font-size:17;" class="" onclick="document.getElementById('file').click()">قم باختيار الملف</button>
+       <button type="button" style="width: 110px;border-radius: 4px; font-size:17;" class="" onclick="document.getElementById('file').click()">قم باختيار الملف</button>
        <input type="file"  name="file" id="file" style="display:none" /> 
     </p>
-       <p> <input type="button" class="" id="upload" name="upload"  value="موافق" style=" width: 110px;border-radius: 4px; font-size:17;"/>  </p>
+       <p> <input type="submit" class="" id="upload" name="upload"  value="موافق" style=" width: 110px;border-radius: 4px; font-size:17;"/>  </p>
     </form>
     </div>
 </body>

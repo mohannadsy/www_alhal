@@ -263,8 +263,11 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
             <div class="row py-4">
                 <div class="col-1">
-                    <div class="row justify-content-end">
+                <div class="row justify-content-end">
                         <button type="button" id="add_row">+</button>
+                    </div>
+                    <div class="row justify-content-end">
+                        <button type="button" id="toggle_discount">d</button>
                     </div>
 
                 </div>
@@ -279,10 +282,12 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                     <th contenteditable='false'>الوحدة</th>
                                     <!-- <th contenteditable='false'>عدد العبوات</th> -->
                                     <th contenteditable='false'>وزن قائم</th>
+                                    
                                     <th contenteditable='false'>وزن الصافي</th>
                                     <th contenteditable='false'> الإفرادي </th>
                                     <th contenteditable='false'>الإجمالي </th>
                                     <th id="notes" contenteditable='false'>ملاحظات</th>
+                                    <th class="discount" style="display: none;" contenteditable='false'>نسبة التحويل</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -412,6 +417,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
                     'bill_id' => $current_bill_id,
                     'item_id' => $item_id,
                     'total_weight' => $_POST['total_weights'][$key],
+                    'discount' => $_POST['discounts'][$key],
                     'real_weight' => $_POST['real_weights'][$key],
                     'price' => $_POST['prices'][$key],
                     'total_item_price' => $_POST['total_item_prices'][$key],
@@ -671,6 +677,7 @@ if (isset($_POST['update'])) {
                 'bill_id' => $current_bill_id_to_update,
                 'item_id' => $item_id,
                 'total_weight' => $_POST['total_weights'][$key],
+                'discount' => $_POST['discounts'][$key],
                 'real_weight' => $_POST['real_weights'][$key],
                 'price' => $_POST['prices'][$key],
                 'total_item_price' => $_POST['total_item_prices'][$key],
@@ -1015,6 +1022,7 @@ for ($i = 0; $i < count($items); $i++)
         document.getElementById('prices_' + $i).value = '" . @$items[$i]['price'] . "';
         document.getElementById('total_item_prices_' + $i).value = '" . @$items[$i]['total_item_price'] . "';
         document.getElementById('note_' + $i).value = '" . @$items[$i]['bill_item_note'] . "';
+        document.getElementById('discounts_' + $i).value = '" . @$items[$i]['discount'] . "';
 </script>"
 ?>
 
@@ -1090,5 +1098,12 @@ for ($i = 0; $i < count($items); $i++)
         $(`#items_${(document.getElementById('tbl').rows.length - 2)}`).autocomplete({
             source: tags_items
         });
+    });
+</script>
+
+<!-- toggle discount col -->
+<script>
+    $('#toggle_discount').click(function(){
+        $('.discount').toggle();
     });
 </script>

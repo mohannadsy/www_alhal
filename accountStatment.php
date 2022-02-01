@@ -65,8 +65,22 @@ include('include/nav.php');
                             <label id="lbl_radio">مختصر</label>
                         </div>
                         <div class="form-check ">
-                            <input type="radio" name="report_type" id="report_type_details" value="details" <?php if(get_value_from_config('account_statement' , 'report_type_details') == 'true') echo 'checked' ?>>
+                            <input type="radio" name="report_type" id="report_type_details" value="details" <?php if (get_value_from_config('account_statement', 'report_type_details') == 'true') echo 'checked' ?>>
                             <label id="lbl_radio">تفصيلي</label>
+                        </div>
+                        <div class="row">
+                            <div class="form-check ">
+                                <input checked type="radio" name="report_account_type" id="account_type_all" value="all">
+                                <label for="account_type_all" id="lbl_radio">الكل</label>
+                            </div>
+                            <div class="form-check" style="margin-right: 5px;">
+                                <input type="radio" name="report_account_type" id="account_type_input" value="input" <?php if (isset($_POST['report_account_type']) && $_POST['report_account_type'] == 'input') echo ' checked'  ?>>
+                                <label for="account_type_input" id="lbl_radio">ادخالات</label>
+                            </div>
+                            <div class="form-check ">
+                                <input type="radio" name="report_account_type" id="account_type_output" value="output" <?php if (isset($_POST['report_account_type']) && $_POST['report_account_type'] == 'output') echo ' checked'  ?>>
+                                <label for="account_type_output" id="lbl_radio">اخراجات</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,19 +90,19 @@ include('include/nav.php');
 
                         <div class="col-6">
                             <div class="form-check">
-                                <input type="checkbox" value="" id="item_hidden" <?php if(get_value_from_config('account_statement' , 'item') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="item_hidden" <?php if (get_value_from_config('account_statement', 'item') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     المادة
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="total_weight_hidden"  <?php if(get_value_from_config('account_statement' , 'total_weight') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="total_weight_hidden" <?php if (get_value_from_config('account_statement', 'total_weight') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الوزن القائم
                                 </label>
                             </div>
                             <div>
-                                <input type="checkbox" value="" id="real_weight_hidden"  <?php if(get_value_from_config('account_statement' , 'real_weight') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="real_weight_hidden" <?php if (get_value_from_config('account_statement', 'real_weight') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الوزن الصافي
                                 </label>
@@ -97,19 +111,19 @@ include('include/nav.php');
                         <div class="col-6">
 
                             <div class="form-check">
-                                <input type="checkbox" value="" id="price_hidden"  <?php if(get_value_from_config('account_statement' , 'price') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="price_hidden" <?php if (get_value_from_config('account_statement', 'price') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الإفرادي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="total_item_price_hidden"  <?php if(get_value_from_config('account_statement' , 'total_item_price') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="total_item_price_hidden" <?php if (get_value_from_config('account_statement', 'total_item_price') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الإجمالي
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="com_value_hidden"  <?php if(get_value_from_config('account_statement' , 'com_value') == 'true') echo 'checked' ?>>
+                                <input type="checkbox" value="" id="com_value_hidden" <?php if (get_value_from_config('account_statement', 'com_value') == 'true') echo 'checked' ?>>
                                 <label for="">
                                     الكمسيون
                                 </label>
@@ -190,8 +204,29 @@ include('include/nav.php');
                                         if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
                                             $href_link = href_code(COM_BILL, $row['code_number']);
                                             $document_type = 'فاتورة رقم ' . $row['code_number'];
+                                            if ($_POST['report_account_type'] == 'input') {
+                                                if ($row['other_account_id'] == 3)
+                                                    continue;
+                                                if ($row['main_account_id'] == 3)
+                                                    continue;
+                                            }
+                                            if ($_POST['report_account_type'] == 'output') {
+                                                if ($row['other_account_id'] == 2  || $row['other_account_id'] == 1)
+                                                    continue;
+                                            }
                                         }
                                         if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
+                                            if ($_POST['report_account_type'] == 'input') {
+                                                if ($row['other_account_id'] == 3)
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 3)
+                                                    continue;
+                                            }
+                                            if ($_POST['report_account_type'] == 'output') {
+                                                if ($row['other_account_id'] == 2  || $row['other_account_id'] == 1)
+                                                    continue;
+                                            }
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
                                             $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
                                             $href_link = href_code(COM_BILL, $bill_code);
@@ -224,13 +259,12 @@ include('include/nav.php');
                                         echo "<td>" . $row['note'] . "</td>";
                                         echo "<td>" . "$current_currency" . "</td>";
                                         if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
-                                            if ($row['code_type'] == 'mid_bonds'){
+                                            if ($row['code_type'] == 'mid_bonds') {
                                                 $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
-                                                $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
-                                            }
-                                            else{
+                                                $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
+                                            } else {
                                                 $bill_id = getId($con, 'bills', 'code', $row['code_number']);
-                                                $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
+                                                $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
                                             }
                                             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                 bills.code as bill_code,com_ratio,
@@ -372,60 +406,59 @@ include('include/footer.php');
 
 <!-- Report Type Radio On click -->
 <script>
-
-    $(function(){
-        if($('#report_type_details').is(':checked'))
+    $(function() {
+        if ($('#report_type_details').is(':checked'))
             $('#report_type_details').click();
     });
 
     $('#report_type_details').click(function() {
         $('.hidden').show();
         $('#show_options').show();
-        
+
         if (document.getElementById('item_hidden').checked) {
             $('.item_hidden').show();
-            
-        }else{
+
+        } else {
             $('.item_hidden').hide();
-            
+
         }
-        
+
         if (document.getElementById('total_weight_hidden').checked) {
             $('.total_weight_hidden').show();
-            
-        }else{
+
+        } else {
             $('.total_weight_hidden').hide();
-            
+
         }
 
         if (document.getElementById('real_weight_hidden').checked) {
             $('.real_weight_hidden').show();
-            
-        }else{
+
+        } else {
             $('.real_weight_hidden').hide();
-            
+
         }
 
         if (document.getElementById('total_item_price_hidden').checked) {
             $('.total_item_price_hidden').show();
-            
-        }else{
+
+        } else {
             $('.total_item_price_hidden').hide();
-            
+
         }
 
         if (document.getElementById('price_hidden').checked) {
             $('.price_hidden').show();
-            
-        }else{
+
+        } else {
             $('.price_hidden').hide();
-            
+
         }
 
         if (document.getElementById('com_value_hidden').checked) {
             $('.com_value_hidden').show();
-            
-        }else{
+
+        } else {
             $('.com_value_hidden').hide();
         }
     });
@@ -447,51 +480,80 @@ include('include/footer.php');
 
 
 <script>
-$('input[type="checkbox"] , input[type="radio"]').on('click',function() {
-            var arr_input_values = [];
-            arr_input_values['report_type_details'] = $('#report_type_details');
-            arr_input_values['item']= $('#item_hidden');
-            arr_input_values['total_weight']= $('#total_weight_hidden');
-            arr_input_values['real_weight']= $('#real_weight_hidden');
-            arr_input_values['total_item_price']= $('#total_item_price_hidden');
-            arr_input_values['price']= $('#price_hidden');
-            arr_input_values['com_value']= $('#com_value_hidden');
-            // var arr_input_values = {"total_weight" :" $('#total_weight')","real_weight" :" $('#real_weight')","total_item_price": "$('#total_item_price')","price": "$('#price')","com_value": "$('#com_value')"};
-            var  arr_input_values_post = {"report_type_details_post":false,"item_post":false,"total_weight_post":false ,"real_weight_post":false ,"total_item_price_post": false ,"price_post":false ,"com_value_post": false};
-            // var arr_input_values_post = [];
-            // arr_input_values_post['item_post']= false;
-            // arr_input_values_post['total_weight_post']= false;
-            // arr_input_values_post['real_weight_post']= false;
-            // arr_input_values_post['total_item_price_post']= false;
-            // arr_input_values_post['price_post']= false;
-            // arr_input_values_post['com_value_post']= false;
+    $('input[type="checkbox"] , input[type="radio"]').on('click', function() {
+        var arr_input_values = [];
+        arr_input_values['report_type_details'] = $('#report_type_details');
+        arr_input_values['item'] = $('#item_hidden');
+        arr_input_values['total_weight'] = $('#total_weight_hidden');
+        arr_input_values['real_weight'] = $('#real_weight_hidden');
+        arr_input_values['total_item_price'] = $('#total_item_price_hidden');
+        arr_input_values['price'] = $('#price_hidden');
+        arr_input_values['com_value'] = $('#com_value_hidden');
+        // var arr_input_values = {"total_weight" :" $('#total_weight')","real_weight" :" $('#real_weight')","total_item_price": "$('#total_item_price')","price": "$('#price')","com_value": "$('#com_value')"};
+        var arr_input_values_post = {
+            "report_type_details_post": false,
+            "item_post": false,
+            "total_weight_post": false,
+            "real_weight_post": false,
+            "total_item_price_post": false,
+            "price_post": false,
+            "com_value_post": false
+        };
+        // var arr_input_values_post = [];
+        // arr_input_values_post['item_post']= false;
+        // arr_input_values_post['total_weight_post']= false;
+        // arr_input_values_post['real_weight_post']= false;
+        // arr_input_values_post['total_item_price_post']= false;
+        // arr_input_values_post['price_post']= false;
+        // arr_input_values_post['com_value_post']= false;
 
-            if ( arr_input_values['report_type_details'].is(':checked') ) {arr_input_values_post['report_type_details_post'] = true;}
-            if (arr_input_values['item'].is(':checked') ) { arr_input_values_post['item_post'] = true;}
-            if (arr_input_values['total_weight'].is(':checked') ) { arr_input_values_post['total_weight_post'] = true;}
-            if (arr_input_values['real_weight'].is(':checked') ) {arr_input_values_post['real_weight_post'] = true;} 
-            if (arr_input_values['total_item_price'].is(':checked') ) {arr_input_values_post['total_item_price_post'] = true;}    
-            if (arr_input_values['price'].is(':checked') ) {arr_input_values_post['price_post'] = true;}
-            if ( arr_input_values['com_value'].is(':checked') ) {arr_input_values_post['com_value_post'] = true;}
+        if (arr_input_values['report_type_details'].is(':checked')) {
+            arr_input_values_post['report_type_details_post'] = true;
+        }
+        if (arr_input_values['item'].is(':checked')) {
+            arr_input_values_post['item_post'] = true;
+        }
+        if (arr_input_values['total_weight'].is(':checked')) {
+            arr_input_values_post['total_weight_post'] = true;
+        }
+        if (arr_input_values['real_weight'].is(':checked')) {
+            arr_input_values_post['real_weight_post'] = true;
+        }
+        if (arr_input_values['total_item_price'].is(':checked')) {
+            arr_input_values_post['total_item_price_post'] = true;
+        }
+        if (arr_input_values['price'].is(':checked')) {
+            arr_input_values_post['price_post'] = true;
+        }
+        if (arr_input_values['com_value'].is(':checked')) {
+            arr_input_values_post['com_value_post'] = true;
+        }
 
-                $.ajax({
-                    method:"POST",
-                    url: "change_setting.php",
-                    data: {account_statement_setting_array:arr_input_values_post},
-                    success:function (data) { $('#show').html(data)},
-                    error:function () {alert('bye') }});});
-    
- </script>
+        $.ajax({
+            method: "POST",
+            url: "change_setting.php",
+            data: {
+                account_statement_setting_array: arr_input_values_post
+            },
+            success: function(data) {
+                $('#show').html(data)
+            },
+            error: function() {
+                alert('bye')
+            }
+        });
+    });
+</script>
 
- 
+
 <script>
-    $('#print').click(function(){
+    $('#print').click(function() {
         var from_date = $('#from_date').val(),
             to_date = $('#to_date').val(),
             account_name = $('#account_name').val();
-            if(account_name == undefined)
-                account_name = '';
-            window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}` , '_blank');
+        if (account_name == undefined)
+            account_name = '';
+        window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`, '_blank');
 
     });
 </script>
