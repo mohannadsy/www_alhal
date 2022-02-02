@@ -55,46 +55,65 @@ if (isset($_POST['save'])) {
       </section> -->
       <section id="printing_section">
         <div>
-          <div class="row" id="page_size">
-            <div class="col">
-                <label> قياس فاتورة البائع</label>
-                <select class="form-control" name="page_size" id="">
-                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
-                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
-                </select>
-              </div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <label> قياس فاتورة البائع</label>
+                </td>
+                <td>
+                <select class="form-control" name="page_size" id="buyer_select">
+                    <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                    <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                    <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                  </select>
+                </td>
+                <td id="paddin_col">
 
-              <div class="col">
-                <label> قياس فاتورة المشتري</label>
-                <select class="form-control" name="" id="">
-                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
-                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
-                </select>
-              </div>
+                </td>
+                <td>
+                  <label>قياس السندات </label>
+                </td>
+                <td>
+                <select class="form-control" name="" id="seller_select">
+                    <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                    <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                    <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label> قياس فاتورة المشتري</label>
+                </td>
+                <td>
+                <select class="form-control" name="" id="bonds_select">
+                    <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                    <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                    <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                  </select>
+                </td>
+                <td id="padding-col">
 
-              <div class="col">
-                <label>قياس السندات </label>
-                <select class="form-control" name="" id="">
-                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
-                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
-                </select>
-              </div>
-
-                <div class="col">
+                </td>
+                <td>
                 <label>قياس ورقة التقارير </label>
-                <select class="form-control" name="" id="">
-                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
-                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
-                </select>
-              </div>
+                </td>
+                <td>
+                <select class="form-control" name="" id="report_select">
+                    <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                    <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                    <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          
 
-            
-          </div>
-          <div>
+          <div id="second_row" class="py-4">
+          <div id="item_code">
             <label class="container">رمز المادة
               <input name="item_code" type="checkbox" <?php if (get_value_from_config('printing', 'item_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
@@ -113,9 +132,10 @@ if (isset($_POST['save'])) {
               <span class="checkmark"></span>
             </label>
           </div>
-        </div>
+          </div>  
+         
       </section>
-      <button type="submit" name="save" class="btn badge-success">حفظ</button>
+      <button type="submit" name="save" class="btn badge-primary">حفظ</button>
     </div>
   </form>
 </body>

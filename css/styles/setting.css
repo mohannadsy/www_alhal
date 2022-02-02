@@ -68,11 +68,21 @@ div.content {
     font-size:19px;
   }
   #page_size select{
-    margin-right: 8px;
+    margin-right: 20px;
     width:70px;
   }
   #page_size label{
     margin-top: 5px;
+    
+  }
+  td{
+    /* background-color: violet; */
+    /* width: 120px; */
+    padding: 8px;
+    /* padding-left: 10px; */
+  }
+  #padding-col{
+    padding-right: 17px;
   }
 
 
@@ -88,7 +98,7 @@ font-size: 19px;
 user-select: none;
 border: none;
 border-radius: 0px;
-background-color: white;
+background-color: inherit;
 color: black;
 }
 
