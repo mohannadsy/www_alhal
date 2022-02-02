@@ -29,18 +29,20 @@ include('include/nav.php');
                 <div class="col-3">
                     <div class="row py-1">
                         <div class="col-md-4 text-left">
-                            <input checked type="radio" name="radio_search" id="form1" value="items">
-                            <label for="form1">المادة</label>
-
+                            <input checked type="radio" name="radio_search" id="form3" value="accounts">
+                            <label for="form3">العميل</label>
                         </div>
+                        
                         <div class="col-md-4 text-center">
                             <input type="radio" name="radio_search" id="form2" value="categories">
                             <label for="form2">الصنف</label>
                         </div>
                         <div class="col-md-4 text-right">
-                            <input type="radio" name="radio_search" id="form3" value="accounts">
-                            <label for="form3">العميل</label>
+                            <input  type="radio" name="radio_search" id="form1" value="items">
+                            <label for="form1">المادة</label>
+
                         </div>
+                       
                     </div>
 
                     <div class="row justify-content-center" id="search_row">
@@ -55,14 +57,14 @@ include('include/nav.php');
 
                 </div>
                 <div class="col-4" id="date_row">
-                    <div class="row justify-content-center py-1 ">
+                    <div class="row justify-content-start py-1 ">
                         <label for="from_date"> من تاريخ</label>
                         <div class="col-md-5">
                             <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo get_value_from_config('default_date') ?>">
                         </div>
 
                     </div>
-                    <div class="row justify-content-center py-1 ">
+                    <div class="row justify-content-start py-1 ">
                         <label for="to_date">إلى تاريخ</label>
                         <div class="col-md-5 ">
                             <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo date('Y-m-d'); ?>">
@@ -148,8 +150,8 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-end py-2">
                 <div class="col-2">
-                <button type="button" id="print" name="print">طباعة</button>
-                <button type="submit" name="close">إغلاق</button>
+                <button type="button" class="btn" id="print" name="print">طباعة</button>
+                <button type="submit" class="btn" name="close">إغلاق</button>
                 </div>
 
             </div>

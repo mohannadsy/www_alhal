@@ -136,9 +136,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 <div class="col-3 " id="receipt_number">
                     <div class="row" style=" padding-top: 10px; ">
                         <label id="lbl_code"> رقم الإيصال</label>
-
-                        <!-- <div class="col-md-6" style="background-color: green;"> -->
-                            <input type="number" id="code" value="<?php if (($next_catch_code == '' && isset($_POST['next'])) ||
+                        <input type="number" id="code" value="<?php if (($next_catch_code == '' && isset($_POST['next'])) ||
                                                                         (isset($_POST['previous']) && $previous_catch_code == '') ||
                                                                         (!isset($_POST['code']))
                                                                     )
@@ -149,7 +147,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                                                                     elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                     elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
-                        <!-- </div> -->
 
                     </div>
 
@@ -165,7 +162,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 </div>
             </div>
 
-            <div class="row py-4" id="inf_row" >
+            <div class="row py-2" id="inf_row" >
                 <div id="account" class="col-sm-6 col-md-4">
                     <div class="form-group row">
                         <label class="col-sm-6 col-md-2 col-form-label"> الحساب</label>
@@ -203,10 +200,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <table id="tbl" class=" text-center table table-bordered table-hover">
                         <thead class="text-center ">
                             <tr>
-                                <th scope="col">رقم</th>
-                                <th scope="col">مدين</th>
-                                <th scope="col">الحساب </th>
-                                <th scope="col">ملاحظات</th>
+                                <th scope="col" id="number_col">رقم</th>
+                                <th scope="col" id="maden_col">مدين</th>
+                                <th scope="col" id="account_col">الحساب </th>
+                                <th scope="col" id="note_col">ملاحظات</th>
                             </tr>
                         </thead>
                     </table>
@@ -416,6 +413,10 @@ include('include/footer.php');
 
     for (var i = 0; i < number_of_rows; i++) {
         $('#maden_' + i).prop('type', 'number');
+        $('#number_'+i).css({"width":"10%","padding":"0.47em"});
+        $('#maden_'+i).css({"width":"20%","padding":"0.47em"});
+        $('#account_'+i).css({"width":"30%","padding":"0.47em"});
+        $('#note_'+i).css({"width":"40%","padding":"0.47em"});
     }
 </script>
 

@@ -1,17 +1,6 @@
-body {
-    text-align: right;
-    background-color: LightGray;
-    position: relative;
-}
-
 .container {
-    position: absolute;
-    /* background-color: #5F9EA0; */
-    border-style: groove;
-    border-radius: 25px;
     width: 1000px;
     height: 620px;
-    font-size: 17px;
     padding: 5px;
 }
 
@@ -52,17 +41,14 @@ span{
    
 }
 
+/* نافذة بطاقة حساب */
 .modal {
     position: fixed;
-    /* Stay in place */
     overflow: auto;
-    /* Enable scroll if needed */
 }
-
 .modal-dialog {
     min-width: 790px;
 }
-
 .modal-content {
     min-width: 780;
     min-height: 650px;
@@ -74,38 +60,49 @@ span{
     animation-name: animatetop;
     animation-duration: 0.4s
 }
-
 .modal-header {
     padding: 0 10px;
     /* background-color: rgb(52,92,100);; */
     /* color: white;    */
     display: flex;
 }
-
 .modal-body {
     position: relative;
     min-width: 780;
     min-height: 630px;
     background-color: rgb(52, 92, 100);
 }
-
-h4 {}
-
 #iframe_account_card {
     position: absolute;
     width: 770px;
     height: 600px;
 }
 
+/* رقم الإيصال */
 #code {
     margin-right: 20px;
     width: 70px;
     margin-right:5px;
 }
-
-
 #lbl_code{
     padding-right: 25px;
     margin-left: 4px;
+
+}
+/* الجدول */
+table{
+    table-layout: fixed;
+}
+#number_col{
+    width: 10%;
+}
+#maden_col{
+    width: 20%;
+}
+#account_col{
+width: 30%;
+}
+#note_col{
+    width:40% ;
 
 }

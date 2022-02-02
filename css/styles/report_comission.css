@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 450px;
+    height: 425px;
     direction: ltr;
 }
 
@@ -22,13 +22,6 @@
 
 th {
     background: #eee;
-}
-
-
-/*radio button style*/
-
-#radio_row {
-    margin: 0px 15px;
 }
 
 
@@ -67,15 +60,38 @@ th {
 }
 
 #total_row {
-    margin: 0px 70px;
+    /* margin: 0px 70px; */
+    border: 1px  solid #67696b;
+    border-radius: 15px;
+    margin-left: 20%;
+    margin-right: 20%;
 }
-
-
-/* #form_input {
-    text-align: right;
-    border-radius: 5px;
+/* table */
+#bill_code{
+    width:7%; 
 }
+#date_col{
+    width: 10%;
+}
+#item_name_col{
+    width: 12%;
 
-#form_btn {
-    text-align: right;
-} */
+}
+#cat_col{
+width: 10%;
+}
+#unit_col{
+    width: 5%;
+}
+#buyer_col,#seller_col{
+    width:16% ;
+
+}
+#comm_col{
+    width:11% ;
+
+}
+#total_col{
+    width:17% ;
+
+}

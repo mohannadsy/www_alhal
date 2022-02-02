@@ -164,11 +164,11 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 </div>
             </div>
 
-            <div class="row py-3" id="inf_row">
+            <div class="row py-2" id="inf_row">
                 <div id="account" class="col-sm-6 col-md-4">
-                    <div class="form-group row" style="">
-                        <label class="col-sm-6 col-md-2 col-form-label" style=""> الحساب</label>
-                        <div class="col-md-9" style="">
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-md-2 col-form-label"> الحساب</label>
+                        <div class="col-md-9">
                             <input  onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" class="form-control" onclick="return this.value=''" name="main_account" id="main_account" value="<?php if (empty($payment_bonds)) echo get_box_account($con);
                                                                                                                                                                                                                                                     else echo get_name_and_code_from_table_using_id($con, 'accounts', $payment_bonds[0]['main_account_id']); ?>">
                         </div>
@@ -199,13 +199,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
             </div>
             <div class="row " style=" padding-right: 20px;">
                 <div class="col-11">
-                    <table id="tbl" class=" text-center table table-bordered table-hover">
+                    <table id="tbl" class=" text-center table table-bordered table-hover" style="width: 100%;">
                         <thead class="text-center ">
                             <tr>
-                                <th scope="col">رقم</th>
-                                <th scope="col">مدين</th>
-                                <th scope="col">الحساب </th>
-                                <th scope="col">ملاحظات</th>
+                                <th scope="col" id="number_col">رقم</th>
+                                <th scope="col" id="maden_col" >مدين</th>
+                                <th scope="col" id="account_col">الحساب </th>
+                                <th scope="col" id="note_col">ملاحظات</th>
                             </tr>
                         </thead>
                     </table>
@@ -417,6 +417,10 @@ include('include/footer.php');
 
     for (var i = 0; i < number_of_rows; i++) {
         $('#daen_' + i).prop('type', 'number');
+        $('#number_'+i).css({"width":"10%","padding":"0.47em"});
+        $('#daen_'+i).css({"width":"20%","padding":"0.47em"});
+        $('#account_'+i).css({"width":"30%","padding":"0.47em"});
+        $('#note_'+i).css({"width":"40%","padding":"0.47em"});
     }
 </script>
 
