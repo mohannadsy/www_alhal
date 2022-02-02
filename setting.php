@@ -56,12 +56,43 @@ if (isset($_POST['save'])) {
       <section id="printing_section">
         <div>
           <div class="row" id="page_size">
-            <label>حجم الصفحة</label>
-            <select class="form-control" name="page_size" id="">
-              <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
-              <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-              <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
-            </select>
+            <div class="col">
+                <label> قياس فاتورة البائع</label>
+                <select class="form-control" name="page_size" id="">
+                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label> قياس فاتورة المشتري</label>
+                <select class="form-control" name="" id="">
+                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label>قياس السندات </label>
+                <select class="form-control" name="" id="">
+                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                </select>
+              </div>
+
+                <div class="col">
+                <label>قياس ورقة التقارير </label>
+                <select class="form-control" name="" id="">
+                  <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                  <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
+                  <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                </select>
+              </div>
+
+            
           </div>
           <div>
             <label class="container">رمز المادة

@@ -30,15 +30,15 @@ include('include/nav.php');
                 <div class="col-3" id="search_col">
                     <div class="row justify-content-end">
                         <input id="search_text" type="search" class="form-control" placeholder="ادخل اسم المادة" aria-label="Search" aria-describedby="search-addon" />
-                        <button id="search" type="button" class=" btn" >بحث</button>
+                        <button id="search" type="button" class=" btn btn-light" >بحث</button>
                     </div>
                 </div>
                 <div class="col-8" id="categry_col">
                     <div class="row justify-content-end">
-                        <a href="category_card.php"><button type="button" id="btn_grp" class=" btn " name="new_category">
+                        <a href="category_card.php"><button type="button" id="btn_grp" class=" btn btn-light " name="new_category">
                                 صنف جديد
                             </button></a>
-                        <a href="item_card.php"><button type="button" id="btn_grp" class=" btn" name="item_card" style="margin-right:10px;">
+                        <a href="item_card.php"><button type="button" id="btn_grp" class=" btn btn-light" name="item_card" style="margin-right:10px;">
                                 بطاقة مادة
                             </button></a>
                     </div>
@@ -71,8 +71,8 @@ include('include/nav.php');
                                 $category = mysqli_fetch_array($select_category_exec);
                                 echo "<td>" . $category['name'] . "</td>";
                                 echo "<td>
-                                    <button type='button' onclick='window.open(\"item_card.php?id=" . $item['id'] . "\" , \"_self\")'>تعديل</button>
-                                    <button type='submit' name='delete' 
+                                    <button type='button' class='btn ' onclick='window.open(\"item_card.php?id=" . $item['id'] . "\" , \"_self\")'>تعديل</button>
+                                    <button type='submit' class='btn' name='delete' 
                                                 onclick='document.getElementById(\"id\").value = \"" . $item['id'] . "\";
                                                 return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
                                     </td>";

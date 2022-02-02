@@ -23,15 +23,15 @@ include('include/nav.php');
                 <div class="col-3" id="search_col">
                     <div class="row justify-content-end">
                         <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
-                        <button id="search" type="button" class=" btn">بحث</button>
+                        <button id="search" type="button" class=" btn btn-light">بحث</button>
                     </div>
                 </div>
 
                 <div class="col-8" id="new_account_col">
-                    <button type="button" class=" btn" name="">
+                    <button type="button" class=" btn btn-light" name="">
                         طباعة
                     </button>
-                    <a href="<?= ACCOUNT_CARD ?>"><button type="button" class=" btn" name="new_account">
+                    <a href="<?= ACCOUNT_CARD ?>"><button type="button" class=" btn btn-light" name="new_account">
                             حساب جديد
                         </button></a>
                 </div>
