@@ -100,6 +100,8 @@ include 'include/nav.php';
 
         img {
             margin-bottom: 25px;
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
         }
 
         /* .col-md-4{

@@ -2,6 +2,7 @@ body {
     margin: 0;
   }
 
+
 .sidebar {
     margin: 0;
     padding: 0;
@@ -87,7 +88,7 @@ font-size: 19px;
 user-select: none;
 border: none;
 border-radius: 0px;
-background-color: inherit;
+background-color: white;
 color: black;
 }
 
