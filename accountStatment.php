@@ -85,59 +85,78 @@ include('include/nav.php');
                             </div>
                         </div>
                 </div>
-                <div class="col-3" id="show_options" style="display: none;">
-                    <h5 style="margin-left: 10px;">خيارات الإظهار</h5>
-                    <div class="row">
+                <div class="col-4" id="show_options" style="display: none;">
+                    <table style="width: 75%;font-size:18;"> 
+                        <thead >
+                            <th colspan="2" style="background-color: inherit;">
+                            <h5>خيارات الإظهار</h5> 
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" value="" id="item_hidden" <?php if (get_value_from_config('account_statement', 'item') == 'true') echo 'checked' ?>>
+                                        <label for="">
+                                            المادة
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                    <input type="checkbox" value="" id="price_hidden" <?php if (get_value_from_config('account_statement', 'price') == 'true') echo 'checked' ?>>
+                                    <label for="">
+                                        الإفرادي
+                                    </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <input type="checkbox" value="" id="real_weight_hidden" <?php if (get_value_from_config('account_statement', 'real_weight') == 'true') echo 'checked' ?>>
+                                        <label for="">
+                                            الوزن الصافي
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <div class="form-check">
+                                        <input type="checkbox" value="" id="com_value_hidden" <?php if (get_value_from_config('account_statement', 'com_value') == 'true') echo 'checked' ?>>
+                                        <label for="">
+                                            الكمسيون
+                                        </label>
+                                    </div>
+                                    
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" value="" id="total_item_price_hidden" <?php if (get_value_from_config('account_statement', 'total_item_price') == 'true') echo 'checked' ?>>
+                                        <label for="">
+                                            الإجمالي
+                                        </label>
+                                    </div>
 
-                        <div class="col-6">
-                            <div class="form-check">
-                                <input type="checkbox" value="" id="item_hidden" <?php if (get_value_from_config('account_statement', 'item') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    المادة
-                                </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" value="" id="total_weight_hidden" <?php if (get_value_from_config('account_statement', 'total_weight') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    الوزن القائم
-                                </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" value="" id="real_weight_hidden" <?php if (get_value_from_config('account_statement', 'real_weight') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    الوزن الصافي
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-6">
+                                </td>
+                                <td>
+                                <div>
+                                        <input type="checkbox" value="" id="total_weight_hidden" <?php if (get_value_from_config('account_statement', 'total_weight') == 'true') echo 'checked' ?>>
+                                        <label for="">
+                                            الوزن القائم
+                                        </label>
+                                    </div>
+                                    
+                                </td>
 
-                            <div class="form-check">
-                                <input type="checkbox" value="" id="price_hidden" <?php if (get_value_from_config('account_statement', 'price') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    الإفرادي
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" value="" id="total_item_price_hidden" <?php if (get_value_from_config('account_statement', 'total_item_price') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    الإجمالي
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" value="" id="com_value_hidden" <?php if (get_value_from_config('account_statement', 'com_value') == 'true') echo 'checked' ?>>
-                                <label for="">
-                                    الكمسيون
-                                </label>
-                            </div>
-                        </div>
 
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="row  " style="margin-right: 30px; margin-bottom:10px;">
+            <div class="row  " style="margin-right: 65px; margin-bottom:10px;">
                 <button type="submit" class="btn btn-primary" name="view" id="btn-grp">معاينة</button>
-                <button type="button" class="btn btn-primary" name="" id="print">طباعة</button>
-                <button type="submit" class="btn btn-primary" id="btn-grp">إغلاق</button>
+                
             </div>
 
             <?php
@@ -151,18 +170,18 @@ include('include/nav.php');
                     <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tbl2">
                         <thead class="text-center">
                             <tr>
-                                <th contenteditable='false'>التاريخ</th>
-                                <th contenteditable="false"> المستند</th>
+                                <th contenteditable='false' id="date_col">التاريخ</th>
+                                <th contenteditable="false" id="doc_col"> المستند</th>
                                 <th contenteditable='false'>مدين</th>
                                 <th contenteditable='false'>دائن</th>
-                                <th contenteditable='false'>الحساب المقابل</th>
+                                <th contenteditable='false' id="cross_col">الحساب المقابل</th>
                                 <th contenteditable='false'>البيان</th>
                                 <th contenteditable='false'>رصيد الحركة</th>
-                                <th class='hidden item_hidden' style='display:none' contenteditable='false'>المادة</th>
-                                <th class='hidden total_weight_hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
-                                <th class='hidden real_weight_hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
-                                <th class='hidden price_hidden' style='display:none' contenteditable='false'> الإفرادي</th>
-                                <th class='hidden total_item_price_hidden' style='display:none' contenteditable='false'>الإجمالي</th>
+                                <th id="item_col" class='hidden item_hidden' style='display:none' contenteditable='false'>المادة</th>
+                                <th id="total_wight" class='hidden total_weight_hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
+                                <th id="last_wight" class='hidden real_weight_hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
+                                <th id="num_col" class='hidden price_hidden' style='display:none' contenteditable='false'> الإفرادي</th>
+                                <th id="total_price_col" class='hidden total_item_price_hidden' style='display:none' contenteditable='false'>الإجمالي</th>
                                 <th class='hidden com_value_hidden' style='display:none' contenteditable='false'>الكمسيون</th>
 
 
@@ -347,14 +366,11 @@ include('include/nav.php');
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
             </div>
-            <!-- <div class="row justify-content-end py-2">
-                <div class="col-4">
-                    <button type="submit" name="view" id="btn-grp">معاينة</button>
-                    <button type="submit" name="" id="btn-grp">طباعة</button>
-                    <button type="submit" id="btn-grp">إغلاق</button>
+            <div class="row justify-content-end mx-5">
+                <button type="button" class="btn btn-primary" name="" id="print">طباعة</button>
+                <button type="submit" class="btn btn-primary" id="btn-grp">إغلاق</button>
 
-                </div>
-            </div> -->
+            </div>
 
 
         </div>
