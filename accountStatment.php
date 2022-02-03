@@ -366,7 +366,7 @@ include('include/nav.php');
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
             </div>
-            <div class="row justify-content-end mx-5">
+            <div class="row justify-content-end mx-5 px-3">
                 <button type="button" class="btn btn-primary" name="" id="print">طباعة</button>
                 <button type="submit" class="btn btn-primary" id="btn-grp">إغلاق</button>
 

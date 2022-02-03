@@ -1,7 +1,7 @@
 /**
  * deafult item_bill
  */
-var number_of_bills_row = 5;
+var number_of_bills_row = 7;
 
 function count_total_price() {
     var sum = 0;
