@@ -570,10 +570,17 @@ include('include/footer.php');
     $('#print').click(function() {
         var from_date = $('#from_date').val(),
             to_date = $('#to_date').val(),
-            account_name = $('#account_name').val();
+            account_name = $('#account_name').val(),
+            report_account_type =$('#report_account_type').val() ;
+           if($('#account_type_input').is(':checked'))
+            report_account_type = $('#account_type_input').val();
+            if($('#account_type_output').is(':checked'))
+            report_account_type = $('#account_type_output').val();
+            
+            
         if (account_name == undefined)
             account_name = '';
-        window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}`, '_blank');
+        window.open(`print.php?account_statement=comission_report&from_date=${from_date}&to_date=${to_date}&account_name=${account_name}&report_account_type=${report_account_type}`, '_blank');
 
     });
 </script>

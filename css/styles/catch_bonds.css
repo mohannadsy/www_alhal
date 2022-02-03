@@ -1,17 +1,6 @@
-body {
-    text-align: right;
-    background-color: LightGray;
-    position: relative;
-}
-
 .container {
-    position: absolute;
-    /* background-color: #5F9EA0; */
-    border-style: groove;
-    border-radius: 25px;
     width: 1000px;
     height: 620px;
-    font-size: 17px;
     padding: 5px;
 }
 
@@ -105,4 +94,21 @@ h4 {}
 #lbl_code{
     padding-right: 25px;
     margin-left: 4px;
+}
+/* الجدول */
+table{
+    table-layout: fixed;
+}
+#number_col{
+    width: 10%;
+}
+#maden_col{
+    width: 20%;
+}
+#account_col{
+width: 30%;
+}
+#note_col{
+    width:40% ;
+
 }

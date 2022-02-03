@@ -29,6 +29,10 @@ include('include/nav.php');
 
                 <div class="col-8" id="new_account_col">
                     <button type="button" class=" btn" name="print">
+<<<<<<< HEAD
+=======
+                    <button type="button" class=" btn btn-light" name="">
+>>>>>>> 133e449e1611fbfa958ce55ff7df0b67e779ab79
                         طباعة
                     </button>
                     <a href="<?= ACCOUNT_CARD ?>"><button type="button" class=" btn" name="new_account">

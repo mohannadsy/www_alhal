@@ -28,20 +28,21 @@ include('include/nav.php');
             </div>
             <div class="row ">
                 <div class="col-3">
-                    <div class="row justify-content-end py-2"  id="radio_row">
+                    <div class="row py-1"  id="radio_row">
                         <div class="col-md-4 text-left" >
-                            <input checked type="radio" name="radio_search" id="form1" value="items">
-                            <label for="form1" name="">المادة</label>
-
-                        </div>
+                            <input checked type="radio" name="radio_search" id="form3" value="accounts">
+                            <label for="form3" name="">العميل</label>
+                        </div>                     
                         <div class="col-md-4 text-center">
                             <input type="radio" name="radio_search" id="form2" value="categories">
                             <label for="form2" name="">الصنف</label>
                         </div>
                         <div class="col-md-4 text-right" >
-                            <input type="radio" name="radio_search" id="form3" value="accounts">
-                            <label for="form3" name="">العميل</label>
+                            <input  type="radio" name="radio_search" id="form1" value="items">
+                            <label for="form1" name="">المادة</label>
+
                         </div>
+                        
                     </div>
 
                     <div class="row justify-content-center" id="search_row">
@@ -78,16 +79,16 @@ include('include/nav.php');
                     <table class=" table table-bordered table-hover text-center ">
                         <thead>
                             <tr>
-                                <th>رقم الفاتورة </th>
-                                <th>تاريخ الفاتورة </th>
-                                <th>اسم المادة </th>
-                                <th> الصنف </th>
-                                <th>الوحدة </th>
+                                <th id="bill_code">رقم الفاتورة </th>
+                                <th id="date_col">تاريخ الفاتورة </th>
+                                <th id="item_name_col">اسم المادة </th>
+                                <th id="cat_col"> الصنف </th>
+                                <th id="unit_col">الوحدة </th>
                                 <!-- <th>العملة </th> -->
-                                <th> المشتري </th>
-                                <th>البائع </th>
-                                <th>قيمة الكمسيون </th>
-                                <th>الاجمالي</th>
+                                <th id="buyer_col"> المشتري </th>
+                                <th id="seller_col">البائع </th>
+                                <th id="comm_col">قيمة الكمسيون </th>
+                                <th id="total_col">الاجمالي</th>
                             </tr>
                         </thead>
                         <tbody id='show'>
@@ -132,26 +133,27 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-start " id="total_row">
-                <div class="px-1">
+            <div class="row justify-content-center py-3 " id="total_row">
+                
+                <div class="mx-5">
                     <label for="">إجمالي الفواتير: </label>
                     <input  type="text" readonly id="total_bill" value="<?= $total_bill ?>">
                 </div>
 
-                <div class="px-1">
+                <div class="mx-5">
                     <label for="">قيمة الكمسيون: </label>
                     <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
                 </div>
 
-                <div>
+                <div class="mx-5">
                     <label for="" class="px-1">صافي الفواتير: </label>
                     <input type="text" readonly id="real_bill" value="<?= $real_bill ?>">
                 </div>
             </div>
             <div class="row justify-content-end py-2">
                 <div class="col-2">
-                    <button type="button" name="print" id="print">طباعة</button>
-                    <button type="submit" name="close">إغلاق</button>
+                    <button type="button" class="btn" name="print" id="print">طباعة</button>
+                    <button type="submit" class="btn" name="close">إغلاق</button>
                 </div>
             </div>
 

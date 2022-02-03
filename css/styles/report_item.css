@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 480px;
+    height: 445px;
     direction: ltr;
 }
 
@@ -23,14 +23,6 @@
 th {
     background: #eee;
 }
-
-
-/*radio button style*/
-
-#radio_row {
-    margin: 0px 15px;
-}
-
 
 /*saerch input and button style*/
 
