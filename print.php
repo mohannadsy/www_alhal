@@ -45,7 +45,7 @@ $phone1='0988828388';
 $phone2='0944571145';
 
 //$page_type = get_value_from_config('printing' , 'page_size');
-$page_type ='A4';
+$page_type ='A6';
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -54,7 +54,7 @@ if($page_type == 'A5'){
 }
 if($page_type == 'A6'){
     $ratio = 0.50;
-    $font_size = 6;
+    $font_size = 7;
 }
 
 //طباعة فاتورة بائع وفاتورة مشتري
@@ -444,7 +444,7 @@ if(isset($_GET['catch_code'])){
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -460,7 +460,7 @@ if(isset($_GET['catch_code'])){
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
@@ -488,7 +488,7 @@ if(isset($_GET['catch_code'])){
                 text-align:center;
             }
             .num{ 
-                width : `10%;
+                width : 10%;
              }
              .daen , .acc{
                 width : 25%;
@@ -513,7 +513,7 @@ if(isset($_GET['catch_code'])){
             $total_catch = 0;
             while ($catch_bond_from_code = mysqli_fetch_array($select_all_catch_bonds_with_same_code_exec)){
                 $content.= "<tr>";
-                $content.= "<td class='num'>" . $counter++ . "</td>";
+                $content.= "<td>" . $counter++ . "</td>";
                 $content.= "<td>". $catch_bond_from_code['maden'] ."</td>";
                 $content.= "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>"; 
                 $content.= "<td>" . $catch_bond_from_code['note'] . "</td>";
@@ -872,18 +872,19 @@ if(isset($_GET['comission_report'])){
         <style>
             th,td{
                 text-align:center;
+                padding:0px;
             }
             .num{
-                width:8%
+                width:8%;
             }
             .date{
-                width: 12%
+                width: 12%;
             }
             .item{
-                width: 10%
+                width: 10%;
             }
             .category , .unit{
-                width: 10%
+                width: 10%;
             }
             .buyer , .seller{
                 width:15%;
@@ -907,6 +908,7 @@ if(isset($_GET['comission_report'])){
             </tr>
             </thead>
             <tbody>';
+            
             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,total_item_price,com_ratio,
@@ -923,12 +925,12 @@ if(isset($_GET['comission_report'])){
                 $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
                 $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
                 $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
-                $content.= "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
-                $content.= "<td class='num'>" . $row['bill_code'] . "</td>";
+                $content.= "<tr>";
+                $content.= "<td>" . $row['bill_code'] . "</td>";
                 $content.= "<td>" . $row['date'] . "</td>";
                 $content.= "<td>" . $row['name'] . "</td>";
                 $content.= "<td>" . $category_name . "</td>";
-                $content.= "<td >" . $row['unit'] . "</td>";
+                $content.= "<td>" . $row['unit'] . "</td>";
                 // echo "<td>" . $row['currency'] . "</td>";
                 $content.= "<td >" . $buyer_name . "</td>";
                 $content.= "<td >" . $seller_name . "</td>";
@@ -1106,13 +1108,12 @@ if(isset($_GET['account_statement'])){
 
             if (mysqli_num_rows($select_account_statements_exec) > 0)
                 while ($row = mysqli_fetch_array($select_account_statements_exec)) {
-                    $current_currency +=  ($row['maden'] - $row['daen']);
-                    $total_daen += $row['daen'];
-                    $total_maden += $row['maden'];
+                    
                     ///////////////////////////////////////////////////////////////////////////////////////////////////
                     /**
                                          * make links section
                                          */
+                                        
                                         $href_link = 'accountStatment.php';
                                         $document_type = '';
                                         if ($row['code_type'] == 'accounts') { // accounts -> رصيد افتتاحي
@@ -1121,12 +1122,54 @@ if(isset($_GET['account_statement'])){
                                             $document_type = 'رصيد افتتاحي';
                                         }
                                         if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
-                                          
+                                            // input output
+                                            $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $row['code_number'])));
+
+                                            if ($_GET['report_account_type'] == 'input') {
+                                                if ($row['main_account_id'] == $bill_row['buyer_id'])
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 3 || $row['other_account_id'] == 2)
+                                                    continue;
+                                            }
+                                            if ($_GET['report_account_type'] == 'output') {
+                                                if ($row['main_account_id'] == $bill_row['seller_id'])
+                                                    continue;
+                                                if ($row['main_account_id'] == 2)
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 1 && $row['other_account_id'] == 3)
+                                                    continue;
+                                            }
+                                            
                                             $document_type = 'فاتورة رقم ' . $row['code_number'];
                                         }
                                         if ($row['code_type'] == 'mid_bonds') { // mid_bonds السطر تابع لسند قيد
+
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
+
+                                            $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $bill_id)));
+
+                                            if ($_GET['report_account_type'] == 'input') {
+                                                if ($row['main_account_id'] == $bill_row['buyer_id'])
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 3 || $row['other_account_id'] == 2)
+                                                    continue;
+                                            }
+                                            if ($_GET['report_account_type'] == 'output') {
+                                                if ($row['main_account_id'] == $bill_row['seller_id'])
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 2)
+                                                    continue;
+
+                                                if ($row['main_account_id'] == 1 && $row['other_account_id'] == 3)
+                                                    continue;
+                                            }
+
                                             $bill_code = get_code_from_table_using_id($con, 'bills', $bill_id);
+                                            
                                             $document_type = 'فاتورة رقم ' . $bill_code;
                                         }
                                         if ($row['code_type'] == 'payment_bonds') { // تابع لسند الدفع
@@ -1138,6 +1181,9 @@ if(isset($_GET['account_statement'])){
                                             $catch_bond_id = getId($con, 'catch_bonds', 'code', $row['code_number']);
                                             $document_type = 'سند قبض رقم ' . $row['code_number'];;
                                         }
+                                        $current_currency +=  ($row['maden'] - $row['daen']);
+                    $total_daen += $row['daen'];
+                    $total_maden += $row['maden'];
                     $content.= "<tr>";
                     $content.= "<td>" . $row['date'] . "</td>";
                     $content.= "<td>" . $document_type . "</td>";
@@ -1179,14 +1225,14 @@ if(isset($_GET['account_statement'])){
                         while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                             // $content.= "<tr><td colspan='7' ></td>";
                             
-                        $content.= "<tr><td ></td>";
-                        $content.= "<td ></td>";
-                        $content.= "<td style='border:none'></td>";
-                        $content.= "<td ></td>";
-                        $content.= "<td ></td>";
-                        
-                        $content.= "<td ></td>";
-                        $content.= "<td ></td>";
+                        $content.= "<tr><td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+                        $content.= "<td style='border-left:none;'></td>";
+
                             $content.= "<td  >" . $item['name'] . "</td>";
                             $content.= "<td  >" . $item['total_weight'] . "</td>";
                             $content.= "<td >" . $item['real_weight'] . "</td>";
