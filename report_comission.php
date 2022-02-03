@@ -27,7 +27,7 @@ include('include/nav.php');
                 <h3> حركة كمسيون </h3>
             </div>
             <div class="row ">
-                <div class="col-3">
+                <div class="col-3 text-left">
                     <div class="row py-1"  id="radio_row">
                         <div class="col-md-4 text-left" >
                             <input checked type="radio" name="radio_search" id="form3" value="accounts">

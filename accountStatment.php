@@ -18,14 +18,14 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container-fluid">
-            <div class="row justify-content-start px-5 py-2">
+            <div class="row justify-content-start px-4 py-2">
                 <h3> كشف حساب </h3>
             </div>
             <div class="row">
-                <div class="col-3 ">
+                <div class="col-2">
                     <div class="row ">
                         <label for="" class=" col-md-3 form-label"> الحساب</label>
-                        <div class="col-md-8  has-validation">
+                        <div class="col-md-9  has-validation">
                             <input class="account_auto form-control " type="text" name="account" id="account_name" value="<?php if (isset($_POST['account'])) echo $_POST['account'] ?>" onclick="this.value=''" placeholder=" اسم الحساب" required>
                             <div class="invalid-feedback">اسم الحساب الخاص بك مطلوب</div>
                         </div>
@@ -33,7 +33,7 @@ include('include/nav.php');
 
                     <div class="row py-2">
                         <label for="" class=" col-md-3 form-label">العملة </label>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <select name="currency" id="syrian-bounds" class="form-control">
                                 <option value="syrian-bounds">ليرة سورية</option>
                             </select>
@@ -42,22 +42,22 @@ include('include/nav.php');
                 </div>
                 <div class="col-3">
                     <div class="row ">
-                        <label for="from_date">من تاريخ</label>
-                        <div class="col-md-8" style="margin-right:4px;">
+                        <label for="from_date" class="col-3 text-left">من تاريخ</label>
+                        <div class="col-md-6">
                             <input type="date" name="from_date" id="from_date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
                                                                                                                             else echo get_value_from_config('default_date'); ?>">
                         </div>
                     </div>
                     <div class="row py-2">
-                        <label for="to_date">إلى تاريخ</label>
-                        <div class="col-md-8">
+                        <label for="to_date" class="col-3 text-left">إلى تاريخ</label>
+                        <div class="col-md-6">
                             <input type="date" name="to_date" id="to_date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
                                                                                                                         else echo date('Y-m-d') ?>">
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="row">
+                    <div class="row" >
                         <label for="" id="lbl-radio-type">نوع التقرير:</label>
 
                         <div class="form-check" style="margin-right: 5px;">
@@ -68,12 +68,14 @@ include('include/nav.php');
                             <input type="radio" name="report_type" id="report_type_details" value="details" <?php if (get_value_from_config('account_statement', 'report_type_details') == 'true') echo 'checked' ?>>
                             <label id="lbl_radio">تفصيلي</label>
                         </div>
-                        <div class="row">
+                        
+                    </div>
+                    <div class="row">
                             <div class="form-check ">
                                 <input checked type="radio" name="report_account_type" id="account_type_all" value="all">
                                 <label for="account_type_all" id="lbl_radio">الكل</label>
                             </div>
-                            <div class="form-check" style="margin-right: 5px;">
+                            <div class="form-check" style="margin-right: 20px;">
                                 <input type="radio" name="report_account_type" id="account_type_input" value="input" <?php if (isset($_POST['report_account_type']) && $_POST['report_account_type'] == 'input') echo ' checked'  ?>>
                                 <label for="account_type_input" id="lbl_radio">ادخالات</label>
                             </div>
@@ -82,7 +84,6 @@ include('include/nav.php');
                                 <label for="account_type_output" id="lbl_radio">اخراجات</label>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="col-3" id="show_options" style="display: none;">
                     <h5 style="margin-left: 10px;">خيارات الإظهار</h5>
@@ -133,10 +134,10 @@ include('include/nav.php');
                     </div>
                 </div>
             </div>
-            <div class="row py-1 justify-content-center" style="margin-right: 30px; margin-bottom:10px;">
-                <button type="submit" name="view" id="btn-grp">معاينة</button>
-                <button type="button" name="" id="print">طباعة</button>
-                <button type="submit" id="btn-grp">إغلاق</button>
+            <div class="row  " style="margin-right: 30px; margin-bottom:10px;">
+                <button type="submit" class="btn btn-primary" name="view" id="btn-grp">معاينة</button>
+                <button type="button" class="btn btn-primary" name="" id="print">طباعة</button>
+                <button type="submit" class="btn btn-primary" id="btn-grp">إغلاق</button>
             </div>
 
             <?php
