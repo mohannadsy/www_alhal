@@ -600,9 +600,6 @@ if(isset($_GET['item_report'])){
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -612,13 +609,28 @@ if(isset($_GET['item_report'])){
     if($page_type == 'A6'){
         $pdf->SetFont('arial', 'B', 10);
     }
-    //$pdf->SetFont('arial', 'B', 18);
-    $tilte='حركة مادة';
-    $pdf->MultiCell(121 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $tilte='تقرير حركة مادة';
+    $pdf->MultiCell(97 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    // if($page_type == 'A4'){
+    //     $pdf->SetFont('arial', 'B', 18);
+    // }
+    // if($page_type == 'A5'){
+    //     $pdf->SetFont('arial', 'B', 12);
+    // }
+    // if($page_type == 'A6'){
+    //     $pdf->SetFont('arial', 'B', 10);
+    // }
+    // //$pdf->SetFont('arial', 'B', 18);
+    // $tilte='حركة مادة';
+    // $pdf->MultiCell(121 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
@@ -637,9 +649,10 @@ if(isset($_GET['item_report'])){
     
     if($_GET['text_value_from_report_item']==''){
         $item='';
+        $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'items'){
         $item=' المادة: ' .$_GET['text_value_from_report_item'];
-        $pdf->MultiCell(182*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'accounts'){
         $item=' العميل: ' .$_GET['text_value_from_report_item'];
@@ -647,7 +660,7 @@ if(isset($_GET['item_report'])){
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'categories'){
         $item=' الصنف: ' .$_GET['text_value_from_report_item'];
-        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(168*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
         $pdf->Ln(9*$ratio);
     }
     
@@ -810,21 +823,22 @@ if(isset($_GET['comission_report'])){
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 18);
+        $pdf->SetFont('arial', 'B', 16);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 12);
-    }
-    if($page_type == 'A6'){
         $pdf->SetFont('arial', 'B', 10);
     }
-    //$pdf->SetFont('arial', 'B', 18);
-    $tilte='حركة كمسيون';
-    $pdf->MultiCell(130 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    if($page_type == 'A6'){
+        $pdf->SetFont('arial', 'B', 8);
+    }
+    $tilte='تقرير حركة كمسيون';
+    $pdf->MultiCell(100 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    //$pdf->Ln(5*$ratio);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
@@ -846,6 +860,7 @@ if(isset($_GET['comission_report'])){
 
     if($_GET['text_value']==''){
         $item='';
+        $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value'] == 'items'){
         $item=' المادة: ' .$_GET['text_value'];
         $pdf->MultiCell(175*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
