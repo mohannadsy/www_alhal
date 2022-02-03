@@ -45,7 +45,7 @@ $phone1='0988828388';
 $phone2='0944571145';
 
 //$page_type = get_value_from_config('printing' , 'page_size');
-$page_type ='A6';
+$page_type ='A4';
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -131,17 +131,22 @@ if(isset($_GET['code'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->Cell(0, 0, $location, 0, 1, 'R', 0, '', 0);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
     $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
+    $pdf->Ln(7*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
-    $date = 'تاريخ الفاتورة: ' . $bill['date'];
-    $pdf->MultiCell(140 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    if($pageLayout='A6'){
+        $date = $bill['date'];
+        $pdf->MultiCell(121 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    }else{
+        $date = 'تاريخ الفاتورة: ' . $bill['date'];
+        $pdf->MultiCell(140 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    }
     $pdf->SetFont('arial', '', $font_size);
     
    
@@ -163,7 +168,7 @@ if(isset($_GET['code'])){
         $notes='ملاحظات: ' . $bill['buyer_note'];
     $pdf->Cell(0, 0, $notes, 0, 1, 'R', 0, '', 0);
     //$pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(4*$ratio);
+    $pdf->Ln(6*$ratio);
 
     // Set some content to print
     $content = '';
@@ -294,7 +299,7 @@ if(isset($_GET['payment_code'])){
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -306,33 +311,30 @@ if(isset($_GET['payment_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند دفع';
-    $pdf->MultiCell(117 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(113 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
-    
     $pdf->Ln(2*$ratio);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(3*$ratio);
     $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
-    $date = 'تاريخ السند: ' . $payment_bond['date'];
-    $pdf->MultiCell(181 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    $date = $payment_bond['date'];
+    $pdf->MultiCell(165 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
     $account = 'الحساب: ' .$main_account;
     $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
     $currency = 'العملة: ' . $payment_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
-    
-    
     $pdf->Ln(6*$ratio);
     $notes='ملاحظات: ' . $payment_bond['main_note'];
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
+    $pdf->Ln(9*$ratio);
 
     // Set some content to print
     $content = '';
@@ -382,7 +384,7 @@ if(isset($_GET['payment_code'])){
 	$pdf->writeHTML($content);
     $fun=convert_number_to_arabic_text($total_payment);
     $res_number='المجموع: ' .$total_payment . ' ل . س ' . $fun;
-    $pdf->MultiCell(185 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(170 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 
@@ -456,7 +458,7 @@ if(isset($_GET['catch_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند قبض';
-    $pdf->MultiCell(121 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
@@ -469,8 +471,8 @@ if(isset($_GET['catch_code'])){
     $receipt_number = 'رقم الإيصال: ' . $catch_bond['code'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio); 
-    $date = 'تاريخ السند: ' . $catch_bond['date'];
-    $pdf->MultiCell(181 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+    $date =  $catch_bond['date'];
+    $pdf->MultiCell(165 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
     $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
     $account = 'الحساب: ' . $main_account;
@@ -480,7 +482,7 @@ if(isset($_GET['catch_code'])){
     $pdf->Ln(6*$ratio);
     $notes='ملاحظات: ' . $catch_bond['main_note'];
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
+    $pdf->Ln(9*$ratio);
     $content = '';
     $content .= '
         <style>
@@ -527,7 +529,7 @@ if(isset($_GET['catch_code'])){
 	$pdf->writeHTML($content);
     $fun = convert_number_to_arabic_text($total_catch);
     $res_number='المجموع: ' .$total_catch . ' ل .س ' .$fun;
-    $pdf->MultiCell(185 * $ratio, 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(170 * $ratio, 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
 
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
@@ -839,7 +841,7 @@ if(isset($_GET['comission_report'])){
     $to ='إلى تاريخ: '  . $to_date;
     $pdf->MultiCell(180 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     //$pdf->Ln(10*$ratio);
-    $pdf->Ln(6*$ratio);
+    $pdf->Ln(7*$ratio);
     $pdf->SetFont('arial', '', $font_size);
 
     if($_GET['text_value']==''){
@@ -872,7 +874,6 @@ if(isset($_GET['comission_report'])){
         <style>
             th,td{
                 text-align:center;
-                padding:0px;
             }
             .num{
                 width:8%;
@@ -925,17 +926,17 @@ if(isset($_GET['comission_report'])){
                 $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
                 $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
                 $bill_code = get_value_from_table_using_id($con, 'bills', 'code', $row['bill_id']);
-                $content.= "<tr>";
+                $content.= "<tr >";
                 $content.= "<td>" . $row['bill_code'] . "</td>";
                 $content.= "<td>" . $row['date'] . "</td>";
                 $content.= "<td>" . $row['name'] . "</td>";
                 $content.= "<td>" . $category_name . "</td>";
                 $content.= "<td>" . $row['unit'] . "</td>";
                 // echo "<td>" . $row['currency'] . "</td>";
-                $content.= "<td >" . $buyer_name . "</td>";
-                $content.= "<td >" . $seller_name . "</td>";
+                $content.= "<td>" . $buyer_name . "</td>";
+                $content.= "<td>" . $seller_name . "</td>";
                 $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
-                $content.= "<td  id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
+                $content.= "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
                 $content.= "<td>".$row['total_item_price']."</td>";
                 $content.= "</tr>";
                 $total_comission += $current_com_value;
