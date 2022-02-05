@@ -8,12 +8,12 @@ include('helper/operation_functions.php');
 
 require 'vendor/autoload.php';
 
-class PDF extends TCPDF{
-    public function Header(){
-    }
-    public function Footer(){
-    }
-}
+// class PDF extends TCPDF{
+//     public function Header(){
+//     }
+//     public function Footer(){
+//     }
+// }
 
 function type($x){
     if($x=='cash'){
@@ -39,13 +39,29 @@ function convert_number_to_arabic_text($num){
 
 $title='أبناء المرحوم صالح درويش';
 $location='جبلة-رأس العين س -ت 40592';
+$commercial_record='س -ت 40592';
 $name1 = 'طلال ';
 $name2= 'جلال ';
 $phone1='0988828388';
 $phone2='0944571145';
 
-//$page_type = get_value_from_config('printing' , 'page_size');
+
 $page_type ='A4';
+
+if(isset($_GET['print_type']) && $_GET['print_type'] == 'seller')
+    $page_type = get_value_from_config('printing' , 'selling_bill_page_size');
+
+if(isset($_GET['print_type']) && $_GET['print_type'] == 'buyer')
+    $page_type = get_value_from_config('printing' , 'buying_bill_page_size');
+
+if( isset($_GET['payment_code']) || isset($_GET['catch_code']))
+    $page_type = get_value_from_config('printing' , 'bonds_page_size');
+
+
+if( isset($_GET['comission_report']) || isset($_GET['item_report']) || isset($_GET['account_statement']))
+    $page_type = get_value_from_config('printing' , 'reports_page_size');
+
+
 $ratio = 1;
 $font_size = 12;
 if($page_type == 'A5'){
@@ -1288,30 +1304,5 @@ if(isset($_GET['account_statement'])){
     // END OF FILE
 }
 
-///////////////////////////////////////طباعة قائمة الحساب
-if(isset($_GET['payment_code'])){
-    
-    $pdf = new TCPDF('P', 'mm', $page_type, true, 'UTF-8', false);
-    
-    $pdf->SetCreator(PDF_CREATOR);
-    //header
-	$pdf->setPrintHeader(false);
 
-    // set some language dependent data:
-    $lg = Array();
-    $lg['a_meta_charset'] = 'UTF-8';
-    $lg['a_meta_dir'] = 'rtl'; 
-    $lg['a_meta_language'] = 'fa';
-    $lg['w_page'] = 'page';
-    // set some language-dependent strings (optional)
-    $pdf->setLanguageArray($lg);
-
-    // set font
-    $pdf->SetFont('arial', 'B', 24);
-    // Add a page
-	$pdf->AddPage();
-    if (ob_get_contents()) ob_end_clean();
-    // Close and output PDF document
-	$pdf->output('account statment', 'I');
-}
 ?>
