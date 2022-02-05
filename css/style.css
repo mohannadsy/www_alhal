@@ -4,7 +4,9 @@
 
 body {
     text-align: right;
-    /*background-color: #0a4b64;*/
+    /* background: rgb(224, 205, 205); */
+    background: linear-gradient(#276f85, #e8e9f3);
+    /* background-color: #0a4b64; */
     background-color: #97e0ebc7;
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
