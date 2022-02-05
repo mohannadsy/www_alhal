@@ -10,6 +10,10 @@ if (isset($_POST['save'])) {
   $get_json['printing']['buying_bill_page_size'] = $_POST['buying_bill_page_size'];
   $get_json['printing']['bonds_page_size'] = $_POST['bonds_page_size'];
   $get_json['printing']['reports_page_size'] = $_POST['reports_page_size'];
+  $get_json['printing']['location'] = $_POST['location'];
+  $get_json['printing']['company_name'] = $_POST['company_name'];
+  $get_json['printing']['commercial_record'] = $_POST['commercial_record'];
+    
   if (isset($_POST['item_code']))
     $get_json['printing']['item_code'] = 'true';
   else
@@ -57,6 +61,91 @@ if (isset($_POST['save'])) {
         </div>
       </section> -->
       <section id="printing_section">
+          <div>
+            <table id="tbl">
+              <tbody>
+                <tr>
+                  <td>
+                    <label> اسم الشركة</label>
+                  </td>
+                  <td>
+                    <input name="company_name">
+                  </td>
+                  <td id="padding_col">
+                  </td>
+                  <td>
+                    <label>العنوان </label>
+                  </td>
+                  <td>
+                    <input name="location">
+                  </td>
+                  <td>
+                    <label>السجل التجاري </label>
+                  </td>
+                  <td>
+                    <input name="commercial_record">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label> الاسم الأول</label>
+                  </td>
+                  <td>
+                    <input name="first_name">
+                  </td>
+                  <td id="padding_col">
+                  </td>
+                  <td>
+                    <label>الرقم الأول </label>
+                  </td>
+                  <td>
+                    <input name="first_num">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label> الاسم الثاني</label>
+                  </td>
+                  <td>
+                    <input name="second_name">
+                  </td>
+                  <td id="padding_col">
+                  </td>
+                  <td>
+                    <label>الرقم الثاني </label>
+                  </td>
+                  <td>
+                    <input name="second_num">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          
+
+        <div id="second_row" class="py-4">
+          <div id="item_code">
+            <label>رمز المادة
+              <input name="item_code" type="checkbox" <?php if (get_value_from_config('printing', 'item_code') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div>
+            <label>رمز البائع
+              <input name="seller_code" type="checkbox" <?php if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+
+          <div>
+            <label>رمز المشتري
+              <input name="buyer_code" type="checkbox" <?php if (get_value_from_config('printing', 'buyer_code') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>  
+
         <div>
           <table>
             <tbody>
@@ -71,7 +160,7 @@ if (isset($_POST['save'])) {
                     <option value="A6" <?php if (get_value_from_config('printing', 'selling_bill_page_size') == 'A6') echo " selected" ?>> A6 </option>
                   </select>
                 </td>
-                <td id="paddin_col">
+                <td id="padding_col">
 
                 </td>
                 <td>
@@ -113,32 +202,11 @@ if (isset($_POST['save'])) {
             </tbody>
           </table>
         </div>
-          
-
-        <div id="second_row" class="py-4">
-          <div id="item_code">
-            <label class="container">رمز المادة
-              <input name="item_code" type="checkbox" <?php if (get_value_from_config('printing', 'item_code') == 'true') echo " checked" ?>>
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <div>
-            <label class="container">رمز البائع
-              <input name="seller_code" type="checkbox" <?php if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
-              <span class="checkmark"></span>
-            </label>
-          </div>
-
-          <div>
-            <label class="container">رمز المشتري
-              <input name="buyer_code" type="checkbox" <?php if (get_value_from_config('printing', 'buyer_code') == 'true') echo " checked" ?>>
-              <span class="checkmark"></span>
-            </label>
-          </div>
-        </div>  
          
       </section>
-      <button type="submit" name="save" class="btn badge-primary">حفظ</button>
+      <div class="row justify-content-center">
+        <button type="submit" name="save" class="btn btn-light">حفظ</button>
+      </div>
     </div>
   </form>
 </body>
