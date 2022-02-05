@@ -125,7 +125,7 @@
     <a class="nav-link" href="setting.php">الإعدادات</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="help.php">معلومات</a>
+    <a class="nav-link" href="help_file.php">معلومات</a>
   </li>
 
   <li class="nav-item">
