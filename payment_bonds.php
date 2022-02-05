@@ -297,7 +297,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             }
         }
     }
-    if (isset($_POST['print'])) {
+    if (isset($_POST['print']) && notempty($payment_bonds)) {
         open_window_blank("print.php?payment_code=" . $current_payment_code);
         open_window_self_id('payment_bonds.php', getId($con, 'payment_bonds', 'code', $current_payment_code));
     }

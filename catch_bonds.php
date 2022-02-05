@@ -292,7 +292,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             }
         }
     }
-    if (isset($_POST['print'])) {
+    if (isset($_POST['print']) && notempty($catch_bonds)) {
         open_window_blank("print.php?catch_code=" . $current_catch_code);
         open_window_self_id('catch_bonds.php' , getId($con , 'catch_bonds' , 'code' , $current_catch_code));
     }

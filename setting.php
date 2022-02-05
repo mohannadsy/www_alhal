@@ -78,7 +78,7 @@ if (isset($_POST['save'])) {
                 <select class="form-control" name="" id="seller_select">
                     <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
                     <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
-                    <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
+                    <option value="A6"  <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
                   </select>
                 </td>
               </tr>
@@ -101,7 +101,7 @@ if (isset($_POST['save'])) {
                 </td>
                 <td>
                 <select class="form-control" name="" id="report_select">
-                    <option value="A4" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
+                    <option value="A4" selected="selected" <?php if (get_value_from_config('printing', 'page_size') == 'A4') echo " selected" ?>> A4 </option>
                     <option value="A5" <?php if (get_value_from_config('printing', 'page_size') == 'A5') echo " selected" ?>> A5 </option>
                     <option value="A6" <?php if (get_value_from_config('printing', 'page_size') == 'A6') echo " selected" ?>> A6 </option>
                   </select>
