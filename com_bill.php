@@ -158,40 +158,12 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 <body id='body'>
     <form action="" method="post">
         <div id="contextmenu" class="container-fluide">
-            <div class="row py-3 px-3">
-                <div class="col-6">
+            <div class="row py-2 px-3">
+                <div class="col-7 text-left" >
                     <h2>فاتورة كمسيون</h2>
                 </div>
-               
-                <div class="col-5">
-                    <div class="row justify-content-center" style="margin-right: 5em;">
-                        <label for="" id="bill_num_lbl">رقم الفاتورة</label>
-                        <div class="col-2">
-                            <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
-                                                                                    (isset($_POST['previous']) && $previous_bill_code == '') ||
-                                                                                    (!isset($_POST['code']))
-                                                                                )
-                                                                                    echo get_auto_code($con, 'bills', 'code', '', 'parent');
-                                                                                elseif (isset($_POST['next'])) echo $next_bill_code;
-                                                                                elseif (isset($_POST['last_next'])) echo $last_next_code;
-                                                                                elseif (isset($_POST['previous'])) echo $previous_bill_code;
-                                                                                elseif (isset($_POST['last_previous'])) echo $last_previous_code;
-                                                                                elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" class="form-control">
-                        </div>
-                
-                        <label for="date" id="bill_date_lbl">تاريخ الفاتورة</label>
-                        <div class="col-4">
-                            <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
-                                                                        else echo $bill[0]['date'] ?>" class="form-control center">
-
-
-                        </div>
-
-                        
-                    </div>
-                </div>
-                <div class="col-1">
-                    <div class="row px-1 ">
+                <div class="col-5  ">
+                    <div class="row px-1 mx-5 justify-content-end ">
                         <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
                         <button name="previous" id="previous"> <span>&#8249;</span> </button>
                         <button name="next" id="next"> <span>&#8250;</span> </button>
@@ -199,68 +171,109 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         <button name="current" id="current" hidden></button>
 
                     </div>
-                </div>
+                </div>  
             </div>
+            <!-- <div class="col-5">
+                   
+                </div> -->
 
-            <div class="row">
-                <div class="col-1">
+            <div class="row" >
+                <div class="col-1" >
 
                 </div>
-                <div class="col-4 ">
+                <div class="col-3 " style="">
                     <div class="row ">
-                        <label class="col-2">البائع</label>
-                        <!-- <div class="ui-widget"> -->
-                        <div class="col-6">
-                            <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" id="seller" name="seller" class="account_auto form-control" style="padding:2px" value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
-                            <!-- </div> -->
+                        <label class="col-2" style="padding-right: 0px;" >البائع</label>
+                        <div class="col-8" style="padding-right: 2px;">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" id="seller" name="seller" class="account_auto form-control" style="padding:2px;" value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
                         </div>
 
                     </div>
                     <div class="row">
-                        <label class="col-3">طريقة الدفع </label>
-                        <div class="col-2">
-                            <input type="radio" name="seller_type_pay" checked value="cash">
-                            <label>نقدي</label>
+                        <label class="col-3" style="padding-left:0px ;padding-right: 0px;margin-left: 10;">طريقة الدفع </label>
+                        <div class="col-2" style="padding: 2px;padding-bottom: 5px;">
+                            <select name="seller_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
+                                <option value="cash">نقدي</option>
+                                <option value="agel" <?php if (notempty($bill)) if ($bill[0]['seller_type_pay'] == 'agel') echo 'selected' ?>>آجل</option>
+                            </select>
                         </div>
-                        <div class="col-2">
-                            <input type="radio" name="seller_type_pay" <?php if (notempty($bill)) if ($bill[0]['seller_type_pay'] == 'agel') echo 'checked' ?> value="agel">
-                            <label>آجل</label>
-                        </div>
+
                     </div>
                     <div class="row ">
-                        <label class="col-2">ملاحظات</label>
-                        <div class="col-6">
-                            <textarea name="seller_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
+                        <label class="col-2" style="padding-right: 0px;" >ملاحظات</label>
+                        <div class="col-8" style="padding-right: 2px;">
+                            <textarea name="seller_note" class="form-control" style="padding: 2px;"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
-
-                </div>
                 <div class="col-4">
-                    <div class="row  justify-content-end">
-                        <label class="col-2">المشتري</label>
+                    <div class="row mt-5 pt-5" >
                         <div class="col-6">
+                            <div class="row justify-content-center">
+                            <label for="date" id="bill_date_lbl">تاريخ الفاتورة</label>
+                            <div class="col-4">
+                                <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
+                                                                            else echo $bill[0]['date'] ?>" class="form-control center">
+
+
+                            </div>
+                            </div>
+                             
+                        </div>
+                        <div class="col-6">
+                            <div class="row justify-content-center">
+                            <label for="" id="bill_num_lbl">رقم الفاتورة</label>
+                            <div class="col-4">
+                                <input type="number" name="code" id="code" value="<?php if (($next_bill_code == '' && isset($_POST['next'])) ||
+                                                                                        (isset($_POST['previous']) && $previous_bill_code == '') ||
+                                                                                        (!isset($_POST['code']))
+                                                                                    )
+                                                                                        echo get_auto_code($con, 'bills', 'code', '', 'parent');
+                                                                                    elseif (isset($_POST['next'])) echo $next_bill_code;
+                                                                                    elseif (isset($_POST['last_next'])) echo $last_next_code;
+                                                                                    elseif (isset($_POST['previous'])) echo $previous_bill_code;
+                                                                                    elseif (isset($_POST['last_previous'])) echo $last_previous_code;
+                                                                                    elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" class="form-control">
+                            </div>
+
+                            </div>
+                            
+                    
+                        </div>
+                            
+                            
+                                  
+                        </div>
+                </div>
+                <div class="col-3" style="    padding-right: 0px;">
+                    <div class="row  justify-content-end">
+                        <label class="col-2"style="padding-left: 0px;">المشتري</label>
+                        <div class="col-8">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer" style="padding:2px" value="<?php if (notempty($bill)) if ($bill[0]['buyer_id'] > 0) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['buyer_id'])  ?>">
 
                         </div>
                     </div>
 
                     <div class="row justify-content-end">
-                        <label class="col-3">طريقة الدفع </label>
-                        <div class="col-2">
-                            <input type="radio" name="buyer_type_pay" checked value="cash">
-                            <label>نقدي</label>
+                        <label class="col-2" style="padding-left:0px ;padding-right: 0px;">طريقة الدفع </label>
+                        <div class="col-2" style="padding: 2px;padding-bottom: 5px;margin-left:-13;">
+                            <select name="buyer_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
+                                <option value="cash">نقدي</option>
+                                <option value="agel" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'checked' ?>>آجل</option>
+                            </select>
+                            <!-- <input type="radio" name="buyer_type_pay" checked value="cash"> -->
                         </div>
-                        <div class="col-3">
-                            <input type="radio" name="buyer_type_pay" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'checked' ?> value="agel">
-                            <label>آجل</label>
+                        <div class="col-6">
+
                         </div>
+                            <!-- <input type="radio" name="buyer_type_pay" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'checked' ?> value="agel"> -->
+                            
+        
                     </div>
                     <div class="row justify-content-end">
-                        <label class="col-2">ملاحظات</label>
-                        <div class="col-6">
-                            <textarea name="buyer_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
+                        <label class="col-2 text-center" style="padding-left: 0px;">ملاحظات</label>
+                        <div class="col-8">
+                            <textarea name="buyer_note" class="form-control"style="padding: 2px;"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -308,7 +321,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             <div class="row justify-content-end" id="total" ;>
                 <label>الإجمالي:</label>
                 <div>
-                    <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
+                    <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
                                                                                                                                     else echo '0' ?>">
                 </div>
             </div>

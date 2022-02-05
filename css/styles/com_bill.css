@@ -29,26 +29,27 @@ td input {
 }
 
 #date {
-    width: 140px;
-    /* border: none; */
-    padding-right: 0px;
+    width: 145px;
+    border: none; 
+    /* padding-right: 0px;   
+    padding-bottom: 3px; */
     padding-left: 0px;
-    padding-bottom: 3px;
-    /* direction: ltr; */
+    padding: 2px;
 }
 #bill_date_lbl{
-    padding-top: 4px;
+    /* padding-top: 4px; */
 
 }
 #bill_num_lbl{
-    padding-top: 4px;
+    /* padding-top: 4px; */
 
 }
 
 #code {
     /* background: inherit; */
     /* border: none; */
-    padding-bottom: 3px;
+    /* padding-bottom: 3px; */
+    padding: 2px;
     
    
 }

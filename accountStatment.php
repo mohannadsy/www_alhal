@@ -161,11 +161,11 @@ include('include/nav.php');
 
             <?php
             if (isset($_POST['view'])) {
-                echo "<h3 class='text-center'> كشف حساب : " . $_POST['account'] . "</h3>";
+                echo "<h4 class='text-center'> كشف حساب : " . $_POST['account'] . "</h4>";
             }
             ?>
-            <div class="row justify-content-center py-2">
-                <div class="col-11">
+            <div class="row justify-content-center py-1">
+                <div class="col-11" id="tableFixHead">
 
                     <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tbl2">
                         <thead class="text-center">
@@ -187,7 +187,7 @@ include('include/nav.php');
 
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody class="text-center" >
                             <?php
 
                             if (isset($_POST['view'])) {
