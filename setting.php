@@ -44,6 +44,7 @@ if (isset($_POST['save'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="css/styles/setting.css">
+  
 </head>
 
 <body>
@@ -62,14 +63,16 @@ if (isset($_POST['save'])) {
       </section> -->
       <section id="printing_section">
           <div>
-            <table id="tbl">
+            <h4>بيانات الشركة</h4>
+            
+            <table id="tbl_data_header">
               <tbody>
                 <tr>
                   <td>
                     <label> اسم الشركة</label>
                   </td>
                   <td>
-                    <input name="company_name">
+                    <input name="company_name" class="form-control">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -77,13 +80,13 @@ if (isset($_POST['save'])) {
                     <label>العنوان </label>
                   </td>
                   <td>
-                    <input name="location">
+                    <input name="location" class="form-control">
                   </td>
                   <td>
                     <label>السجل التجاري </label>
                   </td>
                   <td>
-                    <input name="commercial_record">
+                    <input name="commercial_record" class="form-control">
                   </td>
                 </tr>
                 <tr>
@@ -91,7 +94,7 @@ if (isset($_POST['save'])) {
                     <label> الاسم الأول</label>
                   </td>
                   <td>
-                    <input name="first_name">
+                    <input name="first_name" class="form-control">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -99,7 +102,7 @@ if (isset($_POST['save'])) {
                     <label>الرقم الأول </label>
                   </td>
                   <td>
-                    <input name="first_num">
+                    <input name="first_num" class="form-control">
                   </td>
                 </tr>
                 <tr>
@@ -107,7 +110,7 @@ if (isset($_POST['save'])) {
                     <label> الاسم الثاني</label>
                   </td>
                   <td>
-                    <input name="second_name">
+                    <input name="second_name" class="form-control">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -115,7 +118,7 @@ if (isset($_POST['save'])) {
                     <label>الرقم الثاني </label>
                   </td>
                   <td>
-                    <input name="second_num">
+                    <input name="second_num" class="form-control">
                   </td>
                 </tr>
               </tbody>
@@ -124,29 +127,31 @@ if (isset($_POST['save'])) {
         
           
 
-        <div id="second_row" class="py-4">
-          <div id="item_code">
-            <label>رمز المادة
+        <div id="second_row" class="mt-4">
+          <h4 >خيارات الإظهار</h4>
+          <div id="item_code" class="py-2">
+            <label class="container">رمز المادة
               <input name="item_code" type="checkbox" <?php if (get_value_from_config('printing', 'item_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
             </label>
           </div>
           <div>
-            <label>رمز البائع
+            <label class="container">رمز البائع
               <input name="seller_code" type="checkbox" <?php if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
             </label>
           </div>
 
           <div>
-            <label>رمز المشتري
+            <label class="container">رمز المشتري
               <input name="buyer_code" type="checkbox" <?php if (get_value_from_config('printing', 'buyer_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
             </label>
           </div>
         </div>  
 
-        <div>
+        <div id="printing_options" class="mt-4">
+          <h4>خيارات الطباعة</h4>
           <table>
             <tbody>
               <tr>

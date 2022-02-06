@@ -116,9 +116,9 @@ body {
 } */
 #calender {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 15%;
+    left: 5%;
+    transform: translate(-15%, -5%);
     width: 110px;
     height: 170px;
     background-color: cornflowerblue;
@@ -128,7 +128,6 @@ body {
 }
 
 #calender>p {
-    font-family: Arial;
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.719);
     padding: 3px;
     margin: 0;

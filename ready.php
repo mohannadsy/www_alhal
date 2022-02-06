@@ -16,7 +16,7 @@ include 'include/nav.php';
             box-sizing: border-box;
             direction: rtl;
             color: white;
-            font-family: Arial, Helvetica, sans-serif;
+            /* font-family: Arial, Helvetica, sans-serif; */
         }
 
         .container-fluid {

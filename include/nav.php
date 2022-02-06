@@ -71,7 +71,7 @@
     <a class="nav-link active " href="main_page.php">الرئيسية</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
+    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >ملف</a>
     <div class="dropdown-menu">
       <a class="dropdown-item"  href="open_file.php" >فتح ملف</a>

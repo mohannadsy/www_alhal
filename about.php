@@ -18,7 +18,7 @@ include('include/nav.php');
     box-sizing: border-box;
     color: #212121;
     display: flex;
-    font-family: Phantomsans, sans-serif;
+    /* font-family: Phantomsans, sans-serif; */
     font-size: 20px;
     justify-content: center;
     line-height: 1em;

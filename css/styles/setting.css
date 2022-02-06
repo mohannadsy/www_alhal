@@ -2,8 +2,6 @@ body {
     margin: 0;
 }
 
-#tbl input {}
-
 .sidebar {
     margin: 0;
     padding: 0;
@@ -100,7 +98,8 @@ td {
     user-select: none;
     border: none;
     border-radius: 0px;
-    background-color: inherit;
+    background-color:inherit;
+    background-image: none;
     color: black;
 }
 
@@ -168,4 +167,7 @@ td {
     border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
+}
+#tbl_data_header input {
+    padding: 2px;
 }

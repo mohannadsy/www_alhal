@@ -337,7 +337,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <div class="row justify-content-center" id="total" >
                         <label>الإجمالي:</label>
                         <div>
-                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
+                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'] ;
                                                                                                                                             else echo '0' ?>">
                         </div>
                     </div>
