@@ -337,15 +337,18 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <div class="row justify-content-center" id="total" >
                         <label>الإجمالي:</label>
                         <div>
-                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'] ;
-                                                                                                                                            else echo '0' ?>">
+                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php 
+                            //  $fun = convert_number_to_arabic_text($bill['total_price']);
+                            if (notempty($bill)) echo $bill[0]['total_price'];
+                                                                  else echo '0' ?>">
                         </div>
                     </div>
                     <div class="row" id="commisson">
                         <label>الكمسيون:</label>
                         <div id="commission_title">
-                            <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'];
-                                                                                                                                                                else echo '5'; ?>">
+                            <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
+                                      if (notempty($bill)) echo $bill[0]['com_ratio'].$fun;
+                                                else echo '5' ; ?>">
                         </div>
 
                         <label>قيمته:</label>
@@ -357,8 +360,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <div class="row justify-content-center" id="real">
                         <label>الصافي:</label>
                         <div>
-                            <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['real_price'];
-                                                                                                                                            else echo '0' ?>">
+                            <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php 
+                            //   $fun = convert_number_to_arabic_text($bill['real_price']);
+                              if (notempty($bill)) echo $bill[0]['real_price'];
+                                                            else echo '0'  ?>">
                         </div>
                     </div>
 

@@ -1,5 +1,6 @@
 
 <?php 
+// require 'vendor/autoload.php';
     include('css.php'); 
     @include('sql/connection.php');
     include('sql/sql_queries.php');

@@ -62,8 +62,8 @@ if (isset($_POST['save'])) {
         </div>
       </section> -->
       <section id="printing_section">
-          <div>
-            <h4>بيانات الشركة</h4>
+          <div class="mt-3">
+            <h4 > <span id="line_span"></span>بيانات الشركة</h4>
             
             <table id="tbl_data_header">
               <tbody>
@@ -83,7 +83,7 @@ if (isset($_POST['save'])) {
                     <input name="location" class="form-control">
                   </td>
                   <td>
-                    <label>السجل التجاري </label>
+                    <label> الترخيص </label>
                   </td>
                   <td>
                     <input name="commercial_record" class="form-control">
@@ -128,8 +128,8 @@ if (isset($_POST['save'])) {
           
 
         <div id="second_row" class="mt-4">
-          <h4 >خيارات الإظهار</h4>
-          <div id="item_code" class="py-2">
+          <h4  class="mb-4"><span id="line_span"></span>خيارات الإظهار</h4>
+          <div id="item_code" class="">
             <label class="container">رمز المادة
               <input name="item_code" type="checkbox" <?php if (get_value_from_config('printing', 'item_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
@@ -151,8 +151,8 @@ if (isset($_POST['save'])) {
         </div>  
 
         <div id="printing_options" class="mt-4">
-          <h4>خيارات الطباعة</h4>
-          <table>
+          <h4><span id="line_span"></span>خيارات الطباعة</h4>
+          <table id="tbl_print_op">
             <tbody>
               <tr>
                 <td>
@@ -209,8 +209,12 @@ if (isset($_POST['save'])) {
         </div>
          
       </section>
-      <div class="row justify-content-center">
-        <button type="submit" name="save" class="btn btn-light">حفظ</button>
+      <div class="row py-4 ">
+        <div class="col-2 offset-2">
+          <button type="submit" name="save" class="btn btn-light">حفظ</button>
+
+        </div>
+        
       </div>
     </div>
   </form>

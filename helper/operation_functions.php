@@ -85,3 +85,8 @@ function print_account_to_tags_autocomplete($row){
 function notempty($array){
     return !empty($array);
 }
+
+// function convert_number_to_arabic_text($num){
+//     $obj = new \ArPHP\I18N\Arabic();
+//     return $obj->int2str($num).' ليرة سورية فقط لا غير' ;
+//   }

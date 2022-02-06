@@ -1,5 +1,10 @@
 body {
     margin: 0;
+    font-size: 19px;
+   
+}
+.content{
+
 }
 
 .sidebar {
@@ -61,7 +66,8 @@ div.content {
     margin-bottom: 20px;
     margin-top: 10px;
     margin-right: 10px;
-    font-size: 19px;
+
+    
 }
 
 #page_size select {
@@ -168,6 +174,22 @@ td {
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
+#tbl_data_header td{
+    font-size: 19px;
+}
+#tbl_print_op td{
+    font-size: 19px;
+}
 #tbl_data_header input {
     padding: 2px;
+    
+}
+h4{
+}
+#line_span{
+    /* height: 20px; */
+    border-right: solid 0.2em rgba(231, 231, 231, 0.644);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 1%;
 }
