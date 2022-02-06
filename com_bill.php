@@ -181,17 +181,17 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="col-1" >
 
                 </div>
-                <div class="col-3 " style="">
+                <div class="col-3 " style="padding-right: 35px;padding-left: 0px;">
                     <div class="row ">
                         <label class="col-2" style="padding-right: 0px;" >البائع</label>
-                        <div class="col-8" style="padding-right: 2px;">
+                        <div class="col-8" style="padding-right: 6px;">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" id="seller" name="seller" class="account_auto form-control" style="padding:2px;" value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
                         </div>
 
                     </div>
                     <div class="row">
-                        <label class="col-3" style="padding-left:0px ;padding-right: 0px;margin-left: 10;">طريقة الدفع </label>
-                        <div class="col-2" style="padding: 2px;padding-bottom: 5px;">
+                        <label class="col-2" style="padding-right: 0px;padding-left: 0px;padding-top: 4;">طريقة الدفع </label>
+                        <div class="col-2" style="padding: 2px;padding-bottom: 5px; padding-right:6px;">
                             <select name="seller_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
                                 <option value="cash">نقدي</option>
                                 <option value="agel" <?php if (notempty($bill)) if ($bill[0]['seller_type_pay'] == 'agel') echo 'selected' ?>>آجل</option>
@@ -201,7 +201,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                     <div class="row ">
                         <label class="col-2" style="padding-right: 0px;" >ملاحظات</label>
-                        <div class="col-8" style="padding-right: 2px;">
+                        <div class="col-8" style="padding-right: 6px;">
                             <textarea name="seller_note" class="form-control" style="padding: 2px;"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
                         </div>
                     </div>
@@ -255,7 +255,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
 
                     <div class="row justify-content-end">
-                        <label class="col-2" style="padding-left:0px ;padding-right: 0px;">طريقة الدفع </label>
+                        <label class="col-2" style="padding-left:0px ;padding-right: 0px;padding-top: 4;">طريقة الدفع </label>
                         <div class="col-2" style="padding: 2px;padding-bottom: 5px;margin-left:-13;">
                             <select name="buyer_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
                                 <option value="cash">نقدي</option>
@@ -280,7 +280,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             </div>
             <button hidden type="button" id="add_col">adding column</button>
 
-            <div class="row py-4">
+            <div class="row mt-4">
                 <div class="col-1">
                     <div class="row justify-content-end">
                         <button type="button" id="add_row"><img src="assets/images/plus-circle.svg" alt=""></button>
@@ -314,67 +314,66 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-6">
+                    <div id='buttons' class="row justify-content-center">
+                        <div class="col-5">
+                            <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" class="btn btn-secondary" id="btn-grp">حفظ</button>
+                            <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update"class="btn btn-secondary" id="btn-grp">تعديل</button>
+                            <button type="submit" class="btn btn-secondary" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
+
+                            <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
+                            <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
+                                <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button> -->
+                            <button type="submit" name="print_seller"class="btn btn-secondary">طباعة بائع</button>
+                            <button type="submit" name="print_buyer" class=" btn btn-secondary">طباعة مشتري</button>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="col-6">
+                    <div class="row justify-content-center" id="total" >
+                        <label>الإجمالي:</label>
+                        <div>
+                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
+                                                                                                                                            else echo '0' ?>">
+                        </div>
+                    </div>
+                    <div class="row" id="commisson">
+                        <label>الكمسيون:</label>
+                        <div id="commission_title">
+                            <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'];
+                                                                                                                                                                else echo '5'; ?>">
+                        </div>
+
+                        <label>قيمته:</label>
+                        <div id="commision_value">
+                            <input type="text" name="com_value" id="com_value" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_value'];
+                                                                                                                                        else echo '0' ?>">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" id="real">
+                        <label>الصافي:</label>
+                        <div>
+                            <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['real_price'];
+                                                                                                                                            else echo '0' ?>">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+           
             
-
-
-
-            <div class="row justify-content-end" id="total" ;>
-                <label>الإجمالي:</label>
-                <div>
-                    <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;color:darkgreen;" value="<?php if (notempty($bill)) echo $bill[0]['total_price'];
-                                                                                                                                    else echo '0' ?>">
-                </div>
-            </div>
-            <div class="row justify-content-end" id="commisson">
-                <label>الكمسيون:</label>
-                <div id="commission_title">
-                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_ratio'];
-                                                                                                                                                        else echo '5'; ?>">
-                </div>
-                <label>قيمته:</label>
-                <div id="commision_value">
-                    <input type="text" name="com_value" id="com_value" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_value'];
-                                                                                                                                else echo '0' ?>">
-                </div>
-            </div>
-            <div class="row justify-content-end" id="real">
-                <label>الصافي:</label>
-                <div>
-                    <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['real_price'];
-                                                                                                                                    else echo '0' ?>">
-                </div>
-            </div>
-            <div id='buttons' class="row justify-content-center">
-                <div class="col-5">
-                    <button type="submit" <?php if (notempty($bill)) echo 'hidden' ?> name="save" class="btn btn-secondary" id="btn-grp">حفظ</button>
-                    <button type="submit" <?php if (empty($bill)) echo 'hidden' ?> name="update"class="btn btn-secondary" id="btn-grp">تعديل</button>
-                    <button type="submit" class="btn btn-secondary" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> name="delete" id="btn-grp">حذف</button>
-                    <!-- <select name="print_option" id="">
-                        <optgroup>
-                            <option value="">بائع</option>
-                            <option value="">مشتري</option>
-                        </optgroup>
-                    </select>
-                    <button type="button" name="print" onclick="printComPill(['seller' , 'nav' , 'buttons'])">طباعة</button> -->
-
-                    <!-- <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        طباعة
-                    </a>
-                    <input type="checkbox" name="" id="">
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> -->
-
-                    <!-- <a class="dropdown-item" href="" name="print_buyer" onclick="printComPill(['seller' , 'nav' , 'buttons'])">فاتورة المشتري</a> -->
-                    <!-- <button type="submit" class="dropdown-item" name="print_seller">فاتورة بائع</button>
-                        <button type="submit" class="dropdown-item" name="print_buyer">فاتورة مشتري</button> -->
-                    <button type="submit" name="print_seller"class="btn btn-secondary">طباعة بائع</button>
-                    <button type="submit" name="print_buyer" class=" btn btn-secondary">طباعة مشتري</button>
-                    <!-- </div> -->
-                </div>
-            </div>
         </div>
     </form>
     <script src="js/scripts/com_bill.js"></script>
-    <script src="js/iframeResizer.min.js"></script>
+    <!-- <script src="js/iframeResizer.min.js"></script> -->
 </body>
 
 </html>

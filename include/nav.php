@@ -68,7 +68,7 @@
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active " href="index.php">الرئيسية</a>
+    <a class="nav-link active " href="main_page.php">الرئيسية</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 

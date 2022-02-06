@@ -72,8 +72,7 @@ td input {
 #commission_title input {
     width: 50px;
     margin: 0 8px;
-    background: none;
-    border: none;
+
 }
 
 #commisson {
@@ -82,23 +81,18 @@ td input {
 
 #commision_value input {
     width: 100px;
-    background: none;
-    border: none;
     margin-right: 10px;
 }
 
 #total input {
     margin-right: 10px;
     width: 120px;
-    background: none;
-    border: none;
-}
+    }
+
 
 #real input {
     margin-right: 10px;
     width: 120px;
-    background: none;
-    border: none;
 }
 
 .modal {

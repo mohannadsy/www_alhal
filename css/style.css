@@ -2,21 +2,18 @@
     direction: rtl;
 }
 
-body {
+  body {
     text-align: right;
-<<<<<<< HEAD
     /*background-color: #0a4b64;*/
-    background-color: #00b2cec7;
-=======
+    /* background-color: #00b2cec7; */
     /* background: rgb(224, 205, 205); */
     background: linear-gradient(#276f85, #e8e9f3);
     /* background-color: #0a4b64; */
     background-color: #97e0ebc7;
->>>>>>> d97ff7e98ad070f73ce8a899052bd43750eb5894
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
-}
+}  
 
 .container {
     /*background-color: #0e2a49;*/
