@@ -1,3 +1,3 @@
 <?php
-include('ready.php');
+include('main_page.php');
 ?>
