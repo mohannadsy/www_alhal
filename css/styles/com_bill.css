@@ -31,35 +31,17 @@ td input {
 #date {
     width: 145px;
     border: none; 
-    /* padding-right: 0px;   
-    padding-bottom: 3px; */
     padding-left: 0px;
     padding: 2px;
 }
-#bill_date_lbl{
-    /* padding-top: 4px; */
-
-}
-#bill_num_lbl{
-    /* padding-top: 4px; */
-
-}
 
 #code {
-    /* background: inherit; */
-    /* border: none; */
-    /* padding-bottom: 3px; */
     padding: 2px;
-    
-   
 }
 
 #add_row,#toggle_discount {
-    /* border-radius: 50%; */
-    /* border: solid black 2px; */
     background-color: inherit;
     border: none;
-    /* font-size: 20px; */
     margin: 1px 0px;
     cursor: pointer;
 }
@@ -74,14 +56,16 @@ td input {
     margin: 0 8px;
 
 }
-
-#commisson {
-    margin-left: 3%;
+#comm_val{
+    padding-right: 2px;
+    padding-left: 11px;
 }
 
+
 #commision_value input {
-    width: 100px;
+    width: 120px;
     margin-right: 10px;
+    
 }
 
 #total input {
@@ -97,9 +81,7 @@ td input {
 
 .modal {
     position: fixed;
-    /* Stay in place */
     overflow: auto;
-    /* Enable scroll if needed */
 }
 
 #modal_dialog_account {
@@ -118,8 +100,6 @@ td input {
 
 #modal_header_account {
     padding: 0 10px;
-    /* background-color: rgb(52,92,100);; */
-    /* color: white;    */
     display: flex;
 }
 
@@ -130,7 +110,6 @@ td input {
 }
 
 #iframe_account_card {
-    /* position: absolute; */
     width: 770px;
     height: 600px;
 }
@@ -151,8 +130,6 @@ td input {
 
 #modal_header_item {
     padding: 0px 10px;
-    /* background-color: rgb(52,92,100);; */
-    /* color: white;    */
     display: flex;
 }
 
@@ -211,17 +188,6 @@ td input {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-
-/* table {
-    width: 60%;
-} */
-
-#btn-grp {
-    border-radius: 5px;
-    margin: 6px;
-    width: 80px;
 }
 
 #last_previous,

@@ -62,20 +62,20 @@ span{
 }
 .modal-header {
     padding: 0 10px;
-    /* background-color: rgb(52,92,100);; */
-    /* color: white;    */
     display: flex;
 }
 .modal-body {
     position: relative;
     min-width: 780;
     min-height: 630px;
-    background-color: rgb(52, 92, 100);
 }
 #iframe_account_card {
     position: absolute;
     width: 770px;
     height: 600px;
+}
+.close{
+    line-height: 1.5;
 }
 
 /* رقم الإيصال */
