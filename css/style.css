@@ -1,4 +1,6 @@
 /* font import start */
+
+
 /* @font-face {
     font-family: 'baloo_bhaijaan_2regular';
     src: url('assets/fonts/webfontkit_Baloo_Bhaijaan_2/baloobhaijaan2-variablefont_wght-webfont.woff2') format('woff2'),
@@ -7,15 +9,15 @@
     font-style: normal;
 
 } */
+
+
 /* font import end */
-
-
 
 * {
     direction: rtl;
 }
 
-  body {
+body {
     text-align: right;
     /*background-color: #0a4b64;*/
     /* background-color: #00b2cec7; */
@@ -27,7 +29,7 @@
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
-}  
+}
 
 .container {
     /*background-color: #0e2a49;*/
@@ -56,4 +58,8 @@
     border-radius: 15px;
     /* position: absolute; */
     border-color: #005792;
+}
+
+table {
+    background-color: white;
 }
