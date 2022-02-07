@@ -128,12 +128,12 @@
   <li class="nav-item">
     <a class="nav-link" href="help_file.php">معلومات</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="about.php">حول</a>
+  </li>
 
   <li class="nav-item">
     <a class="nav-link" href="test_index.php">Test</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="test_noor.php">Nour</a>
   </li>
   
   

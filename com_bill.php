@@ -162,8 +162,8 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="col-7 text-left" >
                     <h2>فاتورة كمسيون</h2>
                 </div>
-                <div class="col-5  ">
-                    <div class="row px-1 mx-5 justify-content-end ">
+                <div class="col-5">
+                    <div class="row px-2  justify-content-end ">
                         <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
                         <button name="previous" id="previous"> <span>&#8249;</span> </button>
                         <button name="next" id="next"> <span>&#8250;</span> </button>
@@ -173,9 +173,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                 </div>  
             </div>
-            <!-- <div class="col-5">
-                   
-                </div> -->
 
             <div class="row" >
                 <div class="col-1" >
@@ -183,16 +180,16 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
                 <div class="col-3 " style="padding-right: 35px;padding-left: 0px;">
                     <div class="row ">
-                        <label class="col-2" style="padding-right: 0px;" >البائع</label>
-                        <div class="col-8" style="padding-right: 6px;">
-                            <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" id="seller" name="seller" class="account_auto form-control" style="padding:2px;" value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
+                        <label class="col-2" id="seller_lbl" >البائع</label>
+                        <div class="col-8" id="seller_input_col">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" name="seller" class="account_auto form-control"  value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
                         </div>
 
                     </div>
                     <div class="row">
-                        <label class="col-2" style="padding-right: 0px;padding-left: 0px;padding-top: 4;">طريقة الدفع </label>
-                        <div class="col-2" style="padding: 2px;padding-bottom: 5px; padding-right:6px;">
-                            <select name="seller_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
+                        <label class="col-2" id="payment_lbl">طريقة الدفع </label>
+                        <div class="col-2" id="payment_input_col">
+                            <select name="seller_type_pay" class="form-control">
                                 <option value="cash">نقدي</option>
                                 <option value="agel" <?php if (notempty($bill)) if ($bill[0]['seller_type_pay'] == 'agel') echo 'selected' ?>>آجل</option>
                             </select>
@@ -200,9 +197,9 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                     </div>
                     <div class="row ">
-                        <label class="col-2" style="padding-right: 0px;" >ملاحظات</label>
-                        <div class="col-8" style="padding-right: 6px;">
-                            <textarea name="seller_note" class="form-control" style="padding: 2px;"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
+                        <label class="col-2" id="notes_lbl"  >ملاحظات</label>
+                        <div class="col-8" id="notes_input_col">
+                            <textarea name="seller_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -245,23 +242,22 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                   
                         </div>
                 </div>
-                <div class="col-3" style="    padding-right: 0px;">
+                <div class="col-3" style="padding-right: 0px;">
                     <div class="row  justify-content-end">
-                        <label class="col-2"style="padding-left: 0px;">المشتري</label>
+                        <label class="col-2" id="buyer_lbl">المشتري</label>
                         <div class="col-8">
-                            <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer" style="padding:2px" value="<?php if (notempty($bill)) if ($bill[0]['buyer_id'] > 0) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['buyer_id'])  ?>">
+                            <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer"  value="<?php if (notempty($bill)) if ($bill[0]['buyer_id'] > 0) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['buyer_id'])  ?>">
 
                         </div>
                     </div>
 
                     <div class="row justify-content-end">
-                        <label class="col-2" style="padding-left:0px ;padding-right: 0px;padding-top: 4;">طريقة الدفع </label>
-                        <div class="col-2" style="padding: 2px;padding-bottom: 5px;margin-left:-13;">
-                            <select name="buyer_type_pay" class="form-control" style="height:30px;padding-right: 0px;padding-left: 0px;">
+                        <label class="col-2" id="buyer_pay_lbl">طريقة الدفع </label>
+                        <div class="col-2" id="buyer_pay_lbl_col">
+                            <select name="buyer_type_pay" class="form-control">
                                 <option value="cash">نقدي</option>
                                 <option value="agel" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'checked' ?>>آجل</option>
                             </select>
-                            <!-- <input type="radio" name="buyer_type_pay" checked value="cash"> -->
                         </div>
                         <div class="col-6">
 
@@ -271,9 +267,9 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
         
                     </div>
                     <div class="row justify-content-end">
-                        <label class="col-2 text-center" style="padding-left: 0px;">ملاحظات</label>
+                        <label class="col-2 text-center" id="buyer_notes">ملاحظات</label>
                         <div class="col-8">
-                            <textarea name="buyer_note" class="form-control"style="padding: 2px;"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
+                            <textarea id="notes_input" name="buyer_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -282,10 +278,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
             <div class="row mt-4">
                 <div class="col-1">
-                    <div class="row justify-content-end">
-                        <button type="button" id="add_row"><img src="assets/images/plus-circle.svg" alt=""></button>
+                    <div class="row justify-content-end mt-2">
+                        <button type="button"  id="add_row"><img src="assets/images/plus-circle.svg" alt=""></button>
                     </div>
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-end mt-2">
                         <button type="button" id="toggle_discount"><img src="assets/images/percent.svg" /></button>
                     </div>
 
@@ -298,7 +294,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                     <th contenteditable='false'>الرقم</th>
                                     <th contenteditable='false'>المادة</th>
                                     <th contenteditable='false'>الوحدة</th>
-                                    <!-- <th contenteditable='false'>عدد العبوات</th> -->
                                     <th contenteditable='false'>وزن قائم</th>
                                     <th class="discount" style="display: none;" contenteditable='false'>الخصم</th>
                                     <th contenteditable='false'>وزن الصافي</th>

@@ -207,3 +207,65 @@ span{
 h2 {
     margin: 0 15;
 }
+#seller_lbl{
+    padding-right: 0px;
+}
+#seller_input_col{
+    padding-right: 6px;
+}
+#seller{
+    padding:2px;
+}
+#payment_lbl{
+    padding-right: 0px;padding-left: 0px;padding-top: 4;
+}
+#payment_input_col{
+    padding: 2px;padding-bottom: 5px; padding-right:6px;
+}
+#payment_input_col select{
+    height:30px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+#notes_lbl{
+    padding-right: 0px;
+}
+#notes_input_col{
+    padding-right: 6px;
+}
+#notes_input_col textarea{
+    padding: 2px;
+}
+#buyer_lbl{
+    padding-left: 0px;
+}
+#buyer{
+    padding: 2px;
+
+}
+#buyer_pay_lbl{
+    padding-left:0px ;
+    padding-right: 0px;
+    padding-top: 4;
+}
+#buyer_pay_lbl_col{
+    padding: 2px;
+    padding-bottom: 5px;
+    margin-left:-13;
+}
+#buyer_pay_lbl_col select{
+    height:30px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+#buyer_notes{
+    padding-left: 0px;
+}
+#notes_input{
+    padding: 2px;
+}
+
