@@ -71,20 +71,23 @@ include('include/nav.php');
                     <div class="thumb" style="background-image: url(assets/images/Vector-Money.png);"></div>
                 </a>
             </div>
-            <div class="item">
+            <div class="item" onclick="document.getElementById('backup').click()">
                 <a href="#" class="card">
                     <article>
                         <center>
+
                             <div class="icons_div">
                                 <img class="iconss" src="assets/images/backup-restore.svg" alt="">
                             </div>
                             <h1>النسخ الاحتياطي</h1>
+
                         </center>
 
                     </article>
                     <div class="thumb" style="background-image: url('assets/images/backup-host.png');"></div>
                 </a>
             </div>
+
             <div class="item">
                 <a href="setting.php" class="card">
                     <article>
@@ -99,39 +102,46 @@ include('include/nav.php');
                     <div class="thumb" style="background-image: url(assets/images/maintenance-gears.png);"></div>
                 </a>
             </div>
-            
+
         </div>
     </div>
     <div id="calender">
-                <p id="calender-day">
-                </p>
-                <p id="calender-date">
-                </p>
-                <p id="calender-month-year">
-                </p>
-            </div>
-
+        <p id="calender-day">
+        </p>
+        <p id="calender-date">
+        </p>
+        <p id="calender-month-year">
+        </p>
+    </div>
+    <form action="" method="post">
+        <button type="submit" hidden name="backup" id="backup"></button>
+    </form>
 </body>
-<script >
+<?php
+if (isset($_POST['backup'])) {
+    backup_to_file($con, get_value_from_config('database'));
+}
+?>
+<script>
     function calender() {
-    var day = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-    var month = ["كانون الثاني", "	شباط", "آذار", "نيسان", "أيار", "حزيران", "	تموز",
-        "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "	كانون الأول"
-    ];
-    var d = new Date();
-    setText('calender-day', day[d.getDay()]);
-    setText('calender-date', d.getDate());
-    setText('calender-month-year', month[d.getMonth()] + ' ' + (1900 + d.getYear()));
-};
+        var day = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+        var month = ["كانون الثاني", "	شباط", "آذار", "نيسان", "أيار", "حزيران", "	تموز",
+            "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "	كانون الأول"
+        ];
+        var d = new Date();
+        setText('calender-day', day[d.getDay()]);
+        setText('calender-date', d.getDate());
+        setText('calender-month-year', month[d.getMonth()] + ' ' + (1900 + d.getYear()));
+    };
 
-function setText(id, val) {
-    if (val < 10) {
-        val = '0' + val;
-    }
-    document.getElementById(id).innerHTML = val;
-};
+    function setText(id, val) {
+        if (val < 10) {
+            val = '0' + val;
+        }
+        document.getElementById(id).innerHTML = val;
+    };
 
-// call calender()
+    // call calender()
 
     window.onload = calender;
 </script>
