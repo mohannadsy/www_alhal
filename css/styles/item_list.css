@@ -1,4 +1,5 @@
 /*container style*/
+
 .container-fluid {
     width: 100%;
     background-color: inherit;
@@ -7,16 +8,19 @@
 
 
 /*buttons style*/
+
 #categry_col {
     padding-left: 33px;
 }
 
 
 /*table style*/
+
 #tableFixHead {
     overflow-y: auto;
     height: 520px;
     direction: ltr;
+    background-color: white;
 }
 
 #tableFixHead thead th {
@@ -42,6 +46,7 @@ h3 {
 
 
 /*search style*/
+
 #search_col button {
     margin: 0px 10px;
 }
