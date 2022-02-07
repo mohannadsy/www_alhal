@@ -178,8 +178,12 @@ if(isset($_GET['code'])){
     if (get_value_from_config('printing','account_code') == "true") {
         $name=' البائع: '. $seller['code'] . ' - ' . $seller['name'];
     }
-    if($_GET['print_type'] == 'buyer')
-        $name =' المشتري : ' . $buyer['name'];
+    if($_GET['print_type'] == 'buyer'){
+         $name =' المشتري : ' . $buyer['name'];
+        if (get_value_from_config('printing','account_code') == "true") {
+        $name=' المشتري: '. $buyer['code'] . ' - ' . $buyer['name'];
+    }
+    }
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'L', 0, 0, '', '', true);
 
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
@@ -202,18 +206,27 @@ if(isset($_GET['code'])){
             th,td{
                 text-align:center;
             }
+            .num{
+                width:10%;
+            }
+            .item{
+                width:15%;
+            }
+            .unit{
+                width:7%;
+            }
         </style>
         <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
             <thead>
                 <tr>
-                    <th>الرقم</th>
-                    <th>المادة</th>
-                    <th>الوحدة</th>
-                    <th>وزن قائم</th>
-                    <th>وزن الصافي</th>
-                    <th>الإفرادي</th>
-                    <th>الإجمالي</th>
-                    <th>ملاحظات</th>
+                    <th class="num">الرقم</th>
+                    <th class="item">المادة</th>
+                    <th class="unit">الوحدة</th>
+                    <th class="total_weight">وزن قائم</th>
+                    <th class="real_weight">وزن الصافي</th>
+                    <th class="price">الإفرادي</th>
+                    <th class="total_item_price">الإجمالي</th>
+                    <th class="bill_item_note">ملاحظات</th>
                 </tr>
             <thead>
             <tbody>
@@ -224,14 +237,18 @@ if(isset($_GET['code'])){
                 $number = 1;
                 while ($row = mysqli_fetch_array($select_items_using_id_exec)) {
                     $content.="<tr>";
-                    $content.="<td>" . $number++ . "</td>";
-                    $content.="<td>" . $row['name'] . "</td>";
-                    $content.="<td>" . $row['unit'] . "</td>";
-                    $content.="<td>" . $row['total_weight'] . "</td>";
-                    $content.="<td>" . $row['real_weight'] . "</td>";
-                    $content.="<td>" . $row['price'] . "</td>";
-                    $content.="<td>" . $row['total_item_price'] . "</td>";
-                    $content.="<td>" . $row['bill_item_note'] . "</td>";
+                    $content.="<td class='num'>" . $number++ . "</td>";
+                     if (get_value_from_config('printing','item_code') == "true") {
+                         $content.="<td class='item'>" .$row['code']. ' '. $row['name'] . "</td>";
+                    }else{
+                        $content.="<td class='item'>" . $row['name'] . "</td>";  
+                    }
+                    $content.="<td class='unit'>" . $row['unit'] . "</td>";
+                    $content.="<td class='total_weight'>" . $row['total_weight'] . "</td>";
+                    $content.="<td class='real_weight'>" . $row['real_weight'] . "</td>";
+                    $content.="<td class='price'>" . $row['price'] . "</td>";
+                    $content.="<td class='total_item_price'>" . $row['total_item_price'] . "</td>";
+                    $content.="<td class='bill_item_note'>" . $row['bill_item_note'] . "</td>";
                     $content.="</tr>";
                 }
                 $content.='
