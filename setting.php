@@ -13,7 +13,10 @@ if (isset($_POST['save'])) {
   $get_json['printing']['location'] = $_POST['location'];
   $get_json['printing']['company_name'] = $_POST['company_name'];
   $get_json['printing']['commercial_record'] = $_POST['commercial_record'];
-    
+  $get_json['printing']['first_name'] = $_POST['first_name'];  
+  $get_json['printing']['second_name'] = $_POST['second_name'];  
+  $get_json['printing']['first_num'] = $_POST['first_num'];  
+  $get_json['printing']['second_num'] = $_POST['second_num'];  
   if (isset($_POST['item_code']))
     $get_json['printing']['item_code'] = 'true';
   else
@@ -72,7 +75,7 @@ if (isset($_POST['save'])) {
                     <label> اسم الشركة</label>
                   </td>
                   <td>
-                    <input name="company_name" class="form-control">
+                    <input name="company_name" class="form-control" value="<?php echo get_value_from_config('printing' , 'company_name') ?>">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -80,13 +83,13 @@ if (isset($_POST['save'])) {
                     <label>العنوان </label>
                   </td>
                   <td>
-                    <input name="location" class="form-control">
+                    <input name="location" class="form-control" value="<?php echo get_value_from_config('printing' , 'location') ?>">
                   </td>
                   <td>
                     <label> الترخيص </label>
                   </td>
                   <td>
-                    <input name="commercial_record" class="form-control">
+                    <input name="commercial_record" class="form-control" value="<?php echo get_value_from_config('printing' , 'commercial_record') ?>">
                   </td>
                 </tr>
                 <tr>
@@ -94,7 +97,7 @@ if (isset($_POST['save'])) {
                     <label> الاسم الأول</label>
                   </td>
                   <td>
-                    <input name="first_name" class="form-control">
+                    <input name="first_name" class="form-control" value="<?php echo get_value_from_config('printing' , 'first_name') ?>">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -102,7 +105,7 @@ if (isset($_POST['save'])) {
                     <label>الرقم الأول </label>
                   </td>
                   <td>
-                    <input name="first_num" class="form-control">
+                    <input name="first_num" class="form-control" value="<?php echo get_value_from_config('printing' , 'first_num') ?>">
                   </td>
                 </tr>
                 <tr>
@@ -110,7 +113,7 @@ if (isset($_POST['save'])) {
                     <label> الاسم الثاني</label>
                   </td>
                   <td>
-                    <input name="second_name" class="form-control">
+                    <input name="second_name" class="form-control" value="<?php echo get_value_from_config('printing' , 'second_name') ?>">
                   </td>
                   <td id="padding_col">
                   </td>
@@ -118,7 +121,7 @@ if (isset($_POST['save'])) {
                     <label>الرقم الثاني </label>
                   </td>
                   <td>
-                    <input name="second_num" class="form-control">
+                    <input name="second_num" class="form-control" value="<?php echo get_value_from_config('printing' , 'second_num') ?>">
                   </td>
                 </tr>
               </tbody>

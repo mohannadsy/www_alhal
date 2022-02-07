@@ -42,10 +42,14 @@ $title=get_value_from_config('printing','company_name');
 $location=get_value_from_config('printing','location');
 $commercial_record=get_value_from_config('printing','commercial_record');
 //$commercial_record='س -ت 40592';
-$name1 = 'طلال ';
-$name2= 'جلال ';
-$phone1='0988828388';
-$phone2='0944571145';
+$first_name=get_value_from_config('printing','first_name');
+//$name1 = 'طلال ';
+//$name2= 'جلال ';
+$second_name = get_value_from_config('printing','second_name');
+//$phone1='0988828388';
+$first_num= get_value_from_config('printing','first_num');
+//$phone2='0944571145';
+$second_num= get_value_from_config('printing','second_num');
 
 
 $page_type ='A4';
@@ -148,15 +152,15 @@ if(isset($_GET['code'])){
     //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->Cell(0, 0, $location .' '. $commercial_record, 0, 1, 'R', 0, '', 0);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
     $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(7*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     if($pageLayout='A6'){
         $date = $bill['date'];
@@ -316,8 +320,8 @@ if(isset($_GET['payment_code'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -332,8 +336,8 @@ if(isset($_GET['payment_code'])){
     $pdf->MultiCell(113 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
     $pdf->SetFont('arial', '', $font_size);
@@ -463,8 +467,8 @@ if(isset($_GET['catch_code'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -479,8 +483,8 @@ if(isset($_GET['catch_code'])){
     $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
@@ -631,8 +635,8 @@ if(isset($_GET['item_report'])){
     $pdf->MultiCell(97 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     // if($page_type == 'A4'){
     //     $pdf->SetFont('arial', 'B', 18);
     // }
@@ -647,8 +651,8 @@ if(isset($_GET['item_report'])){
     // $pdf->MultiCell(121 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
@@ -855,12 +859,12 @@ if(isset($_GET['comission_report'])){
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     //$pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
@@ -1054,8 +1058,8 @@ if(isset($_GET['account_statement'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name1 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone1 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -1070,8 +1074,8 @@ if(isset($_GET['account_statement'])){
     $pdf->MultiCell(130 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $name2 ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $phone2 ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     
     $pdf->Ln(2*$ratio);
