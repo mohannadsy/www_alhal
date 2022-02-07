@@ -17,11 +17,20 @@
 
 #tableFixHead thead th {
     position: sticky;
+    background: rgb(223, 99, 99);
     top: 0;
 }
 
-th {
-    background: #eee;
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tbody {
+    background-color: rgb(238, 224, 224);
+}
+
+#in {
+    background: blue;
 }
 
 

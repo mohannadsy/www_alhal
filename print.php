@@ -175,6 +175,9 @@ if(isset($_GET['code'])){
     $pdf->Ln(7*$ratio);
     
     $name=' البائع: ' . $seller['name'];
+    if (get_value_from_config('printing','account_code') == "true") {
+        $name=' البائع: '. $seller['code'] . ' - ' . $seller['name'];
+    }
     if($_GET['print_type'] == 'buyer')
         $name =' المشتري : ' . $buyer['name'];
     $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'L', 0, 0, '', '', true);

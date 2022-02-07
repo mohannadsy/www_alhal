@@ -32,6 +32,16 @@ if (isset($_POST['save'])) {
   else
     $get_json['printing']['buyer_code'] = 'false';
 
+  if (isset($_POST['account_code']))
+    $get_json['printing']['account_code'] = 'true';
+  else
+    $get_json['printing']['account_code'] = 'false';
+
+  if (isset($_POST['only_layra']))
+    $get_json['printing']['only_layra'] = 'true';
+  else
+    $get_json['printing']['only_layra'] = 'false';
+
   // $get_json[''][]= $_POST[''];
   //  $stringData = $_POST['item'];
   file_put_contents($myFile, json_encode($get_json));
@@ -138,20 +148,36 @@ if (isset($_POST['save'])) {
               <span class="checkmark"></span>
             </label>
           </div>
-          <div>
+      <!--    <div>
             <label class="container">رمز البائع
-              <input name="seller_code" type="checkbox" <?php if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
+              <input name="seller_code" type="checkbox" <?php // if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
             </label>
           </div>
 
           <div>
             <label class="container">رمز المشتري
-              <input name="buyer_code" type="checkbox" <?php if (get_value_from_config('printing', 'buyer_code') == 'true') echo " checked" ?>>
+              <input name="buyer_code" type="checkbox" <?php // if (get_value_from_config('printing', 'buyer_code') == 'true') echo " checked" ?>>
               <span class="checkmark"></span>
             </label>
           </div>
-        </div>  
+        </div> --> 
+        <div>
+            <label class="container">رمز الحساب
+              <input name="account_code" type="checkbox" <?php  if (get_value_from_config('printing', 'account_code') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+
+        <div>
+            <label class="container">التفقيط
+              <input name="only_layra" type="checkbox" <?php  if (get_value_from_config('printing', 'only_layra') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>  
+        </div>
+
+        
 
         <div id="printing_options" class="mt-4">
           <h4><span id="line_span"></span>خيارات الطباعة</h4>

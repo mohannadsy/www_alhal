@@ -69,7 +69,7 @@ if (isset($_POST['delete'])) {
             </div>
             <div class="row justify-content-center" >
                 <div class="col-10" id="tableFixHead">
-                    <table class="table table-bordered table-hover text-center">
+                    <table class="table table-hover text-center">
                         <thead id="thead_col">
                             <tr>
                                 <th scope="col">الرقم</th>

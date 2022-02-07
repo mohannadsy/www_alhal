@@ -76,7 +76,7 @@ include('include/nav.php');
 
             <div class="row justify-content-center py-4 ">
                 <div class="col-11"  id="tableFixHead">
-                    <table class=" table table-bordered table-hover text-center ">
+                    <table class=" table table-hover text-center ">
                         <thead>
                             <tr>
                                 <th id="bill_code">رقم الفاتورة </th>

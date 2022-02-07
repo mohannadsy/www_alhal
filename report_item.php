@@ -81,9 +81,9 @@ include('include/nav.php');
                             <tr>
 
                                 <th colspan="3"></th>
-                                <th colspan="2"> الإدخالات </th>
+                                <th colspan="2" id="in"> الإدخالات </th>
 
-                                <th colspan="2">الإخراجات</th>
+                                <th colspan="2" id="out">الإخراجات</th>
                                 <th colspan="2">الرصيد</th>
                             </tr>
                             <tr>

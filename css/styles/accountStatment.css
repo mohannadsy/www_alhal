@@ -18,37 +18,49 @@
 #tableFixHead thead th {
     position: sticky;
     top: 0;
+    background: rgb(223, 99, 99);
 }
 
-th {
-    background: #eee;
+#tableFixHead tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
-#date_col{
+
+#tableFixHead tbody {
+    background-color: rgb(238, 224, 224);
+}
+
+#date_col {
     width: 8%;
 }
-#doc_col{
+
+#doc_col {
     width: 9%;
 }
-#cross_col{
+
+#cross_col {
     width: 10%;
 }
-#item_col{
-    display:none;
-    width:6% ;
 
+#item_col {
+    display: none;
+    width: 6%;
 }
-#total_wight,#last_wight{
+
+#total_wight,
+#last_wight {
     width: 8%;
-
 }
-#num_col{
+
+#num_col {
     width: 5%;
 }
-#total_price_col{
+
+#total_price_col {
     width: 10%;
 }
 
-#btn-grp,#print {
+#btn-grp,
+#print {
     border-radius: 4px;
     text-align: center;
     margin: 1px;
@@ -62,8 +74,8 @@ th {
 #lbl-radio-type {
     padding-right: 5px;
 }
-.account_auto{
-    padding-left: 0;
-    padding-right:0;
 
+.account_auto {
+    padding-left: 0;
+    padding-right: 0;
 }

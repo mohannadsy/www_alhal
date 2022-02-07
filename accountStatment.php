@@ -167,7 +167,7 @@ include('include/nav.php');
             <div class="row justify-content-center py-1">
                 <div class="col-11" id="tableFixHead">
 
-                    <table contenteditable='true' class="table table-bordered table-hover " name="table" id="tbl2">
+                    <table contenteditable='true' class="table table-hover " name="table" id="tbl2">
                         <thead class="text-center">
                             <tr>
                                 <th contenteditable='false' id="date_col">التاريخ</th>

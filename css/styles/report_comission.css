@@ -18,10 +18,15 @@
 #tableFixHead thead th {
     position: sticky;
     top: 0;
+    background: rgb(223, 99, 99);
 }
 
-th {
-    background: #eee;
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tbody {
+    background-color: rgb(238, 224, 224);
 }
 
 
@@ -61,37 +66,44 @@ th {
 
 #total_row {
     /* margin: 0px 70px; */
-    border: 1px  solid #67696b;
+    border: 1px solid #67696b;
     border-radius: 15px;
     margin-left: 20%;
     margin-right: 20%;
 }
+
+
 /* table */
-#bill_code{
-    width:7%; 
+
+#bill_code {
+    width: 7%;
 }
-#date_col{
+
+#date_col {
     width: 10%;
 }
-#item_name_col{
-    width: 12%;
 
+#item_name_col {
+    width: 12%;
 }
-#cat_col{
-width: 10%;
+
+#cat_col {
+    width: 10%;
 }
-#unit_col{
+
+#unit_col {
     width: 5%;
 }
-#buyer_col,#seller_col{
-    width:16% ;
 
+#buyer_col,
+#seller_col {
+    width: 16%;
 }
-#comm_col{
-    width:11% ;
 
+#comm_col {
+    width: 11%;
 }
-#total_col{
-    width:17% ;
 
+#total_col {
+    width: 17%;
 }

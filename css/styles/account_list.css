@@ -1,11 +1,14 @@
 /* container style */
+
 .container-fluid {
     width: 100%;
     background-color: inherit;
     border: none;
 }
 
+
 /* table style */
+
 #tableFixHead {
     overflow-y: auto;
     height: 520px;
@@ -15,32 +18,43 @@
 #tableFixHead thead th {
     position: sticky;
     top: 0;
+    background: rgb(223, 99, 99);
 }
 
-th {
-    background: #eee;
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
+
+tbody {
+    background-color: rgb(238, 224, 224);
+}
+
 
 /*عمود البحث*/
+
 #search_col input {
     width: 170px;
 }
+
 #search_col button {
     margin: 0px 10px;
 }
+
+
 /* زر حساب جديد */
+
 #new_account_col {
     text-align: left;
     padding-left: 15px;
 }
+
+
 /* العنوان */
+
 #header {
     height: 50px;
 }
-h3{
+
+h3 {
     font-weight: bold;
-    
 }
-
-
-
