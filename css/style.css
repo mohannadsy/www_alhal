@@ -18,17 +18,17 @@
 }
 
 body {
-    text-align: right;
     /*background-color: #0a4b64;*/
     /* background-color: #00b2cec7; */
     /* background: rgb(224, 205, 205); */
-    background: linear-gradient(#276f85, #e8e9f3);
     /* background-color: #0a4b64; */
-    background-color: #97e0ebc7;
-    background-color: #0d8396c7;
+    /* background-color: #97e0ebc7; */
+    background-color: #3345578c;
+    text-align: right;
+    /* background-color: #0d8396c7;
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
+    font-size: 17px; */
 }
 
 .container {

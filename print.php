@@ -151,13 +151,15 @@ if(isset($_GET['code'])){
     $pdf->writeHTML($html, true, false, true, false, '');
     //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->Cell(0, 0, $location .' '. $commercial_record, 0, 1, 'R', 0, '', 0);
+    //$pdf->Cell(0, 0, $location .' '. $commercial_record, 0, 1, 'R', 0, '', 0);
+    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location .' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
+    $pdf->Ln(7*$ratio);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
     $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
     $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(7*$ratio);
+    $pdf->Ln(6*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
     $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
@@ -207,13 +209,28 @@ if(isset($_GET['code'])){
                 text-align:center;
             }
             .num{
-                width:10%;
+                width:7%;
             }
             .item{
-                width:15%;
+                width:22%;
             }
             .unit{
-                width:7%;
+                width:9%;
+            }
+            .total_weight{
+                width:10%;
+            }
+            .real_weight{
+                width:13%;
+            }
+            .price{
+                width:10%;
+            }
+            .total_item_price{
+                width:18%; 
+            }
+            .bill_item_note{
+                width:11%;
             }
         </style>
         <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
@@ -256,16 +273,24 @@ if(isset($_GET['code'])){
         </table>';
 	$pdf->writeHTML($content);
     if($_GET['print_type'] == 'buyer'){
-        $fun = convert_number_to_arabic_text($bill['total_price']);
-        $total_price='الإجمالي: ' . $bill['total_price'] . $fun;
-       
-        $pdf->MultiCell(185 * $ratio, 6 * $ratio,$total_price  ,0, 'R', 0, 0, '', '', true);
+        if (get_value_from_config('printing','only_layra') == "true") {
+            $fun = convert_number_to_arabic_text($bill['total_price']);
+            $total_price='الإجمالي: ' . $bill['total_price'] .' ل . س ' . $fun;
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio,$total_price  ,0, 'R', 0, 0, '', '', true);
+        }elseif(get_value_from_config('printing','only_layra') == "false"){
+            $total_price='الإجمالي: ' . $bill['total_price'] .' ل . س ';
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio,$total_price  ,0, 'R', 0, 0, '', '', true);
+        }
     }else{
+        if (get_value_from_config('printing','only_layra') == "true") {
         $fun = convert_number_to_arabic_text($bill['total_price']);
         $total_price='الإجمالي: ' . $bill['total_price'] .' ل . س ' . $fun;
         $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(6*$ratio);
-        
+        }else{
+            $total_price='الإجمالي: ' . $bill['total_price'] .' ل . س ';
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+        }
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'] ;
         $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(6*$ratio);
@@ -368,9 +393,16 @@ if(isset($_GET['payment_code'])){
     $date = $payment_bond['date'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
-    $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
-    $account = 'الحساب: ' .$main_account;
-    $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    $main_account_with_code = @get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
+    $main_account = @get_name_from_table_using_id($con , 'accounts' , $payment_bond['main_account_id']);
+    //get_name_from_table_using_id
+    if (get_value_from_config('printing','account_code') == "true") {
+        $account = 'الحساب: ' .$main_account_with_code;
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    }else{
+        $account = 'الحساب: ' .$main_account;
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    }
     $currency = 'العملة: ' . $payment_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
@@ -386,13 +418,16 @@ if(isset($_GET['payment_code'])){
                 text-align:center;
             }
             .num{ 
-                width : 10%;
+                width : 8%;
              }
-             .maden , .acc{
-                width : 25%;
+            .acc{
+                width : 39%;
+             }
+            .maden{
+                width : 18%;
              }
              .note{
-                 width:40%;
+                 width:35%;
              }
         </style>
         <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
@@ -413,7 +448,12 @@ if(isset($_GET['payment_code'])){
                 $content.="<tr>";
                 $content.="<td  class='num'>" . $counter++ . "</td>";
                 $content.="<td>" . $payment_bond_from_code['daen'] ."</td>";
-                $content.="<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>";
+                if (get_value_from_config('printing','account_code') == "true") {
+                    $content.="<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>";
+                }else{
+                    $content.="<td>" . get_name_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>";
+                }
+                //$content.="<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $payment_bond_from_code['other_account_id']) . "</td>";
                 $content.="<td>" . $payment_bond_from_code['note'] . "</td>";
                 $content.="</tr>";
 
@@ -516,9 +556,17 @@ if(isset($_GET['catch_code'])){
     $date =  $catch_bond['date'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
-    $main_account = @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
-    $account = 'الحساب: ' . $main_account;
-    $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    $main_account_with_code = @get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
+    $main_account = @get_name_from_table_using_id($con , 'accounts' , $catch_bond['main_account_id']);
+    //$account = 'الحساب: ' . $main_account;
+    //$pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    if (get_value_from_config('printing','account_code') == "true") {
+        $account = 'الحساب: ' .$main_account_with_code;
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    }else{
+        $account = 'الحساب: ' .$main_account;
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+    }
     $currency = 'العملة: '. $catch_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
@@ -532,13 +580,16 @@ if(isset($_GET['catch_code'])){
                 text-align:center;
             }
             .num{ 
-                width : 10%;
+                width : 8%;
              }
-             .daen , .acc{
-                width : 25%;
+             .daen{
+                 width : 18%;
+             }
+            .acc{
+                 width : 39%;
              }
              .note{
-                 width:40%;
+                 width:35%;
              }
         </style>
         <table cellspacing="0" cellpadding="1" border="1" style="border-color:gray;">
@@ -559,7 +610,12 @@ if(isset($_GET['catch_code'])){
                 $content.= "<tr>";
                 $content.= "<td>" . $counter++ . "</td>";
                 $content.= "<td>". $catch_bond_from_code['maden'] ."</td>";
-                $content.= "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>"; 
+                if (get_value_from_config('printing','account_code') == "true") {
+                   $content.= "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>";
+                }else{
+                    $content.= "<td>" . get_name_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>";
+                }
+                //$content.= "<td>" . get_name_and_code_from_table_using_id($con , 'accounts' , $catch_bond_from_code['other_account_id']) . "</td>"; 
                 $content.= "<td>" . $catch_bond_from_code['note'] . "</td>";
                 $content.= "</tr>";
 
@@ -1182,7 +1238,7 @@ if(isset($_GET['account_statement'])){
                                         if ($row['code_type'] == 'bills') { // bills -> السطر تابع لفاتورة
                                             // input output
                                             $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $row['code_number'])));
-
+                                            if (get_value_from_config('account_statement' , 'report_type_details') == 'false') {continue;}
                                             if ($_GET['report_account_type'] == 'input') {
                                                 if ($row['main_account_id'] == $bill_row['buyer_id'])
                                                     continue;
@@ -1207,7 +1263,7 @@ if(isset($_GET['account_statement'])){
                                             $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
 
                                             $bill_row = mysqli_fetch_array(mysqli_query($con, selectND('bills') . andWhere('id', $bill_id)));
-
+                                            if (get_value_from_config('account_statement' , 'report_type_details') == 'false') {continue;}
                                             if ($_GET['report_account_type'] == 'input') {
                                                 if ($row['main_account_id'] == $bill_row['buyer_id'])
                                                     continue;

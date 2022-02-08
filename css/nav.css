@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* background-color: #f5f5f5; */
+    /* background-color: #3345578c; */
+    /* background: linear-gradient(to right, #1d86df 0%, #39b49a 100%); */
+    /* background: linear-gradient(to right, #88d6c5 0%, #88b3d8 100%); */
+    /* background: linear-gradient(to right, #a6b7cf 0%, #ffbebe 100%); */
+    /* font-family: arial; */
+}
+
+header {
+    font-family: arial;
+    background: #2b3641;
+    /* background: #001f3d; */
+    /* background: linear-gradient(to right, #596169 0%, #292e33 100%); */
+    width: 100%;
+    float: left;
+    box-shadow: 0px 0px 20px 8px rgb(94, 93, 93);
+    border-bottom: solid 0.2em rgb(223, 56, 26);
+    max-height: 4em;
+    /* border-top: solid 0.4em rgb(223, 56, 26); */
+}
+
+.wrapper {
+    /* max-width: 1200px; */
+    padding: 0px 20px;
+    margin: auto;
+    width: 100%;
+}
+
+.logo {
+    float: left;
+    margin: 38px 0px;
+    max-width: 200px;
+}
+
+.logo img {
+    max-width: 100%;
+}
+
+
+/*-- Navbar CSS --*/
+
+.nav-menus {
+    float: right;
+    /* min-height: 100px; */
+    display: flex;
+    align-items: center;
+}
+
+.nav-menus li {
+    list-style: none;
+    position: relative;
+    padding: 1.2em 0px;
+}
+
+.nav-menus a {
+    color: #fff;
+    position: relative;
+    font-size: 17px;
+    text-decoration: none;
+    padding: 20px 12px;
+    z-index: 1;
+}
+
+.nav-menus li:hover {
+    color: #fff;
+}
+
+.nav-menus a:after {
+    content: "";
+    width: 100%;
+    height: 0px;
+    /* background-color: #6d6e70; */
+    background-color: #505050;
+    position: absolute;
+    top: -6px;
+    left: 0px;
+    border-radius: 4px;
+    transition: 0.2s;
+    z-index: -1;
+}
+
+.nav-menus li:hover>a:after {
+    height: 100%;
+}
+
+.nav-menus i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.toggle-btn {
+    float: right;
+    height: 60px;
+    width: 0.9em;
+    line-height: 2.5em;
+    color: #fff;
+    font-size: 26px;
+    display: none;
+    cursor: pointer;
+}
+
+.nav-menus.active {
+    display: block;
+}
+
+
+/*-- Sub Menus CSS--*/
+
+.sub-menus ul {
+    position: absolute;
+    top: 54px;
+    background-color: #fff;
+    padding: 5px 0px;
+    min-width: 150px;
+    box-shadow: 0px 0px 8px #636363;
+    border-radius: 4px;
+    display: none;
+}
+
+.sub-menus:hover ul {
+    display: block;
+}
+
+.sub-menus ul li {
+    padding: 5px 0px;
+}
+
+.sub-menus ul li a {
+    padding: 8px 10px;
+    display: block;
+    color: #5a30a5;
+}
+
+.sub-menus ul li:hover a {
+    color: #fff;
+}
+
+.sub-menus ul::before {
+    content: "";
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: absolute;
+    top: -0.49em;
+    z-index: 1;
+}
+
+#myBackBtn {
+    padding-right: 22.2em;
+}
+
+
+/*-- Responsive Menus Bar CSS--*/
+
+
+/* @media (max-width:767px) {
+    .toggle-btn {
+        display: block;
+    }
+    .nav-menus {
+        position: absolute;
+        width: 100%;
+        background: #4e2890;
+        top: 100px;
+        right: 0;
+        display: none;
+        padding: 0px 15px;
+        box-sizing: border-box;
+    }
+    .nav-menus::before {
+        content: "";
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #4e2890;
+        position: absolute;
+        top: -10px;
+        right: 10px;
+    }
+    .sub-menus ul {
+        position: static;
+    }
+    .sub-menus ul::before {
+        display: none;
+    }
+    .nav-menus li {
+        padding: 0px;
+    }
+    .nav-menus li a {
+        display: block;
+        margin: 15px 0px;
+    }
+} */

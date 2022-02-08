@@ -14,11 +14,91 @@
     include('helper/links.php');
 ?>
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="fontawesome_v5_10_2.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/nav.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+    <!-- Start Header -->
+    <header>
+        <div class="wrapper">
+            <!-- Brand Image -->
+            <!-- <a href="#" class="logo"><img src="/images/markuptag-white-logo.png" alt=""></a> -->
+            <i class="toggle-btn fas fa-bars"></i>
+            <!-- Navbar -->
+            <nav class="nav-menus">
+                <li><a href="main_page.php"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li class="sub-menus"><a href="#"><i class='fas fa-folder-open fa-9x' style='color:#ffffff'></i>ملف</a>
+                    <ul>
+                        <li><a href="#"> فتح ملف</a></li>
+                        <li><a href="#" onclick="document.getElementById('modal_restore_db_button').click()"> استيراد نسخة احتياطية</a></li>
+                        <li><a href="#" onclick="document.getElementById('backup').click()"> النسخ الاحتياطي</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menus"><a href="#"><i class="fas fa-users" style='color:#ffffff'></i> حسابات</a>
+                    <ul>
+                        <li><a href="account_card.php"> بطاقة حساب</a></li>
+                        <li><a href="accountStatment.php"> كشف حساب</a></li>
+                        <li><a href="account_list.php"> قائمة حسابات</a></li>
+                        <li><a href="report_comission.php"> تقرير حركة كمسيون</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menus"><a href="#"><i class='fas fa-dolly-flatbed fa-9x' style='color:#ffffff'></i> مواد</a>
+                    <ul>
+                        <li><a href="category_card.php"> بطاقة صنف</a></li>
+                        <li><a href="item_card.php"> بطاقة مادة</a></li>
+                        <li><a href="item_list.php"> قائمة المواد</a></li>
+                        <li><a href="report_item.php"> تقرير حركة مادة</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menus"><a href="#"><i class="fas fa-align-left" style='color:#ffffff'></i> فواتير</a>
+                    <ul>
+                        <li><a href="com_bill.php"> فاتورة جديدة</a></li>
+                        <li><a href="bills_list.php"> قائمة الفواتير</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menus"><a href="#"><i class='fas fa-copy fa-9x' style='color:#ffffff'></i> سندات</a>
+                    <ul>
+                        <li><a href="payment_bonds.php"> سند دفع</a></li>
+                        <li><a href="catch_bonds.php"> سند قبض</a></li>
+                    </ul>
+                </li>
+                <li><a href="setting.php"><i class='fas fa-cogs fa-9x' style='color:#ffffff'></i> الإعدادات</a></li>
+                <li><a href="help_file.php"><i class="fas fa-align-left"></i> معلومات</a></li>
+                <li><a href="about.php"><i class='fas fa-info-circle fa-9x' style='color:#ffffff'></i> حول</a></li>
+                <li id="myBackBtn"><a onclick="window.history.back()"><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+
+    <!-- Toggle jQuery for Small Devices -->
+    <!-- <script type="text/javascript">
+        $(".toggle-btn").click(function() {
+            $(this).toggleClass("fa-times");
+            $(".nav-menus").toggleClass("active");
+        });
+    </script> -->
+</body>
+
+</html>
+<!--
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 </head>
 
 <link rel="stylesheet" href="css/nav.css">
+-->
 <!-- <nav class="navbar navbar-expand-lg navbar-dark">
 <div class="container">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +124,7 @@
 </nav> -->
 
 
-
+<!--
 <button hidden id="modal_restore_db_button" class="login-trigger" href="#" data-target="#modal_restore_db" data-toggle="modal">بطاقة حساب </button>
 <div id="modal_restore_db" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered" id="modal_dialog_account">
@@ -63,9 +143,9 @@
         </div>
     </div>
 </div>
+-->
 
-
-
+<!--
 <html dir="rtl" lang="ar">
 <ul id='nav' class="nav nav-tabs">
   <li class="nav-item">
@@ -114,7 +194,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item"  href="payment_bonds.php" >سند دفع</a>
       <a class="dropdown-item" href="catch_bonds.php">سند قبض</a>
-  </li>
+  </li> -->
   <!-- <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
     aria-expanded="false" >حركات</a>
@@ -122,6 +202,7 @@
       <li><a class="dropdown-item"  href="report_item.php" > حركة مادة</a></li>
     </ul>
   </li> -->
+  <!--
   <li class="nav-item">
     <a class="nav-link" href="setting.php">الإعدادات</a>
   </li>
@@ -148,7 +229,7 @@
   </li>
   
 </ul>
-</html>
+</html> -->
 
 
 <script>
