@@ -94,6 +94,7 @@ function backup_to_file($con, $database)
         $fileHandler = fopen($backup_file_name, 'w+');
         $number_of_lines = fwrite($fileHandler, $sqlScript);
         fclose($fileHandler);
+        message_box('لقد تم اخذ نسخة احتياطية بنجاح الى سطح المكتب');
         // Download the SQL backup file to the browser
         // header('Content-Description: File Transfer');
         // header('Content-Type: application/octet-stream');
