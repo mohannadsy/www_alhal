@@ -343,7 +343,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         <label>الكمسيون%</label>
                         <div id="commission_title">
                             <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
-                                      if (notempty($bill)) echo $bill[0]['com_ratio'].$fun;
+                                      if (notempty($bill)) echo $bill[0]['com_ratio'];
                                                 else echo '5' ; ?>">
                         </div>
 

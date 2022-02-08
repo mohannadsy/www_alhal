@@ -34,7 +34,8 @@ include('include/nav.php');
                     <article>
                         <center>
                             <div class="icons_div">
-                                <img class="iconss" src="assets/images/file-arrow-up.svg" alt="">
+                                <!-- <img class="iconss" src="assets/images/file-arrow-up.svg" alt=""> -->
+                                <i class="fa fa-user"></i>
                             </div>
                             <h1>سند دفع</h1>
                         </center>
