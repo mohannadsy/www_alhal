@@ -58,7 +58,7 @@ function createCell(cell, text, style, id, name, row_number) {
         div.setAttribute('min', 0);
         div.setAttribute('class', 'discount');
         div.style='display:none;text-align:center;padding:5px;';
-        cell.style='display:none;padding:0';
+        cell.style='width:10px;display:none;padding:0';
         cell.setAttribute('class', 'discount');
     }
 
