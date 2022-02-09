@@ -36,17 +36,26 @@ h3 {
 
 #tableFixHead {
     overflow-y: auto;
-    height: 450px;
+    height: 500px;
     direction: ltr;
 }
 
 #tableFixHead thead th {
     position: sticky;
     top: -1;
-    
+    background: rgb(223, 99, 99);
 }
-thead{
-border: none;
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+thead {
+    border: none;
+}
+
+tbody {
+    background-color: rgb(238, 224, 224);
 }
 
 th {
@@ -55,9 +64,9 @@ th {
     color: #050102;
     font-size: 18px;
     font-weight: normal;
-    
 }
-.sold{
+
+.sold {
     background-color: #002E60;
     width: 75px;
     height: 35px;
@@ -65,22 +74,23 @@ th {
     border-radius: 3px;
     text-align: center;
 }
-.not_sold{
-    background-color:#207CDF ;
+
+.not_sold {
+    background-color: #207CDF;
     width: 75px;
     height: 35px;
     line-height: 35px;
     border-radius: 3px;
     text-align: center;
-
 }
-.btn{
-    -moz-box-shadow:  0 0 10px rgb(5, 4, 4);
-    -webkit-box-shadow:  0 0 10px rgb(0, 0, 0);
-    box-shadow:  0 0 10px rgb(0, 0, 0);
+
+.btn {
+    -moz-box-shadow: 0 0 10px rgb(5, 4, 4);
+    -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+    box-shadow: 0 0 10px rgb(0, 0, 0);
     width: 100px;
-
 }
-.radio_lbl{
+
+.radio_lbl {
     cursor: pointer;
 }

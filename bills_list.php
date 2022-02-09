@@ -23,7 +23,7 @@ include('include/nav.php');
                     <input name="search_bill" value="all_bills" id="all_bills" type="radio" checked />
                     <label class="radio_lbl" for="all_bills">جميع الفواتير</label>
                 </div>
-                
+                                                             
                 <div>
                     <input name="search_bill" value="not_sell_bills" id="not_sell_bills" type="radio" />
                     <label class="radio_lbl" for="not_sell_bills">الفواتير الغير مباعة</label>
@@ -41,7 +41,7 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-center">
                 <div class="col-10"  id="tableFixHead">
-                    <table class="  table table-bordered table-hover text-center">
+                    <table class="  table table-hover text-center">
                         <thead class="text-center bg-primary ">
                             <tr>
                                 <th scope="col">رقم الفاتورة</th>
