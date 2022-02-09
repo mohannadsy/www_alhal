@@ -39,13 +39,11 @@ tbody {
 
 /*header style*/
 
-#header {
-    height: 50px;
-}
 
 h3 {
     margin-right: 1%;
     font-weight: bold;
+    margin-top: 50;
 }
 
 
