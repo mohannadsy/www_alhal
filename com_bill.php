@@ -160,7 +160,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
         <div id="contextmenu" class="container-fluide">
             <div class="row py-2 px-3">
                 <div class="col-7 text-left" >
-                    <h2>فاتورة كمسيون</h2>
+                    <!--<h2>فاتورة كمسيون</h2>-->
                 </div>
                 <div class="col-5">
                     <div class="row px-2  justify-content-end ">
@@ -175,7 +175,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
             </div>
 
             <div class="row" >
-                <div class="col-1" >
+                <div class="col-1">
 
                 </div>
                 <div class="col-3 " style="padding-right: 35px;padding-left: 0px;">
@@ -204,18 +204,19 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="row mt-5 pt-5" >
+                    <div class="row justify-content-center">
+                        
+                            <h2>فاتورة كمسيون</h2>
+                    </div>
+                    <div class="row  pt-5" >
                         <div class="col-6">
                             <div class="row justify-content-center">
                             <label for="date" id="bill_date_lbl">تاريخ الفاتورة</label>
                             <div class="col-4">
                                 <input type="date" name="date" id="date" value="<?php if (empty($bill)) echo date('Y-m-d');
                                                                             else echo $bill[0]['date'] ?>" class="form-control center">
-
-
                             </div>
                             </div>
-                             
                         </div>
                         <div class="col-6">
                             <div class="row justify-content-center">
@@ -232,14 +233,8 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                                                                     elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                                     elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code']; ?>" class="form-control">
                             </div>
-
                             </div>
-                            
-                    
-                        </div>
-                            
-                            
-                                  
+                        </div>                 
                         </div>
                 </div>
                 <div class="col-3" style="padding-right: 0px;">
@@ -250,7 +245,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                         </div>
                     </div>
-
                     <div class="row justify-content-end">
                         <label class="col-2" id="buyer_pay_lbl">طريقة الدفع </label>
                         <div class="col-2" id="buyer_pay_lbl_col">

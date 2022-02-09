@@ -191,7 +191,7 @@ if(isset($_GET['code'])){
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
     if($_GET['print_type'] == 'buyer')
         $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
-    $pdf->MultiCell(105 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+    $pdf->MultiCell(110 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
 
     $notes='ملاحظات: ' . $bill['seller_note'];

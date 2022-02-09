@@ -1,4 +1,3 @@
-
 .container-fluide {
     width: 100%;
 }
@@ -30,7 +29,7 @@ td input {
 
 #date {
     width: 145px;
-    border: none; 
+    border: none;
     padding-left: 0px;
     padding: 2px;
 }
@@ -39,7 +38,8 @@ td input {
     padding: 2px;
 }
 
-#add_row,#toggle_discount {
+#add_row,
+#toggle_discount {
     background-color: inherit;
     border: none;
     margin: 1px 0px;
@@ -54,25 +54,22 @@ td input {
 #commission_title input {
     width: 50px;
     margin: 0 8px;
-
 }
-#comm_val{
+
+#comm_val {
     padding-right: 2px;
     padding-left: 11px;
 }
 
-
 #commision_value input {
     width: 120px;
     margin-right: 10px;
-    
 }
 
 #total input {
     margin-right: 10px;
     width: 120px;
-    }
-
+}
 
 #real input {
     margin-right: 10px;
@@ -115,8 +112,8 @@ td input {
 }
 
 #modal_dialog_item {
-   min-width: fit-content;
-   min-height: fit-content;
+    min-width: fit-content;
+    min-height: fit-content;
 }
 
 #modal_content_item {
@@ -195,11 +192,11 @@ td input {
 #next,
 #last_next {
     border-radius: 4px;
-    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938);
     margin: 0px 2px;
-   
 }
-span{
+
+span {
     font-size: 23px;
     width: 25px;
 }
@@ -207,65 +204,83 @@ span{
 h2 {
     margin: 0 15;
 }
-#seller_lbl{
+
+#seller_lbl {
     padding-right: 0px;
 }
-#seller_input_col{
+
+#seller_input_col {
     padding-right: 6px;
 }
-#seller{
-    padding:2px;
+
+#seller {
+    padding: 2px;
 }
-#payment_lbl{
-    padding-right: 0px;padding-left: 0px;padding-top: 4;
+
+#payment_lbl {
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 4;
 }
-#payment_input_col{
-    padding: 2px;padding-bottom: 5px; padding-right:6px;
+
+#payment_input_col {
+    padding: 2px;
+    padding-bottom: 5px;
+    padding-right: 6px;
 }
-#payment_input_col select{
-    height:30px;
+
+#payment_input_col select {
+    height: 30px;
     padding-right: 0px;
     padding-left: 0px;
     padding-bottom: 3px;
     padding-top: 3px;
 }
-#notes_lbl{
+
+#notes_lbl {
     padding-right: 0px;
 }
-#notes_input_col{
+
+#notes_input_col {
     padding-right: 6px;
 }
-#notes_input_col textarea{
+
+#notes_input_col textarea {
     padding: 2px;
 }
-#buyer_lbl{
+
+#buyer_lbl {
     padding-left: 0px;
 }
-#buyer{
-    padding: 2px;
 
+#buyer {
+    padding: 2px;
 }
-#buyer_pay_lbl{
-    padding-left:0px ;
+
+#buyer_pay_lbl {
+    padding-left: 0px;
     padding-right: 0px;
     padding-top: 4;
 }
-#buyer_pay_lbl_col{
+
+#buyer_pay_lbl_col {
     padding: 2px;
     padding-bottom: 5px;
-    margin-left:-13;
+    margin-left: -13;
 }
-#buyer_pay_lbl_col select{
-    height:30px;
+
+#buyer_pay_lbl_col select {
+    height: 30px;
     padding-right: 0px;
     padding-left: 0px;
     padding-bottom: 3px;
     padding-top: 3px;
 }
-#buyer_notes{
+
+#buyer_notes {
     padding-left: 0px;
 }
-#notes_input{
+
+#notes_input {
     padding: 2px;
 }
-
