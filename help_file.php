@@ -22,7 +22,7 @@ include('include/nav.php');
         <div id="bonds_sidebar">سندات</div>
         <div id="setting_sidebar">الإعدادات</div>
     </div>
-    <div class="content">
+    <div class="content" id="content">
         <section id="file_section">
             <div class="" id="">
                 <h3 class="bd-title" id="content"> ملف </h3>
@@ -1253,6 +1253,27 @@ include('include/nav.php');
 <?php
 include('include/footer.php');
 ?>
+<script>
+    $('#content').onload(function(){
+    $('#file_section').show();
+    $('#file_sidebar').prop('class', 'active');
+
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
+
+});
+
+</script>
 
 <script>
 $('#file_sidebar').click(function() {

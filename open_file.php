@@ -63,7 +63,7 @@ include('include/nav.php');
             </div>
             <div class="row text-center ">
                 <div class="col-12 ">
-                    <button type="submit" name="open_db" id="btn-grp">فتح</button>
+                    <button type="submit" name="open_db" class="btn btn-light" id="btn-grp">فتح</button>
                     <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
                     <button type="submit" name="delete_db" id="btn-grp">حذف</button>
                     <button type="button" name="restore" id="btn-grp" hidden>استرجاع</button>
