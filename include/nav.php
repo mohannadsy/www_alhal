@@ -39,7 +39,7 @@
                 <li><a href="main_page.php"><i class="fas fa-home"></i> الرئيسية</a></li>
                 <li class="sub-menus"><a href="#"><i class='fas fa-folder-open fa-9x' style='color:#ffffff'></i>ملف</a>
                     <ul>
-                        <li><a href="#"> فتح ملف</a></li>
+                        <li><a href="open_file.php"> فتح ملف</a></li>
                         <li><a href="#" onclick="document.getElementById('modal_restore_db_button').click()"> استيراد نسخة احتياطية</a></li>
                         <li><a href="#" onclick="document.getElementById('backup').click()"> النسخ الاحتياطي</a></li>
                     </ul>
