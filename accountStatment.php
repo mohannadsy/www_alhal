@@ -42,14 +42,14 @@ include('include/nav.php');
                 </div>
                 <div class="col-3">
                     <div class="row ">
-                        <label for="from_date" class="col-3 text-left">من تاريخ</label>
+                        <label for="from_date" class="col-3" style="padding-left: 0px;">من تاريخ</label>
                         <div class="col-md-6">
                             <input type="date" name="from_date" id="from_date" min="" max="" class="form-control" value="<?php if (isset($_POST['from_date'])) echo $_POST['from_date'];
                                                                                                                             else echo get_value_from_config('default_date'); ?>">
                         </div>
                     </div>
                     <div class="row py-2">
-                        <label for="to_date" class="col-3 text-left">إلى تاريخ</label>
+                        <label for="to_date" class="col-3 " style="padding-left: 0px;">إلى تاريخ</label>
                         <div class="col-md-6">
                             <input type="date" name="to_date" id="to_date" min="" max="" class="form-control" value="<?php if (isset($_POST['to_date'])) echo $_POST['to_date'];
                                                                                                                         else echo date('Y-m-d') ?>">
@@ -154,7 +154,7 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row  " style="margin-right: 65px; margin-bottom:10px;">
+            <div class="row  " style="margin-right: 65px; margin-bottom:4px;">
                 <button type="submit" class="btn btn-primary" name="view" id="btn-grp">معاينة</button>
                 
             </div>
@@ -164,7 +164,7 @@ include('include/nav.php');
                 echo "<h4 class='text-center'> كشف حساب : " . $_POST['account'] . "</h4>";
             }
             ?>
-            <div class="row justify-content-center py-1">
+            <div class="row justify-content-center ">
                 <div class="col-11" id="tableFixHead">
 
                     <table contenteditable='true' class="table table-hover " name="table" id="tbl2">

@@ -19,6 +19,8 @@
     position: sticky;
     top: 0;
     background: rgb(223, 99, 99);
+    padding-right: 4px;
+    padding-left: 4px;
 }
 
 #tableFixHead tbody tr:nth-child(odd) {
@@ -27,6 +29,14 @@
 
 #tableFixHead tbody {
     background-color: rgb(238, 224, 224);
+    
+}
+#tableFixHead tbody td {
+    padding-right: 4px;
+    padding-left: 4px;
+
+   
+    
 }
 
 #date_col {
@@ -34,11 +44,13 @@
 }
 
 #doc_col {
-    width: 9%;
+    width: 11%;
+    padding-right: 4px;
+    padding-left: 4px;
 }
 
 #cross_col {
-    width: 10%;
+    width: 12%;
 }
 
 #item_col {
@@ -46,10 +58,10 @@
     width: 6%;
 }
 
-#total_wight,
+/* #total_wight,
 #last_wight {
     width: 8%;
-}
+} */
 
 #num_col {
     width: 5%;
