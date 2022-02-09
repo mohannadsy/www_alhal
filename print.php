@@ -290,19 +290,31 @@ if(isset($_GET['code'])){
         }else{
             $total_price='الإجمالي: ' . $bill['total_price'] .' ل . س ';
             $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+            $pdf->Ln(6*$ratio);
         }
         $com_ratio='الكمسيون: ' .'%' . $bill['com_ratio'] ;
         $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
         $pdf->Ln(6*$ratio);
 
-        $fun = convert_number_to_arabic_text($bill['com_value']);
-        $com_value='قيمة الكمسيون: ' . $bill['com_value'] .' ل . س '. $fun;
-        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
-        $pdf->Ln(6*$ratio);
+        if (get_value_from_config('printing','only_layra') == "true") {
+            $fun = convert_number_to_arabic_text($bill['com_value']);
+            $com_value='قيمة الكمسيون: ' . $bill['com_value'] .' ل . س '. $fun;
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
+            $pdf->Ln(6*$ratio);
+        }else{
+            $com_value='قيمة الكمسيون: ' . $bill['com_value'] .' ل . س ';
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_value ,0, 'R', 0, 0, '', '', true);
+            $pdf->Ln(6*$ratio);
+        }
 
-        $fun = convert_number_to_arabic_text($bill['real_price']);
-        $real_price='الصافي: ' . $bill['real_price'] .' ل . س ' .$fun ;
-        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+        if (get_value_from_config('printing','only_layra') == "true") {
+            $fun = convert_number_to_arabic_text($bill['real_price']);
+            $real_price='الصافي: ' . $bill['real_price'] .' ل . س ' .$fun ;
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+        }else{
+            $real_price='الصافي: ' . $bill['real_price'] .' ل . س ';
+            $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+        }
     }
         
 	if (ob_get_contents()) ob_end_clean();
@@ -464,9 +476,15 @@ if(isset($_GET['payment_code'])){
             </tbody>
         </table>';
 	$pdf->writeHTML($content);
-    $fun=convert_number_to_arabic_text($total_payment);
-    $res_number='المجموع: ' .$total_payment . ' ل . س ' . $fun;
-    $pdf->MultiCell(170 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
+    if (get_value_from_config('printing','only_layra') == "true") {
+        $fun=convert_number_to_arabic_text($total_payment);
+        $res_number='المجموع: ' .$total_payment . ' ل . س ' . $fun;
+        $pdf->MultiCell(170 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
+    }else{
+        $res_number='المجموع: ' .$total_payment . ' ل . س ';
+        $pdf->MultiCell(170 * $ratio , 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
+    }
+   
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 
@@ -625,8 +643,13 @@ if(isset($_GET['catch_code'])){
             </tbody>
         </table>';
 	$pdf->writeHTML($content);
-    $fun = convert_number_to_arabic_text($total_catch);
-    $res_number='المجموع: ' .$total_catch . ' ل .س ' .$fun;
+    if (get_value_from_config('printing','only_layra') == "true") {
+        $fun = convert_number_to_arabic_text($total_catch);
+        $res_number='المجموع: ' .$total_catch . ' ل .س ' .$fun;
+    }else{
+        $fun = convert_number_to_arabic_text($total_catch);
+        $res_number='المجموع: ' .$total_catch . ' ل .س ';
+    }
     $pdf->MultiCell(170 * $ratio, 6 * $ratio, $res_number ,0, 'L', 0, 0, '', '', true);
 
     if (ob_get_contents()) ob_end_clean();
@@ -1061,17 +1084,35 @@ if(isset($_GET['comission_report'])){
         </table>';
 	$pdf->writeHTML($content);
     $pdf->SetFont('arial', '', $font_size);
-    $fun = convert_number_to_arabic_text($total_bill);
-    $total_price='إجمالي الفواتير: ' . $total_bill . ' ل .س ' . $fun;
-    $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
-    $fun = convert_number_to_arabic_text($total_comission);
-    $com_ratio='قيمة الكمسيون: ' . $total_comission . ' ل .س ' . $fun;
-    $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
-    $fun = convert_number_to_arabic_text($real_bill);
-    $real_price='صافي الفواتير: ' . $real_bill . ' ل .س ' . $fun;
-    $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+    if (get_value_from_config('printing','only_layra') == "true") {
+        $fun = convert_number_to_arabic_text($total_bill);
+        $total_price='إجمالي الفواتير: ' . $total_bill . ' ل .س ' . $fun;
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(6*$ratio);
+    }else{
+        $total_price='إجمالي الفواتير: ' . $total_bill . ' ل .س ';
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $total_price ,0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(6*$ratio);
+    }
+    if (get_value_from_config('printing','only_layra') == "true") {
+        $fun = convert_number_to_arabic_text($total_comission);
+        $com_ratio='قيمة الكمسيون: ' . $total_comission . ' ل .س ' . $fun;
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(6*$ratio);
+    }else{
+        $com_ratio='قيمة الكمسيون: ' . $total_comission . ' ل .س ';
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $com_ratio ,0, 'R', 0, 0, '', '', true);
+        $pdf->Ln(6*$ratio);
+    }
+    if (get_value_from_config('printing','only_layra') == "true") {
+        $fun = convert_number_to_arabic_text($real_bill);
+        $real_price='صافي الفواتير: ' . $real_bill . ' ل .س ' . $fun;
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+    }else{
+        $real_price='صافي الفواتير: ' . $real_bill . ' ل .س ';
+        $pdf->MultiCell(185 * $ratio, 6 * $ratio, $real_price ,0, 'R', 0, 0, '', '', true);
+    }
+  
     if (ob_get_contents()) ob_end_clean();
     // Close and output PDF document
 	$pdf->output('comission report', 'I');
