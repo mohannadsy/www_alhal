@@ -13,7 +13,7 @@ body {
     width: 200px;
     background-color: #f1f1f1;
     position: fixed;
-    height: 87%;
+    height: 100%;
     overflow: auto;
     z-index: -1;
     margin-top: 75px;
@@ -63,6 +63,9 @@ div.content {
         text-align: center;
         float: none;
     }
+}
+#printing_section{
+    margin-top: 90px;
 }
 
 #page_size {

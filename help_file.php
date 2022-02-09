@@ -23,40 +23,6 @@ include('include/nav.php');
         <div id="setting_sidebar">الإعدادات</div>
     </div>
     <div class="content">
-        <!-- <div class="row flex-xl-nowrap">
-        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-            <nav class="collapse bd-links  show" id="bd-docs-nav" >
-                <div class="row " style="padding-top: 10px;">
-                    <h2> المحتويات </h2>
-                </div>
-                <div class="bd-toc-item active ">
-                    <a class="bd-toc-link" href="help_file.php#file"> ملف </a>           
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#accounts"> حسابات </a>  
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#items"> مواد </a> 
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#category"> الأصناف </a>
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#bills"> فواتير </a> 
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#bonds"> سندات </a>    
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#movment"> حركات    </a>
-                </div>
-                <div class="bd-toc-item ">
-                    <a class="bd-toc-link" href="help_file.php#setting"> الإعدادات    </a>
-                </div>
-            </nav>
-        </div> -->
-        <!-- <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main"> -->
-
         <section id="file_section">
             <div class="" id="">
                 <h3 class="bd-title" id="content"> ملف </h3>
@@ -1263,7 +1229,7 @@ include('include/nav.php');
             </div>
         </section>
 
-        <section id="setting_section">
+        <section id="setting_section" style="margin-bottom: 100px;">
             <div class="" id="">
                 <h3 class="bd-title" id="content"> الإعدادات </h3>
                 <p>

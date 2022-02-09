@@ -1,7 +1,4 @@
-/* body {
-    text-align: right;
-    background-color: #b0bec5;
-} */
+
 .c{
     color:#800000	;
 }
@@ -11,17 +8,10 @@
     z-index: 1000;
     height: calc(100vh - 4rem);
 } */
-.container-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 body {
     margin: 0;
-  }
+    font-size: 18px;
+}  
 
 .sidebar {
     margin: 0;
@@ -29,8 +19,12 @@ body {
     width: 200px;
     background-color: #f1f1f1;
     position: fixed;
+    overflow: auto;
     height: 100%;
     overflow: auto;
+    z-index: -1;
+    margin-top: 65px;
+    
 }
 
 .sidebar div {
@@ -80,4 +74,7 @@ div.content {
       text-align: center;
       float: none;
     }
+  }
+  #file_section{
+    margin-top: 80px;
   }
