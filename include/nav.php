@@ -21,9 +21,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="fontawesome_v5_10_2.css"> -->
+    <!-- <link rel="stylesheet" href="fontawesom+e_v5_10_2.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/fontawesome.css">
+     <link rel="stylesheet" href="css/fontawesome.css">
     <link rel="stylesheet" href="css/nav.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 </head>
@@ -76,7 +76,7 @@
                 <li><a href="setting.php"><i class='fas fa-cogs fa-9x' style='color:#ffffff'></i> الإعدادات</a></li>
                 <li><a href="help_file.php"><i class="fas fa-align-left"></i> معلومات</a></li>
                 <li><a href="about.php"><i class='fas fa-info-circle fa-9x' style='color:#ffffff'></i> حول</a></li>
-                <li id="myBackBtn"><a onclick="window.history.back()"><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
+                <li id="myBackBtn"><a onclick="window.history.back()" style='color:#ffffff'><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
             </nav>
         </div>
     </header>
