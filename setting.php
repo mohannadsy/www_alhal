@@ -69,14 +69,9 @@ if (isset($_POST['save'])) {
 
 
     <div class="content">
-      <!-- <section id="database_section">
-        <div>قاعدة البيانات  سالب مدين/لنا
-          دائن / علينا
-        </div>
-      </section> -->
       <section id="printing_section">
           <div class="mt-3">
-            <h4 > <span id="line_span"></span>بيانات الشركة</h4>
+            <h4 class="mt-3" > <span id="line_span"></span>بيانات الشركة</h4>
             
             <table id="tbl_data_header">
               <tbody>
