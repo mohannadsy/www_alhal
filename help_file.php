@@ -1274,6 +1274,24 @@ $('#file_sidebar').click(function() {
 
 });
 
+$(document).ready(function() {
+    $('#file_section').show();
+    $('#file_sidebar').prop('class', 'active');
+
+    $('#account_section').hide();
+    $('#account_sidebar').removeClass('active');
+    $('#item_section').hide();
+    $('#item_sidebar').removeClass('active');
+    $('#category_section').hide();
+    $('#category_sidebar').removeClass('active');
+    $('#bills_section').hide();
+    $('#bills_sidebar').removeClass('active');
+    $('#bonds_section').hide();
+    $('#bonds_sidebar').removeClass('active');
+    $('#setting_section').hide();
+    $('#setting_sidebar').removeClass('active');
+
+});
 
 $('#account_sidebar').click(function() {
     $('#account_section').show();
