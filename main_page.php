@@ -20,9 +20,9 @@ include('include/nav.php');
                 <a href="com_bill.php" class="card">
                     <article>
                         <center id="center_div">
-                            <div class="icons_div">
+                            <!--<div class="icons_div">
                                 <img class="iconss" src="assets/images/bill.svg" alt="">
-                            </div>
+                            </div>-->
                             <h1>فاتورة</h1>
                         </center>
                     </article>
@@ -33,10 +33,10 @@ include('include/nav.php');
                 <a href="payment_bonds.php" class="card">
                     <article>
                         <center>
-                            <div class="icons_div">
-                                <!-- <img class="iconss" src="assets/images/file-arrow-up.svg" alt=""> -->
+                            <!--<div class="icons_div">
+                                 <img class="iconss" src="assets/images/file-arrow-up.svg" alt=""> 
                                 <i class="fa fa-user"></i>
-                            </div>
+                            </div>-->
                             <h1>سند دفع</h1>
                         </center>
                     </article>
@@ -48,9 +48,9 @@ include('include/nav.php');
 
                     <article>
                         <center>
-                            <div class="icons_div">
+                           <!-- <div class="icons_div">
                                 <img class="iconss" src="assets/images/file-arrow-down.svg" alt="">
-                            </div>
+                            </div>-->
                             <h1>سند قبض</h1>
                         </center>
 
@@ -62,9 +62,9 @@ include('include/nav.php');
                 <a href="accountStatment.php" class="card">
                     <article>
                         <center>
-                            <div class="icons_div">
+                           <!-- <div class="icons_div">
                                 <img class="iconss" src="assets/images/accounting-svgrepo-com.svg" alt="">
-                            </div>
+                            </div>-->
                             <h1>كشف حساب</h1>
                         </center>
 
@@ -76,10 +76,9 @@ include('include/nav.php');
                 <a href="#" class="card">
                     <article>
                         <center>
-
-                            <div class="icons_div">
+                           <!-- <div class="icons_div">
                                 <img class="iconss" src="assets/images/backup-restore.svg" alt="">
-                            </div>
+                            </div>-->
                             <h1>النسخ الاحتياطي</h1>
 
                         </center>
@@ -93,9 +92,9 @@ include('include/nav.php');
                 <a href="setting.php" class="card">
                     <article>
                         <center>
-                            <div class="icons_div">
+                          <!--  <div class="icons_div">
                                 <img class="iconss" src="assets/images/cogs-solid.svg" alt="">
-                            </div>
+                            </div>-->
                             <h1>الإعدادات</h1>
                         </center>
 
