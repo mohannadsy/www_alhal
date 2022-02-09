@@ -18,7 +18,7 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container-fluid">
-            <div class="row justify-content-start px-4 py-2">
+            <div class="row justify-content-start px-4 py-1">
                 <h3> كشف حساب </h3>
             </div>
             <div class="row">
