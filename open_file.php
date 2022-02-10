@@ -54,19 +54,21 @@ include('include/nav.php');
                 <label name="server">المخدم</label>
                 <hr>
             </div> -->
-            <div class="row py-2" id="new_text" hidden >
-                <div class="col-8" style=" padding-right: 30px;">
-                    <label for="">اسم الملف</label>
-                    <input type="text" name="database_name">
-                    <button type="submit" name="create_db" id="add" onclick="test2()">إضافة</button>
-                </div>
+            <div class="row py-2 mb-3" id="new_text" hidden  style=" padding-right: 30px;">
+                    <label for="" class="mt-2">اسم الملف</label>
+                    <div class="col-4">
+                    <input type="text" class="form-control" name="database_name">
+
+                    </div>
+                    
+                    <button type="submit" name="create_db" class="btn btn-light" id="add" onclick="test2()">إضافة</button>
             </div>
             <div class="row text-center ">
                 <div class="col-12 ">
                     <button type="submit" name="open_db" class="btn btn-light" id="btn-grp">فتح</button>
-                    <button type="button" name="new_db" id="new" onclick="test1()">جديد</button>
-                    <button type="submit" name="delete_db" id="btn-grp">حذف</button>
-                    <button type="button" name="restore" id="btn-grp" hidden>استرجاع</button>
+                    <button type="button" name="new_db" class="btn btn-light" id="new" onclick="test1()">جديد</button>
+                    <button type="submit" name="delete_db" class="btn btn-light" id="btn-grp">حذف</button>
+                    <button type="button" name="restore" class="btn btn-light"  id="btn-grp" hidden>استرجاع</button>
                 </div>
             </div>
             

@@ -67,8 +67,8 @@ tbody {
 
 #total_row {
     /* margin: 0px 70px; */
-    border: 1px solid #67696b;
-    border-radius: 15px;
+    border: 1px solid #000000;
+    border-radius: 7px;
     margin-left: 20%;
     margin-right: 20%;
 }

@@ -50,7 +50,7 @@ include('include/nav.php');
                             <input onclick="return this.value=''" type="text" class="text_search form-control" name="text_search" id="text_search">
                         </div>
                         <div >
-                            <button class= "btn" type="button" id="search" name="search">بحث</button>
+                            <button class= "btn btn-light" type="button" id="search" name="search">بحث</button>
                         </div>
 
                     </div>
@@ -133,7 +133,7 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-center py-3 " id="total_row">
+            <div class="row justify-content-center mt-1 " id="total_row">
                 
                 <div class="mx-5">
                     <label for="">إجمالي الفواتير: </label>
@@ -150,10 +150,10 @@ include('include/nav.php');
                     <input type="text" readonly id="real_bill" value="<?= $real_bill ?>">
                 </div>
             </div>
-            <div class="row justify-content-end py-2">
-                <div class="col-2">
-                    <button type="button" class="btn" name="print" id="print">طباعة</button>
-                    <button type="submit" class="btn" name="close">إغلاق</button>
+            <div class="row justify-content-end pl-2">
+                <div class="col-2 text-center">
+                    <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
+                    <button type="submit" class="btn btn-light" name="close">إغلاق</button>
                 </div>
             </div>
 

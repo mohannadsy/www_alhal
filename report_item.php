@@ -50,7 +50,7 @@ include('include/nav.php');
                             <input class="text_search form-control" type="text" name="text_search" id="text_search">
                         </div>
                         <div >
-                            <button  class= "btn" type="button" name="search" id="search">بحث</button>
+                            <button  class= "btn btn-light" type="button" name="search" id="search">بحث</button>
                         </div>
 
                     </div>
@@ -148,10 +148,10 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end py-2">
-                <div class="col-2">
-                <button type="button" class="btn" id="print" name="print">طباعة</button>
-                <button type="submit" class="btn" name="close">إغلاق</button>
+            <div class="row justify-content-end py-2  pl-2">
+                <div class="col-2 text-center">
+                <button type="button" class="btn btn-light" id="print" name="print">طباعة</button>
+                <button type="submit" class="btn btn-light" name="close">إغلاق</button>
                 </div>
 
             </div>
