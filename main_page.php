@@ -117,11 +117,7 @@ include('include/nav.php');
         <button type="submit" hidden name="backup" id="backup"></button>
     </form>
 </body>
-<?php
-if (isset($_POST['backup'])) {
-    backup_to_file($con, get_value_from_config('database'));
-}
-?>
+
 <script>
     function calender() {
         var day = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];

@@ -13,7 +13,11 @@
     include('helper/html_functions.php');
     include('helper/links.php');
 ?>
-
+<?php
+if (isset($_POST['backup'])) {
+    backup_to_file($con, get_value_from_config('database'));
+}
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -45,6 +49,10 @@
                         <li><a href="#" onclick="document.getElementById('backup').click()"> النسخ الاحتياطي</a></li>
                     </ul>
                 </li>
+                <form action="" method="post">
+                <button type="submit" hidden name="backup" id="backup"></button>
+              </form>
+
                 <li class="sub-menus"><a href="#"><i class="fas fa-users" style='color:#ffffff'></i> حسابات</a>
                     <ul>
                         <li><a href="account_card.php"> بطاقة حساب</a></li>

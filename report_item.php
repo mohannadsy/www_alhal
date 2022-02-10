@@ -116,7 +116,7 @@ include('include/nav.php');
                                 $category_name = get_value_from_table_using_id($con, 'categories', 'name', $row['category_id']);
                                 // $buyer_name = get_name_from_table_using_id($con, 'accounts', $row['buyer_id']);
                                 // $seller_name = get_name_from_table_using_id($con, 'accounts', $row['seller_id']);
-                                echo "<tr ondblclick='window.open(\"com_bill_open.php?id=" . $row['bill_id'] . "\" , \"_self\")'>";
+                                echo "<tr ondblclick='window.open(\"com_bill.php?code=" . $row['bill_code'] . "\" , \"_self\")'>";
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
