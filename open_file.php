@@ -95,7 +95,7 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
     }
     else{
         message_box(" لقد دخلت على قاعدة البيانات " . $selected_database);
-        update_value_in_config('database', $selected_database);
+        update_value_in_config('database', 'souq_'.$selected_database);
         open_window_self(INDEX);
     }
 }
@@ -115,7 +115,7 @@ if(isset($_POST['delete_db'])){
     elseif ($selected_database == get_value_from_config('deafult_database'))
         message_box("لا يمكنك حذف قاعدة البيانات الرئيسية");
     else{
-        open_window_self_after_confirm('هل انت متأكد انك تريد حذف قاعدة البانات! لايمكنك التراجع عن هذه الخطوة!' , "open_file.php?delete_database=$selected_database");
+        open_window_self_after_confirm('هل انت متأكد انك تريد حذف قاعدة البانات! لايمكنك التراجع عن هذه الخطوة!' , "open_file.php?delete_database=souq_$selected_database");
     }
 }
 if(isset($_GET['delete_database'])){
