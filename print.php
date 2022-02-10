@@ -1020,13 +1020,22 @@ if(isset($_GET['comission_report'])){
             .item{
                 width: 10%;
             }
-            .category , .unit{
+            .category{
                 width: 10%;
             }
-            .buyer , .seller{
+            .unit{
+                width: 10%;
+            }
+            .buyer{
                 width:15%;
             }
-            .comission , .total{
+            .seller{
+                width:15%;
+            }
+            .comission{
+                width:10%;
+            }
+            .total{
                 width:10%;
             }
         </style>
@@ -1045,7 +1054,6 @@ if(isset($_GET['comission_report'])){
             </tr>
             </thead>
             <tbody>';
-            
             $select_items_using_id_query = "select DISTINCT items.code as item_code,
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,total_item_price,com_ratio,
