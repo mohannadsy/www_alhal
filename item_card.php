@@ -260,7 +260,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                                                                                             ?> type="submit" class="btn btn-light"  name="delete" id="button-grp2">
                         حذف
                     </button>
-                    <a href="ready.php"><button type="button" class="btn btn-light" id="button-grp2" name="close"> إغلاق</button></a>
+                    <a href="index.php"><button type="button" class="btn btn-light" id="button-grp2" name="close"> إغلاق</button></a>
 
 
                 </div>

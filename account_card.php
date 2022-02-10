@@ -283,7 +283,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account) || $account[0]['code'] == '1' || $account[0]['code'] == '2' || $account[0]['code'] == '3') echo "disabled" ?> name="delete" onclick="return confirm('هل تريد بالتأكيد حذف هذا الحساب !')">حذف</button>
 
-                    <a href="ready.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
+                    <a href="index.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
                 </div>
             </div>
 

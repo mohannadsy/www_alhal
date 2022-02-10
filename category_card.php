@@ -178,7 +178,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                                         <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (empty($category)) echo 'disabled' ?> type="submit" id="button_grp" class="btn btn-light" name="delete">
                                             حذف
                                         </button>
-                                        <a href="ready.php"><button type="button" class="btn btn-light"  name="close" id="button_grp">
+                                        <a href="index.php"><button type="button" class="btn btn-light"  name="close" id="button_grp">
                                             إغلاق
                                         </button></a>
                                     </div>

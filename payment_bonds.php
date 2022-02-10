@@ -232,6 +232,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="form-control " id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
+                    <a href="index.php"><button type="button" class="btn btn-light" id="btn-grp" name="close"> إغلاق</button></a>
                 <!-- </div> -->
             </div>
         </div>

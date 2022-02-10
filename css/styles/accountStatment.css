@@ -18,17 +18,19 @@
 #tableFixHead thead th {
     position: sticky;
     top: 0;
-    background: rgb(223, 99, 99);
+    background: #425262;
+    color: #fff;
     padding-right: 4px;
     padding-left: 4px;
 }
 
 #tableFixHead tbody tr:nth-child(odd) {
-    background-color: #f2f2f2;
+    background-color: #d9e9fa;
 }
 
 #tableFixHead tbody {
-    background-color: rgb(238, 224, 224);
+    background-color: #c5ddf7;
+    /* background-color: rgb(238, 224, 224); */
 }
 
 #tableFixHead tbody td {
