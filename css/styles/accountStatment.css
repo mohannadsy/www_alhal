@@ -29,14 +29,11 @@
 
 #tableFixHead tbody {
     background-color: rgb(238, 224, 224);
-    
 }
+
 #tableFixHead tbody td {
     padding-right: 4px;
     padding-left: 4px;
-
-   
-    
 }
 
 #date_col {
@@ -57,6 +54,7 @@
     display: none;
     width: 6%;
 }
+
 
 /* #total_wight,
 #last_wight {
