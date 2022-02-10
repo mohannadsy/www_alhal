@@ -5,6 +5,11 @@
     background-color: inherit;
     border: none;
 }
+#from_date,#to_date{
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
 
 
 /*table style*/

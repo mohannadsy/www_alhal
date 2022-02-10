@@ -155,7 +155,7 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row  " style="margin-right: 65px; margin-bottom:4px;">
-                <button type="submit" class="btn btn-primary" name="view" id="btn-grp">معاينة</button>
+                <button type="submit" class="btn btn-light" name="view" id="btn-grp">معاينة</button>
                 
             </div>
 
@@ -367,8 +367,8 @@ include('include/nav.php');
                 </div>
             </div>
             <div class="row justify-content-end mx-5 px-3">
-                <button type="button" class="btn btn-primary" name="" id="print">طباعة</button>
-                <button type="submit" class="btn btn-primary" id="btn-grp">إغلاق</button>
+                <button type="button" class="btn btn-light" name="" id="print">طباعة</button>
+                <button type="submit" class="btn btn-light" id="btn-grp">إغلاق</button>
 
             </div>
 
