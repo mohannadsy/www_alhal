@@ -59,9 +59,34 @@ td input {
 
 #commission_title input {
     width: 50px;
+<<<<<<< HEAD
     /* margin: 0 8px; */
 }
 
+=======
+    margin: 0 0.6em;
+}
+
+#comm_val {
+    padding-right: 2px;
+    padding-left: 11px;
+}
+
+#commision_value input {
+    width: 120px;
+    margin-right:1em;
+}
+
+#total input {
+    margin-right: 10px;
+    width: 120px;
+}
+
+#real input {
+    margin-right: 10px;
+    width: 120px;
+}
+>>>>>>> 010fdeb93714a083ce474c4a29e2535eba77bbdc
 
 .modal {
     position: fixed;

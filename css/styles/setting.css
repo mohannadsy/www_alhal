@@ -1,23 +1,20 @@
 body {
     margin: 0;
     font-size: 19px;
-   
 }
-.content{
 
-}
+.content {}
 
 .sidebar {
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
+    background-color: #c5cdce;
     position: fixed;
     height: 100%;
     overflow: auto;
     /* z-index: -1; */
     margin-top: 77px;
-
 }
 
 .sidebar div {
@@ -29,7 +26,7 @@ body {
 }
 
 .sidebar div.active {
-    background-color: #0033cc;
+    background-color: #d35560;
     color: white;
 }
 
@@ -64,7 +61,8 @@ div.content {
         float: none;
     }
 }
-#printing_section{
+
+#printing_section {
     margin-top: 90px;
 }
 
@@ -72,8 +70,6 @@ div.content {
     margin-bottom: 20px;
     margin-top: 10px;
     margin-right: 10px;
-
-    
 }
 
 #page_size select {
@@ -110,7 +106,7 @@ td {
     user-select: none;
     border: none;
     border-radius: 0px;
-    background-color:inherit;
+    background-color: inherit;
     background-image: none;
     color: black;
 }
@@ -180,19 +176,22 @@ td {
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
-#tbl_data_header td{
+
+#tbl_data_header td {
     font-size: 19px;
 }
-#tbl_print_op td{
+
+#tbl_print_op td {
     font-size: 19px;
 }
+
 #tbl_data_header input {
     padding: 2px;
-    
 }
-h4{
-}
-#line_span{
+
+h4 {}
+
+#line_span {
     /* height: 20px; */
     border-right: solid 0.2em rgba(231, 231, 231, 0.644);
     padding-top: 3px;

@@ -539,4 +539,8 @@ for ($i = 0; $i < 5; $i++)
     })
 </script>
 
+<script>
+    f1("help_file.php?bonds_section");
+</script>
+
 <!-- End chec worng insertion -->

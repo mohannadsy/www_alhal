@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 445px;
+    height: 24em;
     direction: ltr;
 }
 
@@ -21,31 +21,37 @@
     top: 0;
 }
 
+.none {
+    background: #425262;
+}
+
 tbody tr:nth-child(odd) {
     background-color: #d9e9fa;
 }
 
-tbody .none {
+tbody {
     background-color: #c5ddf7;
 }
+
+
+/* 
 tbody .in {
     background-color: red
-}
-tbody .out{
+} */
+
+
+/* tbody .out {
     background-color: green;
+} */
+
+thead .in {
+    background: rgb(198, 49, 23);
+    /* background-color: rgb(245, 150, 150); */
 }
 
-.none{
-    background: #425262;
-
-}
-.in{
-    background-color: red;
-}
-
-.out{
-    background-color: green;
-
+thead .out {
+    background: #316eac;
+    /* background-color: rgb(159, 247, 159); */
 }
 
 
@@ -69,7 +75,9 @@ tbody .out{
 #date_row {
     margin-right: 20px;
 }
-#from_date,#to_date{
+
+#from_date,
+#to_date {
     padding-left: 0px;
     padding-right: 0px;
 }

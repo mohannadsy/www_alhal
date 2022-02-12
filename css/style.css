@@ -44,7 +44,7 @@ body {
     /* background-image: linear-gradient(to right, #141e30, #243b55); */
     border-style: groove;
     font-size: 17px;
-    border-radius: 15px;
+    border-radius: 0.938em;
     position: absolute;
     color: #ffffff;
     border-color: none;
@@ -57,7 +57,7 @@ body {
     color: #000000;
     border-style: groove;
     font-size: 19px;
-    border-radius: 15px;
+    border-radius: 0.938em;
     /* position: absolute; */
     border-color: #005792;
 }

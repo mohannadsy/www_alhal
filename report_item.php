@@ -304,3 +304,7 @@ include('include/footer.php');
         window.open(`print.php?item_report=item_report&from_date=${from_date}&to_date=${to_date}&radio_value_from_report_item=${radio_value}&text_value_from_report_item=${text_value}` , '_blank');
     });
 </script>
+
+<script>
+    f1("help_file.php?item_section");
+</script>

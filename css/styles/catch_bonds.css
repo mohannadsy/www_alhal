@@ -1,28 +1,28 @@
 .container {
-    width: 1000px;
-    height: 620px;
-    padding: 5px;
+    width: 56.25em;
+    height: 36em;
+    padding: 0.3em;
 }
 
 #res_number {
-    column-width: 50px;
+    column-width: 3.125em;
 }
 
 #res_num {
-    padding-right: 125px;
+    padding-right: 7.813em;
 }
 
 h2,
 #inf_row {
-    padding-right: 20px;
+    padding-right: 1.25em;
 }
 
 #btn-grp {
-    border-radius: 4px;
+    border-radius: 0.25em;
     text-align: center;
-    margin: 1px 3px;
-    width: 60px;
-    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
+    margin: 0.063em 0.188em;
+    width: 3.75em;
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
     cursor: pointer;
 }
 
@@ -33,12 +33,12 @@ h2,
     border-radius: 4px;
     margin: 0px 2px;
     padding-right: 6px;
-    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938);
 }
-span{
+
+span {
     font-size: 23px;
-    width: 25px;
-   
+    width: 1.563em;
 }
 
 .modal {
@@ -49,7 +49,7 @@ span{
 }
 
 .modal-dialog {
-    min-width: 790px;
+    min-width: 49.375em;
 }
 
 .modal-content {
@@ -82,34 +82,41 @@ h4 {}
     width: 770px;
     height: 600px;
 }
-.close{
+
+.close {
     line-height: 1.5;
 }
 
-
 #code {
-  margin-left: 25px;
-  width: 70px;
-  margin-right:5px;
+    margin-left: 25px;
+    width: 70px;
+    margin-right: 5px;
 }
-#lbl_code{
+
+#lbl_code {
     padding-right: 25px;
     margin-left: 4px;
 }
+
+
 /* الجدول */
-table{
+
+table {
     table-layout: fixed;
 }
-#number_col{
+
+#number_col {
     width: 10%;
 }
-#maden_col{
+
+#maden_col {
     width: 20%;
 }
-#account_col{
-width: 30%;
-}
-#note_col{
-    width:40% ;
 
+#account_col {
+    width: 30%;
+}
+
+#note_col {
+    width: 40%;
 }

@@ -131,3 +131,8 @@ if(isset($_GET['delete_database'])){
 <?php
 include('include/footer.php');
 ?>
+
+
+<script>
+    f1("help_file.php?file_section");
+</script>

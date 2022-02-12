@@ -432,3 +432,7 @@ include('include/footer.php');
         }
     };
 </script>
+
+<script>
+    f1("help_file.php?account_section");
+</script>
