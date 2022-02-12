@@ -1129,7 +1129,13 @@ for ($i = 0; $i < count($items); $i++)
         $('.discount').toggle();
     });
 </script>
+<<<<<<< HEAD
+<script>
+    f1("help_file.php?bills_section");
+</script>
+=======
 
 <script>
     f1('help_file.php?bills_section');
 </script>
+>>>>>>> c05e8999287b5e4a7ba8d9059ccecffbac9ae568
