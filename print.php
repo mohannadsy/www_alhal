@@ -943,7 +943,7 @@ if(isset($_GET['comission_report'])){
 
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 16);
     }
@@ -954,7 +954,7 @@ if(isset($_GET['comission_report'])){
         $pdf->SetFont('arial', 'B', 8);
     }
     $tilte='تقرير حركة كمسيون';
-    $pdf->MultiCell(100 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(135 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     //$pdf->Ln(5*$ratio);
@@ -1181,7 +1181,7 @@ if(isset($_GET['account_statement'])){
 
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
     $pdf->MultiCell(30 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
