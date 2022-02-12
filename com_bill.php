@@ -180,14 +180,14 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
                 <div class="col-3 " style="padding-right: 35px;padding-left: 0px;">
                     <div class="row ">
-                        <label class="col-2" id="seller_lbl" >البائع</label>
+                        <label class="col-3" id="seller_lbl" >البائع</label>
                         <div class="col-8" id="seller_input_col">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,'seller' , 'modal_account_card_button')" id="seller" name="seller" class="account_auto form-control"  value="<?php if (notempty($bill)) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['seller_id'])  ?>" />
                         </div>
 
                     </div>
                     <div class="row">
-                        <label class="col-2" id="payment_lbl">طريقة الدفع </label>
+                        <label class="col-3" id="payment_lbl">طريقة الدفع </label>
                         <div class="col-2" id="payment_input_col">
                             <select name="seller_type_pay" class="form-control">
                                 <option value="cash">نقدي</option>
@@ -197,7 +197,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                     </div>
                     <div class="row ">
-                        <label class="col-2" id="notes_lbl"  >ملاحظات</label>
+                        <label class="col-3" id="notes_lbl"  >ملاحظات</label>
                         <div class="col-8" id="notes_input_col">
                             <textarea name="seller_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['seller_note'] ?></textarea>
                         </div>
@@ -239,14 +239,14 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
                 <div class="col-3" style="padding-right: 0px;">
                     <div class="row  justify-content-end">
-                        <label class="col-2" id="buyer_lbl">المشتري</label>
+                        <label class="col-3" id="buyer_lbl">المشتري</label>
                         <div class="col-8">
                             <input onblur="check_account_to_insert(tags_accounts , this.value ,this.id , 'modal_account_card_button')" type="text" name="buyer" class="account_auto form-control" id="buyer"  value="<?php if (notempty($bill)) if ($bill[0]['buyer_id'] > 0) echo get_name_and_code_from_table_using_id($con, 'accounts', $bill[0]['buyer_id'])  ?>">
 
                         </div>
                     </div>
                     <div class="row justify-content-end">
-                        <label class="col-2" id="buyer_pay_lbl">طريقة الدفع </label>
+                        <label class="col-3" id="buyer_pay_lbl">طريقة الدفع </label>
                         <div class="col-2" id="buyer_pay_lbl_col">
                             <select name="buyer_type_pay" class="form-control">
                                 <option value="cash">نقدي</option>
@@ -261,7 +261,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
         
                     </div>
                     <div class="row justify-content-end">
-                        <label class="col-2 text-center" id="buyer_notes">ملاحظات</label>
+                        <label class="col-3" id="buyer_notes">ملاحظات</label>
                         <div class="col-8">
                             <textarea id="notes_input" name="buyer_note" class="form-control"><?php if (notempty($bill)) echo $bill[0]['buyer_note'] ?></textarea>
                         </div>
@@ -307,12 +307,12 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 <div class="col-1">
 
                 </div>
-                <div class="col-7 mt-4 " >
+                <div class="col-5 mt-4 " >
                     <div id='buttons' class="row ">
                         <div class="col-1 ">
 
                         </div>
-                        <div class="col-5">
+                        <div class="col-8">
                             <button type="submit" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'hidden' ?> >حفظ</button>
                             <button type="submit" name="update" class="btn btn-light" <?php if (empty($bill)) echo 'hidden' ?> >تعديل</button>
                             <button type="submit" name="delete" class="btn btn-light" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> >حذف</button>
@@ -323,40 +323,48 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                 </div>
                 
-                <div class="col-3" >
-                    <div class="row justify-content-end" id="total" >
-                        <label>الإجمالي</label>
-                        <div>
-                            <input type="text" id="total_price" name="total_price" readonly class="form-control" style="margin-right: 5px;padding:2px;" value="<?php 
-                            //  $fun = convert_number_to_arabic_text($bill['total_price']);
-                            if (notempty($bill)) echo $bill[0]['total_price'];
-                                                                  else echo '0' ?>">
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-6 text-left">
+                            <div class="row justify-content-end mt-4 pt-2">
+                                <label>الكمسيون%</label>
+                                <div class="col-2" id="commission_title">
+                                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
+                                            if (notempty($bill)) echo $bill[0]['com_ratio'];
+                                                        else echo '5' ; ?>">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center " id="commisson">
-                        <label>الكمسيون%</label>
-                        <div id="commission_title">
-                            <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
-                                      if (notempty($bill)) echo $bill[0]['com_ratio'];
-                                                else echo '5' ; ?>">
-                        </div>
+                        <div class="col-6 ">
+                            <div class="row justify-content-center">
+                                <label class="lbl_col">الإجمالي</label>
+                                <div class="col-7">
+                                    <input type="text" id="total_price" name="total_price" readonly class="form-control" style="padding:2px;" value="<?php 
+                                    //  $fun = convert_number_to_arabic_text($bill['total_price']);
+                                    if (notempty($bill)) echo $bill[0]['total_price'];
+                                                                        else echo '0' ?>">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <label class="lbl_col" >القيمة</label>
+                                <div class="col-7" id="commision_value">
+                                    <input type="text" name="com_value" id="com_value" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_value'];
+                                                                                                                                                else echo '0' ?>">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <label class="lbl_col">الصافي</label>
+                                <div class="col-7">
+                                    <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php 
+                                    if (notempty($bill)) echo $bill[0]['real_price'];
+                                                                    else echo '0'  ?>">
+                                </div>
+                            </div>
 
-                        <label id="comm_val" >القيمة</label>
-                        <div id="commision_value">
-                            <input type="text" name="com_value" id="com_value" readonly class="form-control" style="padding:2px" value="<?php if (notempty($bill)) echo $bill[0]['com_value'];
-                                                                                                                                        else echo '0' ?>">
                         </div>
                     </div>
-                    <div class="row justify-content-end" id="real">
-                        <label>الصافي</label>
-                        <div>
-                            <input type="text" name="real_price" id="real_price" readonly class="form-control" style="padding:2px" value="<?php 
-                              if (notempty($bill)) echo $bill[0]['real_price'];
-                                                            else echo '0'  ?>">
-                        </div>
-                    </div>
-
                 </div>
+
                 <div class="col-1">
 
                 </div>
@@ -1120,4 +1128,8 @@ for ($i = 0; $i < count($items); $i++)
     $('#toggle_discount').click(function(){
         $('.discount').toggle();
     });
+</script>
+
+<script>
+    f1('help_file.php?bills_section');
 </script>

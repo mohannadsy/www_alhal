@@ -50,31 +50,18 @@ td input {
 #real {
     margin-left: 8%;
 }
+.lbl_col{
+    width: 2.7em;
+}
+#total_price,#com_value,#real_price{
+    width: 8em;
+}
 
 #commission_title input {
     width: 50px;
-    margin: 0 8px;
+    /* margin: 0 8px; */
 }
 
-#comm_val {
-    padding-right: 2px;
-    padding-left: 11px;
-}
-
-#commision_value input {
-    width: 120px;
-    margin-right: 15px;
-}
-
-#total input {
-    margin-right: 10px;
-    width: 120px;
-}
-
-#real input {
-    margin-right: 10px;
-    width: 120px;
-}
 
 .modal {
     position: fixed;
