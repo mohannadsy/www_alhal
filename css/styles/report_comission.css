@@ -72,11 +72,10 @@ tbody {
 }
 
 #total_row {
-    /* margin: 0px 70px; */
     border: 1px solid #000000;
     border-radius: 7px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 

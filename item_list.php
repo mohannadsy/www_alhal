@@ -56,15 +56,19 @@ if (isset($_POST['delete'])) {
                         <button id="search" type="button" class=" btn btn-light" >بحث</button>
                     </div>
                 </div>
-                <div class="col-8" id="categry_col">
-                    <div class="row justify-content-end">
-                        <a href="category_card.php"><button type="button" id="btn_grp" class=" btn btn-light " name="new_category">
+                <div class="col-8 text-left" id="categry_col">
+                        <a href="category_card.php"><button type="button"  class=" btn btn-light " name="new_category">
                                 صنف جديد
-                            </button></a>
-                        <a href="item_card.php"><button type="button" id="btn_grp" class=" btn btn-light" name="item_card" style="margin-right:10px;">
+                            </button>
+                        </a>
+                        <a href="item_card.php"><button type="button"  class=" btn btn-light" name="item_card">
                                 بطاقة مادة
-                            </button></a>
-                    </div>
+                            </button>
+                        </a>
+                        <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
+                            إغلاق
+                        </button>
+                        </a>
                 </div>
             </div>
             <div class="row justify-content-center" >
@@ -110,13 +114,7 @@ if (isset($_POST['delete'])) {
                 </div>
 
             </div>
-            <div class="row justify-content-end py-3 ">
-                <div class="col-2 " id="close_col">
-                    <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
-                            إغلاق
-                        </button></a>
-                </div>
-            </div>
+
         </div>
     </form>
 
