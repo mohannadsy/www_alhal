@@ -1,30 +1,31 @@
-
-.c{
-    color:#800000	;
+.c {
+    color: #800000;
 }
+
+
 /* .bd-sidebar{
     position: sticky;
     top: 4rem;
     z-index: 1000;
     height: calc(100vh - 4rem);
 } */
+
 body {
     margin: 0;
     font-size: 18px;
-}  
+}
 
 .sidebar {
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
+    background-color: #c5cdce;
     position: fixed;
     overflow: auto;
     height: 100%;
     overflow: auto;
     /* z-index: -1; */
     margin-top: 72px;
-    
 }
 
 .sidebar div {
@@ -36,7 +37,7 @@ body {
 }
 
 .sidebar div.active {
-    background-color: #0033cc;
+    background-color: #d35560;
     color: white;
 }
 
@@ -49,32 +50,29 @@ div.content {
     margin-right: 200px;
     padding: 1px 16px;
     height: 1000px;
-
-
 }
 
 @media screen and (max-width: 700px) {
     .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-                    }
-
-.sidebar a {
-      float: left;
-                    }
-
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {
+        float: left;
+    }
     div.content {
-      margin-left: 0;
-                    }
+        margin-left: 0;
+    }
 }
 
-  @media screen and (max-width: 400px) {
+@media screen and (max-width: 400px) {
     .sidebar a {
-      text-align: center;
-      float: none;
+        text-align: center;
+        float: none;
     }
-  }
-  #file_section{
+}
+
+#file_section {
     margin-top: 80px;
-  }
+}

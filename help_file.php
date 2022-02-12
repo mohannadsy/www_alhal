@@ -13,6 +13,7 @@ include('include/nav.php');
 </head>
 
 <body>
+
     <div class="sidebar">
         <div class="active" id="file_sidebar">ملف</div>
         <div id="account_sidebar">حسابات</div>
@@ -1244,7 +1245,6 @@ include('include/nav.php');
 
         <!-- </main> -->
     </div>
-    </div>
 
 </body>
 
@@ -1295,24 +1295,24 @@ $('#file_sidebar').click(function() {
 
 });
 
-$(document).ready(function() {
-    $('#file_section').show();
-    $('#file_sidebar').prop('class', 'active');
+// $(document).ready(function() {
+//     $('#file_section').show();
+//     $('#file_sidebar').prop('class', 'active');
 
-    $('#account_section').hide();
-    $('#account_sidebar').removeClass('active');
-    $('#item_section').hide();
-    $('#item_sidebar').removeClass('active');
-    $('#category_section').hide();
-    $('#category_sidebar').removeClass('active');
-    $('#bills_section').hide();
-    $('#bills_sidebar').removeClass('active');
-    $('#bonds_section').hide();
-    $('#bonds_sidebar').removeClass('active');
-    $('#setting_section').hide();
-    $('#setting_sidebar').removeClass('active');
+//     $('#account_section').hide();
+//     $('#account_sidebar').removeClass('active');
+//     $('#item_section').hide();
+//     $('#item_sidebar').removeClass('active');
+//     $('#category_section').hide();
+//     $('#category_sidebar').removeClass('active');
+//     $('#bills_section').hide();
+//     $('#bills_sidebar').removeClass('active');
+//     $('#bonds_section').hide();
+//     $('#bonds_sidebar').removeClass('active');
+//     $('#setting_section').hide();
+//     $('#setting_sidebar').removeClass('active');
 
-});
+// });
 
 $('#account_sidebar').click(function() {
     $('#account_section').show();
@@ -1424,4 +1424,14 @@ $('#setting_sidebar').click(function() {
     $('#bonds_sidebar').removeClass('active');
 
 });
+</script>
+<script>$('#file_sidebar').click(); </script>
+<?php
+    if(isset($_GET['item_section'])){
+        echo "<script>$('#item_sidebar').click(); </script>";
+    }
+?>
+
+<script>
+    f1('help_file.php');
 </script>
