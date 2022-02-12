@@ -202,13 +202,13 @@ if (isset($_POST['radio_bill_value'])) {
         }
         echo "<td>" . $row['total_price'] . "</td>";
         if ($row['buyer_id'] != '0') {
-            echo "<td style='background-color:green'>" . "مباعة" . "</td><td>
-            <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
-            </td>";
+            echo "<td class=' text-white'><center> <div class='sold'> " . "مباعة" . "</div></center></td><td>
+                <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-success'>عرض الفاتورة</button></a>
+                </td>";
         } else {
-            echo "<td style='background-color:red'>" . "غير مباعة" . "</td><td>
-            <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
-            </td>";
+            echo "<td class='text-white' ><center> <div class='not_sold'>" . "غير مباعة" . "</div></center></td><td>
+                <a href='com_bill.php?code=" . $row['code'] . "'><button type='button' class='btn btn-primary'>بيع الفاتورة</button></a>
+                </td>";
         }
         echo "</tr>";
     }
@@ -317,22 +317,22 @@ if (isset($_POST['radio_value_from_report_item']) && isset($_POST['text_value_fr
         echo "<td>" . $row['date'] . "</td>";
         echo "<td>" . $row['bill_code'] . "</td>";
         echo "<td>" . $row['name'] . "</td>";
-        echo "<td>" . $row['real_weight'] . "</td>";
-        echo "<td>" . $row['real_price'] . "</td>";
+        echo "<td class='in'>" . $row['real_weight'] . "</td>";
+        echo "<td class='in'>" . $row['real_price'] . "</td>";
         $inbox_weight = $row['real_weight'];
         $inbox_price = $row['real_price'];
         $outbox_price = '0';
         $outbox_weight = '0';
         if ($row['buyer_id'] == 0)
-            echo "<td>" . '0' . "</td>";
+            echo "<td class='out'>" . '0' . "</td>";
         else {
-            echo "<td>" . $row['real_weight'] . "</td>";
+            echo "<td class='out'>" . $row['real_weight'] . "</td>";
             $outbox_weight = $row['real_weight'];
         }
         if ($row['buyer_id'] == 0)
-            echo "<td>" . '0' . "</td>";
+            echo "<td class='out'>" . '0' . "</td>";
         else {
-            echo "<td>" . $row['real_price'] . "</td>";
+            echo "<td class='out'>" . $row['real_price'] . "</td>";
             $outbox_price = $row['real_price'];
         }
         echo "<td>" . ($inbox_weight - $outbox_weight) . "</td>";
