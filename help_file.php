@@ -1425,12 +1425,27 @@ $('#setting_sidebar').click(function() {
 
 });
 </script>
+
 <script>$('#file_sidebar').click(); </script>
 <?php
     if(isset($_GET['item_section'])){
         echo "<script>$('#item_sidebar').click(); </script>";
     }
 ?>
+
+<?php
+    if(isset($_GET['category_section'])){
+        echo "<script>$('#category_sidebar').click(); </script>";
+    }
+?>
+<?php
+    if(isset($_GET['account_section'])){
+        echo "<script>$('#account_sidebar').click(); </script>";
+    }
+?>
+
+
+
 
 <script>
     f1('help_file.php');
