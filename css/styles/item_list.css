@@ -18,7 +18,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 500px;
+    height: 24em;
     direction: ltr;
 }
 
