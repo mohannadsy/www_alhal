@@ -94,8 +94,8 @@ if (isset($_POST['delete'])) {
                                 $category = mysqli_fetch_array($select_category_exec);
                                 echo "<td>" . $category['name'] . "</td>";
                                 echo "<td>
-                                    <button type='button' class='btn ' onclick='window.open(\"item_card.php?id=" . $item['id'] . "\" , \"_self\")'>تعديل</button>
-                                    <button type='submit' class='btn' name='delete' 
+                                    <button type='button' class='btn btn-success' onclick='window.open(\"item_card.php?id=" . $item['id'] . "\" , \"_self\")'>تعديل</button>
+                                    <button type='submit' class='btn btn-primary' name='delete' 
                                                 onclick='document.getElementById(\"id\").value = \"" . $item['id'] . "\";
                                                 return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
                                     </td>";
