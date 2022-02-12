@@ -53,7 +53,7 @@ td input {
 
 #commission_title input {
     width: 50px;
-    margin: 0 8px;
+    margin: 0 0.6em;
 }
 
 #comm_val {
