@@ -50,9 +50,20 @@ td input {
 #real {
     margin-left: 8%;
 }
+.lbl_col{
+    width: 2.7em;
+}
+#total_price,#com_value,#real_price{
+    width: 8em;
+}
 
 #commission_title input {
     width: 50px;
+<<<<<<< HEAD
+    /* margin: 0 8px; */
+}
+
+=======
     margin: 0 0.6em;
 }
 
@@ -75,6 +86,7 @@ td input {
     margin-right: 10px;
     width: 120px;
 }
+>>>>>>> 010fdeb93714a083ce474c4a29e2535eba77bbdc
 
 .modal {
     position: fixed;
