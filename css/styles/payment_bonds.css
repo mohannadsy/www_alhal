@@ -5,23 +5,23 @@
 }
 
 #res_number {
-    column-width: 50px;
+    column-width: 3em;
 }
 
 #res_num {
-    padding-right: 125px;
+    padding-right: 7.813em;
 }
 
 h2,
 #inf_row {
-    padding-right: 20px;
+    padding-right: 1em;
 }
 
 #btn-grp {
-    border-radius: 4px;
+    border-radius: 0.25em;
     text-align: center;
-    margin: 1px 3px;
-    width: 60px;
+    margin: 0.063em 0.188em;
+    width: 3.75em;
     box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
     cursor: pointer;
 }
@@ -38,7 +38,7 @@ h2,
 
 span {
     font-size: 23px;
-    width: 25px;
+    width: 1.563em;
 }
 
 
@@ -50,7 +50,7 @@ span {
 }
 
 .modal-dialog {
-    min-width: 790px;
+    min-width: 49.375em;
 }
 
 .modal-content {
