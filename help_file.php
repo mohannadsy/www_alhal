@@ -1427,15 +1427,10 @@ $('#setting_sidebar').click(function() {
 </script>
 
 <script>$('#file_sidebar').click(); </script>
-<?php
-    if(isset($_GET['item_section'])){
-        echo "<script>$('#item_sidebar').click(); </script>";
-    }
-?>
 
 <?php
-    if(isset($_GET['category_section'])){
-        echo "<script>$('#category_sidebar').click(); </script>";
+    if(isset($_GET['file_section'])){
+        echo "<script>$('#file_sidebar').click(); </script>";
     }
 ?>
 <?php
@@ -1443,8 +1438,31 @@ $('#setting_sidebar').click(function() {
         echo "<script>$('#account_sidebar').click(); </script>";
     }
 ?>
-
-
+<?php
+    if(isset($_GET['item_section'])){
+        echo "<script>$('#item_sidebar').click(); </script>";
+    }
+?>
+<?php
+    if(isset($_GET['category_section'])){
+        echo "<script>$('#category_sidebar').click(); </script>";
+    }
+?>
+<?php
+    if(isset($_GET['bills_section'])){
+        echo "<script>$('#bills_sidebar').click(); </script>";
+    }
+?>
+<?php
+    if(isset($_GET['bonds_section'])){
+        echo "<script>$('#bonds_sidebar').click(); </script>";
+    }
+?>
+<?php
+    if(isset($_GET['setting_section'])){
+        echo "<script>$('#setting_sidebar').click(); </script>";
+    }
+?>
 
 
 <script>

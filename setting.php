@@ -270,3 +270,7 @@ include('include/footer.php');
     $('#printing_sidebar').removeClass('active');
   });
 </script>
+
+<script>
+    f1("help_file.php?setting_section");
+</script>
