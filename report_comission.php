@@ -71,6 +71,15 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
+                <div class="col-4 text-left">
+                    <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
+                    <a href="index.php">
+                        <button type="button" class="btn btn-light" id="close_btn" name="close">
+                            إغلاق
+                        </button>
+                    </a>
+
+                </div>
 
             </div>
 
@@ -135,27 +144,19 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-center mt-1 " id="total_row">
                 
-                <div class="mx-5">
+                <div class="col-5 ">
                     <label for="">إجمالي الفواتير: </label>
                     <input  type="text" readonly id="total_bill" value="<?= $total_bill ?>">
                 </div>
 
-                <div class="mx-5">
+                <div class="col-4 ">
                     <label for="">قيمة الكمسيون: </label>
                     <input type="text" readonly id="total_comission" value="<?= $total_comission ?>">
                 </div>
 
-                <div class="mx-5">
+                <div class="col-3 ">
                     <label for="" class="px-1">صافي الفواتير: </label>
                     <input type="text" readonly id="real_bill" value="<?= $real_bill ?>">
-                </div>
-            </div>
-            <div class="row justify-content-end pl-2">
-                <div class="col-2 text-center">
-                    <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
-                    <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
-                            إغلاق
-                        </button></a>
                 </div>
             </div>
 

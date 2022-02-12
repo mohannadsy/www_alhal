@@ -71,6 +71,16 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
+                <div class="col-4 text-left">
+                    <button type="button" class="btn btn-light" id="print" name="print">طباعة</button>
+                    <a href="index.php">
+                        <button type="button" class="btn btn-light" id="close_btn" name="close">
+                                إغلاق
+                            
+                        </button>
+                    </a>
+
+                </div>
 
             </div>
 
@@ -147,15 +157,6 @@ include('include/nav.php');
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row justify-content-end py-2  pl-2">
-                <div class="col-2 text-center">
-                <button type="button" class="btn btn-light" id="print" name="print">طباعة</button>
-               <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
-                            إغلاق
-                        </button></a>
-                </div>
-
             </div>
         </form>
     </div>
