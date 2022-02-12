@@ -217,7 +217,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
                         </div>
                     </div>
-                    <h5 class="" style=" margin-right:16px"> الرصيدالافتتاحي</h5>
+                    <h5 class="" style=" margin-right:16px"> الرصيد الافتتاحي</h5>
                     <div class="row">
                         <div class="col-12">
                             <label for="maden" class="form-label" id="lbl_maden"> مدين</label>
