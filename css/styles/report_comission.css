@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 425px;
+    height: 22em;
     direction: ltr;
 }
 
@@ -51,10 +51,11 @@ tbody {
 #date_row {
     margin-right: 20px;
 }
-#from_date,#to_date{
+
+#from_date,
+#to_date {
     padding-left: 0px;
     padding-right: 0px;
-
 }
 
 
