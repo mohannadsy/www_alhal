@@ -164,10 +164,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
                 <div class="col-5">
                     <div class="row px-2  justify-content-end ">
-                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
-                        <button name="previous" id="previous"> <span>&#8249;</span> </button>
-                        <button name="next" id="next"> <span>&#8250;</span> </button>
-                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
+                        <button name="next" id="next"><span>&#8249;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
+                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
                         <button name="current" id="current" hidden></button>
 
                     </div>
