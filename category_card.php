@@ -164,7 +164,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-4 pt-3">
                 <div class="col-4 text-center">
                     <a href="item_card.php"><button type="button" class="btn btn-light"  name="" id="btn-grp1">
                             بطاقة مادة
