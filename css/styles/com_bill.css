@@ -63,7 +63,7 @@ td input {
 
 #commision_value input {
     width: 120px;
-    margin-right: 15px;
+    margin-right:1em;
 }
 
 #total input {
