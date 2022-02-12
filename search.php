@@ -175,13 +175,13 @@ if (isset($_POST['item_code'])) {
  *  return bills
  */
 if (isset($_POST['radio_bill_value'])) {
-    $select_all_bills_query = select('bills');
+    $select_all_bills_query = selectND('bills');
     if ($_POST['radio_bill_value'] == 'not_sell_bills')
-        $select_all_bills_query = select('bills') . where('buyer_id', 0);
+        $select_all_bills_query = selectND('bills') . andWhere('buyer_id', 0);
     if ($_POST['radio_bill_value'] == 'sell_bills')
-        $select_all_bills_query = select('bills') . where('buyer_id', 0, '<>');
+        $select_all_bills_query = selectND('bills') . andWhere('buyer_id', 0, '<>');
     if ($_POST['radio_bill_value'] == 'all_bills')
-        $select_all_bills_query = select('bills');
+        $select_all_bills_query = selectND('bills');
     $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
     while ($row = mysqli_fetch_array($select_all_bills_exec)) {
         echo "<tr>";
