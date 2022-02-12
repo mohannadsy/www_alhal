@@ -39,7 +39,7 @@ include('include/nav.php');
             </div>
             <div class="row justify-content-center">
                 <div class="col-10" id="tableFixHead">
-                    <table class=" table table-hover text-center">
+                    <table class=" table table-hover text-center" border="1">
                         <thead class="">
                             <tr>
                                 <th scope="col ">الرقم</th>
@@ -53,8 +53,10 @@ include('include/nav.php');
                             <?php
                             $select_accounts_query = selectND('accounts') . andWhereLarger('id', '3') . andWhere('account_id', 0);
                             $select_accounts_exec = mysqli_query($con, $select_accounts_query);
+                            $alert_colors = ['alert-success' , 'alert-danger' , 'alert-secondary' , 'alert-binary'];
+                            $i_alert_color = 0;
                             while ($row = mysqli_fetch_array($select_accounts_exec)) {
-                                echo '<tr class="alert-success" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
+                                echo '<tr class="'.$alert_colors[$i_alert_color].'" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
                                 echo '<td>' . $row['code'] . '</td>';
                                 echo '<td>' . $row['name'] . '</td>';
 
@@ -69,7 +71,7 @@ include('include/nav.php');
                                 $select_accounts_child_exec = mysqli_query($con, $select_accounts_child_query);
                                 while ($row_child = mysqli_fetch_array($select_accounts_child_exec)) {
 
-                                    echo '<tr ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
+                                    echo '<tr  class="'.$alert_colors[$i_alert_color].'" ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
                                     echo '<td>' . $row_child['code'] . '</td>';
                                     echo '<td>' . $row_child['name'] . '</td>';
 
@@ -82,6 +84,7 @@ include('include/nav.php');
                                     echo '<td>' . ($current_maden - $current_daen) . '</td>';
                                     echo '</tr>';
                                 }
+                                $i_alert_color = ($i_alert_color+1) % count($alert_colors);
                             }
                             ?>
                         </tbody>

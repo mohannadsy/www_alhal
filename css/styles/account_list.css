@@ -22,13 +22,15 @@
     color: #fff;
 }
 
-tbody tr:nth-child(odd) {
-    background-color: #d9e9fa;
-}
 
-tbody {
+/* tbody tr:nth-child(odd) {
+    background-color: #d9e9fa;
+} */
+
+
+/* tbody {
     background-color: #c5ddf7;
-}
+} */
 
 
 /*عمود البحث*/
@@ -48,7 +50,6 @@ tbody {
     text-align: left;
     padding-left: 15px;
 }
-
 
 
 /* العنوان */

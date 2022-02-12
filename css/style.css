@@ -30,8 +30,8 @@ body {
     position: relative;
     font-size: 17px; */
     font-family: Arial, Helvetica, sans-serif;
-    
 }
+
 button {
     font-weight: bold;
 }
@@ -64,4 +64,8 @@ button {
     border-radius: 0.938em;
     /* position: absolute; */
     border-color: #005792;
+}
+
+textarea {
+    resize: none;
 }
