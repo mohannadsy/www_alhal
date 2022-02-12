@@ -80,22 +80,22 @@ include('include/nav.php');
                         <thead>
                             <tr>
 
-                                <th colspan="3"></th>
-                                <th colspan="2" id="in"> الإدخالات </th>
+                                <th colspan="3" class="none"></th>
+                                <th colspan="2" id="in" class="in"> الإدخالات </th>
 
-                                <th colspan="2" id="out">الإخراجات</th>
-                                <th colspan="2">الرصيد</th>
+                                <th colspan="2" id="out" class="out">الإخراجات</th>
+                                <th colspan="2" class="none">الرصيد</th>
                             </tr>
                             <tr>
-                                <th> التاريخ </th>
-                                <th> الفاتورة </th>
-                                <th>اسم المادة </th>
-                                <th> الكمية </th>
-                                <th> السعر </th>
-                                <th> الكمية </th>
-                                <th> السعر </th>
-                                <th> الكمية </th>
-                                <th> السعر </th>
+                                <th class="none"> التاريخ </th>
+                                <th class="none"> الفاتورة </th>
+                                <th class="none">اسم المادة </th>
+                                <th class="in"> الكمية </th>
+                                <th class="in"> السعر </th>
+                                <th class="out"> الكمية </th>
+                                <th class="out"> السعر </th>
+                                <th class="none"> الكمية </th>
+                                <th class="none"> السعر </th>
                             </tr>
                         </thead>
                         <tbody id='show'>
@@ -120,25 +120,25 @@ include('include/nav.php');
                                 echo "<td>" . $row['date'] . "</td>";
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
-                                echo "<td>" . $row['real_weight'] . "</td>";
-                                echo "<td>" . $row['total_item_price'] . "</td>";
+                                echo "<td class='in'>" . $row['real_weight'] . "</td>";
+                                echo "<td class='in'>" . $row['total_item_price'] . "</td>";
                                 $inbox_weight = $row['real_weight'];
                                 $inbox_price = $row['total_item_price'];
                                 $outbox_price = '0';
                                 $outbox_weight = '0';
                                 if ($row['buyer_id'] == 0)
-                                    echo "<td>" . '0' . "</td>";
+                                    echo "<td class='out'>" . '0' . "</td>";
                                 else{
-                                    echo "<td>" . $row['real_weight'] . "</td>";
+                                    echo "<td class='out'>" . $row['real_weight'] . "</td>";
                                     $outbox_weight = $row['real_weight'];
                                 }
                                 if ($row['buyer_id'] == 0)
-                                    echo "<td>" . '0' . "</td>";
+                                    echo "<td class='out'>" . '0' . "</td>";
                                 else{
-                                    echo "<td>" . $row['total_item_price'] . "</td>";
+                                    echo "<td class='out'>" . $row['total_item_price'] . "</td>";
                                     $outbox_price = $row['total_item_price'];
                                 }
-                                echo "<td>" . ($inbox_weight - $outbox_weight) . "</td>";
+                                echo "<td >" . ($inbox_weight - $outbox_weight) . "</td>";
                                 echo "<td>" . ($inbox_price - $outbox_price) . "</td>";
                                 echo "</tr>";
 

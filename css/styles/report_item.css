@@ -17,7 +17,6 @@
 
 #tableFixHead thead th {
     position: sticky;
-    background: #425262;
     color: #fff;
     top: 0;
 }
@@ -26,12 +25,27 @@ tbody tr:nth-child(odd) {
     background-color: #d9e9fa;
 }
 
-tbody {
+tbody .none {
     background-color: #c5ddf7;
 }
+tbody .in {
+    background-color: red
+}
+tbody .out{
+    background-color: green;
+}
 
-#in {
-    background: blue;
+.none{
+    background: #425262;
+
+}
+.in{
+    background-color: red;
+}
+
+.out{
+    background-color: green;
+
 }
 
 
