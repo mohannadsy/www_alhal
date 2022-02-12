@@ -1250,7 +1250,9 @@ if(isset($_GET['account_statement'])){
                 <th> البيان </th>
                 <th>رصيد الحركة </th>';
                 if($report_type_details)
-               $content.=" <th  style='display:none' contenteditable='false'>المادة</th>
+                    if (get_value_from_config('account_statement' , 'item') == 'true')
+               $content.=" ;
+                <th  style='display:none' contenteditable='false'>المادة</th>
                 <th  style='display:none' contenteditable='false'> وزن قائم</th>
                 <th style='display:none' contenteditable='false'> وزن صافي</th>
                 <th  style='display:none' contenteditable='false'> إفرادي</th>
@@ -1383,8 +1385,8 @@ if(isset($_GET['account_statement'])){
                              where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id' and bills.code = '$bill_code'";
                         $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
                         $number_of_items = mysqli_num_rows($select_items_using_id_exec);
-
-                        $content.= "<td ></td>";
+                         if (get_value_from_config('account_statement' , 'item') == 'true'){
+                        $content.= "<td ></td>";}
                         $content.= "<td ></td>";
                         $content.= "<td ></td>";
                         $content.= "<td ></td>";
@@ -1394,8 +1396,9 @@ if(isset($_GET['account_statement'])){
                             // $content.= "<tr><td colspan='7' ></td>";
                             
                         $content.= "<tr><td colspan=\"7\"></td>";
-                        
-                            $content.= "<td  >" . $item['name'] . "</td>";
+                            if (get_value_from_config('account_statement' , 'item') == 'true'){
+                                 $content.= "<td  >" . $item['name'] . "</td>";
+                            }
                             $content.= "<td  >" . $item['total_weight'] . "</td>";
                             $content.= "<td >" . $item['real_weight'] . "</td>";
                             $content.= "<td  >" . $item['price'] . "</td>";
