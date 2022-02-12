@@ -244,7 +244,8 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
                                                             bills.id as bill_id,total_item_price,com_ratio,
                                                             unit, date, buyer_id,seller_id,
                                                             name,currency,
-                                                            com_value,category_id
+                                                            com_value,category_id,
+                                                            real_weight , total_weight
                                                              from bill_item, items,bills 
                                                              where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
                                                              and date between '$from_date' and '$to_date'";
@@ -258,12 +259,11 @@ if (isset($_POST['radio_value']) && isset($_POST['text_value'])) {
         echo "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
         echo "<td>" . $row['bill_code'] . "</td>";
         echo "<td>" . $row['date'] . "</td>";
-        echo "<td>" . $row['name'] . "</td>";
-        echo "<td>" . $category_name . "</td>";
-        echo "<td>" . $row['unit'] . "</td>";
-        // echo "<td>" . $row['currency'] . "</td>";
         echo "<td>" . $buyer_name . "</td>";
         echo "<td>" . $seller_name . "</td>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $row['total_weight'] . "</td>";
+        echo "<td>" . $row['real_weight'] . "</td>";
         $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
         echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
         echo "<td>" . $row['total_item_price'] . "</td>";

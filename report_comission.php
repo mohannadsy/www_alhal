@@ -88,15 +88,15 @@ include('include/nav.php');
                     <table class=" table table-hover text-center ">
                         <thead>
                             <tr>
-                                <th id="bill_code">رقم الفاتورة </th>
-                                <th id="date_col">تاريخ الفاتورة </th>
-                                <th id="item_name_col">اسم المادة </th>
-                                <th id="cat_col"> الصنف </th>
-                                <th id="unit_col">الوحدة </th>
-                                <!-- <th>العملة </th> -->
+                                <th id="bill_code">رقم</th>
+                                <th id="date_col">تاريخ</th>
+                                
                                 <th id="buyer_col"> المشتري </th>
                                 <th id="seller_col">البائع </th>
-                                <th id="comm_col">قيمة الكمسيون </th>
+                                <th id="item_name_col">المادة</th>
+                                <th id="total_weight_col">القائم</th>
+                                <th id="real_col">الصافي</th>
+                                <th id="comm_col">الكمسيون</th>
                                 <th id="total_col">الاجمالي</th>
                             </tr>
                         </thead>
@@ -110,6 +110,7 @@ include('include/nav.php');
                                                             bills.id as bill_id,total_item_price,
                                                             unit, date, buyer_id,seller_id,
                                                             name,currency,com_ratio,
+                                                            real_weight , total_weight,
                                                             com_value,category_id
                                                              from bill_item, items,bills 
                                                              where items.id = bill_item.item_id and bills.id = bill_item.bill_id";
@@ -123,12 +124,11 @@ include('include/nav.php');
                                 echo "<tr ondblclick='window.open(\"com_bill.php?code=" . $bill_code . "\" , \"_self\")'>";
                                 echo "<td>" . $row['bill_code'] . "</td>";
                                 echo "<td>" . $row['date'] . "</td>";
-                                echo "<td>" . $row['name'] . "</td>";
-                                echo "<td>" . $category_name . "</td>";
-                                echo "<td>" . $row['unit'] . "</td>";
-                                // echo "<td>" . $row['currency'] . "</td>";
                                 echo "<td>" . $buyer_name . "</td>";
                                 echo "<td>" . $seller_name . "</td>";
+                                echo "<td>" . $row['name'] . "</td>";
+                                echo "<td>" . $row['total_weight'] . "</td>";
+                                echo "<td>" . $row['real_weight'] . "</td>";
                                 $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
                                 echo "<td id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
                                 echo "<td>".$row['total_item_price']."</td>";
