@@ -135,8 +135,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 <div class="col-3 " id="receipt_number">
                     <div class="row" style=" padding-top: 10px;">
                         <label id="lbl_code"> رقم الإيصال</label>
-
-                        <!-- <div class="col-md-6"> -->
                             <input type="number" id="code" value="<?php if (($next_payment_code == '' && isset($_POST['next'])) ||
                                                                         (isset($_POST['previous']) && $previous_payment_code == '') ||
                                                                         (!isset($_POST['code']))
@@ -148,7 +146,6 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                                                                     elseif (isset($_POST['last_previous'])) echo $last_previous_code;
                                                                     elseif (isset($_POST['current']) || isset($_POST['update'])) echo $_POST['code'];
                                                                     ?>" class="form-control" name="code">
-                        <!-- </div> -->
 
                     </div>
 

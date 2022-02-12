@@ -507,7 +507,8 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css();
+        // $('#iframe_account_card').contents().find('#nav').css({"background-color":"#7da6ce;"});
+        $('#iframe_account_card').contents().find('#container').css({});
     });
 </script>
 <script>

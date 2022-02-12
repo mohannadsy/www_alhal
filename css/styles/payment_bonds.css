@@ -74,6 +74,7 @@ span {
     position: relative;
     min-width: 780;
     min-height: 630px;
+    background-color: #7da6ce;
 }
 
 #iframe_account_card {
