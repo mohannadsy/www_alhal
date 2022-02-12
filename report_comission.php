@@ -153,7 +153,9 @@ include('include/nav.php');
             <div class="row justify-content-end pl-2">
                 <div class="col-2 text-center">
                     <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
-                    <button type="submit" class="btn btn-light" name="close">إغلاق</button>
+                    <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
+                            إغلاق
+                        </button></a>
                 </div>
             </div>
 

@@ -15,10 +15,9 @@ include('include/nav.php');
 <body>
     <form action="" method="POST">
         <div class="container-fluid">
-            <div class="row mx-5 py-3" id="header">
+            <div class="row justify-content-start px-5 py-3">
                 <h3 class="col-5">قائمة الحسابات</h3>
             </div>
-
             <div class="row py-3">
                 <div class="col-3" id="search_col">
                     <div class="row justify-content-end">
@@ -87,15 +86,15 @@ include('include/nav.php');
                 </div>
 
             </div>
-            <!-- <div class="row py-3">
-                <div class="col-11" id="close-colum">
-                    <a href="ready.php"> <button type="button" class="btn " name="close">
+            
+            <div class="row justify-content-end py-3 ">
+                <div class="col-2 " id="close_col">
+                    <a href="index.php"><button type="button" class="btn btn-light" id="close_btn" name="close">
                             إغلاق
-
                         </button></a>
-
                 </div>
-            </div> -->
+            </div>
+
         </div>
     </form>
     <div id="show"></div>

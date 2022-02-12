@@ -42,7 +42,7 @@ if (isset($_POST['backup'])) {
             <!-- Navbar -->
             <nav class="nav-menus">
                 <li><a href="main_page.php"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li class="sub-menus"><a href="#"><i class='fas fa-folder-open fa-9x' style='color:#ffffff'></i>ملف</a>
+                <li class="sub-menus"><a href="#"><i class='fas fa-folder-open fa-9x' style='color:#ffffff; padding-left:5px;'></i>ملف</a>
                     <ul>
                         <li><a href="open_file.php"> فتح ملف</a></li>
                         <li><a href="#" onclick="document.getElementById('modal_restore_db_button').click()"> استيراد نسخة احتياطية</a></li>
@@ -85,6 +85,7 @@ if (isset($_POST['backup'])) {
                 <li><a href="help_file.php"><i class="fas fa-align-left"></i> معلومات</a></li>
                 <li><a href="about.php"><i class='fas fa-info-circle fa-9x' style='color:#ffffff'></i> حول</a></li>
                 <li id="myBackBtn"><a onclick="window.history.back()" style='color:#ffffff'><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
+                
             </nav>
         </div>
     </header>

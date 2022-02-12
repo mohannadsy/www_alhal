@@ -13,6 +13,9 @@ include('include/nav.php');
 </head>
 
 <body>
+    <div class="row py-3 px-5">
+        <img src="assets/images/logo1.png" alt="Italian Trulli" style="width:105px;height:135px; margin-rught:10px;">
+    </div>
     <div class="row py-3">
 
         <div id="band">

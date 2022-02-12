@@ -5,10 +5,11 @@
     background-color: inherit;
     border: none;
 }
-#from_date,#to_date{
+
+#from_date,
+#to_date {
     padding-left: 0px;
     padding-right: 0px;
-
 }
 
 
@@ -16,7 +17,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 380px;
+    height: 360px;
     direction: ltr;
 }
 

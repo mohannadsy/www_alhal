@@ -14,3 +14,20 @@
 #table {
     color: #ffffff;
 }
+
+#table {
+    overflow-y: auto;
+    height: 350px;
+    direction: ltr;
+}
+
+#table thead th {
+    position: sticky;
+    top: -1;
+    background-color: #7da6ce;
+    color: #000000;
+}
+
+tbody {
+    background-color: #ffffff;
+}

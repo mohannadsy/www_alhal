@@ -20,8 +20,8 @@ include('include/nav.php');
 <body>
     <form action="" method="post">
         <div class="container" >
-            <div class="col-12">
-                    <table name="table" class="table border table-hover" id="table">
+            <div class="col-12" id="table">
+                    <table name="table" class="table" >
                         <thead class="text-center">
                             <tr>
                                 <th style="font-size: 23px;">اسم قاعدة البيانات</th>
@@ -41,7 +41,7 @@ include('include/nav.php');
                         }
                         ?>
                         <!-- End Code Section -->
-
+                        
                     </table>
             </div>
             <input type="hidden" name="selected_database" value="" id="selected_database"> 
@@ -68,6 +68,7 @@ include('include/nav.php');
                     <button type="submit" name="open_db" class="btn btn-light" id="btn-grp">فتح</button>
                     <button type="button" name="new_db" class="btn btn-light" id="new" onclick="test1()">جديد</button>
                     <button type="submit" name="delete_db" class="btn btn-light" id="btn-grp">حذف</button>
+                    <a href="index.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
                     <button type="button" name="restore" class="btn btn-light"  id="btn-grp" hidden>استرجاع</button>
                 </div>
             </div>

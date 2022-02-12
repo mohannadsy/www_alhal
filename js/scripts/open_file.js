@@ -13,7 +13,7 @@ function get_selected_database(id) {
     document.getElementById("selected_database").value = table;
     $('tbody tr').each(function(a, b) {
         $(b).click(function() {
-            $('table tr').css('background', '#5F9EA0');
+            $('table tr').css('background', '#ffffff');
             $(this).css('background', 'lightgray');
         });
     });
