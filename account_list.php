@@ -84,7 +84,7 @@ include('include/nav.php');
 
 
                                     echo '<td>' . ($current_maden - $current_daen) . '</td>';
-                                    echo '<td><button type="button" onclick="window.open(\'accountStatment.php?account='.$row_child['code'] . ' - ' . $row_child['name'].'\' , \'_self\')">كشف</button></td>';
+                                    echo '<td><button type="button"  class="btn btn-success" onclick="window.open(\'accountStatment.php?account='.$row_child['code'] . ' - ' . $row_child['name'].'\' , \'_self\')">كشف</button></td>';
                                     echo '</tr>';
                                 }
                                 $i_alert_color = ($i_alert_color+1) % count($alert_colors);
