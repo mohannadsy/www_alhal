@@ -251,7 +251,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             
         $inserted_accounts_counter = 0;
         foreach ($_POST['account'] as $key => $value) {
-            if ($value != '' && $_POST['maden'][$key] != '')
+            if ($value != '' && $_POST['daen'][$key] != '')
                 $inserted_accounts_counter++;
         }
         if($inserted_accounts_counter == 0){
