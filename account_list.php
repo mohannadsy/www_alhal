@@ -56,7 +56,7 @@ include('include/nav.php');
                             $alert_colors = ['alert-success' , 'alert-danger' , 'alert-secondary' , 'alert-binary'];
                             $i_alert_color = 0;
                             while ($row = mysqli_fetch_array($select_accounts_exec)) {
-                                echo '<tr class="'.$alert_colors[$i_alert_color].'" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
+                                echo '<tr class="'.$alert_colors[0].'" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
                                 echo '<td>' . $row['code'] . '</td>';
                                 echo '<td>' . $row['name'] . '</td>';
 
@@ -71,7 +71,7 @@ include('include/nav.php');
                                 $select_accounts_child_exec = mysqli_query($con, $select_accounts_child_query);
                                 while ($row_child = mysqli_fetch_array($select_accounts_child_exec)) {
 
-                                    echo '<tr  class="'.$alert_colors[$i_alert_color].'" ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
+                                    echo '<tr  style="background-color:white" ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
                                     echo '<td>' . $row_child['code'] . '</td>';
                                     echo '<td>' . $row_child['name'] . '</td>';
 

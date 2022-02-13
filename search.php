@@ -72,7 +72,7 @@ if (isset($_POST["account_search_part"])) {
             if($row['account_id'] == 0)
             $output .= '<tr class="alert-success" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             else
-            $output .= '<tr ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
+            $output .= '<tr style="background-color:white" ondblclick="window.open(\'account_card.php?id=' . $row['id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['code'] . '</td>
                 <td>' . $row['name'] . '</td>';
                 if ($row['account_id'] != 0) {
