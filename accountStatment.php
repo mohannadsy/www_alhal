@@ -582,7 +582,6 @@ include('include/footer.php');
                 $('#show').html(data)
             },
             error: function() {
-                alert('bye')
             }
         });
     });

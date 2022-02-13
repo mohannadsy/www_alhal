@@ -256,7 +256,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
         }
         if($inserted_accounts_counter == 0){
             message_box('لم يتم حفظ السند لعدم وجود حساب مقابل او قيمة مالية');
-            open_window_self('catch_bonds.php');
+            open_window_self('payment_bonds.php');
         }
 
         foreach ($_POST['account'] as $key => $value) {

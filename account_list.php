@@ -23,6 +23,8 @@ include('include/nav.php');
                     <div class="row justify-content-end">
                         <input id="search_text" type="search" class="form-control" placeholder="بحث" aria-label="Search" aria-describedby="search-addon" />
                         <button id="search" type="button" class=" btn  btn-light">بحث</button>
+                        <!-- <input type="checkbox" name="empty_accounts_checkbox" id="empty_accounts_checkbox" checked>
+                        <label for="empty_accounts_checkbox">اظهار الحسابات الفارغة</label> -->
                     </div>
                 </div>
 
@@ -72,13 +74,14 @@ include('include/nav.php');
                                 $select_accounts_child_query = selectND('accounts'). andWhereLarger('id', '3') . andWhere('account_id', $row['id']);
                                 $select_accounts_child_exec = mysqli_query($con, $select_accounts_child_query);
                                 while ($row_child = mysqli_fetch_array($select_accounts_child_exec)) {
-
+                                    $current_maden = get_current_maden_using_id($con, $row_child['id']);
+                                    $current_daen = get_current_daen_using_id($con, $row_child['id']);
+                                    // if($current_daen == '0' && $current_maden == '0')
+                                    //     continue;
                                     echo '<tr  style="background-color:white" ondblclick="window.open(\'account_card.php?id=' . $row_child['id'] . '\' , \'_self\')">';
                                     echo '<td>' . $row_child['code'] . '</td>';
                                     echo '<td>' . $row_child['name'] . '</td>';
 
-                                    $current_maden = get_current_maden_using_id($con, $row_child['id']);
-                                    $current_daen = get_current_daen_using_id($con, $row_child['id']);
                                     echo '<td>' . $current_daen . '</td>';
                                     echo '<td>' . $current_maden . '</td>';
 
