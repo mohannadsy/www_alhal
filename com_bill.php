@@ -762,7 +762,7 @@ if (isset($_POST['update'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
         // كشف حساب البائع
-        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_number'] = $current_bill_code;
         $_POST['code_type'] = 'bills';
         $_POST['note'] = $_POST['seller_note'];
         $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
