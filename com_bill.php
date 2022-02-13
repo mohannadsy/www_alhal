@@ -313,7 +313,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                         </div>
                         <div class="col-8">
-                            <button type="submit" onclick="return comfirm('هل تريد بالتأكيد حفظ الفاتورة ؟')" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'hidden' ?> >حفظ</button>
+                            <button type="submit" onclick="return confirm('هل تريد بالتأكيد حفظ الفاتورة ؟')" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'hidden' ?> >حفظ</button>
                             <button type="submit" name="update" class="btn btn-light" <?php if (empty($bill)) echo 'hidden' ?> >تعديل</button>
                             <button type="submit" name="delete" class="btn btn-light" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> >حذف</button>
                             <button type="submit" name="print_seller"class="btn btn-light">طباعة بائع</button>
