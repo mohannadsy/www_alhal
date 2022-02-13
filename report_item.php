@@ -69,11 +69,14 @@ include('include/nav.php');
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                        <button type="button" class="btn btn-light" id="print" name="print">طباعة</button>
-                        <a href="index.php">
-                            <button type="button" class="btn btn-light" id="close_btn" name="close">   إغلاق </button>
-                        </a>      
+                <div class="col-4 text-left">
+                    <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
+                    <a href="index.php">
+                        <button type="button" class="btn btn-light" id="close_btn" name="close">
+                            إغلاق
+                        </button>
+                    </a>
+
                 </div>
             </div>
 
