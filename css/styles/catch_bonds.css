@@ -54,7 +54,7 @@ span {
 
 .modal-content {
     min-width: 780;
-    min-height: 650px;
+    min-height: 630px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
@@ -72,15 +72,14 @@ span {
 .modal-body {
     position: relative;
     min-width: 780;
-    min-height: 630px;
+    min-height: 620px;
+    background-color: #7da6ce;
 }
-
-h4 {}
 
 #iframe_account_card {
     position: absolute;
     width: 770px;
-    height: 600px;
+    height: 595px;
 }
 
 .close {

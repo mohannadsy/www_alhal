@@ -490,7 +490,7 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
             $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
             // كشف حساب البائع
-            $_POST['code_number'] = $current_bill_id;
+            $_POST['code_number'] = $current_bill_code;
             $_POST['code_type'] = 'bills';
             $_POST['note'] = $_POST['seller_note'];
             $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
@@ -754,7 +754,7 @@ if (isset($_POST['update'])) {
         ]));
         $insert_mid_bonds_exec = mysqli_query($con, $insert_mid_bonds_query);
         // كشف حساب مشتريات
-        $_POST['code_number'] = $_POST['code'];
+        $_POST['code_number'] = $current_bill_code;
         $_POST['code_type'] = 'mid_bonds';
         $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
             'main_account_id', 'other_account_id', 'maden', 'note', 'date', 'code_number', 'code_type'
@@ -762,7 +762,7 @@ if (isset($_POST['update'])) {
         $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
 
         // كشف حساب البائع
-        $_POST['code_number'] = $current_bill_id_to_update;
+        $_POST['code_number'] = $_POST['code'];
         $_POST['code_type'] = 'bills';
         $_POST['note'] = $_POST['seller_note'];
         $_POST['maden'] = $_POST['daen'] = $_POST['real_price'];
@@ -915,29 +915,30 @@ if (isset($_POST['update'])) {
 <?php
 if (isset($_POST['delete'])) {
     // Delete Bill
+    $current_bill_id_to_delete = getId($con, 'bills', 'code', $current_bill_code);
     $delete_bill_query = delete('bills') . where('code', $current_bill_code);
     $delete_bill_exec = mysqli_query($con, $delete_bill_query);
 
     // Delete Bill_item
-    $current_bill_id_to_delete = getId($con, 'bills', 'code', $current_bill_code);
-    $delete_bill_item_query = delete('bill_item') . where('bill_id', $current_bill_id_to_delete);
+    
+    $delete_bill_item_query = forceDelete('bill_item') . where('bill_id', $current_bill_id_to_delete);
     $delete_bill_item_exec = mysqli_query($con, $delete_bill_item_query);
 
     // Delete mid_bonds after git codes from it
-    $select_mid_bonds_query = select('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
+    $select_mid_bonds_query = selectND('mid_bonds') . andWhere('bill_id', $current_bill_id_to_delete);
     $select_mid_bonds_exec = mysqli_query($con, $select_mid_bonds_query);
     $mid_bonds = [];
     while ($mid_bond = mysqli_fetch_array($select_mid_bonds_exec)) {
         $mid_bonds[] = $mid_bond;
     }
-    $delete_mid_bonds_query = delete('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
+    $delete_mid_bonds_query = forceDelete('mid_bonds') . where('bill_id', $current_bill_id_to_delete);
     $delete_mid_bonds_exec = mysqli_query($con, $delete_mid_bonds_query);
 
     // Delete account_statement
-    $delete_account_statement_query = delete('account_statements') . where('code_type', 'bills') . andWhere('code_number', $current_bill_id_to_delete);
+    $delete_account_statement_query = forceDelete('account_statements') . where('code_type', 'bills') . andWhere('code_number', $current_bill_code);
     $delete_account_statement_exec = mysqli_query($con, $delete_account_statement_query);
     foreach ($mid_bonds as $mid_bond) {
-        $delete_account_statement_query = delete('account_statements') . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bond['code']);
+        $delete_account_statement_query = forceDelete('account_statements') . where('code_type', 'mid_bonds') . andWhere('code_number', $mid_bond['code']);
         $delete_account_statement_exec = mysqli_query($con, $delete_account_statement_query);
     }
     clear_local_storage('account_card_code_name');

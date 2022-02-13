@@ -154,9 +154,12 @@ include('include/nav.php');
                     </table>
                 </div>
             </div>
-            <div class="row  " style="margin-right: 65px; margin-bottom:4px;">
-                <button type="submit" class="btn btn-light" name="view" id="btn-grp">معاينة</button>
-                
+            <div class="row" style="margin-right:1em; margin-bottom :0.5em;">
+                <div class="col-2 text-center">
+                    <button type="submit" class="btn btn-light" name="view" id="btn-grp">معاينة</button>
+                    <button type="button" class="btn btn-light" name="" id="print">طباعة</button>
+                    <!-- <button type="submit" class="btn btn-light" id="btn-grp">إغلاق</button> -->
+                </div>   
             </div>
 
             <?php
@@ -365,11 +368,6 @@ include('include/nav.php');
                 <div class="col-md-2">
                     <input readonly id="code3" type="text" class="form-control" name="" value="<?= @$current_currency ?>">
                 </div>
-            </div>
-            <div class="row justify-content-end mx-5 px-3">
-                <button type="button" class="btn btn-light" name="" id="print">طباعة</button>
-                <button type="submit" class="btn btn-light" id="btn-grp">إغلاق</button>
-
             </div>
 
 

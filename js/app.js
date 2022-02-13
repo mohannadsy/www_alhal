@@ -77,7 +77,6 @@ function scrollToTop() {
 
 function f1(path = "help_file.php") {
     $("body").keydown(function(e) {
-        e.preventDefault();
         var keyCode = e.keyCode || e.which;
         console.log(keyCode);
         if (keyCode == 112) {
