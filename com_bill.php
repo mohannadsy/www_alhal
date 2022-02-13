@@ -303,7 +303,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-1">
 
                 </div>
@@ -329,7 +329,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                             <div class="row justify-content-end mt-4 pt-2">
                                 <label>الكمسيون%</label>
                                 <div class="col-2" id="commission_title">
-                                    <input onchange="count_total_price()" type="number" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
+                                    <input onchange="count_total_price()" type="text" id="com_ratio" name="com_ratio" class="form-control" style="padding:2px" value="<?php 
                                             if (notempty($bill)) echo $bill[0]['com_ratio'];
                                                         else echo '5' ; ?>">
                                 </div>
