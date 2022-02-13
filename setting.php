@@ -44,7 +44,7 @@ if (isset($_POST['save'])) {
 
   // $get_json[''][]= $_POST[''];
   //  $stringData = $_POST['item'];
-  file_put_contents($myFile, json_encode($get_json));
+  @file_put_contents($myFile, json_encode($get_json));
 }
 ?>
 

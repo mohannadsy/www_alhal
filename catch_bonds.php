@@ -152,11 +152,11 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
 
                 </div>
                 <div class="col-5">
-                    <div class="row justify-content-end" style="padding-top: 10px;margin-left:25;">
-                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
-                        <button name="previous" id="previous"><span>&#8249;</span> </button>
-                        <button name="next" id="next"> <span>&#8250;</span> </button>
-                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                    <div class="row justify-content-end" style="padding-top: 10px;margin-left:4.2em;">
+                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
+                        <button name="next" id="next"><span>&#8249;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
+                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
                         <button name="current" id="current" hidden></button>
                     </div>
                 </div>
@@ -195,9 +195,9 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     </div>
                 </div>
             </div>
-            <div class="row " style=" padding-right: 20px;">
+            <div class="row " style=" padding-right: 1.25em;">
                 <div class="col-11">
-                    <table id="tbl" class=" text-center table table-bordered table-hover">
+                    <table id="tbl" class="text-center table table-bordered table-hover">
                         <thead class="text-center ">
                             <tr>
                                 <th scope="col" id="number_col">رقم</th>
@@ -209,29 +209,27 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     </table>
                 </div>
             </div>
-            <div class="row justify-content-end" style="padding-left:70px ;">
+            <div class="row justify-content-end" style="padding-left:4.375em ;">
                 <label for="total" class="col-form-label" id="res_number"> المجموع</label>
                 <div class="col-md-3" style="padding-left: 60px;">
                     <input id="total" type="text" id="resault" class="form-control" name="total">
                 </div>
             </div>
             <div class="row justify-content-end  py-4 px-5 mx-4">
-                <!-- <div class="col-md-5" id="buttons"> -->
-                    <button type="submit" class="form-control" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل تريد بالتأكيد حفظ السند ؟')" type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="form-control" id="btn-grp" name="print">
+                    <button type="submit" class="btn btn-light" id="btn-grp" name="print">
                         طباعة
                     </button>
-                    <button class="form-control" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
+                    <button class="btn btn-light" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
                         تعديل
                     </button>
 
-                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="form-control " id="btn-grp" name="delete" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="btn btn-light" id="btn-grp" name="delete" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
                     <a href="index.php"><button type="button" class="btn btn-light" id="btn-grp" name="close"> إغلاق</button></a>
-                <!-- </div> -->
             </div>
         </div>
     </form>
@@ -507,7 +505,8 @@ for ($i = 0; $i < 5; $i++)
 <script>
     $('#iframe_account_card').load(function() {
         $('#iframe_account_card').contents().find('#nav').hide();
-        $('#iframe_account_card').contents().find('#container').css();
+        // $('#iframe_account_card').contents().find('#nav').css({"background-color":"#7da6ce;"});
+        $('#iframe_account_card').contents().find('#container').css({});
     });
 </script>
 <script>

@@ -1,5 +1,5 @@
 .container {
-    width: 56.25em;
+    width: 54em;
     height: 36em;
     padding: 0.3em;
 }
@@ -17,11 +17,16 @@ h2,
     padding-right: 1em;
 }
 
+thead {
+    background: #425262;
+    color: #fff;
+}
+
 #btn-grp {
-    border-radius: 0.25em;
-    text-align: center;
+    /* border-radius: 0.25em; */
+    /* text-align: center; */
     margin: 0.063em 0.188em;
-    width: 3.75em;
+    /* width: 3.75em; */
     box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
     cursor: pointer;
 }
@@ -74,6 +79,7 @@ span {
     position: relative;
     min-width: 780;
     min-height: 630px;
+    background-color: #7da6ce;
 }
 
 #iframe_account_card {

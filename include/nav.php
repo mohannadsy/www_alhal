@@ -34,8 +34,8 @@ if (isset($_POST['backup'])) {
 
 <body>
     <!-- Start Header -->
-    <header id="hh">
-        <div class="wrapper" id="nav">
+    <header id="nav">
+        <div class="wrapper" >
             <!-- Brand Image -->
             <!-- <a href="#" class="logo"><img src="/images/markuptag-white-logo.png" alt=""></a> -->
             <i class="toggle-btn fas fa-bars"></i>
@@ -84,7 +84,7 @@ if (isset($_POST['backup'])) {
                 <li><a href="setting.php"><i class='fas fa-cogs fa-9x' style='color:#ffffff'></i> الإعدادات</a></li>
                 <li><a href="help_file.php"><i class="fas fa-align-left"></i> معلومات</a></li>
                 <li><a href="about.php"><i class='fas fa-info-circle fa-9x' style='color:#ffffff'></i> حول</a></li>
-                <li id="myBackBtn"><a onclick="window.history.back()" style='color:#ffffff'><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
+                <li><a onclick="window.history.back()" style='color:#ffffff; cursor:pointer'><i class='fas fa-share fa-9x' style='color:#ffffff'></i> عودة</a></li>
                 
             </nav>
         </div>

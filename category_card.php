@@ -123,10 +123,10 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <div class="row justify-content-end" style="margin-left: 15;">
 
         
-                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
-                        <button name="previous" id="previous"><span>&#8249;</span> </button>
-                        <button name="next" id="next"><span>&#8250;</span> </button>
-                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
+                        <button name="next" id="next"><span>&#8249;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
+                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
                         <button name="current" id="current" hidden></button>
                     </div>
 
@@ -164,7 +164,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-4 pt-3">
                 <div class="col-4 text-center">
                     <a href="item_card.php"><button type="button" class="btn btn-light"  name="" id="btn-grp1">
                             بطاقة مادة

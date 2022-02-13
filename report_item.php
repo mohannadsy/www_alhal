@@ -52,9 +52,7 @@ include('include/nav.php');
                         <div >
                             <button  class= "btn btn-light" type="button" name="search" id="search">بحث</button>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="col-4" id="date_row">
                     <div class="row justify-content-start py-1 ">
@@ -72,16 +70,14 @@ include('include/nav.php');
                     </div>
                 </div>
                 <div class="col-4 text-left">
-                    <button type="button" class="btn btn-light" id="print" name="print">طباعة</button>
+                    <button type="button" class="btn btn-light" name="print" id="print">طباعة</button>
                     <a href="index.php">
                         <button type="button" class="btn btn-light" id="close_btn" name="close">
-                                إغلاق
-                            
+                            إغلاق
                         </button>
                     </a>
 
                 </div>
-
             </div>
 
             <div class="row justify-content-center py-4">

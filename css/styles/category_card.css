@@ -1,6 +1,6 @@
 .container {
-    width: 600px;
-    height: 350px;
+    width: 35em;
+    height: 20em;
     margin-bottom: 0;
 }
 
@@ -15,19 +15,19 @@
     margin: 6px;
     width: 80px; */
     width: 3.9em;
-    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
-
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
 }
 
 #button_col {
-   /* margin-left: 3em; */
+    /* margin-left: 3em; */
 }
-#btn-grp1{
-    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
+
+#btn-grp1 {
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
 }
 
 h4 {
-    margin-right: 20px;
+    margin-right: 1.25em;
 }
 
 #last_previous,
@@ -35,13 +35,13 @@ h4 {
 #next,
 #last_next {
     /* margin: 0px 4px; */
-    border-radius: 4px;
+    border-radius: 0.25em;
     margin: 0px 2px;
-    padding-right: 6px;
-    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+    padding-right: 0.375em;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938);
 }
-span{
+
+span {
     font-size: 23px;
-    width: 25px;
-   
+    width: 1.563em;
 }

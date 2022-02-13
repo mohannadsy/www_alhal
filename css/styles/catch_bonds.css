@@ -1,7 +1,12 @@
 .container {
-    width: 56.25em;
+    width: 54em;
     height: 36em;
     padding: 0.3em;
+}
+
+thead {
+    background: #425262;
+    color: #fff;
 }
 
 #res_number {
@@ -18,10 +23,10 @@ h2,
 }
 
 #btn-grp {
-    border-radius: 0.25em;
-    text-align: center;
+    /* border-radius: 0.25em; */
+    /* text-align: center; */
     margin: 0.063em 0.188em;
-    width: 3.75em;
+    /* width: 3.75em; */
     box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
     cursor: pointer;
 }
@@ -54,7 +59,7 @@ span {
 
 .modal-content {
     min-width: 780;
-    min-height: 650px;
+    min-height: 630px;
     border-radius: 25px;
     border-style: groove;
     margin: auto;
@@ -72,15 +77,14 @@ span {
 .modal-body {
     position: relative;
     min-width: 780;
-    min-height: 630px;
+    min-height: 620px;
+    background-color: #7da6ce;
 }
-
-h4 {}
 
 #iframe_account_card {
     position: absolute;
     width: 770px;
-    height: 600px;
+    height: 595px;
 }
 
 .close {

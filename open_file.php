@@ -44,6 +44,7 @@ include('include/nav.php');
                         
                     </table>
             </div>
+            <br>
             <input type="hidden" name="selected_database" value="" id="selected_database"> 
             <!-- <div>
                 <h3>معلومات الملف</h3>
@@ -90,12 +91,12 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
         message_box('رجاءا حدد قاعدة بيانات');
     
     elseif ($selected_database == get_value_from_config('deafult_database')){
-        message_box("لقد دخلت على قاعدة البيانات الافتراضية");
+        message_box("لقد دخلت الى قاعدة البيانات الافتراضية");
         update_value_in_config('database', $selected_database);
         open_window_self(INDEX);
     }
     else{
-        message_box(" لقد دخلت على قاعدة البيانات " . $selected_database);
+        message_box(" لقد دخلت الى قاعدة البيانات " . $selected_database);
         update_value_in_config('database', 'souq_'.$selected_database);
         open_window_self(INDEX);
     }
@@ -104,7 +105,7 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
 if (isset($_POST['create_db'])) {
     $database_name = $_POST['database_name'];
     if (is_not_empty($database_name)) {
-        create_database($con , 'souq_'.$database_name);
+        create_database($con , 'souq_'. str_replace(' ' , '_' , $database_name));
         open_window_self('open_file.php');
     }
 }

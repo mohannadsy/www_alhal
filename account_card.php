@@ -161,10 +161,10 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
                 <div class="col-4 text-end">
                     <div style="margin-right: 60px; margin-top:5px;">
-                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
-                        <button name="previous" id="previous"><span>&#8249;</span> </button>
-                        <button name="next" id="next"> <span>&#8250;</span> </button>
-                        <button name="last_next" id="last_next"> <span>&#187;</span> </button>
+                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
+                        <button name="next" id="next"><span>&#8249;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
+                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
                         <button name="current" id="current" hidden></button>
                     </div>
                 </div>
@@ -341,11 +341,26 @@ if (isset($_POST['update'])) {
         'city', 'location', 'note', 'code', 'maden', 'daen'
     ]));
     $accounts_exec = mysqli_query($con, $accounts);
-    $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
-        'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
-    ])) . where('main_account_id', $current_account_id_to_update_delete) . andWhere('code_number', $_POST['code_number']) . andWhere('code_type', 'accounts');
-    $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
 
+    $select_account_statements_to_check_update = selectND('account_statements').
+                    andWhere('code_number' , $_POST['code_number']).
+                    andWhere('code_type' , 'accounts');
+    $select_account_statements_to_check_update_exec = mysqli_query($con ,$select_account_statements_to_check_update);
+
+    if(mysqli_num_rows($select_account_statements_to_check_update_exec) == 0){
+        
+        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
+        ]));
+        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        
+    }
+    else{
+        $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
+            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
+        ])) . where('main_account_id', $current_account_id_to_update_delete) . andWhere('code_number', $_POST['code_number']) . andWhere('code_type', 'accounts');
+        $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
+    }
     if ($accounts_exec)
         open_window_self('account_card.php?id=' . $current_account_id_to_update_delete . '&message_update=success');
 }

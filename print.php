@@ -152,54 +152,74 @@ if(isset($_GET['code'])){
     //$pdf->Cell(0, 0, $title, 0, 1, 'R', 0, '', 0);
     $pdf->SetFont('aealarabiya', '', $font_size);
     //$pdf->Cell(0, 0, $location .' '. $commercial_record, 0, 1, 'R', 0, '', 0);
-    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location .' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 6 * $ratio, $location .' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(7*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name .' ' . $first_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     $num_bill='رقم الفاتورة: ' . $bill['code'];
-    $pdf->MultiCell(120 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(85 * $ratio, 6 * $ratio, $num_bill ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name .' ' . $second_num,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('arial', '', $font_size);
     if($pageLayout='A6'){
         $date = $bill['date'];
-        $pdf->MultiCell(121 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(86 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     }else{
         $date = 'تاريخ الفاتورة: ' . $bill['date'];
         $pdf->MultiCell(140 * $ratio, 6 * $ratio, $date ,0, 'L', 0, 0, '', '', true);
     }
-    $pdf->SetFont('arial', '', $font_size);
-    
-   
     $pdf->Ln(7*$ratio);
-    
+    if($page_type == 'A4'){
+        $font_for_title = 14;
+    }
+    if($page_type == 'A5'){
+        $font_for_title = 10;
+    }
+    if($page_type == 'A6'){
+        $font_for_title = 9;
+    }
+    $pdf->SetFont('arial', '',  $font_for_title);
+    if($_GET['print_type'] == 'seller'){
+    $bill_title='فاتورة شراء';
+    $pdf->MultiCell(170 * $ratio, 6 * $ratio,  $bill_title ,0, 'C', 0, 0, '', '', true);
+    }elseif($_GET['print_type'] == 'buyer'){
+    $bill_title='فاتورة بيع';
+    $pdf->MultiCell(170 * $ratio, 6 * $ratio,  $bill_title ,0, 'C', 0, 0, '', '', true);
+    }
+    $pdf->Ln(7*$ratio);
+    $pdf->SetFont('arial', '', $font_size);
     $name=' البائع: ' . $seller['name'];
     if (get_value_from_config('printing','account_code') == "true") {
         $name=' البائع: '. $seller['code'] . ' - ' . $seller['name'];
     }
     if($_GET['print_type'] == 'buyer'){
-         $name =' المشتري : ' . $buyer['name'];
+        $name =' المشتري : ' . $buyer['name'];
+         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
         if (get_value_from_config('printing','account_code') == "true") {
         $name=' المشتري: '. $buyer['code'] . ' - ' . $buyer['name'];
+        $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
+        $pdf->MultiCell(106 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+         $pdf->Ln(6*$ratio);
     }
-    }
-    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'L', 0, 0, '', '', true);
+    }else{
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
 
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
-    if($_GET['print_type'] == 'buyer')
-        $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
-    $pdf->MultiCell(110 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+    $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
+    $pdf->MultiCell(107 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
+    }
+   
 
     $notes='ملاحظات: ' . $bill['seller_note'];
     if($_GET['print_type'] == 'buyer')
         $notes='ملاحظات: ' . $bill['buyer_note'];
-    $pdf->Cell(0, 0, $notes, 0, 1, 'R', 0, '', 0);
+    $pdf->MultiCell(170 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
     //$pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
+    $pdf->Ln(9*$ratio);
 
     // Set some content to print
     $content = '';
@@ -377,8 +397,12 @@ if(isset($_GET['payment_code'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
+     $pdf->Ln(4*$ratio);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
         $pdf->SetFont('arial', 'B', 18);
     }
@@ -390,15 +414,13 @@ if(isset($_GET['payment_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند دفع';
-    $pdf->MultiCell(113 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(4*$ratio);
+    
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
     $pdf->SetFont('arial', '', $font_size);
-    $pdf->Ln(3*$ratio);
+    $pdf->Ln(2*$ratio);
     $receipt_number = 'رقم الإيصال: ' . $payment_bond['code'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
@@ -410,10 +432,10 @@ if(isset($_GET['payment_code'])){
     //get_name_from_table_using_id
     if (get_value_from_config('printing','account_code') == "true") {
         $account = 'الحساب: ' .$main_account_with_code;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }else{
         $account = 'الحساب: ' .$main_account;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }
     $currency = 'العملة: ' . $payment_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
@@ -558,7 +580,7 @@ if(isset($_GET['catch_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند قبض';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(118 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
@@ -580,10 +602,10 @@ if(isset($_GET['catch_code'])){
     //$pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
     if (get_value_from_config('printing','account_code') == "true") {
         $account = 'الحساب: ' .$main_account_with_code;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }else{
         $account = 'الحساب: ' .$main_account;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }
     $currency = 'العملة: '. $catch_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
@@ -984,15 +1006,15 @@ if(isset($_GET['comission_report'])){
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value'] == 'items'){
         $item=' المادة: ' .$_GET['text_value'];
-        $pdf->MultiCell(175*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(179*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }elseif($_GET['radio_value'] == 'accounts'){
         $item=' العميل: ' .$_GET['text_value'];
-        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(182*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }elseif($_GET['radio_value'] == 'categories'){
         $item=' الصنف: ' .$_GET['text_value'];
-        $pdf->MultiCell(170*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(169*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }
 
@@ -1020,10 +1042,10 @@ if(isset($_GET['comission_report'])){
             .item{
                 width: 10%;
             }
-            .category{
+            .total_weight{
                 width: 10%;
             }
-            .unit{
+            .real_weight{
                 width: 10%;
             }
             .buyer{
@@ -1044,11 +1066,11 @@ if(isset($_GET['comission_report'])){
             <tr>
                 <th class="num">رقم الفاتورة </th>
                 <th class= "date">تاريخ الفاتورة </th>
-                <th class="item">اسم المادة </th>
-                <th class = "category"> الصنف </th>
-                <th class="unit">الوحدة </th>
                 <th class="buyer"> المشتري </th>
                 <th class="seller">البائع </th>
+                <th class="item">اسم المادة </th>
+                <th class="total_weight"> القائم </th>
+                <th class="real_weight"> الصافي </th>
                 <th class="comission"> الكمسيون </th>
                 <th class= "total">الاجمالي</th>
             </tr>
@@ -1058,8 +1080,8 @@ if(isset($_GET['comission_report'])){
                                                             bills.code as bill_code,
                                                             bills.id as bill_id,total_item_price,com_ratio,
                                                             unit, date, buyer_id,seller_id,
-                                                            name,currency,
-                                                            com_value,category_id
+                                                            name,currency,com_ratio,
+                                                            com_value,category_id,total_weight,real_weight
                                                              from bill_item, items,bills 
                                                              where items.id = bill_item.item_id and bills.id = bill_item.bill_id $and_where_condition 
                                                              and date between '$from_date' and '$to_date'";
@@ -1073,13 +1095,15 @@ if(isset($_GET['comission_report'])){
                 $content.= "<tr >";
                 $content.= "<td class=\"num\">" . $row['bill_code'] . "</td>";
                 $content.= "<td class= \"date\">" . $row['date'] . "</td>";
-                $content.= "<td class=\"item\">" . $row['name'] . "</td>";
-                $content.= "<td class = \"category\">" . $category_name . "</td>";
-                $content.= "<td class=\"unit\">" . $row['unit'] . "</td>";
+                //$content.= "<td class = \"category\">" . $category_name . "</td>";
+                //$content.= "<td class=\"unit\">" . $row['unit'] . "</td>";
                 // echo "<td>" . $row['currency'] . "</td>";
                 $content.= "<td class=\"buyer\">" . $buyer_name . "</td>";
                 $content.= "<td class=\"seller\">" . $seller_name . "</td>";
-                $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
+                $content.= "<td class=\"item\">" . $row['name'] . "</td>";
+                $content.= "<td class=\"total_weight\">" . $row['total_weight'] . "</td>";
+                $content.="<td class=\"real_weight\">" . $row['real_weight'] . "</td>";
+                 $current_com_value = ($row['com_ratio'] / 100) * $row['total_item_price'];
                 $content.= "<td class=\"comission\" id='com_" . $counter_for_com_id++ . "'>" . $current_com_value . "</td>";
                 $content.= "<td class= \"total\">".$row['total_item_price']."</td>";
                 $content.= "</tr>";
@@ -1216,8 +1240,8 @@ if(isset($_GET['account_statement'])){
     $account='الحساب: ' .$_GET['account_name'];
     $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency='العملة: ' .'ليرة سورية';
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(8*$ratio);
+    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
+    $pdf->Ln(10*$ratio);
     if($page_type == 'A5'){
         $font_table = 6;
     }
@@ -1244,13 +1268,25 @@ if(isset($_GET['account_statement'])){
                 <th>الحساب المقابل </th>
                 <th> البيان </th>
                 <th>رصيد الحركة </th>';
-                if($report_type_details)
-               $content.=" <th  style='display:none' contenteditable='false'>المادة</th>
-                <th  style='display:none' contenteditable='false'> الوزن القائم</th>
-                <th style='display:none' contenteditable='false'> الوزن الصافي</th>
-                <th  style='display:none' contenteditable='false'> الإفرادي</th>
-                <th  style='display:none' contenteditable='false'>الإجمالي</th>
-                <th  style='display:none' contenteditable='false'>الكمسيون</th>";
+                if($report_type_details){
+                    if(get_value_from_config('account_statement' , 'item') == "true")
+                        $content.=" <th  style='display:none' contenteditable='false'>المادة</th>";
+                    if(get_value_from_config('account_statement' , 'total_weight') == "true")
+                    $content.="
+                        <th  style='display:none' contenteditable='false'> الوزن القائم</th>";
+                    if(get_value_from_config('account_statement' , 'real_weight') == "true")
+                    $content.= "
+                        <th style='display:none' contenteditable='false'> الوزن الصافي</th>";
+                    if(get_value_from_config('account_statement' , 'price') == "true")
+                    $content.="
+                        <th  style='display:none' contenteditable='false'> الإفرادي</th>";
+                    if(get_value_from_config('account_statement' , 'total_item_price') == "true")
+                    $content.="
+                        <th  style='display:none' contenteditable='false'>الإجمالي</th>";
+                    if(get_value_from_config('account_statement' , 'com_value') == "true")
+                    $content.="
+                        <th  style='display:none' contenteditable='false'>الكمسيون</th>";
+                }
             $content.="</tr>
             </thead>
             <tbody>";
@@ -1369,7 +1405,7 @@ if(isset($_GET['account_statement'])){
                             $bill_code = get_code_from_table_using_id($con , 'bills' , $bill_id);
                         }
                         $select_items_using_id_query = "select DISTINCT items.code as item_code,
-                            bills.code as bill_code,
+                            bills.code as bill_code,com_ratio,
                             unit, date, buyer_id,seller_id,
                             name,currency,real_weight,price,total_price,
                             total_item_price,total_weight,
@@ -1386,18 +1422,25 @@ if(isset($_GET['account_statement'])){
                         $content.= "<td ></td>";
                         $content.= "<td ></td></tr>";
                         while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
+                            $current_com_value = ($item['com_ratio'] / 100) * $item['total_item_price'];
                             // $content.= "<tr><td colspan='7' ></td>";
                             
                         $content.= "<tr><td colspan=\"7\"></td>";
-                        
+                        if(get_value_from_config('account_statement' , 'item') == "true")
                             $content.= "<td  >" . $item['name'] . "</td>";
+                        if(get_value_from_config('account_statement' , 'total_weight') == "true")
                             $content.= "<td  >" . $item['total_weight'] . "</td>";
+                        if(get_value_from_config('account_statement' , 'real_weight') == "true")
                             $content.= "<td >" . $item['real_weight'] . "</td>";
+                        if(get_value_from_config('account_statement' , 'price') == "true")
                             $content.= "<td  >" . $item['price'] . "</td>";
+                        if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                             $content.= "<td  >" . $item['total_item_price'] . "</td>";
-                            $content.= "<td class='hidden com_value_hidden' >" . $item['com_value'] . "</td></tr>";
+                        if(get_value_from_config('account_statement' , 'com_value') == "true")
+                            $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td></tr>";
                         }
                     } else {
+                        
                         $content.= "<td ></td>";
                         $content.= "<td ></td>";
                         $content.= "<td></td>";

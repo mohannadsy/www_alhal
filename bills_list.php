@@ -55,7 +55,7 @@ include('include/nav.php');
                         </thead>
                         <tbody id="show">
                             <?php
-                            $select_all_bills_query = select('bills');
+                            $select_all_bills_query = selectND('bills');
                             $select_all_bills_exec = mysqli_query($con, $select_all_bills_query);
                             while ($row = mysqli_fetch_array($select_all_bills_exec)) {
                                 echo "<tr>";

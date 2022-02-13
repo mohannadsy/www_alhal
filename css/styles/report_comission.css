@@ -11,7 +11,7 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 22em;
+    height: 18.5em;
     direction: ltr;
 }
 
@@ -34,22 +34,22 @@ tbody {
 /*saerch input and button style*/
 
 #search_row {
-    margin-right: 25px;
+    margin-right: 1.563em;
 }
 
 #search_row div {
-    margin: 0px 5px;
+    margin: 0em 0.313em;
 }
 
 #search_row input {
-    width: 135px;
+    width: 8.438em;
 }
 
 
 /*date style*/
 
 #date_row {
-    margin-right: 20px;
+    margin-right: 1.25em;
 }
 
 #from_date,
@@ -62,18 +62,18 @@ tbody {
 /*report result style*/
 
 #total_row input {
-    width: 100px;
+    width: 6.25em;
     border: none;
     background-color: inherit;
 }
 
 #total_row label {
-    font-size: 19px;
+    font-size: 1.188em;
 }
 
 #total_row {
     border: 1px solid #000000;
-    border-radius: 7px;
+    border-radius: 0.438em;
     margin-left: 5%;
     margin-right: 5%;
 }

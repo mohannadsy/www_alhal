@@ -2,6 +2,13 @@
 include('include/nav.php');
 ?>
 
+<?php
+if(!isset($_POST['view']))
+if(isset($_GET['account'])){
+    $_POST['account'] = $_GET['account'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -62,11 +69,11 @@ include('include/nav.php');
 
                         <div class="form-check" style="margin-right: 5px;">
                             <input checked type="radio" name="report_type" id="report_type_conclusion" value="conclusion">
-                            <label id="lbl_radio">مختصر</label>
+                            <label id="lbl_radio" for="report_type_conclusion">مختصر</label>
                         </div>
                         <div class="form-check ">
                             <input type="radio" name="report_type" id="report_type_details" value="details" <?php if (get_value_from_config('account_statement', 'report_type_details') == 'true') echo 'checked' ?>>
-                            <label id="lbl_radio">تفصيلي</label>
+                            <label id="lbl_radio" for="report_type_details">تفصيلي</label>
                         </div>
                         
                     </div>
@@ -97,7 +104,7 @@ include('include/nav.php');
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox" value="" id="item_hidden" <?php if (get_value_from_config('account_statement', 'item') == 'true') echo 'checked' ?>>
-                                        <label for="">
+                                        <label for="item_hidden">
                                             المادة
                                         </label>
                                     </div>
@@ -105,7 +112,7 @@ include('include/nav.php');
                                 <td>
                                     <div class="form-check">
                                     <input type="checkbox" value="" id="price_hidden" <?php if (get_value_from_config('account_statement', 'price') == 'true') echo 'checked' ?>>
-                                    <label for="">
+                                    <label for="price_hidden">
                                         الإفرادي
                                     </label>
                                     </div>
@@ -113,7 +120,7 @@ include('include/nav.php');
                                 <td>
                                     <div>
                                         <input type="checkbox" value="" id="real_weight_hidden" <?php if (get_value_from_config('account_statement', 'real_weight') == 'true') echo 'checked' ?>>
-                                        <label for="">
+                                        <label for="real_weight_hidden">
                                             الوزن الصافي
                                         </label>
                                     </div>
@@ -123,7 +130,7 @@ include('include/nav.php');
                                 <td>
                                 <div class="form-check">
                                         <input type="checkbox" value="" id="com_value_hidden" <?php if (get_value_from_config('account_statement', 'com_value') == 'true') echo 'checked' ?>>
-                                        <label for="">
+                                        <label for="com_value_hidden">
                                             الكمسيون
                                         </label>
                                     </div>
@@ -132,7 +139,7 @@ include('include/nav.php');
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox" value="" id="total_item_price_hidden" <?php if (get_value_from_config('account_statement', 'total_item_price') == 'true') echo 'checked' ?>>
-                                        <label for="">
+                                        <label for="total_item_price_hidden">
                                             الإجمالي
                                         </label>
                                     </div>
@@ -141,7 +148,7 @@ include('include/nav.php');
                                 <td>
                                 <div>
                                         <input type="checkbox" value="" id="total_weight_hidden" <?php if (get_value_from_config('account_statement', 'total_weight') == 'true') echo 'checked' ?>>
-                                        <label for="">
+                                        <label for="total_weight_hidden">
                                             الوزن القائم
                                         </label>
                                     </div>
@@ -156,14 +163,15 @@ include('include/nav.php');
             </div>
             <div class="row" style="margin-right:1em; margin-bottom :0.5em;">
                 <div class="col-2 text-center">
-                    <button type="submit" class="btn btn-light" name="view" id="btn-grp">معاينة</button>
+                    <button type="submit" class="btn btn-light" name="view" id="view">معاينة</button>
+                    <button type="submit" class="btn btn-light" name="view_from_get" id="view_from_get" style="display: none;">معاينة</button>
                     <button type="button" class="btn btn-light" name="" id="print">طباعة</button>
                     <!-- <button type="submit" class="btn btn-light" id="btn-grp">إغلاق</button> -->
                 </div>   
             </div>
 
             <?php
-            if (isset($_POST['view'])) {
+            if (isset($_POST['view']) || isset($_POST['view_from_get'])) {
                 echo "<h4 class='text-center'> كشف حساب : " . $_POST['account'] . "</h4>";
             }
             ?>
@@ -193,7 +201,7 @@ include('include/nav.php');
                         <tbody class="text-center" >
                             <?php
 
-                            if (isset($_POST['view'])) {
+                            if (isset($_POST['view']) || isset($_POST['view_from_get'])) {
                                 $main_account_code = get_code_from_input($_POST['account']);
                                 $select_main_accounta_id_using_code_query = "select id,code from accounts where code = '$main_account_code'";
                                 $select_main_accounta_id_using_code_exec = mysqli_query($con, $select_main_accounta_id_using_code_query);
@@ -603,3 +611,9 @@ include('include/footer.php');
 <script>
     f1("help_file.php?account_section");
 </script>
+
+<?php
+    if(isset($_GET['account']) && !isset($main_account_id) && !isset($_POST['view_from_get'])){
+        echo '<script>$("#view_from_get").click()</script>';
+    }
+?>

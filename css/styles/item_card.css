@@ -3,24 +3,22 @@ body {
 }
 
 .container {
-    width: 700px;
-    height: 450px;
+    width: 40em;
+    height: 27em;
     margin-bottom: 0;
 }
 
 #btn_grp1,
 #button-grp2 {
-    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938) ;
-
+    box-shadow: 0px 0px 10px 1px rgba(34, 34, 36, 0.938);
 }
 
-
 #button-grp2 {
-    width: 70px;
+    width: 4em;
 }
 
 h4 {
-    margin-right: 20px;
+    margin-right: 1.25em;
 }
 
 #last_previous,
@@ -31,10 +29,10 @@ h4 {
     border-radius: 4px;
     margin: 0px 2px;
     padding-right: 6px;
-    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938) ;
+    box-shadow: 0px 0px 5px 1px rgba(34, 34, 36, 0.938);
 }
-span{
+
+span {
     font-size: 23px;
-    width: 25px;
-   
+    width: 1.563em;
 }

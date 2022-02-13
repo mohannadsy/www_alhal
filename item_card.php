@@ -161,10 +161,10 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <div class="col-4">
                     <div class="row justify-content-end" style="margin-left: 15px;">
 
-                        <button name="last_previous" id="last_previous"><span>&#171;</span> </button>
-                        <button name="previous" id="previous"> <span>&#8249;</span> </button>
-                        <button name="next" id="next"> <span>&#8250;</span> </button>
-                        <button name="last_next" id="last_next"><span>&#187;</span> </button>
+                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
+                        <button name="next" id="next"><span>&#8249;</span> </button>
+                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
+                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
                         <button name="current" id="current" hidden></button>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ if (isset($_POST['delete'])) {
         message_box('لا يمكنك حذف هذه المادة لوجود عمليات عليها !');
         open_window_self_id('item_card.php' , $current_item_id_to_update_delete);
     } else {
-        $delete_item_query = delete('items') . where('id', $current_item_id_to_update_delete);
+        $delete_item_query = forceDelete('items') . where('id', $current_item_id_to_update_delete);
         $delete_item_exec = mysqli_query($con, $delete_item_query);
         if ($delete_item_exec) {
             open_window_self("item_card.php?message_delete=success");

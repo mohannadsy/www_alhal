@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-size: 19px;
+    /* font-size: 19px; */
 }
 
 .content {}
@@ -14,7 +14,7 @@ body {
     height: 100%;
     overflow: auto;
     /* z-index: -1; */
-    margin-top: 77px;
+    margin-top: 64px;
 }
 
 .sidebar div {
