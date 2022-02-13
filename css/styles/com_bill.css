@@ -109,6 +109,7 @@ td input {
     position: relative;
     min-width: 770;
     min-height: 630px;
+    background-color: #7da6ce;
 }
 
 #iframe_account_card {
@@ -139,8 +140,7 @@ td input {
     position: relative;
     min-width: 770px;
     min-height: 500px;
-    background-color: inherit;
-    border-radius: inherit;
+    background-color: #7da6ce;
 }
 
 #iframe_item_card {
@@ -288,4 +288,7 @@ h2 {
 
 #notes_input {
     padding: 2px;
+}
+.btn{
+    font-weight: bold;
 }

@@ -215,22 +215,21 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 </div>
             </div>
             <div class="row justify-content-end  py-4 px-5 mx-4">
-                <!-- <div class="col-md-12" id='buttons'> -->
-                    <button type="submit" class="form-control" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="form-control" id="btn-grp" name="print">
+                    <button type="submit" class="btn btn-light" id="btn-grp" name="print">
                         طباعة
                     </button>
-                    <button class="form-control" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button class="btn btn-light" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         تعديل
                     </button>
 
-                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="form-control " id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="btn btn-light"  id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
                     <a href="index.php"><button type="button" class="btn btn-light" id="btn-grp" name="close"> إغلاق</button></a>
-                <!-- </div> -->
+    
             </div>
         </div>
     </form>
