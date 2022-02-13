@@ -3,6 +3,7 @@ include('include/nav.php');
 ?>
 
 <?php
+if(!isset($_POST['view']))
 if(isset($_GET['account'])){
     $_POST['account'] = $_GET['account'];
 }
@@ -163,13 +164,14 @@ if(isset($_GET['account'])){
             <div class="row" style="margin-right:1em; margin-bottom :0.5em;">
                 <div class="col-2 text-center">
                     <button type="submit" class="btn btn-light" name="view" id="view">معاينة</button>
+                    <button type="submit" class="btn btn-light" name="view_from_get" id="view_from_get" style="display: none;">معاينة</button>
                     <button type="button" class="btn btn-light" name="" id="print">طباعة</button>
                     <!-- <button type="submit" class="btn btn-light" id="btn-grp">إغلاق</button> -->
                 </div>   
             </div>
 
             <?php
-            if (isset($_POST['view'])) {
+            if (isset($_POST['view']) || isset($_POST['view_from_get'])) {
                 echo "<h4 class='text-center'> كشف حساب : " . $_POST['account'] . "</h4>";
             }
             ?>
@@ -199,7 +201,7 @@ if(isset($_GET['account'])){
                         <tbody class="text-center" >
                             <?php
 
-                            if (isset($_POST['view'])) {
+                            if (isset($_POST['view']) || isset($_POST['view_from_get'])) {
                                 $main_account_code = get_code_from_input($_POST['account']);
                                 $select_main_accounta_id_using_code_query = "select id,code from accounts where code = '$main_account_code'";
                                 $select_main_accounta_id_using_code_exec = mysqli_query($con, $select_main_accounta_id_using_code_query);
@@ -611,7 +613,7 @@ include('include/footer.php');
 </script>
 
 <?php
-    if(isset($_GET['account']) && !isset($main_account_id)){
-        echo '<script>$("#view").click()</script>';
+    if(isset($_GET['account']) && !isset($main_account_id) && !isset($_POST['view_from_get'])){
+        echo '<script>$("#view_from_get").click()</script>';
     }
 ?>

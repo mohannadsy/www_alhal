@@ -27,7 +27,8 @@ if (isset($_POST['delete'])) {
         message_box('لا يمكنك حذف هذه المادة لوجود عمليات عليها !');
         open_window_self("item_list.php");
     } else {
-        $delete_item_query = deleteWhereId('items', $_POST['id']);
+        // $delete_item_query = deleteWhereId('items', $_POST['id']);
+        $delete_item_query = forceDelete(('items')) . where('id' , $_POST['id']);
         $delete_item_exec = mysqli_query($con, $delete_item_query);
         if ($delete_item_exec) {
             open_window_self("item_list.php?message_delete=success");

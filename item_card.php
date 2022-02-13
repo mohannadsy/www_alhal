@@ -315,7 +315,7 @@ if (isset($_POST['delete'])) {
         message_box('لا يمكنك حذف هذه المادة لوجود عمليات عليها !');
         open_window_self_id('item_card.php' , $current_item_id_to_update_delete);
     } else {
-        $delete_item_query = delete('items') . where('id', $current_item_id_to_update_delete);
+        $delete_item_query = forceDelete('items') . where('id', $current_item_id_to_update_delete);
         $delete_item_exec = mysqli_query($con, $delete_item_query);
         if ($delete_item_exec) {
             open_window_self("item_card.php?message_delete=success");

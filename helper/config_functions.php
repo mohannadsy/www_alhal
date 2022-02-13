@@ -6,7 +6,7 @@ function update_value_in_config($key , $value , $in_key = ''){
         $json[$key][$in_key] = $value;
     else
         $json[$key] = $value;
-    file_put_contents('config.json' , json_encode($json));
+    @file_put_contents('config.json' , json_encode($json));
 }
 
 

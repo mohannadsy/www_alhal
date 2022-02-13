@@ -250,7 +250,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         <div class="col-2" id="buyer_pay_lbl_col">
                             <select name="buyer_type_pay" class="form-control">
                                 <option value="cash">نقدي</option>
-                                <option value="agel" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'checked' ?>>آجل</option>
+                                <option value="agel" <?php if (notempty($bill)) if ($bill[0]['buyer_type_pay'] == 'agel') echo 'selected' ?>>آجل</option>
                             </select>
                         </div>
                         <div class="col-6">
