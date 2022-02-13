@@ -47,6 +47,7 @@ include('include/nav.php');
                                 <th scope="col">دائن/له</th>
                                 <th scope="col">مدين/لنا</th>
                                 <th scope="col">الرصيد الحالي</th>
+                                <th scope="col">كشف حساب</th>
                             </tr>
                         </thead>
                         <tbody id="show">
@@ -66,6 +67,7 @@ include('include/nav.php');
                                 echo '<td>' . $current_maden . '</td>';
 
                                 echo '<td>' . ($current_maden - $current_daen) . '</td>';
+                                echo '<td></td>';
                                 echo '</tr>';
                                 $select_accounts_child_query = selectND('accounts'). andWhereLarger('id', '3') . andWhere('account_id', $row['id']);
                                 $select_accounts_child_exec = mysqli_query($con, $select_accounts_child_query);
@@ -82,6 +84,7 @@ include('include/nav.php');
 
 
                                     echo '<td>' . ($current_maden - $current_daen) . '</td>';
+                                    echo '<td><button type="button" onclick="window.open(\'accountStatment.php?account='.$row_child['code'] . ' - ' . $row_child['name'].'\' , \'_self\')">كشف</button></td>';
                                     echo '</tr>';
                                 }
                                 $i_alert_color = ($i_alert_color+1) % count($alert_colors);
