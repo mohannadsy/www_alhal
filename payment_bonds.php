@@ -215,7 +215,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                 </div>
             </div>
             <div class="row justify-content-end  py-4 px-5 mx-4">
-                    <button type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
+                    <button onclick="return confirm('هل تريد بالتأكيد حفظ السند ؟')"  type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
                     <button type="submit" class="btn btn-light" id="btn-grp" name="print">
