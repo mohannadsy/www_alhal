@@ -316,8 +316,8 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                             <button type="submit" onclick="return confirm('هل تريد بالتأكيد حفظ الفاتورة ؟')" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'disabled' ?> >حفظ</button>
                             <button type="submit" name="update" class="btn btn-light" <?php if (empty($bill)) echo 'disabled' ?> >تعديل</button>
                             <button type="submit" name="delete" class="btn btn-light" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'disabled' ?> >حذف</button>
-                            <button type="submit" name="print_seller"class="btn btn-light">طباعة بائع</button>
-                            <button type="submit" name="print_buyer" class=" btn btn-light">طباعة مشتري</button>
+                            <button <?php if(empty($bill)) echo  'onclick="return confirm(\'سيتم حفظ الفاتورة قبل الطباعة ! هل تريد الاستمرار ؟\')"';?>  type="submit" name="print_seller"class="btn btn-light">طباعة بائع</button>
+                            <button <?php if(empty($bill)) echo  'onclick="return confirm(\'سيتم حفظ الفاتورة قبل الطباعة ! هل تريد الاستمرار ؟\')"';?>  type="submit" name="print_buyer" class=" btn btn-light">طباعة مشتري</button>
                             <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('com_bill.php' , '_self')">جديد</button>
                         </div>
                     </div>
@@ -392,6 +392,16 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['print_buyer'])) {
 
 
+    $inserted_items_counter = 0;
+    foreach ($_POST['items'] as $key => $item) {
+        if ($item != '')
+            $inserted_items_counter++;
+    }
+
+    if($inserted_items_counter == 0){
+        message_box('لم يتم حفظ الفاتورة لعدم ادخال مواد !');
+        open_window_self('com_bill.php');
+    }else
     if (empty($bill) && $_POST['seller'] != '') {
         // get seller id from seller code
 
@@ -635,14 +645,24 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
         }
     }
     clear_local_storage('account_card_code_name');
+    if($_POST['seller'] == ''){
+        message_box('لم يتم حفظ الفاتورة لنقص في البيانات');
+        open_window_self(COM_BILL);
+    }
     if (isset($_POST['print_seller']) && $_POST['seller'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
+        open_window_self_code(COM_BILL, $current_bill_code);
+    }
+    if (isset($_POST['print_buyer']) && $_POST['buyer'] == '') {
+        message_box('لا يمكن الطباعة لعدم وجود مشتري !');
         open_window_self_code(COM_BILL, $current_bill_code);
     }
     if (isset($_POST['print_buyer']) && $_POST['buyer'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . '&print_type=buyer');
         open_window_self_code(COM_BILL, $current_bill_code);
     }
+    if($_POST['seller'] == '')
+        message_box('لم يتم حفظ الفاتورة لنقص في البيانات');
     open_window_self(COM_BILL);
 }
 

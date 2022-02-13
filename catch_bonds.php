@@ -219,7 +219,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button onclick="return confirm('هل تريد بالتأكيد حفظ السند ؟')" type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($catch_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="btn btn-light" id="btn-grp" name="print">
+                    <button <?php if (empty($catch_bonds)) echo 'onclick="return confirm(\'سيتم حفظ السند قبل الطباعة ! هل تريد الاستمرار ؟\')"'?>  type="submit" class="btn btn-light" id="btn-grp" name="print">
                         طباعة
                     </button>
                     <button class="btn btn-light" id="btn-grp" name="update" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
@@ -246,6 +246,16 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
         $main_account_id = getId($con, 'accounts', 'code', $main_account_code);
 
         $_POST['code'] = get_auto_code($con, 'catch_bonds', 'code', '', 'parent');
+
+        $inserted_accounts_counter = 0;
+        foreach ($_POST['account'] as $key => $value) {
+            if ($value != '' && $_POST['maden'][$key] != '')
+                $inserted_accounts_counter++;
+        }
+        if($inserted_accounts_counter == 0){
+            message_box('لم يتم حفظ السند لعدم وجود حساب مقابل او قيمة مالية');
+            open_window_self('catch_bonds.php');
+        }
 
         foreach ($_POST['account'] as $key => $value) {
             if ($value != '' && $_POST['maden'][$key] != '') {
@@ -292,7 +302,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             }
         }
     }
-    if (isset($_POST['print']) && notempty($catch_bonds)) {
+    if (isset($_POST['print'])) {
         open_window_blank("print.php?catch_code=" . $current_catch_code);
         open_window_self_id('catch_bonds.php' , getId($con , 'catch_bonds' , 'code' , $current_catch_code));
     }
