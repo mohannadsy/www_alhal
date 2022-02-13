@@ -181,25 +181,30 @@ if(isset($_GET['code'])){
         $name=' البائع: '. $seller['code'] . ' - ' . $seller['name'];
     }
     if($_GET['print_type'] == 'buyer'){
-         $name =' المشتري : ' . $buyer['name'];
+        $name =' المشتري : ' . $buyer['name'];
+         $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
         if (get_value_from_config('printing','account_code') == "true") {
         $name=' المشتري: '. $buyer['code'] . ' - ' . $buyer['name'];
+        $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
+        $pdf->MultiCell(106 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+         $pdf->Ln(6*$ratio);
     }
-    }
-    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'L', 0, 0, '', '', true);
+    }else{
+    $pdf->MultiCell(100 * $ratio, 6 * $ratio, $name ,0, 'R', 0, 0, '', '', true);
 
     $payment_method='طريقة الدفع: ' . type($bill['seller_type_pay']);
-    if($_GET['print_type'] == 'buyer')
-        $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
-    $pdf->MultiCell(110 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
+    $payment_method='طريقة الدفع: ' . type($bill['buyer_type_pay']);
+    $pdf->MultiCell(107 * $ratio, 6 * $ratio, $payment_method ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio);
+    }
+   
 
     $notes='ملاحظات: ' . $bill['seller_note'];
     if($_GET['print_type'] == 'buyer')
         $notes='ملاحظات: ' . $bill['buyer_note'];
-    $pdf->Cell(0, 0, $notes, 0, 1, 'R', 0, '', 0);
+    $pdf->MultiCell(170 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
     //$pdf->MultiCell(100 * $ratio, 6 * $ratio, $notes ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(6*$ratio);
+    $pdf->Ln(9*$ratio);
 
     // Set some content to print
     $content = '';
@@ -390,7 +395,7 @@ if(isset($_GET['payment_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند دفع';
-    $pdf->MultiCell(113 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
@@ -410,10 +415,10 @@ if(isset($_GET['payment_code'])){
     //get_name_from_table_using_id
     if (get_value_from_config('printing','account_code') == "true") {
         $account = 'الحساب: ' .$main_account_with_code;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }else{
         $account = 'الحساب: ' .$main_account;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }
     $currency = 'العملة: ' . $payment_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
@@ -558,7 +563,7 @@ if(isset($_GET['catch_code'])){
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند قبض';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
+    $pdf->MultiCell(118 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
@@ -580,10 +585,10 @@ if(isset($_GET['catch_code'])){
     //$pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
     if (get_value_from_config('printing','account_code') == "true") {
         $account = 'الحساب: ' .$main_account_with_code;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }else{
         $account = 'الحساب: ' .$main_account;
-        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(100 * $ratio , 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     }
     $currency = 'العملة: '. $catch_bond['currency'];
     $pdf->MultiCell(68 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
@@ -984,15 +989,15 @@ if(isset($_GET['comission_report'])){
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value'] == 'items'){
         $item=' المادة: ' .$_GET['text_value'];
-        $pdf->MultiCell(175*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(179*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }elseif($_GET['radio_value'] == 'accounts'){
         $item=' العميل: ' .$_GET['text_value'];
-        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(182*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }elseif($_GET['radio_value'] == 'categories'){
         $item=' الصنف: ' .$_GET['text_value'];
-        $pdf->MultiCell(170*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(169*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(11*$ratio);
     }
 
@@ -1214,10 +1219,10 @@ if(isset($_GET['account_statement'])){
     $pdf->MultiCell(180 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10*$ratio);
     $account='الحساب: ' .$_GET['account_name'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(90 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency='العملة: ' .'ليرة سورية';
     $pdf->MultiCell(50 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(8*$ratio);
+    $pdf->Ln(10*$ratio);
     if($page_type == 'A5'){
         $font_table = 6;
     }
@@ -1246,11 +1251,11 @@ if(isset($_GET['account_statement'])){
                 <th>رصيد الحركة </th>';
                 if($report_type_details)
                $content.=" <th  style='display:none' contenteditable='false'>المادة</th>
-                <th  style='display:none' contenteditable='false'> الوزن القائم</th>
-                <th style='display:none' contenteditable='false'> الوزن الصافي</th>
-                <th  style='display:none' contenteditable='false'> الإفرادي</th>
-                <th  style='display:none' contenteditable='false'>الإجمالي</th>
-                <th  style='display:none' contenteditable='false'>الكمسيون</th>";
+                <th  style='display:none' contenteditable='false'> وزن قائم</th>
+                <th style='display:none' contenteditable='false'> وزن صافي</th>
+                <th  style='display:none' contenteditable='false'> إفرادي</th>
+                <th  style='display:none' contenteditable='false'>إجمالي</th>
+                <th  style='display:none' contenteditable='false'>كمسيون</th>";
             $content.="</tr>
             </thead>
             <tbody>";
