@@ -7,13 +7,15 @@
 
 #tableFixHead {
     overflow-y: auto;
-    height: 320px;
+    height: 20em;
     direction: ltr;
 }
 
 #tableFixHead thead th {
     position: sticky;
     top: 0;
+    background: #425262;
+    color: #fff;
 }
 
 th {
@@ -28,21 +30,21 @@ td input {
 }
 
 #date {
-    width: 145px;
+    width: 9.063em;
     border: none;
     padding-left: 0px;
-    padding: 2px;
+    padding: 0.125em;
 }
 
 #code {
-    padding: 2px;
+    padding: 0.125em;
 }
 
 #add_row,
 #toggle_discount {
     background-color: inherit;
     border: none;
-    margin: 1px 0px;
+    margin: 0.063em 0em;
     cursor: pointer;
 }
 
@@ -50,30 +52,33 @@ td input {
 #real {
     margin-left: 8%;
 }
-.lbl_col{
+
+.lbl_col {
     width: 2.7em;
 }
-#total_price,#com_value,#real_price{
+
+#total_price,
+#com_value,
+#real_price {
     width: 8em;
 }
 
 #commission_title input {
-    width: 50px;
+    width: 3.125em;
     margin: 0 0.6em;
 }
 
 #comm_val {
-    padding-right: 2px;
-    padding-left: 11px;
+    padding-right: 0.125em;
+    padding-left: 0.688em;
 }
 
-
 #total input {
-    margin-right: 10px;
+    margin-right: 0.625em;
 }
 
 #real input {
-    margin-right: 10px;
+    margin-right: 0.625em;
 }
 
 .modal {

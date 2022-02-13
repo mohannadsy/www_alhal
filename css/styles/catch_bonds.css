@@ -1,7 +1,12 @@
 .container {
-    width: 56.25em;
+    width: 54em;
     height: 36em;
     padding: 0.3em;
+}
+
+thead {
+    background: #425262;
+    color: #fff;
 }
 
 #res_number {

@@ -26,12 +26,11 @@ include('include/nav.php');
     </div> -->
     <div class="container">
         <div class="row mt-2 mr-3">
-            <label for="">شركة</label>
+          <h2>شركة</h2>
 
         </div>
         <div class="row justify-content-center">
-            <label for="">update</label>
-
+            <h3>update</h3>
         </div>
         <div class="row justify-content-center">
             <label for="">للتكنلوجيا وحلول الأعمال</label>
@@ -48,11 +47,9 @@ include('include/nav.php');
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-8 text-center">
+        <div class="row justify-content-start">
+            <div class="col-8 ">
                 <label for=""> zainjaraa@gmail.com</label>
-                
-
             </div>
             <div class="col-4">
                 <label for="">0933999494</label> 
