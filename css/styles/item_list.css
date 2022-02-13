@@ -43,9 +43,9 @@ h3 {
 /*search style*/
 
 #search_col button {
-    margin: 0px 10px;
+    margin: 0em 0.625em;
 }
 
 #search_col input {
-    width: 170px;
+    width: 10em;
 }
