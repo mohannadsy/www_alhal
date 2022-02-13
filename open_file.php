@@ -44,6 +44,7 @@ include('include/nav.php');
                         
                     </table>
             </div>
+            <br>
             <input type="hidden" name="selected_database" value="" id="selected_database"> 
             <!-- <div>
                 <h3>معلومات الملف</h3>
@@ -104,7 +105,7 @@ if (isset($_POST['open_db']) && isset($_POST['selected_database'])) {
 if (isset($_POST['create_db'])) {
     $database_name = $_POST['database_name'];
     if (is_not_empty($database_name)) {
-        create_database($con , 'souq_'.$database_name);
+        create_database($con , 'souq_'. str_replace(' ' , '_' , $database_name));
         open_window_self('open_file.php');
     }
 }
