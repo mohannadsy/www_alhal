@@ -248,7 +248,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <!-- </div> -->
                 <!-- <div id="button_col" class="col-md-6 text-center" > -->
 
-                <div class="col-6">
+                <div class="col-7">
                     <button <?php if ((notempty($item))) echo 'disabled' ?> type="submit" class="btn btn-light" name="add" id="button-grp2">
                         إضافة
                     </button>
@@ -260,6 +260,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                                                                                             ?> type="submit" class="btn btn-light"  name="delete" id="button-grp2">
                         حذف
                     </button>
+                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('item_card.php' , '_self')">جديد</button>
                     <a href="index.php"><button type="button" class="btn btn-light" id="button-grp2" name="close"> إغلاق</button></a>
 
 

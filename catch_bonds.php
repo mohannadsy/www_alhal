@@ -229,6 +229,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="btn btn-light" id="btn-grp" name="delete" <?php if (empty($catch_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
+                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('catch_bonds.php' , '_self')">جديد</button>
                     <a href="index.php"><button type="button" class="btn btn-light" id="btn-grp" name="close"> إغلاق</button></a>
             </div>
         </div>

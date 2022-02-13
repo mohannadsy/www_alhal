@@ -174,7 +174,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
                 </div>
 
-                <div id="button_col" class="col-sm-12  col-md-7 ">
+                <div id="button_col" class="col-sm-12  col-md-8 ">
                     <button <?php if (notempty($category)) echo 'disabled' ?> type="submit" class="btn btn-light " name="add" id="button_grp">
                         إضافة
                     </button>
@@ -184,6 +184,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                     <button onclick="return confirm('هل تريد بالتأكيد حذف هذا الصنف !')" <?php if (empty($category)) echo 'disabled' ?> type="submit" id="button_grp" class="btn btn-light" name="delete">
                         حذف
                     </button>
+                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('category_card.php' , '_self')">جديد</button>
                     <a href="index.php"><button type="button" class="btn btn-light"  name="close" id="button_grp">
                         إغلاق
                     </button></a>

@@ -275,13 +275,15 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 
             <div class="row justify-content-center py-3">
-                <div class="col-md-6" id="button_col">
+                <div class="col-md-8" id="button_col">
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account)) echo "disabled" ?> name="update">تعديل</button>
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account) || $account[0]['code'] == '1' || $account[0]['code'] == '2' || $account[0]['code'] == '3') echo "disabled" ?> name="delete" onclick="return confirm('هل تريد بالتأكيد حذف هذا الحساب !')">حذف</button>
+
+                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('account_card.php' , '_self')">جديد</button>
 
                     <a href="index.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
                 </div>
