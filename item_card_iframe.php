@@ -1,5 +1,16 @@
 <?php
-include('include/nav.php');
+    include('include/css.php'); 
+    @include('sql/connection.php');
+    include('sql/sql_queries.php');
+    include('helper/config_functions.php');
+    include('helper/operation_functions.php');
+    include('helper/database_functions.php');
+    include('helper/javascript_functions.php');
+    include('helper/ready_queries_functions.php');
+    include('helper/notification_functions.php');
+    include('helper/html_functions.php');
+    include('helper/links.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -144,11 +155,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 <body>
     <form id="form" action="" method="post">
         <div class="container" id="container">
-            <?php
-            success_error_create_message('تم انشاء المادة بنجاح', 'عئرا لم يتم انشاء المادة');
-            success_error_update_message('تم تعديل المادة بنجاح', 'عئرا لم يتم تعديل المادة');
-            success_error_delete_message('تم حذف المادة بنجاح', 'عئرا لم يتم حذف المادة');
-            ?>
+
 
             <!-- <div class="row justify-content-center"> -->
             <!-- <div id="item_col" class="col-sm-10 col-md-12 text-center py-5"> -->
@@ -161,11 +168,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <div class="col-4">
                     <div class="row justify-content-end" style="margin-left: 15px;">
 
-                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
-                        <button name="next" id="next"><span>&#8249;</span> </button>
-                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
-                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
-                        <button name="current" id="current" hidden></button>
+                    
                     </div>
                 </div>
 
@@ -235,8 +238,6 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
             <div class="row py-4">
                 <div class="col-md-5 text-center">
-                    <a  href="category_card.php" > <button type="button" class="btn btn-light" id="btn_grp1"  name="">إضافة صنف</button></a>
-                    <a href="item_list.php"><button type="button" class="btn btn-light" id="btn_grp1" name="view_items">استعراض المواد</button></a>
                     <!-- <a <?php // if (empty($item)) echo 'disabled' 
                         ?> href="item_card.php"><button type="button" id="btn_grp1" class="" name="item_card">
                             مادة جديدة
@@ -252,16 +253,6 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                     <button <?php if ((notempty($item))) echo 'disabled' ?> type="submit" class="btn btn-light" name="add" id="button-grp2">
                         إضافة
                     </button>
-                    <button <?php if ((empty($item))) echo 'disabled' 
-                            ?> type="submit" name="update" class="btn btn-light" id="button-grp2">
-                        تعديل
-                    </button>
-                    <button onclick="return confirm('هل تريد بالتأكيد حذف هذه المادة !')" <?php if (empty($item)) echo 'disabled' 
-                                                                                            ?> type="submit" class="btn btn-light"  name="delete" id="button-grp2">
-                        حذف
-                    </button>
-                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('item_card.php' , '_self')">جديد</button>
-                    <a href="index.php"><button type="button" class="btn btn-light" id="button-grp2" name="close"> إغلاق</button></a>
 
 
                 </div>
@@ -292,36 +283,12 @@ if (isset($_POST['add'])) {
         $insert_item_exec = mysqli_query($con, $insert_item_query);
         if ($insert_item_exec) {
             set_local_storage('item_card_code_name', $_POST['code'] . " - " . $_POST['name']);
-            open_window_self('item_card.php?message_create=success&category_id=' . $_POST['category_id']);
+            // open_window_self('item_card_iframe.php?message_create=success&category_id=' . $_POST['category_id']);
+            open_window_self('item_card_iframe.php?category_id=' . $_POST['category_id']);
         }
     }else{
         message_box('لم ينم ادخال المادة لنقص في البيانات');
-        open_window_self('item_card.php');
-    }
-}
-if (isset($_POST['update'])) {
-    $update_item_query = update('items', get_array_from_array($_POST, ['name', 'unit', 'category_id', 'code', 'note'])) . where('id', $current_item_id_to_update_delete);
-    $update_item_exec = mysqli_query($con, $update_item_query);
-    if ($update_item_exec) {
-        open_window_self("item_card.php?id=" . $current_item_id_to_update_delete . "&message_update=success");
-    }
-}
-
-if (isset($_POST['delete'])) {
-
-    $select_bill_item_to_check_delete_query = selectND('bill_item') . andWhere('item_id', $current_item_id_to_update_delete);
-    $select_bill_item_to_check_delete_exec = mysqli_query($con, $select_bill_item_to_check_delete_query);
-    $number_of_bill_item_rows = mysqli_num_rows($select_bill_item_to_check_delete_exec);
-
-    if ($number_of_bill_item_rows > 0) {
-        message_box('لا يمكنك حذف هذه المادة لوجود عمليات عليها !');
-        open_window_self_id('item_card.php' , $current_item_id_to_update_delete);
-    } else {
-        $delete_item_query = forceDelete('items') . where('id', $current_item_id_to_update_delete);
-        $delete_item_exec = mysqli_query($con, $delete_item_query);
-        if ($delete_item_exec) {
-            open_window_self("item_card.php?message_delete=success");
-        }
+        open_window_self('item_card_iframe.php');
     }
 }
 
@@ -385,7 +352,3 @@ include('include/footer.php');
     };
 </script>
 
-
-<script>
-    f1("help_file.php?item_section");
-</script>

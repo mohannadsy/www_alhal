@@ -81,17 +81,17 @@ td input {
     margin-right: 0.625em;
 }
 
-.modal {
+.modal2 {
     position: fixed;
     overflow: auto;
 }
 
-#modal_dialog_account {
+.modal_dialog_account2 {
     min-width: fit-content;
     min-height: fit-content;
 }
 
-#modal_content_account {
+.modal_content_account2 {
     min-width: 770;
     min-height: 650px;
     border-radius: 25px;
@@ -100,29 +100,29 @@ td input {
     animation-duration: 0.4s
 }
 
-#modal_header_account {
+.modal_header_account2 {
     padding: 0 10px;
     display: flex;
 }
 
-#modal_body_account {
+.modal_body_account2 {
     position: relative;
     min-width: 770;
     min-height: 630px;
     background-color: #7da6ce;
 }
 
-#iframe_account_card {
+.iframe_account_card2 {
     width: 770px;
     height: 600px;
 }
 
-#modal_dialog_item {
+.modal_dialog_item2 {
     min-width: fit-content;
     min-height: fit-content;
 }
 
-#modal_content_item {
+.modal_content_item2 {
     min-width: 795px;
     min-height: 500px;
     border-radius: 25px;
@@ -131,19 +131,19 @@ td input {
     animation-duration: 0.4s;
 }
 
-#modal_header_item {
+.modal_header_item2 {
     padding: 0px 10px;
     display: flex;
 }
 
-#modal_body_item {
+.modal_body_item2 {
     position: relative;
     min-width: 770px;
     min-height: 500px;
     background-color: #7da6ce;
 }
 
-#iframe_item_card {
+.iframe_item_card2 {
     position: absolute;
     min-width: 770px;
     min-height: 480px;
@@ -289,6 +289,7 @@ h2 {
 #notes_input {
     padding: 2px;
 }
-.btn{
+
+.btn {
     font-weight: bold;
 }

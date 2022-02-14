@@ -759,8 +759,9 @@ if(isset($_GET['item_report'])){
         $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
+    $pdf->Ln(2*$ratio);
     $tilte='تقرير حركة مادة';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
@@ -968,8 +969,9 @@ if(isset($_GET['comission_report'])){
         $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
+    $pdf->Ln(2*$ratio);
     $tilte='تقرير حركة كمسيون';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
@@ -1220,10 +1222,10 @@ if(isset($_GET['account_statement'])){
     $pdf->MultiCell(180 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10*$ratio);
     $account='الحساب: ' .$_GET['account_name'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency='العملة: ' .'ليرة سورية';
-    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(10*$ratio);
+    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(11*$ratio);
     if($page_type == 'A5'){
         $font_table = 6;
     }
@@ -1265,6 +1267,7 @@ if(isset($_GET['account_statement'])){
                     if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الإجمالي</th>";
+                    
                     if(get_value_from_config('account_statement' , 'com_value') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الكمسيون</th>";
@@ -1419,8 +1422,10 @@ if(isset($_GET['account_statement'])){
                         if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                             $content.= "<td  >" . $item['total_item_price'] . "</td>";
                         if(get_value_from_config('account_statement' , 'com_value') == "true")
-                            $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td></tr>";
+                            $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td>";
                         }
+                        
+                        $content.="</tr>";
                     } else {
                         
                         $content.= "<td ></td>";
