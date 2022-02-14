@@ -17,18 +17,18 @@ include('include/nav.php');
 </head>
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
-<div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+<div id="modal_account_card" class="modal fade modal2" role="dialog">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog2">
+        <div class="modal-content modal-content2">
+            <div class="modal-header modal-header2">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button onclick="" type="button" data-dismiss="modal" class="close" aria-label="Close" style=" margin-right: 10px;">
                     <span aria-hidden="true" id="moadal_close" >&times;</span>
                 </button>
 
             </div>
-            <div class="modal-body">
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
+            <div class="modal-body modal-body2">
+                <iframe id="iframe_account_card" class="frame_account_card" src="account_card_iframe.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>

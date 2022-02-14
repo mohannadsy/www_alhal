@@ -1,5 +1,15 @@
 <?php
-include('include/nav.php');
+    include('include/css.php'); 
+    @include('sql/connection.php');
+    include('sql/sql_queries.php');
+    include('helper/config_functions.php');
+    include('helper/operation_functions.php');
+    include('helper/database_functions.php');
+    include('helper/javascript_functions.php');
+    include('helper/ready_queries_functions.php');
+    include('helper/notification_functions.php');
+    include('helper/html_functions.php');
+    include('helper/links.php');
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -148,26 +158,12 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 <body>
     <form action="" method="post">
         <div class="container" id="container">
-
-            <!-- Messages Section -->
-            <?php
-            success_error_create_message('تم انشاء الحساب بنجاح', 'عئرا لم يتم انشاء الحساب بنجاح');
-            success_error_update_message('تم تعديل الحساب بنجاح', 'عئرا لم يتم تعديل الحساب بنجاح');
-            ?>
             <div class="row py-2">
                 <div class="col-8">
                     <h3 style=" margin-right:16px">بطاقة حساب</h3>
                 </div>
 
-                <div class="col-4 text-end">
-                    <div style="margin-right: 60px; margin-top:5px;">
-                    <button name="last_next" id="last_next"><span>&#171;</span> </button>
-                        <button name="next" id="next"><span>&#8249;</span> </button>
-                        <button name="previous" id="previous"> <span>&#8250;</span> </button>
-                        <button name="last_previous" id="last_previous"><span>&#187;</span> </button>
-                        <button name="current" id="current" hidden></button>
-                    </div>
-                </div>
+               
 
             </div>
             <div class="row">
@@ -278,14 +274,6 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                 <div class="col-md-8" id="button_col">
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
-
-                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account)) echo "disabled" ?> name="update">تعديل</button>
-
-                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account) || $account[0]['code'] == '1' || $account[0]['code'] == '2' || $account[0]['code'] == '3') echo "disabled" ?> name="delete" onclick="return confirm('هل تريد بالتأكيد حذف هذا الحساب !')">حذف</button>
-
-                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('account_card.php' , '_self')">جديد</button>
-
-                    <a href="index.php"><button type="button" id="btn-grp" class="btn btn-light" name="close">إغلاق</button></a>
                 </div>
             </div>
 
@@ -324,79 +312,12 @@ if (isset($_POST['add'])) {
             set_local_storage('account_card_code_name', $_POST['code'] . " - " . $_POST['name']);
         // open_window_self('account_card.php?message_create=success');
         message_box('تم إنشاء الحساب بنجاح');
-        open_window_self('account_card.php');
+        open_window_self('account_card_iframe.php');
+        // echo "<script>window.html.style('display:none')</script>";
         close_window();
     }
 }
-
-if (isset($_POST['update'])) {
-    if ($_POST['maden'] != '' || $_POST['daen'] != '') {
-        if ($_POST['maden'] == '') $_POST['maden'] = '0';
-        if ($_POST['daen'] == '') $_POST['daen'] = '0';
-    }
-    $_POST['code_number'] = $_POST['code'];
-    $_POST['main_account_id'] = getId($con, 'accounts', 'code', $_POST['code']);
-    $_POST['other_account_id'] = $_POST['main_account_id'];
-    $_POST['code_type'] = 'accounts'; // accounts -> رصيد افتتاحي
-    $_POST['date'] = date('Y-m-d');
-
-    $accounts =  updateWhereId('accounts', $current_account_id_to_update_delete, get_array_from_array($_POST, [
-        'name', 'account_id', 'phone', 'state',
-        'city', 'location', 'note', 'code', 'maden', 'daen'
-    ]));
-    $accounts_exec = mysqli_query($con, $accounts);
-
-    $select_account_statements_to_check_update = selectND('account_statements').
-                    andWhere('code_number' , $_POST['code_number']).
-                    andWhere('code_type' , 'accounts');
-    $select_account_statements_to_check_update_exec = mysqli_query($con ,$select_account_statements_to_check_update);
-
-    if(mysqli_num_rows($select_account_statements_to_check_update_exec) == 0){
-        
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-        
-    }
-    else{
-        $update_account_statement_query = update('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
-        ])) . where('main_account_id', $current_account_id_to_update_delete) . andWhere('code_number', $_POST['code_number']) . andWhere('code_type', 'accounts');
-        $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
-    }
-    if ($accounts_exec)
-        open_window_self('account_card.php?id=' . $current_account_id_to_update_delete . '&message_update=success');
-}
-
 ?>
-
-
-<?php
-
-if (isset($_POST['delete'])) {
-
-    $select_account_statements_to_check_delete_account_query = selectND('account_statements') . andWhere('main_account_id', $current_account_id_to_update_delete) . orWhere('other_account_id', $current_account_id_to_update_delete);
-    $select_account_statements_to_check_delete_account_exec = mysqli_query($con, $select_account_statements_to_check_delete_account_query);
-    if (mysqli_num_rows($select_account_statements_to_check_delete_account_exec) > 0) {
-        message_box('لا يمكن حذف هذا الحساب لارتباطه بعمليات اخرى');
-        open_window_self_id(ACCOUNT_CARD, $current_account_id_to_update_delete);
-    } else {
-        $select_accounts_to_check_delete_query = selectND('accounts') . andWhere('account_id', $current_account_id_to_update_delete);
-        $select_accounts_to_check_delete_exec = mysqli_query($con, $select_accounts_to_check_delete_query);
-        if (mysqli_num_rows($select_accounts_to_check_delete_exec) > 0) {
-            message_box('لا يمكن حذف هذا الحساب الرئيسي لارتباطه بحسابات اخرى !');
-            open_window_self_id(ACCOUNT_CARD, $current_account_id_to_update_delete);
-        } else {
-            $delete_account_query = delete('accounts') . where('id', $current_account_id_to_update_delete);
-            $delete_account_exec = mysqli_query($con, $delete_account_query);
-        }
-    }
-}
-
-?>
-
-
 <?php
 include('include/footer.php');
 ?>
@@ -450,8 +371,4 @@ include('include/footer.php');
             document.getElementById('current').click();
         }
     };
-</script>
-
-<script>
-    f1("help_file.php?account_section");
 </script>

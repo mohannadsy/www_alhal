@@ -1222,10 +1222,10 @@ if(isset($_GET['account_statement'])){
     $pdf->MultiCell(180 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10*$ratio);
     $account='الحساب: ' .$_GET['account_name'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency='العملة: ' .'ليرة سورية';
-    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(10*$ratio);
+    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(11*$ratio);
     if($page_type == 'A5'){
         $font_table = 6;
     }

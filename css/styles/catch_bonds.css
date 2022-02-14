@@ -46,18 +46,18 @@ span {
     width: 1.563em;
 }
 
-.modal {
+.modal2 {
     position: fixed;
     /* Stay in place */
     overflow: auto;
     /* Enable scroll if needed */
 }
 
-.modal-dialog {
+.modal-dialog2 {
     min-width: 49.375em;
 }
 
-.modal-content {
+.modal-content2 {
     min-width: 780;
     min-height: 630px;
     border-radius: 25px;
@@ -69,19 +69,19 @@ span {
     animation-duration: 0.4s
 }
 
-.modal-header {
+.modal-header2 {
     padding: 0 10px;
     display: flex;
 }
 
-.modal-body {
+.modal-body2 {
     position: relative;
     min-width: 780;
     min-height: 620px;
     background-color: #7da6ce;
 }
 
-#iframe_account_card {
+.iframe_account_card {
     position: absolute;
     width: 770px;
     height: 595px;

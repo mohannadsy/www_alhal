@@ -183,8 +183,8 @@ if(isset($_GET['account'])){
                             <tr>
                                 <th contenteditable='false' id="date_col">التاريخ</th>
                                 <th contenteditable="false" id="doc_col"> المستند</th>
-                                <th contenteditable='false'>مدين</th>
-                                <th contenteditable='false'>دائن</th>
+                                <th contenteditable='false'>مدين/لنا</th>
+                                <th contenteditable='false'>دائن/له</th>
                                 <th contenteditable='false' id="cross_col">الحساب المقابل</th>
                                 <th contenteditable='false'>البيان</th>
                                 <th contenteditable='false'>رصيد الحركة</th>
