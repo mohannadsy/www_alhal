@@ -1424,6 +1424,7 @@ if(isset($_GET['account_statement'])){
                         if(get_value_from_config('account_statement' , 'com_value') == "true")
                             $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td>";
                         }
+                        
                         $content.="</tr>";
                     } else {
                         
