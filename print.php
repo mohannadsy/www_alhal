@@ -759,8 +759,9 @@ if(isset($_GET['item_report'])){
         $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
+    $pdf->Ln(2*$ratio);
     $tilte='تقرير حركة مادة';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
@@ -968,8 +969,9 @@ if(isset($_GET['comission_report'])){
         $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
+    $pdf->Ln(2*$ratio);
     $tilte='تقرير حركة كمسيون';
-    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
     $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
