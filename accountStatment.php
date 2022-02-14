@@ -157,37 +157,6 @@ if(isset($_GET['account'])){
 
 
                             </tr>
-                            <tr>
-                                <td>
-                                <div class="form-check">
-                                        <input type="checkbox" value="" id="other_account_hidden" <?php if (get_value_from_config('account_statement', 'other_account') == 'true') echo 'checked' ?>>
-                                        <label for="other_account_hidden">
-                                            الحساب المقابل
-                                        </label>
-                                    </div>
-                                    
-                                </td>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox" value="" id="current_currency_hidden" <?php if (get_value_from_config('account_statement', 'current_currency') == 'true') echo 'checked' ?>>
-                                        <label for="current_currency_hidden">
-                                            رصيد الحركة
-                                        </label>
-                                    </div>
-
-                                </td>
-                                <td>
-                                <div>
-                                        <input type="checkbox" value="" id="note_hidden" <?php if (get_value_from_config('account_statement', 'note') == 'true') echo 'checked' ?>>
-                                        <label for="note_hidden">
-                                            البيان
-                                        </label>
-                                    </div>
-                                    
-                                </td>
-
-
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -563,9 +532,6 @@ include('include/footer.php');
         arr_input_values['total_item_price'] = $('#total_item_price_hidden');
         arr_input_values['price'] = $('#price_hidden');
         arr_input_values['com_value'] = $('#com_value_hidden');
-        arr_input_values['other_account'] = $('#other_account_hidden');
-        arr_input_values['current_currency'] = $('#current_currency_hidden');
-        arr_input_values['note'] = $('#note_hidden');
         // var arr_input_values = {"total_weight" :" $('#total_weight')","real_weight" :" $('#real_weight')","total_item_price": "$('#total_item_price')","price": "$('#price')","com_value": "$('#com_value')"};
         var arr_input_values_post = {
             "report_type_details_post": false,
@@ -574,10 +540,7 @@ include('include/footer.php');
             "real_weight_post": false,
             "total_item_price_post": false,
             "price_post": false,
-            "com_value_post": false,
-            "other_account_post":false,
-            "current_currency_post":false,
-            "note_post":false
+            "com_value_post": false
         };
         // var arr_input_values_post = [];
         // arr_input_values_post['item_post']= false;
@@ -607,18 +570,6 @@ include('include/footer.php');
         }
         if (arr_input_values['com_value'].is(':checked')) {
             arr_input_values_post['com_value_post'] = true;
-        }
-        
-        if (arr_input_values['other_account'].is(':checked')) {
-            arr_input_values_post['other_account_post'] = true;
-        }
-        
-        if (arr_input_values['current_currency'].is(':checked')) {
-            arr_input_values_post['current_currency_post'] = true;
-        }
-        
-        if (arr_input_values['note'].is(':checked')) {
-            arr_input_values_post['note_post'] = true;
         }
 
         $.ajax({
