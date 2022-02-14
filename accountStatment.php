@@ -157,37 +157,6 @@ if(isset($_GET['account'])){
 
 
                             </tr>
-                            <tr>
-                                <td>
-                                <div class="form-check">
-                                        <input type="checkbox" value="" id="other_account_hidden" <?php if (get_value_from_config('account_statement', 'other_account') == 'true') echo 'checked' ?>>
-                                        <label for="other_account_hidden">
-                                            الحساب المقابل
-                                        </label>
-                                    </div>
-                                    
-                                </td>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox" value="" id="current_currency_hidden" <?php if (get_value_from_config('account_statement', 'current_currency') == 'true') echo 'checked' ?>>
-                                        <label for="current_currency_hidden">
-                                            رصيد الحركة
-                                        </label>
-                                    </div>
-
-                                </td>
-                                <td>
-                                <div>
-                                        <input type="checkbox" value="" id="note_hidden" <?php if (get_value_from_config('account_statement', 'note') == 'true') echo 'checked' ?>>
-                                        <label for="note_hidden">
-                                            البيان
-                                        </label>
-                                    </div>
-                                    
-                                </td>
-
-
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -216,9 +185,9 @@ if(isset($_GET['account'])){
                                 <th contenteditable="false" id="doc_col"> المستند</th>
                                 <th contenteditable='false'>مدين</th>
                                 <th contenteditable='false'>دائن</th>
-                                <th contenteditable='false' id="cross_col" class="other_account_hidden">الحساب المقابل</th>
-                                <th contenteditable='false' class="note_hidden">البيان</th>
-                                <th contenteditable='false' class="current_currency_hidden">رصيد الحركة</th>
+                                <th contenteditable='false' id="cross_col">الحساب المقابل</th>
+                                <th contenteditable='false'>البيان</th>
+                                <th contenteditable='false'>رصيد الحركة</th>
                                 <th id="item_col" class='hidden item_hidden' style='display:none' contenteditable='false'>المادة</th>
                                 <th id="total_wight" class='hidden total_weight_hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
                                 <th id="last_wight" class='hidden real_weight_hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
@@ -337,9 +306,9 @@ if(isset($_GET['account'])){
                                         $select_other_account_name_query = selectND('accounts', ['id', 'name']) . andWhere('id', $row['other_account_id']);
                                         $select_other_account_name_exec = mysqli_query($con, $select_other_account_name_query);
                                         // echo "<td>" . $row['code_number'] . "</td>";
-                                        echo "<td class='other_account_hidden'>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
-                                        echo "<td class='note_hidden'>" . $row['note'] . "</td>";
-                                        echo "<td class='current_currency_hidden'>" . "$current_currency" . "</td>";
+                                        echo "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
+                                        echo "<td>" . $row['note'] . "</td>";
+                                        echo "<td>" . "$current_currency" . "</td>";
                                         if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
                                             if ($row['code_type'] == 'mid_bonds') {
                                                 $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
@@ -505,28 +474,6 @@ include('include/footer.php');
 
         }
 
-        if (document.getElementById('other_account_hidden').checked) {
-            $('.other_account_hidden').show();
-
-        } else {
-            $('.other_account_hidden').hide();
-
-        }
-        if (document.getElementById('current_currency_hidden').checked) {
-            $('.current_currency_hidden').show();
-
-        } else {
-            $('.current_currency_hidden').hide();
-
-        }
-        if (document.getElementById('note_hidden').checked) {
-            $('.note_hidden').show();
-
-        } else {
-            $('.note_hidden').hide();
-
-        }
-
         if (document.getElementById('real_weight_hidden').checked) {
             $('.real_weight_hidden').show();
 
@@ -585,9 +532,6 @@ include('include/footer.php');
         arr_input_values['total_item_price'] = $('#total_item_price_hidden');
         arr_input_values['price'] = $('#price_hidden');
         arr_input_values['com_value'] = $('#com_value_hidden');
-        arr_input_values['other_account'] = $('#other_account_hidden');
-        arr_input_values['current_currency'] = $('#current_currency_hidden');
-        arr_input_values['note'] = $('#note_hidden');
         // var arr_input_values = {"total_weight" :" $('#total_weight')","real_weight" :" $('#real_weight')","total_item_price": "$('#total_item_price')","price": "$('#price')","com_value": "$('#com_value')"};
         var arr_input_values_post = {
             "report_type_details_post": false,
@@ -596,10 +540,7 @@ include('include/footer.php');
             "real_weight_post": false,
             "total_item_price_post": false,
             "price_post": false,
-            "com_value_post": false,
-            "other_account_post":false,
-            "current_currency_post":false,
-            "note_post":false
+            "com_value_post": false
         };
         // var arr_input_values_post = [];
         // arr_input_values_post['item_post']= false;
@@ -629,18 +570,6 @@ include('include/footer.php');
         }
         if (arr_input_values['com_value'].is(':checked')) {
             arr_input_values_post['com_value_post'] = true;
-        }
-        
-        if (arr_input_values['other_account'].is(':checked')) {
-            arr_input_values_post['other_account_post'] = true;
-        }
-        
-        if (arr_input_values['current_currency'].is(':checked')) {
-            arr_input_values_post['current_currency_post'] = true;
-        }
-        
-        if (arr_input_values['note'].is(':checked')) {
-            arr_input_values_post['note_post'] = true;
         }
 
         $.ajax({
