@@ -89,6 +89,10 @@ if (isset($_POST["account_search_part"])) {
 
             
                 $output .= '<td>' . ($current_maden - $current_daen) . '</td>';
+                if ($row['account_id'] != 0)
+                $output.='<td><button type="button"  class="btn btn-success" onclick="window.open(\'accountStatment.php?account='.$row['code'] . ' - ' . $row['name'].'\' , \'_self\')">كشف</button></td>';
+                else
+                $output.= '<td></td>';
             $output .= '</tr>';
         }
     }
