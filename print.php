@@ -1391,7 +1391,7 @@ if(isset($_GET['account_statement'])){
                             unit, date, buyer_id,seller_id,
                             name,currency,real_weight,price,total_price,
                             total_item_price,total_weight,
-                            com_value,category_id
+                            com_value,category_id,total_item_price
                              from bill_item, items,bills 
                              where items.id = bill_item.item_id and bill_item.bill_id = '$bill_id' and bills.code = '$bill_code'";
                         $select_items_using_id_exec = mysqli_query($con, $select_items_using_id_query);
