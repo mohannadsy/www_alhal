@@ -216,9 +216,9 @@ if(isset($_GET['account'])){
                                 <th contenteditable="false" id="doc_col"> المستند</th>
                                 <th contenteditable='false'>مدين</th>
                                 <th contenteditable='false'>دائن</th>
-                                <th contenteditable='false' id="cross_col">الحساب المقابل</th>
-                                <th contenteditable='false'>البيان</th>
-                                <th contenteditable='false'>رصيد الحركة</th>
+                                <th contenteditable='false' id="cross_col" class="other_account_hidden">الحساب المقابل</th>
+                                <th contenteditable='false' class="note_hidden">البيان</th>
+                                <th contenteditable='false' class="current_currency_hidden">رصيد الحركة</th>
                                 <th id="item_col" class='hidden item_hidden' style='display:none' contenteditable='false'>المادة</th>
                                 <th id="total_wight" class='hidden total_weight_hidden' style='display:none' contenteditable='false'> الوزن القائم</th>
                                 <th id="last_wight" class='hidden real_weight_hidden' style='display:none' contenteditable='false'> الوزن الصافي</th>
@@ -337,9 +337,9 @@ if(isset($_GET['account'])){
                                         $select_other_account_name_query = selectND('accounts', ['id', 'name']) . andWhere('id', $row['other_account_id']);
                                         $select_other_account_name_exec = mysqli_query($con, $select_other_account_name_query);
                                         // echo "<td>" . $row['code_number'] . "</td>";
-                                        echo "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
-                                        echo "<td>" . $row['note'] . "</td>";
-                                        echo "<td>" . "$current_currency" . "</td>";
+                                        echo "<td class='other_account_hidden'>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
+                                        echo "<td class='note_hidden'>" . $row['note'] . "</td>";
+                                        echo "<td class='current_currency_hidden'>" . "$current_currency" . "</td>";
                                         if ($row['code_type'] == 'bills' || $row['code_type'] == 'mid_bonds') {
                                             if ($row['code_type'] == 'mid_bonds') {
                                                 $bill_id = get_value_from_table_using_column($con, 'mid_bonds', 'code', $row['code_number'], 'bill_id');
@@ -502,6 +502,28 @@ include('include/footer.php');
 
         } else {
             $('.total_weight_hidden').hide();
+
+        }
+
+        if (document.getElementById('other_account_hidden').checked) {
+            $('.other_account_hidden').show();
+
+        } else {
+            $('.other_account_hidden').hide();
+
+        }
+        if (document.getElementById('current_currency_hidden').checked) {
+            $('.current_currency_hidden').show();
+
+        } else {
+            $('.current_currency_hidden').hide();
+
+        }
+        if (document.getElementById('note_hidden').checked) {
+            $('.note_hidden').show();
+
+        } else {
+            $('.note_hidden').hide();
 
         }
 
