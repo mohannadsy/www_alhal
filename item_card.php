@@ -287,7 +287,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 
 if (isset($_POST['add'])) {
-    if(trim($_POST['name']) != ''){
+    if(trim($_POST['name']) != '' && trim($_POST['unit']) != '' ){
         $insert_item_query = insert('items', get_array_from_array($_POST, ['name', 'unit', 'category_id', 'code', 'note']));
         $insert_item_exec = mysqli_query($con, $insert_item_query);
         if ($insert_item_exec) {
@@ -295,6 +295,7 @@ if (isset($_POST['add'])) {
             open_window_self('item_card.php?message_create=success&category_id=' . $_POST['category_id']);
         }
     }else{
+        message_box('لم ينم ادخال المادة لنقص في البيانات');
         open_window_self('item_card.php');
     }
 }
