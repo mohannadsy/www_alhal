@@ -1267,6 +1267,7 @@ if(isset($_GET['account_statement'])){
                     if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الإجمالي</th>";
+                    
                     if(get_value_from_config('account_statement' , 'com_value') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الكمسيون</th>";
