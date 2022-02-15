@@ -24,13 +24,20 @@ include('include/nav.php');
             </div>
         </div>
     </div> -->
-    <div class="container">
-        <div class="row mt-2 mr-3">
-          <h2>شركة</h2>
+    <div class="container"  minWidth= "200 %" height= "500 %" >
+        <div class="row mt-14 mr-4">
+          <b>
+              صُمِمَ هذا البرنامج من قبل شركة أبديت للتكنولوجيا وحلول الأعمال ,ويمنع منعاً باتاً تداول البرنامج 
+              أو التعامل به إلّا من خلال الشركة أوأحد وكلائها منعاً للملاحقة القانونية 
+
+        </b>
+          <h6>
+              تمت الموافقة الإلكترونية من قبل هذا المستخدم على هذه الشروط 
+          </h6>
 
         </div>
         <div class="row justify-content-center">
-            <h3>update</h3>
+            <h3>Update</h3>
         </div>
         <div class="row justify-content-center">
             <label for="">للتكنلوجيا وحلول الأعمال</label>
@@ -58,7 +65,26 @@ include('include/nav.php');
 
     </div>
     
-     
+    
+    <!DOCTYPE html>
+<html>
+  <head>
+    <title>Title of the document</title>
+    <style>
+      input.larger {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Checkbox size example</h2>
+    <p>Default checkbox size:</p>
+    <input type="checkbox" name="checkBox1" checked>
+    <p>A larger checkbox:</p>
+    <input type="checkbox" class="larger" name="checkBox2" checked>
+  </body>
+</html>
 </body>
 </html>
 
