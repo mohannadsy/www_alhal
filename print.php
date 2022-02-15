@@ -1248,8 +1248,10 @@ if(isset($_GET['account_statement'])){
                 <th>التاريخ </th>
                 <th>المستند </th>
                 <th>مدين </th>
-                <th> دائن </th>
-                <th>الحساب المقابل </th>
+                <th> دائن </th>';
+                if(get_value_from_config('printing' , 'other_account') == "true")
+                    $content.= '<th>الحساب المقابل </th>';
+                $content .= '
                 <th> البيان </th>
                 <th>رصيد الحركة </th>';
                 if($report_type_details){
@@ -1376,6 +1378,7 @@ if(isset($_GET['account_statement'])){
                     $select_other_account_name_query = selectND('accounts', ['id', 'name']) . andWhere('id', $row['other_account_id']);
                     $select_other_account_name_exec = mysqli_query($con, $select_other_account_name_query);
                     // echo "<td>" . $row['code_number'] . "</td>";
+                    if(get_value_from_config('printing' , 'other_account') == "true")
                     $content.= "<td>" . mysqli_fetch_row($select_other_account_name_exec)[1] . "</td>";
                     $content.= "<td>" . $row['note'] . "</td>";
                     $content.= "<td>" . "$current_currency" . "</td>";
@@ -1409,7 +1412,9 @@ if(isset($_GET['account_statement'])){
                         while ($item = mysqli_fetch_array($select_items_using_id_exec)) {
                             $current_com_value = ($item['com_ratio'] / 100) * $item['total_item_price'];
                             // $content.= "<tr><td colspan='7' ></td>";
-                            
+                        if(get_value_from_config('printing' , 'other_account') == "false"){
+                            $content.= "<tr><td colspan=\"6\"></td>";
+                        }elseif(get_value_from_config('printing' , 'other_account') == "true")    
                         $content.= "<tr><td colspan=\"7\"></td>";
                         if(get_value_from_config('account_statement' , 'item') == "true")
                             $content.= "<td  >" . $item['name'] . "</td>";
