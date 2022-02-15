@@ -266,6 +266,14 @@ include('include/nav.php');
                     </tr>
                     <tr>
                         <th style="width:12%">
+                        جديد
+                        </th>
+                        <td style="height:30px">
+                             هذا الزر مخصص لإضافة  حساب جديد
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:12%">
                             إغلاق
                         </th>
                         <td style="height:30px">
@@ -321,14 +329,14 @@ include('include/nav.php');
                             </td>
 
                             <tr>
-                                <th style="width:9%" text-align=" center">     مختصر  </th>
+                                <th style="width:9%; text-align:center">     مختصر  </th>
                                 <td style="height:30px" >
                                         يظهر لك هذا التقرير قيمة الفواتير بدون تفصيلها والعملاء فقط
                                 </td>
                             </tr>
                             
                             <tr>
-                                <th style="width:9%" text-align=" center"> تفصيلي </th>
+                                <th style="width:9%; text-align:center"> تفصيلي </th>
                                 <td style="height:30px">
                                     يظهر لك هذا التقرير تفصيل الفواتير بالكامل مع إمكانية التحكم بخيارات الإظهار
                                 </td>
@@ -382,14 +390,7 @@ include('include/nav.php');
                             هذا الزر مخصص لطباعة التقرير المحدد لحساب معين وفق الخيارات المحددة
                         </td>
                     </tr>
-                    <tr>
-                        <th style="width:12%">
-                            إغلاق
-                        </th>
-                        <td style="height:30px">
-                            هذا الزر مخصص لغلق نافذة كشف حساب
-                        </td>
-                    </tr>
+                   
                 </table>
                 </p>
 
@@ -486,7 +487,7 @@ include('include/nav.php');
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:12%">
+                        <th style="width:5%">
                             إغلاق
                         </th>
                         <td style="height:30px">
@@ -597,6 +598,14 @@ include('include/nav.php');
                         </td>
                     </tr>
                     <tr>
+                        <th style="width:12%">
+                            جديد
+                        </th>
+                        <td style="height:30px">
+                            هذا الزر مخصص لإضافة صنف جديد   
+                        </td>
+                    </tr>
+                    <tr>
                         <th style="width:18%">
                             إغلاق
                         </th>
@@ -684,6 +693,14 @@ include('include/nav.php');
                         </th>
                         <td style="height:30px">
                             حذف المادة المدخلة من قائمة المواد
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:12%">
+                            جديد
+                        </th>
+                        <td style="height:30px">
+                            هذا الزر مخصص لإضافة بيانات مادة جديدة   
                         </td>
                     </tr>
                     <tr>
@@ -996,7 +1013,7 @@ include('include/nav.php');
 
                 <table>
                     <tr>
-                        <th style="width:10%">
+                        <th style="width:8%">
                             (+)
                         </th>
                         <td style="height:30px">
@@ -1004,7 +1021,7 @@ include('include/nav.php');
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:10%">
+                        <th style="width:8%">
                             (%)
                         </th>
                         <td style="height:30px">
@@ -1013,7 +1030,7 @@ include('include/nav.php');
                     </tr>
 
                     <tr>
-                        <th style="width:10%">
+                        <th style="width:8%">
                             حفظ
                         </th>
                         <td style="height:30px">
@@ -1021,7 +1038,31 @@ include('include/nav.php');
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:10%">
+                        <th style="width:8%">
+                            تعديل
+                        </th>
+                        <td style="height:30px">
+                            تعديل بيانات الفاتورة المدخلة
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:8%">
+                            حذف
+                        </th>
+                        <td style="height:30px">
+                            حذف الفاتورة المدخلة 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:8%">
+                            جديد
+                        </th>
+                        <td style="height:30px">
+                            هذا الزر مخصص لتوليد فاتورة  جديدة   
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:8%">
                             طباعة بائع
                         </th>
                         <td style="height:30px">
@@ -1029,7 +1070,7 @@ include('include/nav.php');
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:10%">
+                        <th style="width:8%">
                             طباعة مشتري
                         </th>
                         <td style="height:30px">
@@ -1066,6 +1107,14 @@ include('include/nav.php');
                         </th>
                         <td style="height:30px">
                             للحصول على بيانات الفواتير الغير مباعة فقط نقوم بتحديد الفواتير الغير المباعة
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width:9%">
+                            عرض الفاتورة
+                        </th>
+                        <td style="height:30px">
+                        هذا الزر مخصص لفتح نافذة الفاتورة لعرض  بيانات الفاتورة المحددة
                         </td>
                     </tr>
                 </table>
@@ -1143,8 +1192,8 @@ include('include/nav.php');
 
                         </td>
                         <Table>
-                            <th style="width:4%"> الرقم </th>
-                            <td style="height:30px">
+                            <th  style="width:4%"> الرقم </th>
+                            <td style="width:8%">
                                 رقم ترتيبي
                             </td>
 
@@ -1271,7 +1320,7 @@ include('include/nav.php');
                         </td>
                         <Table>
                             <th style="width:4%"> الرقم </th>
-                            <td style="height:30px">
+                            <td style="width:8%">
                                 رقم ترتيبي
                             </td>
 
