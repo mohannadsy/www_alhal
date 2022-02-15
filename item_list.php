@@ -78,8 +78,8 @@ if (isset($_POST['delete'])) {
                         <thead id="thead_col">
                             <tr>
                                 <th scope="col">الرقم</th>
-                                <th scope="col">المادة</th>
                                 <th scope="col">رمز المادة</th>
+                                <th scope="col">المادة</th>
                                 <th scope="col">الصنف</th>
                                 <th scope="col">عمليات</th>
                             </tr>
@@ -92,8 +92,8 @@ if (isset($_POST['delete'])) {
                             while ($item = mysqli_fetch_array($select_all_items_exec)) {
                                 echo '<tr  ondblclick="window.open(\'item_card.php?id=' . $item['id'] . '\' , \'_self\')">';
                                 echo "<td>" . $count++ . "</td>";
-                                echo "<td>" . $item['name'] . "</td>";
                                 echo "<td>" . $item['code'] . "</td>";
+                                echo "<td>" . $item['name'] . "</td>";
                                 $select_category_query = selectND('categories') . andWhere('id', $item['category_id']);
                                 $select_category_exec = mysqli_query($con, $select_category_query);
                                 $category = mysqli_fetch_array($select_category_exec);

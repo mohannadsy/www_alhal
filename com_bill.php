@@ -19,19 +19,19 @@ include('include/nav.php');
 
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">بطاقة حساب </button>
-<div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" id="modal_dialog_account">
+<div id="modal_account_card" class="modal fade modal2" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal_dialog_account2" id="modal_dialog_account">
 
-        <div class="modal-content" id="modal_content_account">
-            <div class="modal-header" id="modal_header_account">
+        <div class="modal-content modal_content_account2" id="modal_content_account">
+            <div class="modal-header modal_header_account2" id="modal_header_account">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style=" margin-right: 10px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="modal_body_account">
+            <div class="modal-body modal_body_account2" id="modal_body_account">
 
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
+                <iframe id="iframe_account_card" class="iframe_account_card2" src="account_card_iframe.php#form" frameborder="0"></iframe>
 
             </div>
         </div>
@@ -40,18 +40,18 @@ include('include/nav.php');
 
 <button hidden id="modal_item_card_button" class="login-trigger" href="#" data-target="#modal_item_card" data-toggle="modal">بطاقة مادة </button>
 <div id="modal_item_card" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" id="modal_dialog_item">
+    <div class="modal-dialog modal-dialog-centered modal_dialog_item2" id="modal_dialog_item">
 
-        <div class="modal-content" id="modal_content_item">
+        <div class="modal-content modal_content_item2" id="modal_content_item">
 
-            <div class="modal-header" id="modal_header_item">
+            <div class="modal-header modal_header_item2" id="modal_header_item">
                 <h4 class="modal-title col-11">بطاقة صنف </h4>
                 <button onclick="" data-dismiss="modal" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="modal_body_item">
-                <iframe id="iframe_item_card" src="item_card.php#form" frameborder="0"></iframe>
+            <div class="modal-body modal_body_item2" id="modal_body_item">
+                <iframe id="iframe_item_card" class="iframe_item_card2" src="item_card_iframe.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -312,12 +312,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                         <div class="col-1 ">
 
                         </div>
-                        <div class="col-8">
-                            <button type="submit" onclick="return confirm('هل تريد بالتأكيد حفظ الفاتورة ؟')" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'hidden' ?> >حفظ</button>
-                            <button type="submit" name="update" class="btn btn-light" <?php if (empty($bill)) echo 'hidden' ?> >تعديل</button>
-                            <button type="submit" name="delete" class="btn btn-light" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'hidden' ?> >حذف</button>
-                            <button type="submit" name="print_seller"class="btn btn-light">طباعة بائع</button>
-                            <button type="submit" name="print_buyer" class=" btn btn-light">طباعة مشتري</button>
+                        <div class="col-10">
+                            <button type="submit" onclick="return confirm('هل تريد بالتأكيد حفظ الفاتورة ؟')" name="save"   class="btn btn-light" <?php if (notempty($bill)) echo 'disabled' ?> >حفظ</button>
+                            <button type="submit" name="update" class="btn btn-light" <?php if (empty($bill)) echo 'disabled' ?> >تعديل</button>
+                            <button type="submit" name="delete" class="btn btn-light" onclick="return confirm('هل تريد بالتأكيد حذف هذه الفاتورة ؟')" <?php if (empty($bill)) echo 'disabled' ?> >حذف</button>
+                            <button <?php if(empty($bill)) echo  'onclick="return confirm(\'سيتم حفظ الفاتورة قبل الطباعة ! هل تريد الاستمرار ؟\')"';?>  type="submit" name="print_seller"class="btn btn-light">طباعة بائع</button>
+                            <button <?php if(empty($bill)) echo  'onclick="return confirm(\'سيتم حفظ الفاتورة قبل الطباعة ! هل تريد الاستمرار ؟\')"';?>  type="submit" name="print_buyer" class=" btn btn-light">طباعة مشتري</button>
+                            <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('com_bill.php' , '_self')">جديد</button>
                         </div>
                     </div>
 
@@ -391,6 +392,16 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['print_buyer'])) {
 
 
+    $inserted_items_counter = 0;
+    foreach ($_POST['items'] as $key => $item) {
+        if ($item != '')
+            $inserted_items_counter++;
+    }
+
+    if($inserted_items_counter == 0){
+        message_box('لم يتم حفظ الفاتورة لعدم ادخال مواد !');
+        open_window_self('com_bill.php');
+    }else
     if (empty($bill) && $_POST['seller'] != '') {
         // get seller id from seller code
 
@@ -634,14 +645,24 @@ if (isset($_POST['save']) || isset($_POST['print_seller']) || isset($_POST['prin
         }
     }
     clear_local_storage('account_card_code_name');
+    if($_POST['seller'] == ''){
+        message_box('لم يتم حفظ الفاتورة لنقص في البيانات');
+        open_window_self(COM_BILL);
+    }
     if (isset($_POST['print_seller']) && $_POST['seller'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . "&print_type=seller");
+        open_window_self_code(COM_BILL, $current_bill_code);
+    }
+    if (isset($_POST['print_buyer']) && $_POST['buyer'] == '') {
+        message_box('لا يمكن الطباعة لعدم وجود مشتري !');
         open_window_self_code(COM_BILL, $current_bill_code);
     }
     if (isset($_POST['print_buyer']) && $_POST['buyer'] != '') {
         open_window_blank("print.php?code=" . $current_bill_code . '&print_type=buyer');
         open_window_self_code(COM_BILL, $current_bill_code);
     }
+    if($_POST['seller'] == '')
+        message_box('لم يتم حفظ الفاتورة لنقص في البيانات');
     open_window_self(COM_BILL);
 }
 

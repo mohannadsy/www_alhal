@@ -89,6 +89,10 @@ if (isset($_POST["account_search_part"])) {
 
             
                 $output .= '<td>' . ($current_maden - $current_daen) . '</td>';
+                if ($row['account_id'] != 0)
+                $output.='<td><button type="button"  class="btn btn-success" onclick="window.open(\'accountStatment.php?account='.$row['code'] . ' - ' . $row['name'].'\' , \'_self\')">كشف</button></td>';
+                else
+                $output.= '<td></td>';
             $output .= '</tr>';
         }
     }
@@ -111,12 +115,13 @@ if (isset($_POST["item_search"])) {
         while ($row = mysqli_fetch_array($result)) {
             $output .= '<tr ondblclick="window.open(\'item_card.php?id=' . $row['item_id'] . '\' , \'_self\')">';
             $output .= '<td>' . $row['item_id'] . '</td>
-            <td>' . $row['item_name'] . '</td>
             <td>' . $row['item_code'] . '</td>
+            <td>' . $row['item_name'] . '</td>
+            
             <td>' . $row['cat_name'] . '</td>';
             $output .= "<td>
-                        <button type='button' onclick='window.open(\"item_card.php?id=" . $row['item_id'] . "\" , \"_self\")'>تعديل</button>
-                        <button type='submit' name='delete' 
+                        <button type='button' class='btn btn-success' onclick='window.open(\"item_card.php?id=" . $row['item_id'] . "\" , \"_self\")'>تعديل</button>
+                        <button type='submit' name='delete'  class='btn btn-primary'
                                     onclick='document.getElementById(\"id\").value = \"" . $row['item_id'] . "\";
                                     return confirm(\"هل تريد بالتأكيد حذف هذه المادة !\");'>حذف</button>
                         </td>";

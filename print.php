@@ -398,25 +398,24 @@ if(isset($_GET['payment_code'])){
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
-     $pdf->Ln(4*$ratio);
+     $pdf->Ln(5*$ratio);
     //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
     //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 18);
+        $pdf->SetFont('arial', 'B', 20);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFont('arial', 'B', 13);
     }
     if($page_type == 'A6'){
-        $pdf->SetFont('arial', 'B', 10);
+        $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='سند دفع';
     $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(4*$ratio);
-    
     $pdf->SetFont('arial', '', $font_size);
     $pdf->Ln(2*$ratio);
     $pdf->SetFont('arial', '', $font_size);
@@ -567,29 +566,29 @@ if(isset($_GET['catch_code'])){
     $pdf->SetFont('aealarabiya', '', $font_size);
     $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 18);
+        $pdf->SetFont('arial', 'B', 20);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFont('arial', 'B', 13);
     }
     if($page_type == 'A6'){
-        $pdf->SetFont('arial', 'B', 10);
+        $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
-    $tilte='سند قبض';
-    $pdf->MultiCell(118 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
+    $tilte='سند دفع';
+    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
-    
     $pdf->Ln(2*$ratio);
     $pdf->SetFont('arial', '', $font_size);
-    $pdf->Ln(3*$ratio);
+    $pdf->Ln(2*$ratio);
     $receipt_number = 'رقم الإيصال: ' . $catch_bond['code'];
     $pdf->MultiCell(165 * $ratio, 6 * $ratio, $receipt_number ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(6*$ratio); 
@@ -742,42 +741,30 @@ if(isset($_GET['item_report'])){
 
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 18);
+        $pdf->SetFont('arial', 'B', 20);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFont('arial', 'B', 13);
     }
     if($page_type == 'A6'){
-        $pdf->SetFont('arial', 'B', 10);
+        $pdf->SetFont('arial', 'B', 12);
     }
-    $tilte='تقرير حركة مادة';
-    $pdf->MultiCell(135 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
-    // if($page_type == 'A4'){
-    //     $pdf->SetFont('arial', 'B', 18);
-    // }
-    // if($page_type == 'A5'){
-    //     $pdf->SetFont('arial', 'B', 12);
-    // }
-    // if($page_type == 'A6'){
-    //     $pdf->SetFont('arial', 'B', 10);
-    // }
-    // //$pdf->SetFont('arial', 'B', 18);
-    // $tilte='حركة مادة';
-    // $pdf->MultiCell(121 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
-    $pdf->SetFont('arial', '', $font_size);
-    
+    //$pdf->SetFont('arial', 'B', 18);
     $pdf->Ln(2*$ratio);
+    $tilte='تقرير حركة مادة';
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
+    $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
+    $pdf->Ln(2*$ratio);
     $from_date = $_GET['from_date'];
     $to_date = $_GET['to_date'];
     $from='من تاريخ: ' .$from_date;
@@ -795,18 +782,17 @@ if(isset($_GET['item_report'])){
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'items'){
         $item=' المادة: ' .$_GET['text_value_from_report_item'];
-        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(180*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'accounts'){
         $item=' العميل: ' .$_GET['text_value_from_report_item'];
-        $pdf->MultiCell(182*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(182*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(9*$ratio);
     }elseif($_GET['radio_value_from_report_item'] == 'categories'){
         $item=' الصنف: ' .$_GET['text_value_from_report_item'];
-        $pdf->MultiCell(168*$ratio, 6*$ratio,$item, 0, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(168*$ratio, 6*$ratio,$item, 0, 'R', 0, 0, '', '', true);
         $pdf->Ln(9*$ratio);
     }
-    
     if($page_type == 'A5'){
         $font_table = 6;
     }
@@ -965,31 +951,30 @@ if(isset($_GET['comission_report'])){
 
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 16);
+        $pdf->SetFont('arial', 'B', 20);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 10);
+        $pdf->SetFont('arial', 'B', 13);
     }
     if($page_type == 'A6'){
-        $pdf->SetFont('arial', 'B', 8);
+        $pdf->SetFont('arial', 'B', 12);
     }
-    $tilte='تقرير حركة كمسيون';
-    $pdf->MultiCell(135 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    //$pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
-    $pdf->SetFont('arial', '', $font_size);
-    
+    //$pdf->SetFont('arial', 'B', 18);
     $pdf->Ln(2*$ratio);
+    $tilte='تقرير حركة كمسيون';
+    $pdf->MultiCell(180 * $ratio, 8 * $ratio, $tilte ,0, 'C', 0, 0, '', '', true);
+    $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
+    $pdf->Ln(2*$ratio);
     $from_date = $_GET['from_date'];
     $to_date = $_GET['to_date'];
     $from='من تاريخ: ' .$from_date;
@@ -1205,30 +1190,29 @@ if(isset($_GET['account_statement'])){
 
     $pdf->writeHTML($html, true, false, true, false, '');
     $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(45 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'C', 0, 0, '', '', true);
+   $pdf->MultiCell(80 * $ratio, 6 * $ratio, $location.' '. $commercial_record ,0, 'R', 0, 0, '', '', true);
     $pdf->Ln(5*$ratio);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $first_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $first_name . ' ' . $first_num  ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(5*$ratio);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $first_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->SetFont('aealarabiya', '', $font_size);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $second_name . ' ' . $second_num ,0, 'R', 0, 0, '', '', true);
+    //$pdf->MultiCell(32 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
     if($page_type == 'A4'){
-        $pdf->SetFont('arial', 'B', 18);
+        $pdf->SetFont('arial', 'B', 20);
     }
     if($page_type == 'A5'){
-        $pdf->SetFont('arial', 'B', 12);
+        $pdf->SetFont('arial', 'B', 13);
     }
     if($page_type == 'A6'){
-        $pdf->SetFont('arial', 'B', 10);
+        $pdf->SetFont('arial', 'B', 12);
     }
     //$pdf->SetFont('arial', 'B', 18);
     $tilte='كشف حساب';
-    $pdf->MultiCell(130 * $ratio, 8 * $ratio, $tilte ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(5*$ratio);
-    $pdf->SetFont('aealarabiya', '', $font_size);
-    $pdf->MultiCell(13 * $ratio, 6 * $ratio, $second_name ,0, 'L', 0, 0, '', '', true);
-    $pdf->MultiCell(30 * $ratio, 6 * $ratio, $second_num ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(116 * $ratio, 8 * $ratio, $tilte ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(4*$ratio);
     $pdf->SetFont('arial', '', $font_size);
-    
     $pdf->Ln(2*$ratio);
-    $pdf->SetFont('arial', '', $font_size);
     $from_date = $_GET['from_date'];
     $to_date = $_GET['to_date'];
     $from='من تاريخ: ' .$from_date;
@@ -1238,10 +1222,10 @@ if(isset($_GET['account_statement'])){
     $pdf->MultiCell(180 * $ratio, 6 * $ratio, $to ,0, 'L', 0, 0, '', '', true);
     $pdf->Ln(10*$ratio);
     $account='الحساب: ' .$_GET['account_name'];
-    $pdf->MultiCell(50 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
+    $pdf->MultiCell(80 * $ratio, 6 * $ratio, $account ,0, 'R', 0, 0, '', '', true);
     $currency='العملة: ' .'ليرة سورية';
-    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'L', 0, 0, '', '', true);
-    $pdf->Ln(10*$ratio);
+    $pdf->MultiCell(60 * $ratio, 6 * $ratio, $currency ,0, 'R', 0, 0, '', '', true);
+    $pdf->Ln(11*$ratio);
     if($page_type == 'A5'){
         $font_table = 6;
     }
@@ -1283,6 +1267,7 @@ if(isset($_GET['account_statement'])){
                     if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الإجمالي</th>";
+                    
                     if(get_value_from_config('account_statement' , 'com_value') == "true")
                     $content.="
                         <th  style='display:none' contenteditable='false'>الكمسيون</th>";
@@ -1437,8 +1422,11 @@ if(isset($_GET['account_statement'])){
                         if(get_value_from_config('account_statement' , 'total_item_price') == "true")
                             $content.= "<td  >" . $item['total_item_price'] . "</td>";
                         if(get_value_from_config('account_statement' , 'com_value') == "true")
-                            $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td></tr>";
+                            $content.= "<td class='hidden com_value_hidden' >" .  $current_com_value  . "</td>";
+                        $content.="</tr>";
                         }
+                        
+                        
                     } else {
                         
                         $content.= "<td ></td>";

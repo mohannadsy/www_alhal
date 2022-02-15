@@ -17,18 +17,18 @@ include('include/nav.php');
 </head>
 
 <button hidden id="modal_account_card_button" class="login-trigger" href="#" data-target="#modal_account_card" data-toggle="modal">Account Card</button>
-<div id="modal_account_card" class="modal fade" role="dialog">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+<div id="modal_account_card" class="modal fade modal2" role="dialog">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog2">
+        <div class="modal-content modal-content2">
+            <div class="modal-header modal-header2">
                 <h4 class="modal-title col-11">بطاقة حساب</h4>
                 <button onclick="" type="button" data-dismiss="modal" class="close" aria-label="Close" style=" margin-right: 10px;">
                     <span aria-hidden="true" >&times;</span>
                 </button>
 
             </div>
-            <div class="modal-body">
-                <iframe id="iframe_account_card" src="account_card.php#form" frameborder="0"></iframe>
+            <div class="modal-body modal-body2">
+                <iframe id="iframe_account_card" class="iframe_account_card2" src="account_card_iframe.php#form" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -218,7 +218,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button onclick="return confirm('هل تريد بالتأكيد حفظ السند ؟')"  type="submit" class="btn btn-light" id="btn-grp" name="add" <?php if (!empty($payment_bonds)) echo 'disabled'; ?>>
                         إضافة
                     </button>
-                    <button type="submit" class="btn btn-light" id="btn-grp" name="print">
+                    <button <?php if (empty($payment_bonds)) echo 'onclick="return confirm(\'سيتم حفظ السند قبل الطباعة ! هل تريد الاستمرار ؟\')"'?> type="submit" class="btn btn-light" id="btn-grp" name="print">
                         طباعة
                     </button>
                     <button class="btn btn-light" id="btn-grp" name="update" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
@@ -228,6 +228,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print']
                     <button onclick="return confirm('هل انت متأكد انك تريد حذف السند ؟')" class="btn btn-light"  id="btn-grp" name="delete" <?php if (empty($payment_bonds)) echo 'disabled'; ?>>
                         حذف
                     </button>
+                    <button type="button" id="btn-grp" class="btn btn-light" name="new" onclick="window.open('payment_bonds.php' , '_self')">جديد</button>
                     <a href="index.php"><button type="button" class="btn btn-light" id="btn-grp" name="close"> إغلاق</button></a>
     
             </div>
@@ -247,7 +248,16 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
         // if ($_POST['code'] != $current_payment_code) {
         $_POST['code'] = get_auto_code($con, 'payment_bonds', 'code', '', 'parent');
         // }
-
+            
+        $inserted_accounts_counter = 0;
+        foreach ($_POST['account'] as $key => $value) {
+            if ($value != '' && $_POST['daen'][$key] != '')
+                $inserted_accounts_counter++;
+        }
+        if($inserted_accounts_counter == 0){
+            message_box('لم يتم حفظ السند لعدم وجود حساب مقابل او قيمة مالية');
+            open_window_self('payment_bonds.php');
+        }
 
         foreach ($_POST['account'] as $key => $value) {
             if ($value != '' && $_POST['daen'][$key] != '') {
@@ -294,7 +304,7 @@ if (isset($_POST['add']) || isset($_POST['print'])) {
             }
         }
     }
-    if (isset($_POST['print']) && notempty($payment_bonds)) {
+    if (isset($_POST['print'])) {
         open_window_blank("print.php?payment_code=" . $current_payment_code);
         open_window_self_id('payment_bonds.php', getId($con, 'payment_bonds', 'code', $current_payment_code));
     }

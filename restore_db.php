@@ -25,7 +25,7 @@ if (isset($_POST['upload'])) {
 ?>
 
 <body>
-    <div class="container" id="container">
+     <div class="container" id="container">
         <form action = "?" method = "POST" enctype="multipart/form-data">
             
             <p>
