@@ -17,6 +17,8 @@ if (isset($_POST['save'])) {
   $get_json['printing']['second_name'] = $_POST['second_name'];  
   $get_json['printing']['first_num'] = $_POST['first_num'];  
   $get_json['printing']['second_num'] = $_POST['second_num'];  
+  //$get_json['printing']['other_account'] = $_POST['other_account']; 
+
   if (isset($_POST['item_code']))
     $get_json['printing']['item_code'] = 'true';
   else
@@ -42,6 +44,10 @@ if (isset($_POST['save'])) {
   else
     $get_json['printing']['only_layra'] = 'false';
 
+  if (isset($_POST['other_account']))
+    $get_json['printing']['other_account'] = 'true';
+  else
+    $get_json['printing']['other_account'] = 'false';
   // $get_json[''][]= $_POST[''];
   //  $stringData = $_POST['item'];
   @file_put_contents($myFile, json_encode($get_json));
@@ -143,6 +149,7 @@ if (isset($_POST['save'])) {
               <span class="checkmark"></span>
             </label>
           </div>
+          
       <!--    <div>
             <label class="container">رمز البائع
               <input name="seller_code" type="checkbox" <?php // if (get_value_from_config('printing', 'seller_code') == 'true') echo " checked" ?>>
@@ -170,7 +177,15 @@ if (isset($_POST['save'])) {
               <span class="checkmark"></span>
             </label>
           </div>  
+          <div>
+            <label class="container">الحساب المقابل
+              <input name="other_account" type="checkbox" <?php  if (get_value_from_config('printing' , 'other_account') == 'true') echo " checked" ?>>
+              <span class="checkmark"></span>
+            </label>
+          </div>  
         </div>
+
+        
 
         
 
