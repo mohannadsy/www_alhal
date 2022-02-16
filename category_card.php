@@ -175,7 +175,7 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
                 </div>
 
                 <div id="button_col" class="col-sm-12  col-md-8 ">
-                    <button <?php if (notempty($category)) echo 'disabled' ?> type="submit" class="btn btn-light " name="add" id="button_grp">
+                    <button onclick="confirm('هل تريد اضافة الصنف ؟')" <?php if (notempty($category)) echo 'disabled' ?> type="submit" class="btn btn-light " name="add" id="button_grp">
                         إضافة
                     </button>
                     <button <?php if (empty($category)) echo 'disabled' ?> type="submit" class="btn btn-light" id="button_grp" name="update">
@@ -198,17 +198,24 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 <?php
 
 if (isset($_POST['add'])) {
-    $insert_category_query = insert('categories', get_array_from_array($_POST, ['name', 'code', 'note']));
-    $insert_category_exec = mysqli_query($con, $insert_category_query);
-    if ($insert_category_exec) {
-        open_window_self('category_card.php?message_create=success');
-    }
+    if(trim($_POST['name']) == ''){
+        message_box('لم يتم حفظ الصنف لأن الاسم فارغ');
+        open_window_self('category_card.php');
+    }else{
+        $insert_category_query = insert('categories', get_array_from_array($_POST, ['name', 'code', 'note']));
+        $insert_category_exec = mysqli_query($con, $insert_category_query);
+        if ($insert_category_exec) {
+            message_box('تم حفظ الصنف بنجاح');
+            open_window_self('category_card.php');
+        }
+}
 }
 if (isset($_POST['update'])) {
     $update_category_query = update('categories', get_array_from_array($_POST, ['name', 'code', 'note'])) . where('code',$current_category_code_to_update_delete);
     $update_category_exec = mysqli_query($con, $update_category_query);
     if ($update_category_exec) {
-        open_window_self("category_card.php?code=" .$current_category_code_to_update_delete. "&message_update=success");
+        message_box('تم تعديل الصنف بنجاح');
+        open_window_self("category_card.php?code=" .$current_category_code_to_update_delete);
     }
 }
 
@@ -223,7 +230,8 @@ if (isset($_POST['delete'])) {
         $delete_category_query = delete('categories') . where('code', $current_category_code_to_update_delete);
         $delete_category_exec = mysqli_query($con, $delete_category_query);
         if ($delete_category_exec) {
-            open_window_self("category_card.php?message_delete=success");
+            message_box('تم حذا الصنف بنجاح');
+            open_window_self("category_card.php");
         }
     }
 }
