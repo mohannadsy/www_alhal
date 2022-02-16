@@ -149,11 +149,6 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
     <form action="" method="post">
         <div class="container" id="container">
 
-            <!-- Messages Section -->
-            <?php
-            success_error_create_message('تم انشاء الحساب بنجاح', 'عئرا لم يتم انشاء الحساب بنجاح');
-            success_error_update_message('تم تعديل الحساب بنجاح', 'عئرا لم يتم تعديل الحساب بنجاح');
-            ?>
             <div class="row py-2">
                 <div class="col-8">
                     <h3 style=" margin-right:16px">بطاقة حساب</h3>

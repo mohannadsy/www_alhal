@@ -199,13 +199,13 @@ if (isset($_POST['current']) || isset($_POST['update']) || isset($_POST['print_s
 
 if (isset($_POST['add'])) {
     if(trim($_POST['name']) == ''){
-        message_box('لم يتم حفظ الصنف لأن الاسم فارغ');
+        message_box('لم يتم انشاء الصنف لأن الاسم فارغ');
         open_window_self('category_card.php');
     }else{
         $insert_category_query = insert('categories', get_array_from_array($_POST, ['name', 'code', 'note']));
         $insert_category_exec = mysqli_query($con, $insert_category_query);
         if ($insert_category_exec) {
-            message_box('تم حفظ الصنف بنجاح');
+            message_box('تم انشاء الصنف بنجاح');
             open_window_self('category_card.php');
         }
 }
