@@ -195,7 +195,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
                         <div class="col-10 py-3">
                             <label for="account_id" class="form-label" id="lbl_main"> الحساب الرئيسي</label>
 
-                            <select class="form-select" name="account_id" id="account_id" required>
+                            <select  <?php if (notempty($account)) echo 'disabled'?>  class="form-select" name="account_id" id="account_id" required>
                                 <option value="0"> حساب رئيسي</option>
                                 <?php
                                 foreach (get_main_accounts($con) as $id => $value) {
