@@ -38,7 +38,7 @@ if (isset($_POST['backup'])) {
         <div class="wrapper" >
             <!-- Brand Image -->
             <!-- <a href="#" class="logo"><img src="/images/markuptag-white-logo.png" alt=""></a> -->
-            <i class="toggle-btn fas fa-bars"></i>
+            <!--<i class="toggle-btn fas fa-bars"></i>-->
             <!-- Navbar -->
             <nav class="nav-menus">
                 <li><a href="main_page.php"><i class="fas fa-home"></i> الرئيسية</a></li>
