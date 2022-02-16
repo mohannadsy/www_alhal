@@ -277,7 +277,7 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
             <div class="row justify-content-center py-3">
                 <div class="col-md-8" id="button_col">
 
-                    <button type="submit" id="btn-grp" class="btn btn-light" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
+                    <button onclick="return confirm('هل تريد اضافة هذا الحساب ؟')" type="submit" id="btn-grp" class="btn btn-light" <?php if (notempty($account)) echo "disabled" ?> name="add">إضافة</button>
 
                     <button type="submit" id="btn-grp" class="btn btn-light" <?php if (empty($account)) echo "disabled" ?> name="update">تعديل</button>
 
@@ -300,32 +300,39 @@ if (isset($_POST['current']) || isset($_POST['update'])) {
 
 
 if (isset($_POST['add'])) {
-    $accounts =  insert('accounts', get_array_from_array($_POST, [
-        'name', 'account_id', 'phone', 'state', 'maden', 'daen',
-        'city', 'location', 'note', 'code'
-    ]));
 
-    $accounts_exec = mysqli_query($con, $accounts);
-    if ($_POST['maden'] != '' || $_POST['daen'] != '') {
-        if ($_POST['maden'] == '') $_POST['maden'] = '0';
-        if ($_POST['daen'] == '') $_POST['daen'] = '0';
-        $_POST['code_number'] = $_POST['code'];
-        $_POST['main_account_id'] = getId($con, 'accounts', 'code', $_POST['code']);
-        $_POST['other_account_id'] = $_POST['main_account_id'];
-        $_POST['code_type'] = 'accounts'; // accounts -> رصيد افتتاحي
-        $_POST['date'] = date('Y-m-d');
-        $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
-            'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
-        ]));
-        $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
-    }
-    if ($accounts_exec) {
-        if ($_POST['account_id'] != '0')
-            set_local_storage('account_card_code_name', $_POST['code'] . " - " . $_POST['name']);
-        // open_window_self('account_card.php?message_create=success');
-        message_box('تم إنشاء الحساب بنجاح');
+    if(trim($_POST['name']) == ''){
+        message_box('لم يتم اضافة الحساب لأن الاسم فارغ');
         open_window_self('account_card.php');
-        close_window();
+    }else{
+
+        $accounts =  insert('accounts', get_array_from_array($_POST, [
+            'name', 'account_id', 'phone', 'state', 'maden', 'daen',
+            'city', 'location', 'note', 'code'
+        ]));
+
+        $accounts_exec = mysqli_query($con, $accounts);
+        if ($_POST['maden'] != '' || $_POST['daen'] != '') {
+            if ($_POST['maden'] == '') $_POST['maden'] = '0';
+            if ($_POST['daen'] == '') $_POST['daen'] = '0';
+            $_POST['code_number'] = $_POST['code'];
+            $_POST['main_account_id'] = getId($con, 'accounts', 'code', $_POST['code']);
+            $_POST['other_account_id'] = $_POST['main_account_id'];
+            $_POST['code_type'] = 'accounts'; // accounts -> رصيد افتتاحي
+            $_POST['date'] = date('Y-m-d');
+            $insert_account_statement_query = insert('account_statements', get_array_from_array($_POST, [
+                'main_account_id', 'other_account_id', 'maden', 'daen', 'note', 'date', 'code_number', 'code_type'
+            ]));
+            $insert_account_statement_exec = mysqli_query($con, $insert_account_statement_query);
+        }
+        if ($accounts_exec) {
+            if ($_POST['account_id'] != '0')
+                set_local_storage('account_card_code_name', $_POST['code'] . " - " . $_POST['name']);
+            // open_window_self('account_card.php?message_create=success');
+            message_box('تم إنشاء الحساب بنجاح');
+            open_window_self('account_card.php');
+            close_window();
+        }
     }
 }
 
@@ -365,8 +372,10 @@ if (isset($_POST['update'])) {
         ])) . where('main_account_id', $current_account_id_to_update_delete) . andWhere('code_number', $_POST['code_number']) . andWhere('code_type', 'accounts');
         $update_account_statement_exec = mysqli_query($con, $update_account_statement_query);
     }
-    if ($accounts_exec)
+    if ($accounts_exec){
+        message_box('تم تعديل الحساب بنجاح');
         open_window_self('account_card.php?id=' . $current_account_id_to_update_delete . '&message_update=success');
+    }
 }
 
 ?>
@@ -390,6 +399,8 @@ if (isset($_POST['delete'])) {
         } else {
             $delete_account_query = delete('accounts') . where('id', $current_account_id_to_update_delete);
             $delete_account_exec = mysqli_query($con, $delete_account_query);
+            if($delete_account_exec)
+                message_box('تم حذف الحساب بنجاح');
         }
     }
 }
